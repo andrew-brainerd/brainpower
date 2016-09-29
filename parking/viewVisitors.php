@@ -8,30 +8,18 @@
 
 include "dbconnect.php";
 
-$today = $_POST['searchDate'];
-$location = $_POST['branch'];
+$today = strip_tags($_POST['searchDate']);
+$location = strip_tags($_POST['branch']);
 
-
-$temp = $_GET['branch'];
-$lcation = $temp;
-//echo $location . "<br><br>";
-
-if ($today == "")
-    $today = date("Y/m/d");
-else {
-    echo "ERROR";
-    exit(1);
-}
+if ($today == "") $today = date("Y/m/d");
 
 $slt = "SELECT *";
 $frm = " FROM Parking AS p";
 $ijn = " INNER JOIN Visitors AS v ON p.vid = v.vid";
 $whr = " WHERE visit_date = '$today' ";
 if ($location != "") $whr = " WHERE location='$location' AND visit_date = '$today' ";
-$lmt = "";
 $ord = "ORDER BY time_out ASC, time_in DESC";
-$sql = $slt . $frm . $ijn . $whr . $lmt . $ord;
-//echo $whr . "<br><br>";
+$sql = $slt . $frm . $ijn . $whr . $ord;
 
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -82,7 +70,6 @@ if ($result->num_rows > 0) {
         echo "</div>";
     }
     echo "</div>";
-    //echo "<div class='table' id='fixedHeader'></div>";
 } else {
     echo "<h1>No Visitor Check-Ins Today</h1>";
 }

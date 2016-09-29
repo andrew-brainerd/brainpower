@@ -6,13 +6,13 @@
  * Time: 11:02 AM
  */
 
-$vid = $_POST["vid"];
-$fname = $_POST["fn"];
-$lname = $_POST["ln"];
-$make = $_POST["mk"];
-$model = $_POST["md"];
-
 include "dbconnect.php";
+
+$vid = strip_tags($_POST["vid"]);
+$fname = strip_tags($_POST["fn"]);
+$lname = strip_tags($_POST["ln"]);
+$make = strip_tags($_POST["mk"]);
+$model = strip_tags($_POST["md"]);
 
 $sql = "UPDATE Visitors SET fname='$fname' WHERE vid='$vid' and fname<>'$fname'";
 $success2 = $conn->query($sql);

@@ -17,16 +17,13 @@ if ($result->num_rows > 0) {
     $_un = $row['umcu_username'];
     $_ps = $row['assigned_spot'];
     if ($_un === NULL && $_ps === NULL) {
-        //echo "0";
         echo '<input type="text" id="tmEmail" name="tmEmail" placeholder="UMCU Username" autocomplete="off"/>';
-        echo '<span>@umcu.org</span>'; // id="tmSpan"
+        echo '<span>@umcu.org</span>';
         echo '<input type="number" id="tmAssSpot" name="tmAssSpot" placeholder="My Spot"/>';
         echo '<input type="text" id="vehicleDesc" name="vehicleDesc" placeholder="Vehicle Description" autocomplete="off"/>';
     } else {
-        //echo "1";
         echo '<input type="text" id="vehicleDesc" name="vehicleDesc" placeholder="Vehicle Description" autocomplete="off"/>';
     }
-    //echo " - " . $vid . " | " . $_un . " | " . $_ps;
 } else {
     echo "Database call returned no rows";
 }

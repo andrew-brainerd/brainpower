@@ -8,8 +8,6 @@
 
 include 'dbconnect.php';
 
-//$sql = "SELECT reason FROM Reasons WHERE required=0";
-
 $sql = "SELECT reason FROM Reasons WHERE required=1 ORDER BY used_count DESC";
 $result = $conn->query($sql);
 

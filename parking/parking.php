@@ -104,41 +104,6 @@
     <h1>Enjoy your time at UMCU</h1>
     <div id="return" onclick="returnToCheckIn()">Return to Check-In</div>
 </div>
-<div class="testing" style="margin: auto; width: 60%; text-align: center;">
-    <h3><?php echo $success ?></h3>
-    <h3>
-        <?php
-        if ($s1 === TRUE) {
-            echo "Wrote to Parking Table :D";
-        } else echo "Didn't Write Parking Table :(<br><div id='success1'>" . $s1 . "</div>"
-        ?>
-    </h3>
-    <h3>
-        <?php
-        if ($s2 === TRUE) {
-            echo "Wrote to Reasons Table :D";
-        } else echo "Didn't Write to Reasons Table :(<br><div id='success2'>" . $s2 . "</div>"
-        ?>
-    </h3>
-    <h3>
-        <?php
-        if ($s3 === TRUE) {
-            echo "Wrote to Visitors Table :D";
-        } else echo "Didn't Write to Visitors Table :(<br><div id='success3'>" . $s3 . "</div>"
-        ?>
-    </h3>
-    <h3>
-        <?php
-        if ($s4 === TRUE) {
-            echo "Wrote TM Info to Visitors Table :D";
-        } else {
-            echo "Didn't Write to Visitors Table :(<br><div id='success3'>" . $s4 . "</div>";
-            echo "Username: " . $un . "<br>";
-            echo "Assigned Spot: " . $ps . "<br>";
-        }
-        ?>
-    </h3>
-</div>
 <script src="/js/secure.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script type="text/javascript">
@@ -148,7 +113,6 @@
             returnToCheckIn();
         }, 10000);
     });
-
     function returnToCheckIn() {
         $("#thank-you").fadeOut("slow", function () {
             var loc = window.location.toString();

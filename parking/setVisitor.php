@@ -1,9 +1,9 @@
 <?php
 
-$fname = ucwords($_POST["fn"]);
-$lname = ucwords($_POST["ln"]);
-$make = ucwords($_POST["mk"]);
-$model = ucwords($_POST["md"]);
+$fname = strip_tags(ucwords($_POST["fn"]));
+$lname = strip_tags(ucwords($_POST["ln"]));
+$make = strip_tags(ucwords($_POST["mk"]));
+$model = strip_tags(ucwords($_POST["md"]));
 
 include 'dbconnect.php';
 

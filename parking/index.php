@@ -10,11 +10,10 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="initial-scale=1"><!--, width=device-width,user-scalable=no">-->
+    <meta name="viewport" content="initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" href="../img/iconified/apple-touch-icon.png"/>
-    <!--?m=<?php //echo filemtime('apple-touch-icon.png'); ?>"/>-->
     <link rel="apple-touch-icon" sizes="57x57" href="../img/iconified/apple-touch-icon-57x57.png"/>
     <link rel="apple-touch-icon" sizes="72x72" href="../img/iconified/apple-touch-icon-72x72.png"/>
     <link rel="apple-touch-icon" sizes="76x76" href="../img/iconified/apple-touch-icon-76x76.png"/>

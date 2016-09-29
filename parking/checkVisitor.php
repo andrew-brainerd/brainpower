@@ -6,8 +6,8 @@
  * Time: 10:21 AM
  */
 
-$first = $_POST["fname"];
-$last = $_POST["lname"];
+$first = strip_tags($_POST["fname"]);
+$last = strip_tags($_POST["lname"]);
 
 include "dbconnect.php";
 
@@ -17,8 +17,6 @@ $whr = " WHERE fname like '$first%' AND lname like '$last%'";
 $ord = " ORDER BY last_visit DESC";
 $lmt = " LIMIT 5";
 $sql = $slt . $frm . $whr . $ord . $lmt;
-
-//echo "<br><br><div><u>SQL String</u><br><br> " . $sql;
 
 if (strlen($first) > 0 || strlen($last) > 0) {
     $result = $conn->query($sql);
@@ -41,12 +39,6 @@ if (strlen($first) > 0 || strlen($last) > 0) {
         echo "</div>";
     }
     echo "<div id='new' onclick='showMoreInfo(" . ")'>Continue as New Visitor</div>";
-    /*else {
-        echo "<h1>Welcome New Visitor!</h1><h1 id='create-new'>Next</h1>";
-    }*/
 }
-/*else {
-    echo "<h1>Welcome to UMCU</h1><h1>Please enter your name to check-in</h1>";
-}*/
 echo "</div>";
 $conn->close();
