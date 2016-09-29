@@ -48,6 +48,10 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
     <h1>Enjoy your time at UMCU!</h1>
 </div>
 <div id="viewVisitors"></div>
+<div id="closingNotes">
+    <label for="notes">In what ways were you able to aMAIZEing this member today?</label>
+    <textarea id="notes"></textarea>
+</div>
 <div id="screensaver"></div>
 <input type="text" id="decoy" title="" readonly/>
 <input type="hidden" id="branch" value="<?php echo $branch ?>"/>

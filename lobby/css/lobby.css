@@ -98,7 +98,6 @@ label:hover {
     color: transparent;
     width: 10px;
 }
-
 #addInfo {
     text-align: center;
     text-indent: 0;
@@ -215,12 +214,10 @@ label:hover {
     color: #00274c;
     cursor: pointer;
 }
-
 #viewVisitors h1 {
     font-size: 4vw;
     color: #ffcb05;
 }
-
 input[type=button],
 #submitForm {
     cursor: pointer;
@@ -246,10 +243,10 @@ input[type=button],
 #thankYou {
     background: #00274c;
     /*border: 6px solid #ffcb05;*/
-    bottom: 500px;
+    bottom: 550px;
     display: none;
     margin: auto;
-    padding: 50px 50px 170px 50px;
+    padding: 90px 50px 170px 50px;
     position: relative;
     width: 700px;
 }
@@ -259,6 +256,16 @@ input[type=button],
 }
 .disabled {
     opacity: 0.8;
+}
+
+/*----------------------------------------*/
+/* Closing Notes Box */
+/*----------------------------------------*/
+#closingNotes {
+    margin: 50px auto;
+    padding: 50px;
+    position: absolute;
+    width: 500px;
 }
 
 /*----------------------------------------*/
