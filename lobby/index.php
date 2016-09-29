@@ -13,6 +13,7 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
 <html lang="en">
 <head>
     <?php include "head.php"; ?>
+    <link rel="stylesheet" href="css/lobby.css"/>
     <title>UMCU Lobby Check-In</title>
 </head>
 <body>

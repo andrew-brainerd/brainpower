@@ -13,13 +13,16 @@
 *, *:before, *:after {
     box-sizing: border-box;
 }
+
 html {
     overflow-y: scroll;
 }
+
 body {
     display: none;
     padding-bottom: 50px;
 }
+
 header {
     background: #00274c;
     width: 100%;
@@ -27,16 +30,19 @@ header {
     left: 0;
     z-index: 998;
 }
+
 header img {
     cursor: pointer;
     display: block;
     margin: 20px auto;
     /*margin: 20px 0 20px 20px;*/
 }
+
 form {
     width: 600px;
     margin: 80px auto;
 }
+
 form > div {
     display: inline-block;
     text-align: center;
@@ -48,6 +54,7 @@ form > div > div { /* Check-In Button */
     text-align: center;
     width: calc(100% / 2);
 }
+
 body, input, select {
     background: #00274c;
     color: white;
@@ -55,10 +62,12 @@ body, input, select {
     font-weight: bold;
     z-index: 0;
 }
+
 h1, h2 {
     margin: 50px;
     text-align: center;
 }
+
 input, select, #submitForm {
     border: 2px solid #ffcb05;
     border-radius: 5px;
@@ -69,13 +78,16 @@ input, select, #submitForm {
     /*text-align: left;*/
     width: 250px;
 }
+
 input[type=text] {
     text-indent: 75px;
 }
+
 select {
     text-align-last: center;
     -webkit-appearance: none;
 }
+
 label {
     display: block;
     font-size: 30px;
@@ -87,19 +99,23 @@ label {
     width: 300px;
     transition: all 0.2s ease;
 }
+
 label:hover {
     cursor: text;
 }
+
 #decoy {
     border: none;
     color: transparent;
     width: 10px;
 }
+
 #goTo {
     border: none;
     color: transparent;
     width: 10px;
 }
+
 #other {
     text-align: center;
     text-indent: 0;
@@ -112,24 +128,30 @@ label:hover {
     display: table;
     margin: 50px auto;
 }
+
 .row {
     display: table-row;
 }
+
 .cell {
     display: table-cell;
     padding: 5px;
 }
+
 .hcell {
     display: table-cell;
     color: #ffcb05;
     font-weight: bold;
 }
+
 .cell {
     transition: background 0.3s, color 0.3s;
 }
+
 .cell label {
     margin-right: 10px;
 }
+
 .cell input, .cell select {
     border-radius: 5px;
     width: 200px;
@@ -154,6 +176,7 @@ label:hover {
     width: 100%;
     z-index: 999;
 }
+
 #return {
     background: #ffcb05;
     color: #00274c;
@@ -177,20 +200,24 @@ label:hover {
     font-size: 2em;
     text-align: center;
 }
+
 #viewVisitors {
     margin-top: 180px;
 }
+
 #viewVisitors .table {
     font-size: 1.5vw;
     margin: auto;
     max-width: 90%;
 }
+
 #fixedHeader {
     position: fixed;
     display: none;
     right: 50%;
     margin-right: 50%;
 }
+
 #viewVisitors .hcell {
     border-bottom: 2px solid #ffcb05;
     font-size: 0.8em;
@@ -198,6 +225,7 @@ label:hover {
     -webkit-user-select: none;
     padding: 10px 25px;
 }
+
 #viewVisitors .cell {
     border-bottom: 1px solid #ffcb05;
     padding: 15px 20px;
@@ -205,21 +233,26 @@ label:hover {
     -webkit-user-select: none;
     vertical-align: middle;
 }
+
 #viewVisitors .cell.reason { /* Reason */
     max-width: 250px;
 }
+
 #viewVisitors .cell.time { /* Times */
     text-align: center;
 }
+
 #viewVisitors .row:hover .cell {
     background: #ffcb05;
     color: #00274c;
     cursor: pointer;
 }
+
 #viewVisitors h1 {
     font-size: 4vw;
     color: #ffcb05;
 }
+
 input[type=button],
 #submitForm {
     cursor: pointer;
@@ -234,6 +267,7 @@ input[type=button],
     -ms-user-select: none;
     user-select: none;
 }
+
 #cancel {
     background: red;
     border: 2px solid red;
@@ -242,6 +276,7 @@ input[type=button],
     display: inline-block;
     width: 100px;
 }
+
 #thankYou {
     background: #00274c;
     /*border: 6px solid #ffcb05;*/
@@ -252,10 +287,12 @@ input[type=button],
     position: relative;
     width: 700px;
 }
+
 #thankYou h1 {
     font-size: 42px;
     margin-top: 0;
 }
+
 .disabled {
     opacity: 0.8;
 }

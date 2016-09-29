@@ -98,8 +98,6 @@ video {
 }*/
 
 .preview {
-    background: #009a44;
-    background: #4cb87c;
     background: #fae7b5; /* banana mania */
 }
 
@@ -126,7 +124,7 @@ a:hover, .video:hover {
 }
 
 .button.selected {
-    backround: white;
+    background: white;
 }
 
 .button.selected:hover {
@@ -225,7 +223,6 @@ header #current {
 #uploadContainer {
     border: 6px solid white;
     margin: 20px auto;
-    width: 900px;
     width: 600px;
 }
 
@@ -268,8 +265,8 @@ header #current {
     margin-left: 60px;
 }*/
 #uploadForm #videoUpload {
-    width: 0.1px;
-    height: 0.1px;
+    width: 1px;
+    height: 1px;
     opacity: 0;
     overflow: hidden;
     position: absolute;

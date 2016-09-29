@@ -1,19 +1,23 @@
 .testing {
     display: none;
 }
+
 #timer {
     position: absolute;
     top: 20px;
     left: 20px;
     z-index: 999;
 }
+
 html {
     overflow-y: scroll;
 }
+
 body {
     display: none;
     padding-bottom: 50px;
 }
+
 header {
     background: #00274c;
     width: 100%;
@@ -21,11 +25,13 @@ header {
     left: 0;
     z-index: 998;
 }
+
 header img {
     cursor: pointer;
     display: block;
     margin: 20px auto;
 }
+
 body, input, select {
     background: #00274c;
     color: white;
@@ -34,42 +40,52 @@ body, input, select {
     font-weight: bold;
     z-index: 0;
 }
+
 h1, h2 {
     margin: 50px;
     text-align: center;
 }
+
 #moreInfo {
     margin-top: -50px;
 }
+
 #confirmation {
     /*display: none;*/
     margin: auto;
     text-align: center;
     width: 70%;
 }
+
 input, select {
     border: 2px solid #ffcb05;
     border-radius: 5px;
     font-size: 20px;
     padding: 10px;
 }
+
 input[type=submit] {
     cursor: pointer;
 }
+
 label {
     display: block;
     font-size: 20px;
 }
+
 #startInfo label {
     font-size: 1.1em;
 }
+
 #thank-you h1 {
     font-size: 40px;
 }
+
 #decoy {
     border: none;
     width: 10px;
 }
+
 #goTo {
     border: none;
     color: transparent;
@@ -83,24 +99,30 @@ label {
     display: table;
     margin: 50px auto;
 }
+
 .row {
     display: table-row;
 }
+
 .cell {
     display: table-cell;
     padding: 5px;
 }
+
 .hcell {
     display: table-cell;
     color: #ffcb05;
     font-weight: bold;
 }
+
 .cell {
     transition: background 0.3s, color 0.3s;
 }
+
 .cell label {
     margin-right: 10px;
 }
+
 .cell input, .cell select {
     border-radius: 5px;
     width: 200px;
@@ -121,6 +143,7 @@ label {
     width: 100%;
     z-index: 999;
 }
+
 #new {
     background: #ffcb05;
     border-radius: 5px;
@@ -135,6 +158,7 @@ label {
     -ms-user-select: none;
     user-select: none;
 }
+
 #confirmation > div {
     border-radius: 10px;
     cursor: pointer;
@@ -146,14 +170,17 @@ label {
     -ms-user-select: none;
     user-select: none;
 }
+
 #confirmation #confirm, #confirmation #next {
     background: green;
 }
+
 #confirmation #deny {
     background: red;
     margin-right: 20px;
     width: 100px;
 }
+
 #return {
     background: #ffcb05;
     color: #00274c;
@@ -181,6 +208,7 @@ label {
     min-width: 470px !important;
     z-index: 80;
 }
+
 #promptOverlay {
     background: white;
     border-radius: 5px;
@@ -191,6 +219,7 @@ label {
     width: 98%;
     z-index: 85;
 }
+
 #promptText {
     color: #00274c;
     font-size: 1.1em;
@@ -200,6 +229,7 @@ label {
     vertical-align: middle;
     z-index: 90;
 }
+
 .arrow-down {
     width: 0;
     height: 0;
@@ -210,27 +240,34 @@ label {
     top: 45px;
     z-index: 92;
 }
+
 .arrow-down:nth-child(2) {
     left: 15px;
 }
+
 .arrow-down:nth-child(3) {
     right: 15px;
 }
+
 #search {
     z-index: 0;
 }
+
 #search #results {
     margin: 50px auto;
 }
+
 #search #results .hcell {
     border-bottom: 2px solid #ffcb05;
     padding: 10px 25px;
 }
+
 #search #results .cell {
     padding: 10px 25px;
     user-select: none;
     -webkit-user-select: none;
 }
+
 #search #results .row:hover .cell {
     background: #ffcb05;
     color: #00274c;
@@ -243,21 +280,25 @@ label {
 #viewVisitors {
     margin-top: 180px;
 }
+
 #viewVisitors .table {
     margin: auto;
     max-width: 90%;
 }
+
 #fixedHeader {
     position: fixed;
     display: none;
     right: 50%;
     margin-right: 50%;
 }
+
 #viewVisitors .hcell {
     border-bottom: 2px solid #ffcb05;
     font-size: 0.8em;
     padding: 10px 25px;
 }
+
 #viewVisitors .cell {
     border-bottom: 1px solid #ffcb05;
     padding: 15px 10px;
@@ -265,17 +306,21 @@ label {
     -webkit-user-select: none;
     vertical-align: middle;
 }
+
 #viewVisitors .cell.reason {
     max-width: 250px;
 }
+
 #viewVisitors .cell.time {
     text-align: center;
 }
+
 #viewVisitors .row:hover .cell {
     background: #ffcb05;
     color: #00274c;
     cursor: pointer;
 }
+
 #viewVisitors h1 {
     font-size: 4vw;
     color: #ffcb05;
@@ -288,27 +333,33 @@ label {
     margin: auto;
     width: 70%;
 }
+
 #parkingContainer {
     margin: 50px auto;
     width: 700px;
 }
+
 #parkingSelection h1 {
     font-size: 2em;
     margin-bottom: 20px;
     text-align: center;
 }
+
 #parkingContainer {
     display: block;
     margin: 0 auto 20px auto;
     width: 400px;
 }
+
 #parkingContainer input {
     width: 100%;
 }
+
 #parkingContainer select {
     width: 300px;
     -webkit-appearance: none;
 }
+
 #parkingContainer input[type=button],
 #parkingContainer input[type=submit] {
     /*-webkit-border-radius: 0;*/
@@ -319,9 +370,11 @@ label {
     color: #00274c;
     cursor: pointer;
 }
+
 #parkingContainer input[type=submit] {
     display: inline-block;
 }
+
 #parkingContainer #cancel {
     background: red;
     border: 2px solid red;
@@ -330,21 +383,26 @@ label {
     display: inline-block;
     width: 100px;
 }
+
 #parkingContainer #other {
     width: 100px;
     margin: 5px auto;
 }
+
 #parkingContainer #otherR {
     width: 250px;
     margin: 15px auto;
 }
+
 #parkingContainer #spotTaken {
     margin: 15px auto 0;
 }
+
 #parkingContainer #spotTaken input[type=text] {
     width: 200px;
     margin-right: 3px;
 }
+
 #parkingContainer #spotTaken input[type=number] {
     width: 100px;
     margin: 10px 5px 10px 0;
