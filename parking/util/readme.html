@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="http://umculobby.com/css/reset.css">
+    <style>
+        section * {
+            padding-left: 15px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .location::before {
+            content: "url: umculobby.com";
+        }
+    </style>
+</head>
+<body>
+<header></header>
+<div id="content">
+    <section>
+        <h2>head section</h2>
+        <div id="meta">
+            <h3>meta tags</h3>
+            <p>description of meta tags</p>
+        </div>
+        <div id="favicon">
+            <h3>Favicon</h3>
+            <p>how to change favicon</p>
+        </div>
+        <div id="stylesheets">
+            <h3>Stylesheets</h3>
+            <ul>
+                <li>reset.css
+                    <div class="description">using the CSS reset written by Eric Meyer</div>
+                    <div class="location">/css</div>
+                </li>
+                <li>font.css
+                    <div class="description">used for custom fonts, because defaults are boring</div>
+                    <div class="location">/css</div>
+                </li>
+                <li>default.css
+                    <div class="description">all the general styles used for the application (most changes should be
+                        made here)
+                    </div>
+                    <div class="location">/parking/css</div>
+                </li>
+                <li>screensaver.css
+                    <div class="description">styles related to the screensaver (not much here)</div>
+                    <div class="location">/parking/css</div>
+                </li>
+                <li>map.css
+                    <div class="description">styles for the popup map, positioning based on the location of the popup
+                    </div>
+                    <div class="location">/parking/css</div>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section>
+        <h2>body section</h2>
+        <div id="header">
+            <h3>header</h3>
+            <p>The header section contains the UMCU Logo and the buttons for navigating between the check-in
+                and check-out views. The buttons are positioned absolutely, so they really could sit anywhere
+                in the DOM. I just thought they made sense near the top of the structure.</p>
+        </div>
+        <div id="initialForm">
+            <h3>initialForm</h3>
+            <p>This section has a couple tables that comprise most of the user input as well as a few divs
+                which are entirely populated after the page loads. This happens in either the JavaScript of
+                PHP, depending on each section.</p>
+            <div class="table">
+                <h4>startInfo</h4>
+                <p>This table hold the input fields that are required to get the check-in process started.
+                    Users should start typing either their first or last name (which causes the search <i>div</i>
+                    to populate with any available information from the database) and either continue as a
+                    fresh, new visitor or build upon previous info if they have visited previously.</p>
+            </div>
+            <div class="table">
+                <h4>moreInfo</h4>
+                <p>This table has two different states, based on the previous user input. If the user selected
+                    their previous information from the search area, the fields of this table are populated with
+                    that data, in addition to the date of their last visit. If the user is a first time visitor,
+                    the fields in this form will be blank and the last-visit input will not be shown.</p>
+            </div>
+        </div>
+    </section>
+</div>
+<!--<script src="../js/readme.js" ></script>-->
+</body>
+</html>

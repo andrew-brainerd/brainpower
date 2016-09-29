@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteCond % {HTTP_HOST} !^www\.umculobby\.com$ [NC] RewriteRule ^(.*)$ http://www.umculobby.com/$1 [R=301,L]

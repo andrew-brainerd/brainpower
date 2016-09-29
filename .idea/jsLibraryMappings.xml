@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$/js/location.js" libraries="{jquery-DefinitelyTyped}" />
+    <file url="file://$PROJECT_DIR$/lobby/js/script.js" libraries="{jquery-DefinitelyTyped}" />
+    <file url="file://$PROJECT_DIR$/lobby/util/randomUser.html" libraries="{jquery-DefinitelyTyped}" />
+    <file url="file://$PROJECT_DIR$/parking/js/screensaver.js" libraries="{jquery-DefinitelyTyped}" />
+    <file url="file://$PROJECT_DIR$/parking/js/script.js" libraries="{jquery-DefinitelyTyped}" />
+    <file url="file://$PROJECT_DIR$/video/js/auth.js" libraries="{jquery-DefinitelyTyped}" />
+    <file url="file://$PROJECT_DIR$/video/js/login.js" libraries="{jquery-DefinitelyTyped}" />
+    <file url="file://$PROJECT_DIR$/video/js/player.js" libraries="{jquery-DefinitelyTyped}" />
+    <file url="file://$PROJECT_DIR$/video/js/upload.js" libraries="{jquery-DefinitelyTyped}" />
+    <file url="PROJECT" libraries="{jquery-DefinitelyTyped}" />
+  </component>
+</project>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="8357edae-e7ef-4303-a171-e6845ceff24d" name="UMCU Lobby" url="http://u84350508.1and1-data.host">
+        <fileTransfer host="u84350508.1and1-data.host" port="22" accessType="SFTP" password="dfffdfc7dfc9dfdfdfeadf9fdf9edf8bdf89" username="u84350508">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

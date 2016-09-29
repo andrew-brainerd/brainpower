@@ -1,0 +1,583 @@
+.testing {
+    display: none;
+}
+
+/**/
+#timer {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 999;
+}
+
+/*input[type=checkbox] {
+    transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    width: initial;
+}
+*, *:before, *:after {
+    box-sizing: border-box;
+}*/
+html {
+    overflow-y: scroll;
+}
+
+body {
+    display: none;
+    padding-bottom: 50px;
+}
+
+header {
+    background: #00274c;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 998;
+}
+
+header img {
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+}
+
+body, input, select {
+    background: #00274c;
+    color: white;
+    font-family: 'Avenir Next Condensed', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    z-index: 0;
+}
+
+h1, h2 {
+    margin: 50px;
+    text-align: center;
+}
+
+#moreInfo {
+    margin-top: -50px;
+}
+
+#confirmation {
+    /*display: none;*/
+    margin: auto;
+    text-align: center;
+    width: 70%;
+}
+
+/*ul {
+    display: block;
+    margin: auto;
+    width: 90%;
+}
+
+ul li {
+    display: inline-block;
+    margin: 20px;
+    width: 40%;
+}*/
+
+input, select {
+    border: 2px solid #ffcb05;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 10px;
+}
+
+/*input[type=text] { padding: 10px; }*/
+input[type=submit] {
+    cursor: pointer;
+}
+
+label {
+    display: block;
+    font-size: 20px;
+}
+
+#startInfo label {
+    font-size: 1.1em;
+}
+
+#thank-you h1 {
+    font-size: 40px;
+}
+
+#decoy {
+    border: none;
+    width: 10px;
+}
+
+#goTo {
+    border: none;
+    color: transparent;
+    width: 10px;
+}
+
+/*----------------------------------------*/
+/* Table Structure */
+/*----------------------------------------*/
+.table {
+    display: table;
+    margin: 50px auto;
+}
+
+.row {
+    display: table-row;
+}
+
+.cell {
+    display: table-cell;
+    padding: 5px;
+}
+
+.hcell {
+    display: table-cell;
+    color: #ffcb05;
+    font-weight: bold;
+}
+
+/*-----------------*/
+
+.cell {
+    transition: background 0.3s, color 0.3s;
+}
+
+.cell label {
+    margin-right: 10px;
+}
+
+.cell input, .cell select {
+    border-radius: 5px;
+    width: 200px;
+}
+
+/*----------------------------------------*/
+/* Buttons */
+/*----------------------------------------*/
+/*#report {               /* Check Out - Old
+    cursor: pointer;
+    font-size: 2vw;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+}*/
+
+#report, #closeReport {
+    background: #00274c;
+    cursor: pointer;
+    font-size: 40px;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    right: 1%;
+    text-align: right;
+    width: 100%;
+    z-index: 999;
+}
+
+#new {
+    background: #ffcb05;
+    border-radius: 5px;
+    color: #00274c;
+    cursor: pointer;
+    margin: auto;
+    padding: 15px 10px;
+    text-align: center;
+    width: 200px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#confirmation > div {
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-block;
+    margin: auto;
+    padding: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#confirmation #confirm, #confirmation #next {
+    background: green;
+}
+
+#confirmation #deny {
+    background: red;
+    margin-right: 20px;
+    width: 100px;
+}
+
+#return {
+    background: #ffcb05;
+    color: #00274c;
+    border-radius: 10px;
+    cursor: pointer;
+    display: block;
+    margin: 50px auto;
+    padding: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    text-align: center;
+    user-select: none;
+    width: 250px;
+}
+
+/*----------------------------------------*/
+/* Search Table */
+/*----------------------------------------*/
+#prompt {
+    background: none;
+    /*border: 2px dashed white;*/
+    border-radius: 10px;
+    display: none;
+    min-width: 470px !important;
+    z-index: 80;
+}
+
+#promptOverlay {
+    background: white;
+    border-radius: 5px;
+    height: 98%;
+    left: 1%;
+    opacity: 0.9;
+    position: relative;
+    width: 98%;
+    z-index: 85;
+}
+
+#promptText {
+    color: #00274c;
+    font-size: 1.1em;
+    padding: 0 20px;
+    text-align: center;
+    opacity: 1;
+    vertical-align: middle;
+    z-index: 90;
+}
+
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid #00274c;
+    position: absolute;
+    top: 45px;
+    z-index: 92;
+}
+
+.arrow-down:nth-child(2) {
+    left: 15px;
+}
+
+.arrow-down:nth-child(3) {
+    right: 15px;
+}
+
+#search {
+    z-index: 0;
+}
+
+#search #results {
+    margin: 50px auto;
+}
+
+/* 20px auto*/
+#search #results .hcell {
+    border-bottom: 2px solid #ffcb05;
+    padding: 10px 25px;
+}
+
+#search #results .cell {
+    padding: 10px 25px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+#search #results .row:hover .cell {
+    background: #ffcb05;
+    color: #00274c;
+    cursor: pointer;
+}
+
+/*----------------------------------------*/
+/* Visitors Table */
+/*----------------------------------------*/
+#viewVisitors {
+    margin-top: 180px;
+}
+
+#viewVisitors .table {
+    margin: auto;
+    max-width: 90%;
+}
+
+#fixedHeader {
+    position: fixed;
+    display: none;
+    right: 50%;
+    margin-right: 50%;
+}
+
+#viewVisitors .hcell {
+    border-bottom: 2px solid #ffcb05;
+    font-size: 0.8em;
+    padding: 10px 25px;
+}
+
+#viewVisitors .cell {
+    border-bottom: 1px solid #ffcb05;
+    padding: 15px 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+}
+
+#viewVisitors .cell.reason {
+    max-width: 250px;
+}
+
+#viewVisitors .cell.time {
+    text-align: center;
+}
+
+#viewVisitors .row:hover .cell {
+    background: #ffcb05;
+    color: #00274c;
+    cursor: pointer;
+}
+
+#viewVisitors h1 {
+    font-size: 4vw;
+    color: #ffcb05;
+}
+
+/*----------------------------------------*/
+/* Parking Selection */
+/*----------------------------------------*/
+#parkingSelection {
+    margin: auto;
+    width: 70%;
+}
+
+#parkingContainer {
+    margin: 50px auto;
+    width: 700px;
+}
+
+#parkingSelection h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#parkingContainer {
+    display: block;
+    margin: 0 auto 20px auto;
+    width: 400px;
+}
+
+#parkingContainer input {
+    width: 100%;
+}
+
+#parkingContainer select {
+    width: 300px;
+    -webkit-appearance: none;
+}
+
+#parkingContainer input[type=button],
+#parkingContainer input[type=submit] {
+    /*-webkit-border-radius: 0;*/
+    -webkit-appearance: none;
+    margin: 20px auto 30px auto;
+    width: 200px;
+    background: #ffcb05;
+    color: #00274c;
+    cursor: pointer;
+}
+
+#parkingContainer input[type=submit] {
+    display: inline-block;
+}
+
+#parkingContainer #cancel {
+    background: red;
+    border: 2px solid red;
+    border-radius: 10px;
+    color: white;
+    display: inline-block;
+    width: 100px;
+}
+
+#parkingContainer #other {
+    width: 100px;
+    margin: 5px auto;
+}
+
+#parkingContainer #otherR {
+    width: 250px;
+    margin: 15px auto;
+}
+
+#parkingContainer #spotTaken {
+    margin: 15px auto 0;
+}
+
+#parkingContainer #spotTaken input[type=text] {
+    width: 200px;
+    margin-right: 3px;
+}
+
+#parkingContainer #spotTaken input[type=number] {
+    width: 100px;
+    margin: 10px 5px 10px 0;
+}
+
+/*----------------------------------------*/
+/* Media Queries */
+/*----------------------------------------*/
+@media (max-width: 500px) {
+    body { /*border: 3px solid gold;*/
+    }
+
+    img {
+        width: 250px !important;
+    }
+
+    #screensaver h1 {
+        font-size: 8vw;
+    }
+
+    #screensaver h2 {
+        font-size: 6vw;
+        top: 33%;
+    }
+
+    form > .table .cell {
+        display: block;
+    }
+
+    .hcell {
+        display: none;
+    }
+
+    #results .row {
+        border: 2px solid #ffcb05;
+        display: block;
+    }
+
+    #results .cell:nth-child(3) {
+        display: block;
+    }
+
+    #mapPopup {
+        width: 100%;
+        top: 0;
+        left: 0;
+    }
+
+    #timer {
+        font-size: 0.5em;
+    }
+
+    #confirmation {
+        /*margin-top: -20px;*/
+    }
+
+    #confirmation h1 {
+        margin: -20px 15px 15px 10px;
+    }
+
+    #confirmation #deny {
+        margin: 0 auto 5px auto;
+        width: initial;
+    }
+
+    #search {
+        z-index: 0;
+    }
+
+    #search #results {
+        font-size: 0.9em;
+        margin: 50px auto;
+    }
+
+    #search #results .hcell {
+        border-bottom: 2px solid #ffcb05;
+        display: none;
+        /*padding: 10px 25px;*/
+    }
+
+    #search #results .cell {
+        /*padding: 10px 25px;*/
+        display: inline-block;
+        padding-left: 0;
+        padding-right: 0;
+        user-select: none;
+        -webkit-user-select: none;
+        width: 100px;
+        margin: auto;
+        transition: none;
+    }
+
+    #search #results .cell:first-child {
+        padding-left: 30px;
+        text-align: right;
+    }
+
+    #search #results .cell:first-child::after {
+        content: ",";
+    }
+
+    #search #results .cell:nth-child(2n) {
+        padding-left: 5px;
+        padding-right: 50px;
+    }
+
+    #search #results .cell:nth-child(3n) {
+        /*padding: 10px 25px;
+        background: green;*/
+        display: block;
+        margin-bottom: 5px;
+        text-align: center;
+        user-select: none;
+        -webkit-user-select: none;
+        /*width: 98%;*/
+        width: 250px;
+    }
+
+    #search #results .row:hover {
+        background: #ffcb05;
+        color: #00274c;
+        cursor: pointer;
+    }
+
+    #report, #closeReport {
+        border-top: 2px solid white;
+    }
+
+    #parkingSelection h1 {
+        margin: 0 0 20px 0;
+    }
+
+    #parkingContainer select {
+        width: 250px;
+    }
+
+    #parkingContainer #showMap {
+        display: none;
+    }
+
+    #parkingContainer #spotTaken input[type=text] {
+        width: 120px;
+    }
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UMCU Lobby Reports</title>
+    <link rel="icon" href="//umculobby.com/favicon.ico">
+    <link rel="stylesheet" href="//umculobby.com/css/reset.css"/>
+    <link rel="stylesheet" href="//umculobby.com/css/font.css"/>
+    <link rel="stylesheet" href="/lobby/css/default.css"/>
+    <link rel="stylesheet" href="css/default.css"/>
+    <style>
+        iframe {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+    <script src="/js/analytics.js"></script>
+</head>
+<body>
+<h2 id="reportTitle"></h2>
+<select id="branchSelect">
+    <option value="-1">Select A Branch</option>
+    <option value="Huron">Huron</option>
+    <option value="William">William</option>
+    <option value="Union">Union</option>
+    <option value="State">S. State</option>
+    <option value="Jackson">Jackson</option>
+    <option value="Plymouth">Plymouth</option>
+    <option value="Dearborn">Dearborn</option>
+    <option value="Bristol">Bristol</option>
+</select>
+<div id="viewVisitors"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="/js/secure.js"></script>
+<script>
+    $("body").fadeIn();
+    var visitors = $("#viewVisitors");
+    var branchSelect = $("#branchSelect");
+    branchSelect.change(function () {
+        console.log("Selected: " + $(this).val());
+        if ($(this).val() == -1) visitors.fadeOut();
+        else runReport();
+    });
+
+    function runReport() {
+        var branch = branchSelect.val();
+        console.log("Branch: " + branch);
+        $.ajax({
+            type: "GET",
+            url: "branchActivity.php",
+            data: "branch=" + branch,
+            //"&searchDate=" + ,
+            success: function (data) {
+                $("#reportTitle").text();
+                visitors.fadeOut(function () {
+                    visitors.html(data);
+                    visitors.fadeIn();
+                });
+            }
+        });
+    }
+</script>
+</body>
+</html>

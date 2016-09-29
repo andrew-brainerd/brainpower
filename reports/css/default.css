@@ -1,0 +1,12 @@
+#viewVisitors {
+    font-size: 1.2em;
+    margin-top: 0;
+}
+
+#viewVisitors .row:hover .cell {
+    cursor: default;
+}
+
+select {
+    font-size: 1.5em;
+}

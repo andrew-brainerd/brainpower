@@ -1,0 +1,72 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+body {
+    background: #00274c;
+    color: white;
+    display: none;
+    font-family: 'Avenir Next Condensed', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    z-index: 0;
+}
+
+input, select {
+    background: #00274c;
+    border: 2px solid #ffcb05;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Avenir Next Condensed', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px;
+    width: 220px;
+}
+
+#title {
+    margin: 30px auto;
+    width: 50%;
+}
+
+#loginForm {
+    /*border: 6px outset gold;*/
+    border-radius: 5px;
+    margin: auto;
+    padding: 20px;
+    position: relative;
+    top: 20px;
+    width: 500px;
+}
+
+#loginForm label {
+    display: block;
+    margin: auto;
+    width: 215px;
+}
+
+#loginForm input {
+    display: block;
+    margin: 5px auto 20px auto;
+}
+
+#loginForm #loginButton {
+    background: #ffcb05;
+    color: #00274c;
+    cursor: pointer;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+    width: 150px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#message {
+    font-size: 1.5em;
+    margin: 50px auto;
+    text-align: center;
+    width: 500px;
+}

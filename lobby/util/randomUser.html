@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cURL Test Page</title>
+    <style>
+        #result {
+            border: 3px solid #0f345e;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+<div id="result"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script type="text/javascript">
+    var counter;
+    $(document).ready(function () {
+        counter = 0;
+        var url = "https://v5.fakenameapi.com/generate?callback=?";
+        var apiData = "app_id=1898ec66";
+        apiData += "&app_key=713b2c77af8e71e6441051260e7b4c76";
+        apiData += "&country=us";
+        apiData += "&name-set=us";
+        apiData += "&gender=random";
+        apiData += "&minimum-age=19";
+        apiData += "&maximum-age=85";
+        apiData += "&output=json";
+        console.log(url + apiData);
+        $.ajax({
+            type: "json",
+            url: url,
+            data: apiData,
+            success: function (data) {
+                $("#result").html(data);
+            }
+        });
+    });
+
+    function addElement(e) {
+        counter++;
+        return "<div id='data" + counter + "'>" + e + "</div>";
+    }
+</script>
+</body>
+</html>
+
+
+<!--
+$.ajax({
+            type: "POST",
+            url:  "http://notmuchhappening.com/umcu/lobby/util/cURL.php",
+            success: function(info) {
+                //var info = $.parseJSON(data);
+                var fname = info.GivenName;
+                var data = addElement(fname);
+                var mname = info.MiddleInitial;
+                data += addElement(mname);
+                var lname = info.Surname;
+                data += addElement(lname);
+                var address1 = info.StreetAddress;
+                data += addElement(address1);
+                var city = info.City;
+                data += addElement(city);
+                var state = info.State;
+                data += addElement(state);
+                var zip = info.ZipCode;
+                data += addElement(zip);
+                var email = info.EmailAddress;
+                data += addElement(email);
+
+                var bday = info.Birthday.toString();
+                data += addElement(bday + " | " + bday.length);
+                var month, day, year;
+                if (bday.indexOf("/") == 1) {
+                    month = bday.substring(0, 1);
+                    bday = bday.substring(2);
+                }
+                else {
+                    month = bday.substring(0, 2);
+                    bday = bday.substring(3);
+                }
+                console.log("Set month to " + month);
+
+                if (bday.indexOf("/") == 1) {
+                    day = bday.substring(0, 1);
+                    year = bday.substring(2);
+                }
+                else {
+                    day = bday.substring(0, 2);
+                    year = bday.substring(3);
+                }
+                data += addElement("Month: " + month);
+                data += addElement("Day: " + day);
+                data += addElement("Year: " + year);
+                /*var month = bday.substring()
+                var day;
+                var year;3\/4\/1996*/
+                $("#result").html(data);
+            }
+        });
+
+        -->

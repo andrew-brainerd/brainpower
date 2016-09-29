@@ -1,0 +1,354 @@
+.testing {
+    display: none;
+}
+
+/**/
+#timer {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 999;
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+html {
+    overflow-y: scroll;
+}
+
+body {
+    display: none;
+    padding-bottom: 50px;
+}
+
+header {
+    background: #00274c;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 998;
+}
+
+header img {
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+    /*margin: 20px 0 20px 20px;*/
+}
+
+form {
+    width: 600px;
+    margin: 80px auto;
+}
+
+form > div {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+}
+
+form > div > div {
+    display: inline-block;
+    text-align: center;
+    width: calc(100% / 2);
+}
+
+body, input, select {
+    background: #00274c;
+    color: white;
+    font-family: 'Avenir Next Condensed', sans-serif;
+    font-weight: bold;
+    z-index: 0;
+}
+
+h1, h2 {
+    margin: 50px;
+    text-align: center;
+}
+
+input, select, #submitForm {
+    border: 2px solid #ffcb05;
+    border-radius: 5px;
+    font-size: 30px;
+    display: block;
+    margin: 20px auto;
+    padding: 15px;
+    /*text-align: left;*/
+    width: 250px;
+}
+
+input[type=text] {
+    text-indent: 75px;
+}
+
+select {
+    text-align-last: center;
+    -webkit-appearance: none;
+}
+
+label {
+    display: block;
+    font-size: 30px;
+    margin: auto;
+    margin-top: -50px;
+    opacity: 0.6;
+    position: relative;
+    top: 73px;
+    width: 300px;
+    transition: all 0.2s ease;
+}
+
+label:hover {
+    cursor: text;
+}
+
+#decoy {
+    border: none;
+    color: transparent;
+    width: 10px;
+}
+
+#goTo {
+    border: none;
+    color: transparent;
+    width: 10px;
+}
+
+#other {
+    text-align: center;
+    text-indent: 0;
+}
+
+/*----------------------------------------*/
+/* Table Structure */
+/*----------------------------------------*/
+.table {
+    display: table;
+    margin: 50px auto;
+}
+
+.row {
+    display: table-row;
+}
+
+.cell {
+    display: table-cell;
+    padding: 5px;
+}
+
+.hcell {
+    display: table-cell;
+    color: #ffcb05;
+    font-weight: bold;
+}
+
+/*-----------------*/
+
+.cell {
+    transition: background 0.3s, color 0.3s;
+}
+
+.cell label {
+    margin-right: 10px;
+}
+
+.cell input, .cell select {
+    border-radius: 5px;
+    width: 200px;
+}
+
+/*----------------------------------------*/
+/* Buttons */
+/*----------------------------------------*/
+#report, #closeReport {
+    background: #00274c;
+    cursor: pointer;
+    font-size: 40px;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    right: 1%;
+    text-align: right;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 100%;
+    z-index: 999;
+}
+
+#return {
+    background: #ffcb05;
+    color: #00274c;
+    border-radius: 10px;
+    cursor: pointer;
+    display: block;
+    margin: 50px auto;
+    padding: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    text-align: center;
+    user-select: none;
+    width: 250px;
+}
+
+/*----------------------------------------*/
+/* Visitors Table */
+/*----------------------------------------*/
+.tableTitle {
+    font-size: 2em;
+    text-align: center;
+}
+
+#viewVisitors {
+    margin-top: 180px;
+}
+
+#viewVisitors .table {
+    font-size: 1.5vw;
+    margin: auto;
+    max-width: 90%;
+}
+
+#fixedHeader {
+    position: fixed;
+    display: none;
+    right: 50%;
+    margin-right: 50%;
+}
+
+#viewVisitors .hcell {
+    border-bottom: 2px solid #ffcb05;
+    font-size: 0.8em;
+    user-select: none;
+    -webkit-user-select: none;
+    padding: 10px 25px;
+}
+
+#viewVisitors .cell {
+    border-bottom: 1px solid #ffcb05;
+    padding: 15px 20px;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+}
+
+#viewVisitors .cell.reason { /* Reason */
+    max-width: 250px;
+}
+
+#viewVisitors .cell.time { /* Times */
+    text-align: center;
+}
+
+#viewVisitors .row:hover .cell {
+    background: #ffcb05;
+    color: #00274c;
+    cursor: pointer;
+}
+
+#viewVisitors h1 {
+    font-size: 4vw;
+    color: #ffcb05;
+}
+
+input[type=button],
+#submitForm {
+    cursor: pointer;
+    display: inline-block;
+    -webkit-appearance: none;
+    margin: 20px auto 30px auto;
+    width: 200px;
+    background: #ffcb05;
+    color: #00274c;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#cancel {
+    background: red;
+    border: 2px solid red;
+    border-radius: 10px;
+    color: white;
+    display: inline-block;
+    width: 100px;
+}
+
+#thankYou {
+    background: #00274c;
+    /*border: 6px solid #ffcb05;*/
+    bottom: 500px;
+    display: none;
+    margin: auto;
+    padding: 50px 50px 170px 50px;
+    position: relative;
+    width: 700px;
+}
+
+#thankYou h1 {
+    font-size: 42px;
+    margin-top: 0;
+}
+
+.disabled {
+    opacity: 0.8;
+}
+
+/*----------------------------------------*/
+/* Media Queries */
+/*----------------------------------------*/
+@media (max-width: 500px) {
+    body { /*border: 3px solid gold;*/
+    }
+
+    img {
+        width: 250px !important;
+    }
+
+    #screensaver h1 {
+        font-size: 8vw;
+    }
+
+    #screensaver h2 {
+        font-size: 6vw;
+        top: 33%;
+    }
+
+    form > .table .cell {
+        display: block;
+    }
+
+    .hcell {
+        display: none;
+    }
+
+    #results .row {
+        border: 2px solid #ffcb05;
+        display: block;
+    }
+
+    #results .cell:nth-child(3) {
+        display: block;
+    }
+
+    #timer {
+        font-size: 0.5em;
+    }
+
+    #report, #closeReport {
+        border-top: 2px solid white;
+    }
+
+    #parkingSelection h1 {
+        margin: 0 0 20px 0;
+    }
+
+    #parkingContainer select {
+        width: 250px;
+    }
+}
