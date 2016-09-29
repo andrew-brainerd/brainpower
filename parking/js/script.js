@@ -53,39 +53,6 @@ var environment = "";
 
 //</editor-fold>
 
-/*var parking_lots = {
- "Huron" : {
- "1": "Visitor",
- "2": "Visitor",
- "3": "Visitor",
- "4": "Visitor",
- "5": "Visitor",
- "25": "Real Estate",
- "26": "Real Estate",
- "29": "Visitor",
- "90": "Loading Dock",
- "97": "Handicap 1",
- "98": "Handicap 2",
- "99": "New Team Member Area"
- },
- "William" : {
- "1": "",
- "2": "",
- "3": "",
- "4": "",
- "5": "",
- "6": "",
- "7": "",
- "8": "",
- "9": "",
- "10": "",
- "11": "",
- "12": "",
- "13": "",
- "14": ""
- }
- };*/
-
 $(document).ready(function () {
     $additionalInfo.hide();
     $parkingSelection.hide();
@@ -394,7 +361,6 @@ function checkUpdate() {
     $nameInfo.fadeOut("fast", function () {
         fetchReasons();
         $(document).bind('keypress.key13', function (e) {
-            //console.log("key: " + e.which);
             if (e.which == 13) {
                 $("#checkIn").click();
             }
@@ -433,10 +399,6 @@ function createNewVisitor() {
         });
     }
     else {
-        console.log("First Name: " + fn);
-        console.log("Last Name: " + ln);
-        console.log("Make: " + mk);
-        console.log("Model: " + md);
         if (fn == "") console.log("First Name is blank");
         if (ln == "") console.log("Last Name is blank");
         if (mk == "") console.log("Make is blank");
@@ -568,7 +530,6 @@ function buildSpotDropdown() {
     $parkingSpot.append("<option value='-1'>-- Select A Spot --</option>");
     var option;
     $.each(availableSpots, function (spot, designation) {
-        //console.log(spot + ": " + designation);
         if (spot < 90 && (spot != "" && designation != "")) {
             option = spot + " - " + designation;
         } else {
@@ -584,7 +545,6 @@ function buildSpotDropdown() {
     $parkingSpot.append("<option value='0'>Other</option>");
 }
 function buildDefaultDropdown() {
-    console.log("Using Default Options");
     $parkingSpot.empty();
     $parkingSpot.append('<option value="-1">-- Select A Spot --</option>');
     $parkingSpot.append('<option value="1">1 - Visitor</option>');
@@ -608,8 +568,10 @@ function buildDefaultDropdown() {
     $parkingMap.addClass("huron");
     availableSpots = [1, 2, 3, 4, 5, 25, 26, 29, 90, 97, 98, 99];
     for (var cs in availableSpots) {
-        $parkingMap.append(
-            "<div class='area' id='area" + availableSpots[cs] + "' data-spot='" + availableSpots[cs] + "'></div>"
-        );
+        if (availableSpots.hasOwnProperty(cs)) {
+            $parkingMap.append(
+                "<div class='area' id='area" + availableSpots[cs] + "' data-spot='" + availableSpots[cs] + "'></div>"
+            );
+        }
     }
 }
