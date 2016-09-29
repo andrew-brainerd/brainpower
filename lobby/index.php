@@ -1,10 +1,12 @@
 <?php
 $clientIP = $_SERVER['REMOTE_ADDR'];
 $goTo = "";
+$branch = "";
 if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
     //header("Location: ../video");
 } else {
-    $goTo = $_GET["goto"];
+    $goTo = strip_tags($_GET["goto"]);
+    $branch = strip_tags($_GET["branch"]);
 }
 ?>
 <!DOCTYPE html>
@@ -29,8 +31,13 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
             <input type="text" id="fname"/>
             <label for="lname">Last Name</label>
             <input type="text" id="lname"/>
-            <select id="reason" name="reason"></select>
+            <select id="reason" name="reason" title="Reason for Visit"></select>
             <input type="text" id="other" placeholder="Other Reason"/>
+            <?
+            if ($branch == "William") {
+                echo "<h3>Probably something extra here...</h3>";
+            }
+            ?>
             <div id="submitForm">Check-In</div>
         </div>
     </form>
@@ -41,8 +48,8 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
 </div>
 <div id="viewVisitors"></div>
 <div id="screensaver"></div>
-<input type="text" id="decoy" readonly/>
-<input type="hidden" id="branch" value="<?php echo $_GET["branch"] ?>"/>
+<input type="text" id="decoy" title="" readonly/>
+<input type="hidden" id="branch" value="<?php echo $branch ?>"/>
 <input type="hidden" id="goTo" value="<?php echo $goTo; ?>"/>
 <script src="/js/secure.js"></script>
 <?php include "util/jquery.php"; ?>
