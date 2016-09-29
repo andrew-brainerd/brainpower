@@ -3,14 +3,6 @@
     top: 130px;
     left: 20%;
 }
-
-/*#showMap {
-    display: none;
-}
-#spotNum {
-    margin-bottom: 20px;
-}*/
-
 #closeMap {
     background: white;
     border: 3px solid #ffcb05;
@@ -28,7 +20,6 @@
     width: 80px;
     z-index: 101;
 }
-
 #parking-map {
     background: white center no-repeat;
     background-size: contain;
@@ -40,7 +31,6 @@
     height: 505px;
     z-index: 100;
 }
-
 #parking-map > .area {
     font-size: 12px;
     text-decoration: none;
@@ -49,201 +39,77 @@
     height: 32px;
     background: #00274c;
     opacity: 0.3;
-    /*border: 1px solid gold;*/
 }
-
 #parking-map > .area:hover {
     cursor: pointer;
     opacity: 0.7;
 }
-
 #parking-map.huron {
     background-image: url("../img/huron_parking.png");
 }
-
 .huron #area29 {
     left: 125px;
     top: 132px;
     width: 85px;
 }
-
 .huron #area26 {
     left: 125px;
     top: 233px;
     width: 85px;
 }
-
 .huron #area25 {
     left: 125px;
     top: 266px;
     width: 85px;
 }
-
 .huron #area99 {
     left: 125px;
     top: 504px;
     width: 85px;
 }
-
-/* New Team Member Area */
-
 .huron #area1 {
     right: 221px;
     top: 352px;
     width: 89px;
 }
-
 .huron #area2 {
     right: 221px;
     top: 385px;
     width: 89px;
 }
-
 .huron #area3 {
     right: 221px;
     top: 419px;
     width: 89px;
 }
-
 .huron #area4 {
     right: 221px;
     top: 453px;
     width: 89px;
 }
-
 .huron #area5 {
     right: 221px;
     top: 486px;
     width: 89px;
 }
-
 .huron #area97 {
     right: 221px;
     top: 243px;
     width: 110px;
     height: 37px;
 }
-
-/* Handicap Spot 1 */
 .huron #area98 {
     right: 221px;
     top: 308px;
     width: 110px;
     height: 41px;
 }
-
-/* Handicap Spot 1 */
 .huron #area90 {
     right: 10px;
     top: 450px;
     width: 110px;
     height: 60px;
 }
-
-/* Loading Dock */
-
-#parking-map.william {
-    background-image: url("../img/william_parking.png");
-}
-
-.william #area1 {
-    left: 110px;
-    top: 340px;
-    width: 95px;
-    height: 49px;
-}
-
-.william #area2 {
-    left: 110px;
-    top: 292px;
-    width: 95px;
-    height: 48px;
-}
-
-.william #area3 {
-    left: 110px;
-    top: 247px;
-    width: 95px;
-    height: 48px;
-}
-
-.william #area4 {
-    left: 110px;
-    top: 203px;
-    width: 95px;
-    height: 48px;
-}
-
-.william #area5 {
-    left: 110px;
-    top: 158px;
-    width: 95px;
-    height: 48px;
-}
-
-.william #area6 {
-    left: 190px;
-    top: 97px;
-    width: 55px;
-    height: 61px;
-}
-
-.william #area7 {
-    left: 245px;
-    top: 97px;
-    width: 63px;
-    height: 61px;
-}
-
-.william #area8 {
-    left: 271px;
-    top: 158px;
-    width: 92px;
-    height: 48px;
-}
-
-.william #area9 {
-    left: 271px;
-    top: 203px;
-    width: 92px;
-    height: 48px;
-}
-
-.william #area10 {
-    left: 271px;
-    top: 247px;
-    width: 92px;
-    height: 48px;
-}
-
-.william #area11 {
-    left: 271px;
-    top: 292px;
-    width: 92px;
-    height: 48px;
-}
-
-.william #area12 {
-    left: 271px;
-    top: 340px;
-    width: 92px;
-    height: 49px;
-}
-
-.william #area13 {
-    left: 406px;
-    top: 119px;
-    width: 91px;
-    height: 43px;
-}
-
-.william #area14 {
-    left: 640px;
-    top: 119px;
-    width: 91px;
-    height: 43px;
-}
-
 #parking-map.huron label {
     color: #00274c;
     font-size: 12px;
@@ -251,7 +117,6 @@
     left: 240px;
     top: 515px;
 }
-
 .left-arrow {
     width: 0;
     height: 0;
@@ -260,7 +125,6 @@
     border-right: 10px solid #00274c;
     position: absolute;
 }
-
 #parking-map.huron .left-arrow {
     left: 220px;
     top: 510px;
