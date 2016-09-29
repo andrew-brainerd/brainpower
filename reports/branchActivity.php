@@ -68,6 +68,7 @@ if ($result->num_rows > 0) {
                     $spot = $row["spot_num"];
             }
         }
+        $reason = $row["reason"];
         if (strlen($reason) > 30) {
             $reason = substr($reason, 0, 16) . "...";
         }
@@ -77,7 +78,6 @@ if ($result->num_rows > 0) {
             $timeOut = "-";
             $pid = $row["pid"];
         } else $pid = -1;
-        $reason = $row["reason"];
 
         echo "<div class='row'>";
         echo "<div class='cell'>" . $row["fname"] . " " . $row["lname"] . "</div>";
