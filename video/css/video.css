@@ -7,7 +7,6 @@ body {
     font-weight: bold;
     z-index: 0;
 }
-
 header {
     margin-bottom: 10px;
     position: absolute;
@@ -15,21 +14,17 @@ header {
     left: 0;
     top: 0;
 }
-
 #view {
     position: relative;
     top: 100px;
 }
-
 #library {
     width: 100%;
     text-align: center;
 }
-
 #player {
     display: none;
 }
-
 input, select {
     background: #00274c;
     border: 2px solid #ffcb05;
@@ -40,34 +35,27 @@ input, select {
     font-weight: bold;
     padding: 10px;
 }
-
 h1 {
     font-size: 1.5em;
 }
-
 h2 {
     font-size: 1.2em;
 }
-
 h1, h2 {
     margin: 30px;
     text-align: center;
 }
-
 h3 {
     margin: 30px;
 }
-
 img {
     display: block;
 }
-
 video {
     border: 8px outset #ffcb05;
     display: block;
     margin: 20px auto;
 }
-
 .video {
     background: white;
     border-radius: 10px;
@@ -92,19 +80,12 @@ video {
     -ms-user-select: none;
     user-select: none;
 }
-
-/*.videoTitle {
-    padding: 0 50px;
-}*/
-
 .preview {
     background: #fae7b5; /* banana mania */
 }
-
 a:hover, .video:hover {
     background: #ffcb05;
 }
-
 .button {
     background: #ffcb05;
     cursor: pointer;
@@ -118,19 +99,15 @@ a:hover, .video:hover {
     user-select: none;
     width: 150px;
 }
-
 .button:hover {
     background: white;
 }
-
 .button.selected {
     background: white;
 }
-
 .button.selected:hover {
     background: #ffcb05;
 }
-
 #title:hover {
     cursor: pointer;
     -webkit-user-select: none;
@@ -138,7 +115,6 @@ a:hover, .video:hover {
     -ms-user-select: none;
     user-select: none;
 }
-
 #message {
     display: none;
     font-size: 1.5em;
@@ -146,11 +122,9 @@ a:hover, .video:hover {
     text-align: center;
     width: 90%;
 }
-
 #back {
     margin: 30px auto;
 }
-
 header .button {
     border-radius: 10px;
     font-size: 0.8em;
@@ -159,30 +133,24 @@ header .button {
     top: 20px;
     width: 100px;
 }
-
 header #upload {
     right: 140px;
 }
-
 header #manage {
     right: 140px;
 }
-
 header #logout {
     right: 20px;
 }
-
 header #new {
     left: 20px;
 }
-
 header #current {
     font-size: 0.8em;
     position: absolute;
     top: 35px;
     left: 160px;
 }
-
 #timer {
     position: absolute;
     top: 20px;
@@ -190,9 +158,6 @@ header #current {
     z-index: 999;
     display: none;
 }
-
-/**/
-/*#vid { display: none; }*/
 
 /* Create New User page */
 #createNew {
@@ -204,66 +169,52 @@ header #current {
     top: 20px;
     width: 500px;
 }
-
 #createNew label {
     display: block;
     margin: auto;
     width: 215px;
 }
-
 #createNew input, #createNew select {
     display: block;
     margin: 5px auto 20px auto;
 }
-
 #createNew .button {
     margin: 30px auto;
 }
-
 #uploadContainer {
     border: 6px solid white;
     margin: 20px auto;
     width: 600px;
 }
-
 #uploadForm {
     /*margin-left: 620px;*/
     display: inline-block;
     padding: 20px;
     width: 300px;
 }
-
 #uploading {
     display: inline-block;
     bottom: 50px;
     right: 40px;
 }
-
 #uploadForm label {
     display: block;
     /*margin-left: 130px;
     margin: auto;
     width: 215px;*/
 }
-
 #uploadForm input, #uploadForm select {
     display: block;
     /*margin: 5px auto 20px auto;*/
     margin: 5px 0 20px 0;
 }
-
 #uploadForm .button {
     /*margin: 30px auto;*/
     margin-bottom: 30px;
 }
-
 #uploadForm input[type=number] {
     text-align: center;
 }
-
-/*#uploadForm #uploadButton {
-    margin-left: 60px;
-}*/
 #uploadForm #videoUpload {
     width: 1px;
     height: 1px;
@@ -272,34 +223,28 @@ header #current {
     position: absolute;
     z-index: -1;
 }
-
 #uploadForm #chooseVideo {
     border-radius: 10px;
     width: 200px;
     max-width: 450px;
 }
-
 #uploadForm #authLevel {
     /*margin-left: 150px;*/
 }
-
 #options {
     margin: auto;
     text-align: center;
     width: 350px;
 }
-
 #options .button {
     display: inline-block;
     margin: 5px 0;
     padding: 5px;
     width: 135px;
 }
-
 #options .button:hover {
     background: white;
 }
-
 #options .button#viewManage {
     display: block;
     margin: auto;
@@ -314,48 +259,37 @@ header #current {
     display: table;
     margin: 50px auto;
 }
-
 .row {
     display: table-row;
 }
-
 .cell {
     display: table-cell;
     padding: 5px;
 }
-
 .hcell {
     display: table-cell;
     color: #ffcb05;
     font-weight: bold;
 }
-
-/*-----------------*/
-
 .cell {
     transition: background 0.3s, color 0.3s;
 }
-
 .cell label {
     margin-right: 10px;
 }
-
 .cell input, .cell select {
     border-radius: 5px;
     width: 200px;
 }
-
 .table {
     margin: auto;
     max-width: 90%;
 }
-
 .hcell {
     border-bottom: 2px solid #ffcb05;
     font-size: 0.8em;
     padding: 10px 25px;
 }
-
 .cell {
     border-bottom: 1px solid #ffcb05;
     padding: 15px 10px;
@@ -363,7 +297,6 @@ header #current {
     -webkit-user-select: none;
     vertical-align: middle;
 }
-
 .row:hover .cell {
     background: #ffcb05;
     color: #00274c;
