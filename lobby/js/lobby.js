@@ -15,7 +15,7 @@ var vid;
 var fname;
 var lname;
 var reason;
-var other;
+var addInfo;
 var submit;
 var cancel;
 
@@ -33,14 +33,14 @@ $(document).ready(function () {
     fname = $("#fname");
     lname = $("#lname");
     reason = $("#reason");
-    other = $("#other");
+    addInfo = $("#addInfo");
     submit = $("#submitForm");
     cancel = $("#cancel");
 
-    other.hide();
+    addInfo.hide();
     viewVisitors.hide();
     closeReport.hide();
-    other.hide();
+    addInfo.hide();
     fetchReasons();
     clearForm();
     checkEnvironment();
@@ -70,7 +70,7 @@ $(document).ready(function () {
         inputLabel.css("right", "80px");
         if (inputLabel.text().indexOf(" ") > 0)
             inputLabel.text(inputLabel.text().substring(0, inputLabel.text().indexOf(" ")) + ":");
-        $("#report").hide();
+        showReport.hide();
     });
     inputs.blur(function () {
         $(this).val(capitalize($.trim($(this).val())));
@@ -78,14 +78,14 @@ $(document).ready(function () {
         if (elementType == "LABEL" && $(this).val() == "") {
             $(this).prev().css("right", "0");
         }
-        $("#report").show();
+        showReport.show();
     });
     reason.focus(function () {
         var label = $(this).prev("label");
         $("#report").hide();
     });
     reason.blur(function () {
-        $("#report").show();
+        showReport.show();
         $("html, body").animate({
             scrollTop: 0
         }, 0);
@@ -101,19 +101,21 @@ $(document).ready(function () {
     reason.change(function () {
         var r = reason.val();
         if (r == 0) {
-            other.show();
+            addInfo.show();
+        }
+        else if (r == "Appointment") {
+            addInfo.show();
         }
         else {
-            other.hide();
+            addInfo.hide();
         }
     });
     cancel.click(function () {
         clearForm();
-        //location.reload();
     });
     submit.click(function () {
         if (!submit.hasClass("disabled")) {
-            var r = reason.val() == 0 ? other.val() : reason.val();
+            var r = reason.val() == 0 ? addInfo.val() : reason.val();
             if (validateCheckIn()) {
                 $.ajax({
                     type: "POST",
@@ -208,8 +210,8 @@ function clearForm() {
     lname.val("");
     lname.prev("label").css("right", "0").text("Last Name");
     reason.val("-1");
-    other.hide();
-    other.val("");
+    addInfo.hide();
+    addInfo.val("");
     submit.removeClass("disabled");
 }
 function fetchReasons() {
@@ -235,7 +237,7 @@ function validateCheckIn() {
         return false;
     }
     else if (reason.val() == 0) {
-        if ($.trim(other.val()) == "") {
+        if ($.trim(addInfo.val()) == "") {
             alert("Please provide a reason for you visit");
             return false;
         }

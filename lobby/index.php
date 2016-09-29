@@ -33,7 +33,7 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
             <label for="lname">Last Name</label>
             <input type="text" id="lname"/>
             <select id="reason" name="reason" title="Reason for Visit"></select>
-            <input type="text" id="other" placeholder="Other Reason"/>
+            <input type="text" id="addInfo" placeholder=""/>
             <?
             if ($branch == "William") {
                 echo "<h3>Probably something extra here...</h3>";
