@@ -254,9 +254,10 @@ function checkEnvironment() {
     }
 }
 function checkRedirect() {
-    if ($("#branch").val() == "") location.href = "https://umculobby.com?d=instant";
-    else if ($("#branch").val() == "William") location.href = "https://umculobby.com/parking/?branch=William";
-    else if ($("#branch").val() == "Huron") location.href = "https://umculobby.com/parking/?branch=Huron";
+    branch = $("#branch");
+    if (branch.val() == "") location.href = "https://umculobby.com?d=instant";
+    else if (branch.val() == "William") location.href = "https://umculobby.com/parking/?branch=William";
+    else if (branch.val() == "Huron") location.href = "https://umculobby.com/parking/?branch=Huron";
     var g = $("#goTo").val();
     if (g != "") {
         console.log("There is a goTo value");

@@ -1,5 +1,6 @@
 <?php
 $clientIP = $_SERVER['REMOTE_ADDR'];
+$goto = "";
 if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
     //header("Location: ../video");
 } else {
@@ -79,7 +80,7 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
     <form id="parkingContainer" action="parking.php" method="post" onsubmit="return validateCheckIn()">
         <label for="spotNum">Spot Number</label>
         <select id="spotNum" name="spotNum"></select>
-        <input type="number" id="other" name="other" autocomplete="off"/>
+        <input type="number" id="other" name="other" title="Other Parking Spot" autocomplete="off"/>
         <input type="button" id="showMap" value="Show Parking Map"/>
         <label for="reason">Reason</label>
         <select id="reason" name="reason"></select>
@@ -88,7 +89,7 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
         <input type="hidden" id="branch" name="branch" value="<?php echo $_GET["branch"] ?>"/>
         <input type="submit" id="checkIn" value="Check-In"/>
         <input type="button" id="cancel" value="Cancel"/>
-        <input type="text" id="vid" name="vid" hidden/>
+        <input type="text" id="vid" name="vid" title="" hidden/>
     </form>
 </div>
 <div id="viewVisitors"></div>
@@ -97,13 +98,13 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
     <div id="parking-map"></div>
 </div>
 <div id="screensaver"></div>
-<input type="text" id="decoy" readonly/>
-<input type="text" id="goTo" value="<?php echo $goto; ?>" readonly/>
+<input type="text" id="decoy" title="" readonly/>
+<input type="text" id="goTo" title="" value="<?php echo $goto; ?>" readonly/>
 <script src="/js/secure.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script src="js/map.js"></script>
-<script src="js/script.js"></script>
+<script src="js/parking.js"></script>
 <script src="js/screensaver.js"></script>
 </body>
 </html>
