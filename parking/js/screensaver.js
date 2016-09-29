@@ -19,7 +19,6 @@ function show_screensaver() {
 
     if (screensaver_active) {
         $('#screensaver').html(
-            "<img id='blockM' src='img/block_m.png' />" +
             "<h1 id='tap-anywhere'>UMCU Parking Check-In</h1>" +
             "<h2 id='tap-anywhere2'>Tap Anywhere to Get Started</h2>"
         );
