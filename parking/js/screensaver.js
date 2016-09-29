@@ -3,6 +3,7 @@
  */
 
 var mousetimeout;
+var screensaver;
 var screensaver_active = false;
 var idletime = 900;
 var counter = 0;
@@ -11,31 +12,29 @@ var tapAnywhere;
 function show_screensaver() {
     var isWhite = true;
     $("title").text("UMCU Screensaver");
-    $("#decoy").focus();
-    $("#decoy").blur();
-    $('#screensaver').fadeIn();
+    $("#decoy").focus().blur();
+    screensaver.fadeIn();
     screensaver_active = true;
     counter = 0;
 
     if (screensaver_active) {
-        $('#screensaver').html(
+        screensaver.html(
             "<h1 id='tap-anywhere'>UMCU Parking Check-In</h1>" +
             "<h2 id='tap-anywhere2'>Tap Anywhere to Get Started</h2>"
         );
     }
 }
-
 function stop_screensaver() {
     $("title").text("UMCU Parking App");
     console.log("Screensaver ran for " + counter + " seconds");
     if (counter > 30) {
         $("body").fadeOut(function () {
-            $('#screensaver').fadeOut();
+            screensaver.fadeOut();
             location.reload();
         });
     }
     else {
-        $('#screensaver').fadeOut();
+        screensaver.fadeOut();
     }
     screensaver_active = false;
     counter = 0;
@@ -46,7 +45,6 @@ function stop_screensaver() {
         });
     }
 }
-
 function reset_screensaver() {
     clearTimeout(mousetimeout);
 
@@ -59,8 +57,20 @@ function reset_screensaver() {
     }, 1000 * idletime);
     counter = 0;
 }
-
 $(document).ready(function () {
+    screensaver = $("#screensaver");
+    $(document).click(function () {
+        reset_screensaver();
+    });
+    screensaver.click(function () {
+        reset_screensaver();
+    });
+    $(document).keyup(function () {
+        reset_screensaver();
+    });
+    $(document).mousemove(function () {
+        reset_screensaver();
+    });
     mousetimeout = setTimeout(function () {
         show_screensaver();
     }, 1000 * idletime);
@@ -68,20 +78,4 @@ $(document).ready(function () {
         counter++;
     }, 1000);
 
-});
-
-$(document).click(function () {
-    reset_screensaver();
-});
-
-$("#screensaver").click(function () {
-    reset_screensaver();
-});
-
-$(document).keyup(function () {
-    reset_screensaver();
-});
-
-$(document).mousemove(function () {
-    reset_screensaver();
 });
