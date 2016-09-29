@@ -97,9 +97,6 @@ function calcDistance(p) {
         }
     }
     branch = distances[closest][0];
-    //$("body").prepend("<div id='continue'>Continue</div>");
-    //$("body").prepend("<h1>" + branch + "</h1>");
-    //$("body").prepend("<h1 style='font-size: 8vw;'>Closest To:</h1>");
 
     var redir = getURLParameter("d");
     if (redir == "b") setTimeout(redirect(), 3000);
@@ -107,19 +104,9 @@ function calcDistance(p) {
     else redirect();
 }
 function redirect() {
-    console.log("redirecting...");
-    //setTimeout(function () {
-    if (branch == "Huron") {
-        //location.href += "/parking?branch=Huron";
-        location.href = "https://umculobby.com/parking?branch=Huron";
-    }
-    else if (branch == "William") {
-        location.href = "https://umculobby.com/parking?branch=William";
-    }
-    else {
-        location.href = "https://umculobby.com/lobby?branch=" + branch;
-    }
-    //}, 3000);
+    if (branch == "Huron") location.href = "https://umculobby.com/parking?branch=Huron";
+    //else if (branch == "William") location.href = "https://umculobby.com/parking?branch=William";
+    else location.href = "https://umculobby.com/lobby?branch=" + branch;
 }
 function showError(error) {
     switch (error.code) {

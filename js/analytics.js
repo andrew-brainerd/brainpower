@@ -1,5 +1,6 @@
 /**
  * Created by abrainerd on 7/19/2016.
+ * Purpose: Gather analytics. Not in use yet.
  */
 (function (i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r;
