@@ -101,10 +101,10 @@ $(document).ready(function () {
     reason.change(function () {
         var r = reason.val();
         if (r == 0) {
-            addInfo.show();
+            addInfo.attr("placeholder", "Other Reason").show();
         }
         else if (r == "Appointment") {
-            addInfo.show();
+            addInfo.attr("placeholder", "Meeting With").show();
         }
         else {
             addInfo.hide();
@@ -116,6 +116,9 @@ $(document).ready(function () {
     submit.click(function () {
         if (!submit.hasClass("disabled")) {
             var r = reason.val() == 0 ? addInfo.val() : reason.val();
+            if (reason.val() == "Appointment") {
+                r = "Appointment with " + r;
+            }
             if (validateCheckIn()) {
                 $.ajax({
                     type: "POST",
