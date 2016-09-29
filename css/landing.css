@@ -1,57 +1,45 @@
 body {
     background: #00274c;
     color: #00274c;
-    /*font-family: 'Permanent Marker', cursive;*/
-    /*font-family: 'Oswald', sans-serif;*/
     font-family: 'Caveat Brush', cursive;
 }
-
 #container {
     margin: auto;
     width: 750px;
 }
-
 div.nav {
     background: white;
     border: 6px outset white;
-    /*box-shadow: 0 8px 5px #888888;
-    box-shadow: 10px 10px 15px 0 #888888;*/
     border-radius: 10px;
     display: inline-block;
     height: 330px;
     margin: 20px;
     opacity: 0.8;
-    transition: opacity 0.5s,
-    background 0.5s,
-    border 0.5s;
+    transition: opacity 0.5s, background 0.5s, border 0.5s;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     width: 300px;
 }
-
 div.nav:hover {
     background: #ffcb05;
     border: 6px outset #ffcb05;
     cursor: pointer;
     opacity: 1;
 }
-
 div.nav .title {
     font-size: 46px;
     margin-top: 30px;
     margin-bottom: 40px;
     text-align: center;
 }
-
 div.nav img {
     display: block;
     fill: green;
     margin: auto;
     width: 150px;
 }
-
 #credit {
-    font-color: transparent;
+    color: transparent;
 }
