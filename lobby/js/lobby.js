@@ -138,6 +138,7 @@ $(document).ready(function () {
     });
     showReport.click(fetchVisitors);
     closeReport.click(function () {
+        page.find("#closingNote").remove();
         viewVisitors.fadeOut(function () {
             closeReport.fadeOut(function () {
                 header.css({"position": "static", "border-bottom": "none"});
@@ -229,18 +230,17 @@ function finalNote(vid, row) {
 function checkout(vid) {
     if (vid != -1) {
         var noteText = $("#note").val();
-        if (confirm("Checkout Visitor?")) {
-            $.ajax({
-                type: "POST",
-                url: "util/updateStatus.php",
-                data: "vid=" + vid +
+        $.ajax({
+            type: "POST",
+            url: "util/updateStatus.php",
+            data: "vid=" + vid +
                 "&noteText=" + noteText +
                 "&status=2",
-                success: function (msg) {
-                    fetchVisitors();
-                }
-            });
-        }
+            success: function (msg) {
+                page.find("#closingNote").remove();
+                fetchVisitors();
+            }
+        });
     }
 }
 function clearForm() {

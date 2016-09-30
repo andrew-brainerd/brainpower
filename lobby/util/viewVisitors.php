@@ -66,6 +66,7 @@ if ($result->num_rows > 0) {
                 } else $vid = -1;
 
                 $status = $row['status'];
+                if ($status == "2") $reason = $reason . " --> " . $row["noteText"];
                 if ($status == "0") {
                     echo "<div class='row' onclick='helpMember($vid)'>";
                     $status = "Waiting";
