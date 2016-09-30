@@ -9,6 +9,7 @@ var inputs;
 var form;
 var showReport;
 var viewVisitors;
+var visitorRows;
 var closeReport;
 var branch;
 var vid;
@@ -18,6 +19,7 @@ var reason;
 var addInfo;
 var submit;
 var cancel;
+var page;
 
 $(document).ready(function () {
     checkRedirect();
@@ -26,6 +28,7 @@ $(document).ready(function () {
     inputs = $("input");
     form = $("#initialForm");
     viewVisitors = $("#viewVisitors");
+    visitorRows = $("#viewVisitors .row");
     showReport = $("#report");
     closeReport = $("#closeReport");
     branch = $("#branch");
@@ -36,6 +39,9 @@ $(document).ready(function () {
     addInfo = $("#addInfo");
     submit = $("#submitForm");
     cancel = $("#cancel");
+    page = $("body");
+
+    page.find("#closingNote").remove();
 
     addInfo.hide();
     viewVisitors.hide();
@@ -52,9 +58,13 @@ $(document).ready(function () {
         }
     });
 
-    $("body").fadeIn(function () {
+    page.fadeIn(function () {
         $("body").scroll();
         //fname.focus();
+    });
+    page.click(function () {
+        //$("#viewVisitors .row").removeClass("selected");
+        //page.find("#closingNote").remove();
     });
     logo.click(function () {
         var loc = location.href;
@@ -184,12 +194,35 @@ function helpMember(vid) {
         }
     }
 }
-function checkOut(vid) {
+function finalNote(vid, row) {
     if (vid != -1) {
-        var finalNotes = "<div id='closingNotes'></div>";
-        finalNotes.append("<label for='notes'>In what ways were you able to aMAIZE this member today?</label>");
-        finalNotes.append("<textarea id='notes'></textarea>");
-        /*if (confirm("Checkout Visitor?")) {
+        console.log("Class: " + row.attr("class"));
+        page.find("#closingNote").remove();
+        viewVisitors.find(".row").removeClass("selected");
+        row.addClass("selected");
+        console.log("Row onClick: " + row.attr("onclick"));
+        row.on("click.selected", function () {
+            row.removeClass("selected");
+            page.find("#closingNote").remove();
+            row.off("click.selected");
+        });
+        var finalNotes = $("<div id='closingNote'></div>");
+        finalNotes.append("<label for='note'>How did we aMAIZE this member today?</label>");
+        finalNotes.append("<textarea id='note'></textarea>");
+        finalNotes.append("<input id='addNote' type='button' onclick='checkout(" + vid + ")'/>");
+        finalNotes.css({
+            "width": row.width(),
+            "height": row.height(),
+            "left": row.offset().left,
+            "top": row.offset().top + row.height()
+        });
+        page.append(finalNotes);
+    }
+    else alert("Visitor already checked out");
+}
+function checkout(vid) {
+    if (vid != -1) {
+        if (confirm("Checkout Visitor?")) {
             $.ajax({
                 type: "POST",
                 url: "util/updateStatus.php",
@@ -198,9 +231,8 @@ function checkOut(vid) {
                     fetchVisitors();
                 }
             });
-         }*/
+        }
     }
-    else alert("Visitor already checked out");
 }
 function clearForm() {
     fname.val("");

@@ -70,7 +70,7 @@ if ($result->num_rows > 0) {
                     echo "<div class='row' onclick='helpMember($vid)'>";
                     $status = "Waiting";
                 } else if ($status == "1") {
-                    echo "<div class='row' onclick='checkOut($vid)'>";
+                    echo "<div class='row' onclick='finalNote($vid, $(this))'>";
                     $status = "With MSR";
                 } else {
                     echo "<div class='row'>";

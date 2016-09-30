@@ -17,6 +17,7 @@ html {
 }
 body {
     display: none;
+    margin-bottom: 100px;
     padding-bottom: 50px;
 }
 header {
@@ -215,6 +216,12 @@ label:hover {
     color: #00274c;
     cursor: pointer;
 }
+
+#viewVisitors .row.selected {
+    background: #ffcb05;
+    font-weight: bold;
+    color: #00274c;
+}
 #viewVisitors h1 {
     font-size: 4vw;
     color: #ffcb05;
@@ -262,11 +269,23 @@ input[type=button],
 /*----------------------------------------*/
 /* Closing Notes Box */
 /*----------------------------------------*/
-#closingNotes {
-    margin: 50px auto;
-    padding: 50px;
+#closingNote {
+    background: purple;
     position: absolute;
-    width: 500px;
+    z-index: 99;
+}
+
+#closingNote label {
+    display: inline-block;
+    font-size: 1.2em;
+    margin: auto 10px;
+    opacity: 1;
+    top: -20px;
+}
+
+#closingNote #note {
+    display: inline-block;
+    margin: 10px auto;
 }
 
 /*----------------------------------------*/
