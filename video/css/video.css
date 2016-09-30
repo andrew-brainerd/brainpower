@@ -62,16 +62,12 @@ video {
     color: #00274c;
     cursor: pointer;
     display: inline-block;
-    /*font-size: 1.5em;*/
-    font-size: 1.7vw;
+    font-size: 1.2vw;
     line-height: 100px;
-    /*margin: 25px auto;*/
     margin: 1.5%;
-    /*padding: 50px 15px;*/
     text-align: center;
     text-decoration: none;
     transition: background 0.5s;
-    /*width: 45%;*/
     height: 100px;
     width: calc(100% / 4);
     vertical-align: top;

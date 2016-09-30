@@ -6,7 +6,7 @@
     <title>Create New User</title>
     <link rel="stylesheet" href="//umculobby.com/css/reset.css"/>
     <link rel="stylesheet" href="//umculobby.com/css/font.css"/>
-    <link rel="stylesheet" href="../css/default.css"/>
+    <link rel="stylesheet" href="../css/video.css"/>
     <!--<style>
         body { background: #000444; color: gold; font-family: sans-serif; }
         input, select { display: block; }
@@ -23,7 +23,7 @@
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" autocomplete="off"/>
         <label for="authlv">Access Level:</label>
-        <select id="authLv" name="authLv"></select>
+        <select id="authLv" name="authLv" title="Authotrization Level"></select>
         <div class="button" id="createUser">Create</div>
         <div id="message"></div>
     </div>

@@ -8,7 +8,7 @@ session_start(); ?>
     <link rel="icon" href="//umculobby.com/favicon.ico">
     <link rel="stylesheet" href="//umculobby.com/css/reset.css"/>
     <link rel="stylesheet" href="//umculobby.com/css/font.css"/>
-    <link rel="stylesheet" href="css/default.css"/>
+    <link rel="stylesheet" href="css/video.css"/>
     <style>
         <?php
         $today = date("Y/m/d");
