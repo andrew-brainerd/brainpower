@@ -20,28 +20,14 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
 <header>
     <div id="timer"></div>
     <img src="img/umcu_logo.png" alt="UMCU Logo"/>
-    <span><?php //echo $_GET["location"]; ?></span>
     <!--<img src="img/UMCU-NewLogo-transparent2.png" />-->
     <div id="closeReport">Check-In</div>
     <div id="report">Check-Out</div>
 </header>
 <div id="initialForm">
-    <form autocomplete="off" spellcheck="false">
-        <div>
-            <label for="fname">First Name</label>
-            <input type="text" id="fname"/>
-            <label for="lname">Last Name</label>
-            <input type="text" id="lname"/>
-            <select id="reason" name="reason" title="Reason for Visit"></select>
-            <input type="text" id="addInfo" placeholder=""/>
-            <?
-            if ($branch == "William") {
-                echo "<h3>Probably something extra here...</h3>";
-            }
-            ?>
-            <div id="submitForm">Check-In</div>
-        </div>
-    </form>
+    <?php
+    if ($branch != "Huron") include "lobby.php";
+    ?>
 </div>
 <div id="thankYou">
     <h1>Thanks for Checking In</h1>
