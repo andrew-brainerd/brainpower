@@ -194,7 +194,10 @@ function helpMember(vid) {
 }
 function checkOut(vid) {
     if (vid != -1) {
-        if (confirm("Checkout Visitor?")) {
+        var finalNotes = "<div id='closingNotes'></div>";
+        finalNotes.append("<label for='notes'>In what ways were you able to aMAIZE this member today?</label>");
+        finalNotes.append("<textarea id='notes'></textarea>");
+        /*if (confirm("Checkout Visitor?")) {
             $.ajax({
                 type: "POST",
                 url: "util/updateStatus.php",
@@ -203,7 +206,7 @@ function checkOut(vid) {
                     fetchVisitors();
                 }
             });
-        }
+         }*/
     }
     else alert("Visitor already checked out");
 }
