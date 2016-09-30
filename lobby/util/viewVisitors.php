@@ -10,15 +10,8 @@ include "dbconnect.php";
 
 $today = $_POST['searchDate'];
 $branch = $_GET['branch'];
-if ($branch === "" || $branch === null) {
-    $branch = $_POST['branch'];
-}
-
+if ($branch === "" || $branch === null) $branch = $_POST['branch'];
 if ($today == "") $today = date("Y/m/d");
-else {
-    echo "ERROR: [" . $today . "]";
-    exit(1);
-}
 
 $slt = "SELECT *";
 $frm = " FROM SimpleVisitors";
@@ -34,7 +27,6 @@ if ($result->num_rows > 0) {
         $whr = " WHERE location='$branch' AND visit_date = '$today' AND status=$i ";
         $ord = "ORDER BY time_out ASC, time_in DESC";
         $sql = $slt . $frm . $whr . $ord;
-        //echo "SQL Statement: $sql<br />";
         switch ($i) {
             case 0:
                 $tableTitle = "Members Excitedly Waiting";

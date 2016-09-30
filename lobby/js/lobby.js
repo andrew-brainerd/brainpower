@@ -90,14 +90,6 @@ $(document).ready(function () {
             scrollTop: 0
         }, 0);
     });
-    /*reason.focus(function () {
-     var elementType = $(this).prev().prop("nodeName");
-     console.log(elementType);
-     if (elementType == "LABEL" && $(this).val() != -1) {
-     $(this).prev().show();
-     } else { $(this).prev().hide(); }
-
-     });*/
     reason.change(function () {
         var r = reason.val();
         if (r == 0) {
@@ -117,7 +109,7 @@ $(document).ready(function () {
         if (!submit.hasClass("disabled")) {
             var r = reason.val() == 0 ? addInfo.val() : reason.val();
             if (reason.val() == "Appointment") {
-                r = "Appointment with " + r;
+                r = "Appointment with " + addInfo.val();
             }
             if (validateCheckIn()) {
                 $.ajax({
