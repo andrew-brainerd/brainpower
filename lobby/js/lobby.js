@@ -109,7 +109,7 @@ $(document).ready(function () {
         if (!submit.hasClass("disabled")) {
             var r = reason.val() == 0 ? addInfo.val() : reason.val();
             if (reason.val() == "Appointment") {
-                r = "Appointment with " + addInfo.val();
+                r = "Appt w/" + addInfo.val();
             }
             if (validateCheckIn()) {
                 $.ajax({

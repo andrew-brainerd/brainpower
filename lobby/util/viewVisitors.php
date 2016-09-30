@@ -51,7 +51,7 @@ if ($result->num_rows > 0) {
             echo "<div class='hcell'>Time In</div>";
             echo "<div class='hcell'>Time Out</div>";
             echo "<div class='hcell'>Reason</div>";
-            echo "<div class='hcell'>Status</div>";
+            //echo "<div class='hcell'>Status</div>";
             echo "</div>";
             while ($row = $result->fetch_assoc()) {
                 $reason = $row["reason"];
@@ -81,7 +81,7 @@ if ($result->num_rows > 0) {
                 echo "<div class='cell time'>" . $timeIn . "</div>";
                 echo "<div class='cell time'>" . $timeOut . "</div>";
                 echo "<div class='cell reason'>" . $reason . "</div>";
-                echo "<div class='cell'>$status</div>";
+                //echo "<div class='cell'>$status</div>";
                 echo "</div>";
             }
             echo "</div>";

@@ -198,6 +198,7 @@ label:hover {
 }
 #viewVisitors .cell {
     border-bottom: 1px solid #ffcb05;
+    line-height: 28px;
     padding: 15px 20px;
     user-select: none;
     -webkit-user-select: none;
