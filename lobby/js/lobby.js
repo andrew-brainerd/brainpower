@@ -206,27 +206,36 @@ function finalNote(vid, row) {
             page.find("#closingNote").remove();
             row.off("click.selected");
         });
-        var finalNotes = $("<div id='closingNote'></div>");
-        finalNotes.append("<label for='note'>How did we aMAIZE this member today?</label>");
-        finalNotes.append("<textarea id='note'></textarea>");
-        finalNotes.append("<input id='addNote' type='button' onclick='checkout(" + vid + ")'/>");
-        finalNotes.css({
+        var finalNote = $("<div id='closingNote'></div>");
+        finalNote.append("<label for='note'>How did we aMAIZE this member today?</label>");
+        finalNote.append("<textarea id='note'></textarea>");
+        finalNote.css({
             "width": row.width(),
             "height": row.height(),
             "left": row.offset().left,
             "top": row.offset().top + row.height()
         });
-        page.append(finalNotes);
+        var dasButton = $("<input id='addNote' type='button' value='Done' onclick='checkout(" + vid + ")'/>");
+        dasButton.css({
+            "height": finalNote.height(),
+            "left": finalNote.width(),
+            "top": -20 //finalNote.offset().top
+        });
+        finalNote.append(dasButton);
+        page.append(finalNote);
     }
     else alert("Visitor already checked out");
 }
 function checkout(vid) {
     if (vid != -1) {
+        var noteText = $("#note").val();
         if (confirm("Checkout Visitor?")) {
             $.ajax({
                 type: "POST",
                 url: "util/updateStatus.php",
-                data: "vid=" + vid + "&status=2",
+                data: "vid=" + vid +
+                "&noteText=" + noteText +
+                "&status=2",
                 success: function (msg) {
                     fetchVisitors();
                 }
