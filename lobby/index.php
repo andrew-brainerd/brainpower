@@ -43,7 +43,6 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
 <input type="hidden" id="goTo" value="<?php echo $goTo; ?>"/>
 <script src="/js/secure.js"></script>
 <?php include "util/jquery.php"; ?>
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>-->
 <script src="js/lobby.js"></script>
 <script src="js/screensaver.js"></script>
 </body>
