@@ -86,7 +86,7 @@
     </style>
 </head>
 <body>
-<div id="visitor">
+<div id="visitor" onclick="alert('something')">
     <div>
         <div>Visitor: Andrew Brainerd</div>
         <div>For: Appt w/Linda Kaddouh</div>
@@ -110,6 +110,7 @@
         }).css({
             "left": "350px"
         });
+        //visitor.click(function () { alert("something"); });
         dropAreas.droppable({
             activate: function (event, ui) {
                 $(this).addClass("pickMe").html("<p>PICK ME! :D</p>");
@@ -144,7 +145,7 @@
                 $.ajax({
                     type: "POST",
                     url: "updateStatus.php",
-                    data: "vid=155&status=" + status,
+                    data: "vid=156&status=" + status,
                     success: function (msg) {
                         fetchVisitors();
                     }
@@ -170,7 +171,7 @@
         $.ajax({
             type: "POST",
             url: "viewVisitors.php",
-            data: "branch=William",
+            data: "branch=Union",
             success: function (data) {
                 $("#viewVisitors").html(data);
             }

@@ -216,7 +216,6 @@ label:hover {
     color: #00274c;
     cursor: pointer;
 }
-
 #viewVisitors .row.selected {
     background: #ffcb05;
     font-weight: bold;
@@ -225,6 +224,15 @@ label:hover {
 #viewVisitors h1 {
     font-size: 4vw;
     color: #ffcb05;
+}
+
+#viewVisitors .row.ui-draggable-dragging {
+    background: #ffcb05;
+    cursor: none;
+}
+
+#viewVisitors .table.ui-droppable {
+    border: 5px inset ghostwhite;
 }
 input[type=button],
 #submitForm {

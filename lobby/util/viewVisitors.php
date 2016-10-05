@@ -68,10 +68,10 @@ if ($result->num_rows > 0) {
                 $status = $row['status'];
                 if ($status == "2") $reason = $reason . " --> " . $row["noteText"];
                 if ($status == "0") {
-                    echo "<div class='row' onclick='helpMember($vid)'>";
+                    echo "<div class='row'>"; // onclick='helpMember($vid)'
                     $status = "Waiting";
                 } else if ($status == "1") {
-                    echo "<div class='row' onclick='finalNote($vid, $(this))'>";
+                    echo "<div class='row'>";  // onclick='finalNote($vid, $(this))'
                     $status = "With MSR";
                 } else {
                     echo "<div class='row'>";

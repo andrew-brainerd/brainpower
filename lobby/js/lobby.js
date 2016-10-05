@@ -42,8 +42,6 @@ $(document).ready(function () {
     page = $("body");
 
     page.find("#closingNote").remove();
-
-    addInfo.hide();
     viewVisitors.hide();
     closeReport.hide();
     addInfo.hide();
@@ -80,7 +78,7 @@ $(document).ready(function () {
         inputLabel.css("right", "80px");
         if (inputLabel.text().indexOf(" ") > 0)
             inputLabel.text(inputLabel.text().substring(0, inputLabel.text().indexOf(" ")) + ":");
-        showReport.hide();
+        //showReport.hide();
     });
     inputs.blur(function () {
         $(this).val(capitalize($.trim($(this).val())));
@@ -174,6 +172,13 @@ function fetchVisitors() {
             form.fadeOut();
             showReport.fadeOut(function () {
                 header.css({"position": "fixed", "border-bottom": "3px solid white"});
+                $(".table").droppable();
+                $(".row").draggable({
+                    helper: "clone"
+                }).click(function () {
+                    if ($(this).hasClass(("ui-draggable-draggin"))) return;
+                    console.log("I was clicked on");
+                });
                 viewVisitors.fadeIn();
                 closeReport.fadeIn();
             });
