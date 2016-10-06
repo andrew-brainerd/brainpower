@@ -83,7 +83,7 @@
     <title>Thank You!</title>
     <link rel="stylesheet" href="../css/reset.css"/>
     <link rel="stylesheet" href="../css/font.css"/>
-    <link rel="stylesheet" href="css/default.css"/>
+    <link rel="stylesheet" href="css/parking.css"/>
     <style>
         .padding {
             border-collapse: collapse;
