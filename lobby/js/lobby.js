@@ -4,160 +4,146 @@
 
 var queryID = 0;          // IE caching fix
 var environment = "";
-var header;
-var inputs;
-var form;
-var showReport;
-var viewVisitors;
-var visitorRows;
-var closeReport;
-var branch;
-var vid;
-var fname;
-var lname;
-var reason;
-var addInfo;
-var submit;
-var cancel;
-var page;
+var header = $("header");
+var logo = header.find("img");
+var inputs = $("input");
+var form = $("#initialForm");
+var viewVisitors = $("#viewVisitors");
+var visitorRows = viewVisitors.find(".row");
+var showReport = $("#report");
+var closeReport = $("#closeReport");
+var branch = $("#branch");
+var vid = $("#vid").val();
+var fname = $("#fname");
+var lname = $("#lname");
+var reason = $("#reason");
+var addInfo = $("#addInfo");
+var submit = $("#submitForm");
+var cancel = $("#cancel");
+var page = $("body");
 var draggedVID;
 
-$(document).ready(function () {
-    checkRedirect();
-    var logo = $("header > img");
-    header = $("header");
-    inputs = $("input");
-    form = $("#initialForm");
-    viewVisitors = $("#viewVisitors");
-    visitorRows = $("#viewVisitors .row");
-    showReport = $("#report");
-    closeReport = $("#closeReport");
-    branch = $("#branch");
-    vid = $("#vid").val();
-    fname = $("#fname");
-    lname = $("#lname");
-    reason = $("#reason");
-    addInfo = $("#addInfo");
-    submit = $("#submitForm");
-    cancel = $("#cancel");
-    page = $("body");
+checkRedirect();
+page.find("#closingNote").remove();
+viewVisitors.hide();
+closeReport.hide();
+addInfo.hide();
+fetchReasons();
+clearForm();
+checkEnvironment();
 
-    page.find("#closingNote").remove();
-    viewVisitors.hide();
-    closeReport.hide();
-    addInfo.hide();
-    fetchReasons();
+$(document).bind('keypress.key13', function (e) {
+    if (e.which == 13) {
+        e.preventDefault();
+        submit.click();
+    }
+});
+
+page.fadeIn(function () {
+    $("body").scroll();
+    //fname.focus();
+});
+page.click(function () {
+    //$("#viewVisitors .row").removeClass("selected");
+    //page.find("#closingNote").remove();
+});
+logo.click(function () {
+    var loc = location.href;
+    if (loc.indexOf("goto") >= 0) {
+        window.location.href = "index.php";
+    }
+    else {
+        location.reload();
+    }
+});
+inputs.focus(function () {
+    var inputLabel = $(this).prev("label");
+    inputLabel.css("right", "80px");
+    if (inputLabel.text().indexOf(" ") > 0)
+        inputLabel.text(inputLabel.text().substring(0, inputLabel.text().indexOf(" ")) + ":");
+    //showReport.hide();
+});
+inputs.on("blur", function () {
+    $(this).val(capitalize($.trim($(this).val())));
+    var elementType = $(this).prev().prop("nodeName");
+    if (elementType == "LABEL" && $(this).val() == "") {
+        $(this).prev().css("right", "0");
+    }
+    showReport.show();
+});
+reason.focus(function () {
+    var label = $(this).prev("label");
+    $("#report").hide();
+});
+reason.blur(function () {
+    showReport.show();
+    $("html, body").animate({
+        scrollTop: 0
+    }, 0);
+});
+reason.change(function () {
+    var r = reason.val();
+    if (r == 0) {
+        addInfo.attr("placeholder", "Other Reason").show();
+    }
+    else if (r == "Appointment") {
+        addInfo.attr("placeholder", "Meeting With").show();
+    }
+    else {
+        addInfo.hide();
+    }
+});
+cancel.click(function () {
     clearForm();
-    checkEnvironment();
-
-    $(document).bind('keypress.key13', function (e) {
-        if (e.which == 13) {
-            e.preventDefault();
-            submit.click();
+});
+submit.click(function () {
+    if (!submit.hasClass("disabled")) {
+        var r = reason.val() == 0 ? addInfo.val() : reason.val();
+        if (reason.val() == "Appointment") {
+            r = "Appt w/" + addInfo.val();
         }
-    });
-
-    page.fadeIn(function () {
-        $("body").scroll();
-        //fname.focus();
-    });
-    page.click(function () {
-        //$("#viewVisitors .row").removeClass("selected");
-        //page.find("#closingNote").remove();
-    });
-    logo.click(function () {
-        var loc = location.href;
-        if (loc.indexOf("goto") >= 0) {
-            window.location.href = "index.php";
-        }
-        else {
-            location.reload();
-        }
-    });
-    inputs.focus(function () {
-        var inputLabel = $(this).prev("label");
-        inputLabel.css("right", "80px");
-        if (inputLabel.text().indexOf(" ") > 0)
-            inputLabel.text(inputLabel.text().substring(0, inputLabel.text().indexOf(" ")) + ":");
-        //showReport.hide();
-    });
-    inputs.blur(function () {
-        $(this).val(capitalize($.trim($(this).val())));
-        var elementType = $(this).prev().prop("nodeName");
-        if (elementType == "LABEL" && $(this).val() == "") {
-            $(this).prev().css("right", "0");
-        }
-        showReport.show();
-    });
-    reason.focus(function () {
-        var label = $(this).prev("label");
-        $("#report").hide();
-    });
-    reason.blur(function () {
-        showReport.show();
-        $("html, body").animate({
-            scrollTop: 0
-        }, 0);
-    });
-    reason.change(function () {
-        var r = reason.val();
-        if (r == 0) {
-            addInfo.attr("placeholder", "Other Reason").show();
-        }
-        else if (r == "Appointment") {
-            addInfo.attr("placeholder", "Meeting With").show();
-        }
-        else {
-            addInfo.hide();
-        }
-    });
-    cancel.click(function () {
-        clearForm();
-    });
-    submit.click(function () {
-        if (!submit.hasClass("disabled")) {
-            var r = reason.val() == 0 ? addInfo.val() : reason.val();
-            if (reason.val() == "Appointment") {
-                r = "Appt w/" + addInfo.val();
-            }
-            if (validateCheckIn()) {
-                $.ajax({
-                    type: "POST",
-                    url: "util/setVisitor.php",
-                    data: "fname=" + fname.val() +
-                    "&lname=" + lname.val() +
-                    "&reason=" + r +
-                    "&branch=" + $("#branch").val(),
-                    success: function () {
-                        showPopupMessage();
-                    }
-                });
-            }
-        }
-    });
-    showReport.click(fetchVisitors);
-    closeReport.click(function () {
-        page.find("#closingNote").remove();
-        viewVisitors.fadeOut(function () {
-            closeReport.fadeOut(function () {
-                header.css({"position": "static", "border-bottom": "none"});
-                form.fadeIn();
-                showReport.fadeIn();
+        if (validateCheckIn()) {
+            $.ajax({
+                type: "POST",
+                url: "util/setVisitor.php",
+                data: "fname=" + fname.val() +
+                "&lname=" + lname.val() +
+                "&reason=" + r +
+                "&branch=" + $("#branch").val(),
+                success: function () {
+                    showPopupMessage();
+                }
             });
+        }
+    }
+});
+showReport.click(fetchVisitors);
+closeReport.click(function () {
+    page.find("#closingNote").remove();
+    viewVisitors.fadeOut(function () {
+        closeReport.fadeOut(function () {
+            header.css({"position": "static", "border-bottom": "none"});
+            form.fadeIn();
+            showReport.fadeIn();
         });
     });
 });
 
 function showPopupMessage() {
-    var popup = $("#thankYou");
+    page.fadeOut("slow", function () {
+        clearForm();
+        showReport.show();
+        page.fadeIn("slow");
+    });
+    /*var popup = $("#thankYou");
     popup.fadeIn("slow", function () {
         clearForm();
     });
     setTimeout(function () {
         popup.fadeOut("slow", function () {
-            $("#report").fadeIn();
+     showReport.fadeIn();
         });
-    }, 3000);
+     }, 3000);*/
 }
 function fetchVisitors() {
     var sd = "";
@@ -294,8 +280,8 @@ function checkout(vid) {
             type: "POST",
             url: "util/updateStatus.php",
             data: "vid=" + vid +
-                "&noteText=" + noteText +
-                "&status=2",
+            "&noteText=" + noteText +
+            "&status=2",
             success: function (msg) {
                 page.find("#closingNote").remove();
                 fetchVisitors();
