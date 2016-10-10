@@ -1,11 +1,12 @@
 <form autocomplete="off" spellcheck="false">
     <div>
-        <label for="fname">First Name</label>
+        <label for="fname" title="First Name" data-alt="First"></label>
         <input type="text" id="fname"/>
-        <label for="lname">Last Name</label>
+        <label for="lname" title="Last Name" data-alt="Last">Last Name</label>
         <input type="text" id="lname"/>
         <select id="reason" name="reason" title="Reason for Visit"></select>
-        <input type="text" id="addInfo" placeholder=""/>
+        <label for="addInfo"></label>
+        <input type="text" id="addInfo"/>
         <?php
         if ($_GET["branch"] == "William") {
             echo "<h3>Probably something extra here...</h3>";

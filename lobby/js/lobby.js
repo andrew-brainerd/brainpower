@@ -4,9 +4,10 @@
 
 var queryID = 0;          // IE caching fix
 var environment = "";
+var page = $("body");
 var header = $("header");
 var logo = header.find("img");
-var inputs = $("input");
+var inputs = page.find("input");
 var form = $("#initialForm");
 var viewVisitors = $("#viewVisitors");
 var visitorRows = viewVisitors.find(".row");
@@ -20,14 +21,13 @@ var reason = $("#reason");
 var addInfo = $("#addInfo");
 var submit = $("#submitForm");
 var cancel = $("#cancel");
-var page = $("body");
 var draggedVID;
 
 checkRedirect();
 page.find("#closingNote").remove();
 viewVisitors.hide();
 closeReport.hide();
-addInfo.hide();
+hideAdditionalInfo();
 fetchReasons();
 clearForm();
 checkEnvironment();
@@ -40,12 +40,7 @@ $(document).bind('keypress.key13', function (e) {
 });
 
 page.fadeIn(function () {
-    $("body").scroll();
-    //fname.focus();
-});
-page.click(function () {
-    //$("#viewVisitors .row").removeClass("selected");
-    //page.find("#closingNote").remove();
+    page.scroll();
 });
 logo.click(function () {
     var loc = location.href;
@@ -56,14 +51,16 @@ logo.click(function () {
         location.reload();
     }
 });
-inputs.focus(function () {
+inputs.on("focus", function () {
+    console.log("You focused an input!");
     var inputLabel = $(this).prev("label");
     inputLabel.css("right", "80px");
     if (inputLabel.text().indexOf(" ") > 0)
-        inputLabel.text(inputLabel.text().substring(0, inputLabel.text().indexOf(" ")) + ":");
+        inputLabel.text(inputLabel.attr("title") + ":");
     //showReport.hide();
 });
 inputs.on("blur", function () {
+    console.log("You left an input!");
     $(this).val(capitalize($.trim($(this).val())));
     var elementType = $(this).prev().prop("nodeName");
     if (elementType == "LABEL" && $(this).val() == "") {
@@ -84,10 +81,11 @@ reason.blur(function () {
 reason.change(function () {
     var r = reason.val();
     if (r == 0) {
-        addInfo.attr("placeholder", "Other Reason").show();
+        form.remove("label[for=addInfo]");
+        showAdditionalInfo();
     }
     else if (r == "Appointment") {
-        addInfo.attr("placeholder", "Meeting With").show();
+        showAdditionalInfo();
     }
     else {
         addInfo.hide();
@@ -217,7 +215,7 @@ function fetchVisitors() {
                         console.log("Helper ID: " + $(ui.helper).attr("class"));
                     }
                 }).click(function () {
-                    if ($(this).hasClass(("ui-draggable-draggin"))) return;
+                    if ($(this).hasClass(("ui-draggable-dragging"))) return;
                     console.log("I was clicked on");
                 });
                 viewVisitors.fadeIn();
@@ -357,4 +355,12 @@ function checkRedirect() {
 }
 function capitalize(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
+}
+function showAdditionalInfo() {
+    addInfo.prev("label").show();
+    addInfo.show();
+}
+function hideAdditionalInfo() {
+    addInfo.prev("label").hide();
+    addInfo.hide();
 }
