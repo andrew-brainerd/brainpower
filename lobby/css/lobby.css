@@ -377,3 +377,10 @@ input[type=button],
         width: 250px;
     }
 }
+
+/*----------------------------------------*/
+/* Hacksors - Nobody's Perfect */
+/*----------------------------------------*/
+select::-ms-expand {
+    display: none;
+}
