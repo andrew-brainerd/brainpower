@@ -43,7 +43,7 @@ if ($result->num_rows > 0) {
         echo "<h2 class='tableTitle'>$tableTitle</h2>";
 
         $result = $conn->query($sql);
-
+        echo "<div class='tableContainer' id='status$i''>";
         if ($result->num_rows > 0) {
             echo "<div class='table' id='viewTable'>";
             echo "<div class='row' id='viewHeader'>";
@@ -68,10 +68,10 @@ if ($result->num_rows > 0) {
                 $status = $row['status'];
                 if ($status == "2") $reason = $reason . " --> " . $row["noteText"];
                 if ($status == "0") {
-                    echo "<div class='row'>"; // onclick='helpMember($vid)'
+                    echo "<div class='row' data-vid='$vid'>"; // onclick='helpMember($vid)'
                     $status = "Waiting";
                 } else if ($status == "1") {
-                    echo "<div class='row'>";  // onclick='finalNote($vid, $(this))'
+                    echo "<div class='row' data-vid='$vid'>";  // onclick='finalNote($vid, $(this))'
                     $status = "With MSR";
                 } else {
                     echo "<div class='row'>";
@@ -83,10 +83,11 @@ if ($result->num_rows > 0) {
                 echo "<div class='cell time'>" . $timeOut . "</div>";
                 echo "<div class='cell reason'>" . $reason . "</div>";
                 //echo "<div class='cell'>$status</div>";
-                echo "</div>";
+                echo "</div>";  // row
             }
-            echo "</div>";
+            echo "</div>";  // table
         }
+        echo "</div>"; // table container
     }
 } else {
     echo "<h1>No Visitor Check-Ins Today</h1>";

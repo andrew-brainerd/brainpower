@@ -179,10 +179,15 @@ label:hover {
 #viewVisitors {
     margin-top: 180px;
 }
+
+#viewVisitors * {
+    transition: background 0.5s ease-in-out;
+}
 #viewVisitors .table {
     font-size: 1.5vw;
     margin: auto;
     max-width: 90%;
+    min-width: 500px;
 }
 #fixedHeader {
     position: fixed;
@@ -225,14 +230,25 @@ label:hover {
     font-size: 4vw;
     color: #ffcb05;
 }
-
 #viewVisitors .row.ui-draggable-dragging {
     background: #ffcb05;
     cursor: none;
 }
 
-#viewVisitors .table.ui-droppable {
+#viewVisitors .tableContainer.ui-droppable {
+    border: 5px inset transparent;
+    margin: auto;
+    padding: 30px;
+    width: 70%;
+}
+
+#viewVisitors .tableContainer.ui-droppable.pickMe {
+    background: dodgerblue;
     border: 5px inset ghostwhite;
+}
+
+#viewVisitors .tableContainer.ui-droppable.almostHaveIt {
+    background: orangered;
 }
 input[type=button],
 #submitForm {

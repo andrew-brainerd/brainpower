@@ -20,6 +20,7 @@ var addInfo;
 var submit;
 var cancel;
 var page;
+var draggedVID;
 
 $(document).ready(function () {
     checkRedirect();
@@ -160,7 +161,6 @@ function showPopupMessage() {
 }
 function fetchVisitors() {
     var sd = "";
-    console.log("searchDate=" + sd + "&queryID=" + queryID + "&branch=" + $("#branch").val());
     $.ajax({
         type: "POST",
         url: "util/viewVisitors.php",
@@ -172,9 +172,64 @@ function fetchVisitors() {
             form.fadeOut();
             showReport.fadeOut(function () {
                 header.css({"position": "fixed", "border-bottom": "3px solid white"});
-                $(".table").droppable();
+                $(".tableContainer").droppable({
+                    activate: function (event, ui) {
+                        $(this).addClass("pickMe");
+                    },
+                    deactivate: function () {
+                        $(this).removeClass("pickMe");
+                    },
+                    drop: function (event, ui) {
+                        $(this).removeClass("almostHaveIt");
+                        var dragID = ui.helper.attr("data-vid");
+                        var dropID = $(this).attr("id");
+                        console.log("drag: " + dragID + "    drop: " + dropID);
+                        var status, statusText;
+                        switch (dropID) {
+                            case "status0":
+                                status = 0;
+                                statusText = "Waiting";
+                                break;
+                            case "status1":
+                                status = 1;
+                                statusText = "With MSR";
+                                break;
+                            case "status2":
+                                status = 2;
+                                statusText = "Done";
+                                break;
+                            default:
+                                console.log("Mucked it up. Nice Job");
+                        }
+                        $(this)
+                        //.html("<p>Changed status to " + statusText + "</p>")
+                            .removeClass("almostHaveIt")
+                            .addClass("droppedTheMic");
+                        $.ajax({
+                            type: "POST",
+                            url: "util/updateStatus.php",
+                            data: "vid=" + dragID +
+                            "&status=" + status,
+                            success: function (msg) {
+                                console.log("vid=" + dragID + "&status=" + status);
+                                fetchVisitors();
+                            }
+                        });
+                    },
+                    greedy: true,
+                    out: function () {
+                        $(this).removeClass("almostHaveIt");
+                    },
+                    over: function () {
+                        $(this).addClass("almostHaveIt")
+                    }
+                });
                 $(".row").draggable({
-                    helper: "clone"
+                    helper: "clone",
+                    start: function (event, ui) {
+                        $(ui.helper).attr("class", $(this).attr("id"));
+                        console.log("Helper ID: " + $(ui.helper).attr("class"));
+                    }
                 }).click(function () {
                     if ($(this).hasClass(("ui-draggable-draggin"))) return;
                     console.log("I was clicked on");
@@ -306,7 +361,6 @@ function checkRedirect() {
     else if (branch.val() == "Huron") location.href = "https://umculobby.com/parking/?branch=Huron";
     var g = $("#goTo").val();
     if (g != "") {
-        console.log("There is a goTo value");
         if (g == "view") {
             fetchVisitors();
         }
