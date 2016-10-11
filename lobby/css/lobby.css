@@ -68,9 +68,9 @@ input, select, #submitForm {
     /*text-align: left;*/
     width: 250px;
 }
-input[type=text] {
+/*input[type=text] {
     text-indent: 75px;
-}
+}*/
 select {
     text-align-last: center;
     -webkit-appearance: none;
@@ -179,7 +179,6 @@ label:hover {
 #viewVisitors {
     margin-top: 180px;
 }
-
 #viewVisitors * {
     transition: background 0.5s ease-in-out;
 }
@@ -234,19 +233,16 @@ label:hover {
     background: #ffcb05;
     cursor: none;
 }
-
 #viewVisitors .tableContainer.ui-droppable {
     border: 5px inset transparent;
     margin: auto;
     padding: 30px;
     width: 70%;
 }
-
 #viewVisitors .tableContainer.ui-droppable.pickMe {
     background: dodgerblue;
     border: 5px inset ghostwhite;
 }
-
 #viewVisitors .tableContainer.ui-droppable.almostHaveIt {
     background: orangered;
 }
@@ -289,7 +285,12 @@ input[type=button],
 .disabled {
     opacity: 0.8;
 }
-
+.textIndent {
+    text-indent: 75px;
+}
+.smoothness {
+    transition: all 0.2s ease-in-out;
+}
 /*----------------------------------------*/
 /* Closing Notes Box */
 /*----------------------------------------*/
@@ -298,7 +299,6 @@ input[type=button],
     position: absolute;
     z-index: 99;
 }
-
 #closingNote label {
     display: inline-block;
     font-size: 1.2em;
@@ -306,12 +306,10 @@ input[type=button],
     opacity: 1;
     top: -20px;
 }
-
 #closingNote #note {
     display: inline-block;
     margin: 10px auto;
 }
-
 #closingNote #addNote {
     background: purple;
     border: none;

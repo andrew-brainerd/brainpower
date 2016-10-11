@@ -24,6 +24,7 @@ var cancel = $("#cancel");
 var draggedVID;
 
 checkRedirect();
+inputs.addClass("textIndent");
 page.find("#closingNote").remove();
 viewVisitors.hide();
 closeReport.hide();
@@ -52,21 +53,33 @@ logo.click(function () {
     }
 });
 inputs.on("focus", function () {
-    console.log("You focused an input!");
+    //console.log("You focused an input!");
     var inputLabel = $(this).prev("label");
     inputLabel.css("right", "80px");
-    if (inputLabel.text().indexOf(" ") > 0)
-        inputLabel.text(inputLabel.attr("title") + ":");
+    var altText = inputLabel.data("alt");
+    //if (altText != "" && altText != undefined) altText = altText + ":"; else altText = "|";
+    if (inputLabel.text().indexOf(" ") > 0) inputLabel.text(altText + ": ");
     //showReport.hide();
 });
 inputs.on("blur", function () {
-    console.log("You left an input!");
+    //console.log("You left an input!");
     $(this).val(capitalize($.trim($(this).val())));
-    var elementType = $(this).prev().prop("nodeName");
-    if (elementType == "LABEL" && $(this).val() == "") {
-        $(this).prev().css("right", "0");
+    var inputLabel = $(this).prev("label");
+    var elementType = inputLabel.prop("nodeName");
+    if ($(this).val() == "") {
+        inputLabel.css("right", "0").text(inputLabel.attr("title"));
     }
     showReport.show();
+});
+inputs.on("keyup", function () {
+    var inputLabel = $(this).prev("label");
+    if ($(this).val().length >= 12) {
+        $(this).removeClass("textIndent");
+        inputLabel.css({"color": "transparent", "right": "0"});
+    } else {
+        $(this).addClass("textIndent");
+        inputLabel.css("color", "inherit");
+    }
 });
 reason.focus(function () {
     var label = $(this).prev("label");
@@ -81,14 +94,13 @@ reason.blur(function () {
 reason.change(function () {
     var r = reason.val();
     if (r == 0) {
-        form.remove("label[for=addInfo]");
-        showAdditionalInfo();
+        showAdditionalInfo("Other Reason", "");
     }
     else if (r == "Appointment") {
-        showAdditionalInfo();
+        showAdditionalInfo("Meeting With", "With");
     }
     else {
-        addInfo.hide();
+        hideAdditionalInfo();
     }
 });
 cancel.click(function () {
@@ -356,8 +368,8 @@ function checkRedirect() {
 function capitalize(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
 }
-function showAdditionalInfo() {
-    addInfo.prev("label").show();
+function showAdditionalInfo(labelText, altText) {
+    addInfo.prev("label").attr("title", labelText).text(labelText).data("alt", altText).show();
     addInfo.show();
 }
 function hideAdditionalInfo() {

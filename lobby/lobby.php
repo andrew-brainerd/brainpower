@@ -2,10 +2,10 @@
     <div>
         <label for="fname" title="First Name" data-alt="First"></label>
         <input type="text" id="fname"/>
-        <label for="lname" title="Last Name" data-alt="Last">Last Name</label>
+        <label for="lname" title="Last Name" data-alt="Last"></label>
         <input type="text" id="lname"/>
         <select id="reason" name="reason" title="Reason for Visit"></select>
-        <label for="addInfo"></label>
+        <label for="addInfo">Empty</label>
         <input type="text" id="addInfo"/>
         <?php
         if ($_GET["branch"] == "William") {
