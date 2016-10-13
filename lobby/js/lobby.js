@@ -78,7 +78,7 @@ inputs.on("keyup", function () {
         inputLabel.css({"color": "transparent", "right": "0"});
     } else {
         $(this).addClass("textIndent");
-        inputLabel.css("color", "inherit");
+        //inputLabel.css({"color": "inherit", "right": ""});
     }
 });
 reason.focus(function () {
@@ -156,7 +156,7 @@ function showPopupMessage() {
      }, 3000);*/
 }
 function fetchVisitors() {
-    var sd = "";
+    var sd = "", noteText = "";
     $.ajax({
         type: "POST",
         url: "util/viewVisitors.php",
@@ -193,19 +193,18 @@ function fetchVisitors() {
                             case "status2":
                                 status = 2;
                                 statusText = "Done";
+                                addCheckoutNote();
                                 break;
                             default:
                                 console.log("Mucked it up. Nice Job");
                         }
-                        $(this)
-                        //.html("<p>Changed status to " + statusText + "</p>")
-                            .removeClass("almostHaveIt")
-                            .addClass("droppedTheMic");
+                        $(this).removeClass("almostHaveIt").addClass("droppedTheMic");
                         $.ajax({
                             type: "POST",
                             url: "util/updateStatus.php",
                             data: "vid=" + dragID +
-                            "&status=" + status,
+                            "&status=" + status +
+                            "&noteText=" + noteText,
                             success: function (msg) {
                                 console.log("vid=" + dragID + "&status=" + status);
                                 fetchVisitors();
@@ -224,7 +223,7 @@ function fetchVisitors() {
                     helper: "clone",
                     start: function (event, ui) {
                         $(ui.helper).attr("class", $(this).attr("id"));
-                        console.log("Helper ID: " + $(ui.helper).attr("class"));
+                        //console.log("Helper ID: " + $(ui.helper).attr("class"));
                     }
                 }).click(function () {
                     if ($(this).hasClass(("ui-draggable-dragging"))) return;
@@ -375,4 +374,9 @@ function showAdditionalInfo(labelText, altText) {
 function hideAdditionalInfo() {
     addInfo.prev("label").hide();
     addInfo.hide();
+}
+function addCheckoutNote() {
+    var popup = $("<div id='checkoutNote'></div>");
+    popup.position(header.position());
+    page.prepend(popup);
 }

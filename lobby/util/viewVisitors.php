@@ -64,6 +64,7 @@ if ($result->num_rows > 0) {
                     $timeOut = "-";
                     $vid = $row["vid"];
                 } else $vid = -1;
+                $vid = $row["vid"]; // remove for live (probably)
 
                 $status = $row['status'];
                 if ($status == "2") $reason = $reason . " --> " . $row["noteText"];
@@ -74,7 +75,7 @@ if ($result->num_rows > 0) {
                     echo "<div class='row' data-vid='$vid'>";  // onclick='finalNote($vid, $(this))'
                     $status = "With MSR";
                 } else {
-                    echo "<div class='row'>";
+                    echo "<div class='row' data-vid='$vid'>"; // remove for live (probably)
                     $status = "Done";
                 }
                 echo "<div class='cell'>" . $row["fname"] . " " . $row["lname"] . "</div>";
@@ -88,6 +89,7 @@ if ($result->num_rows > 0) {
             echo "</div>";  // table
         }
         echo "</div>"; // table container
+        echo "<hr>";
     }
 } else {
     echo "<h1>No Visitor Check-Ins Today</h1>";

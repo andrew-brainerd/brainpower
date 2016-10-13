@@ -7,7 +7,7 @@
     position: absolute;
     top: 20px;
     left: 20px;
-    z-index: 999;
+    z-index: 2;
 }
 *, *:before, *:after {
     box-sizing: border-box;
@@ -19,13 +19,14 @@ body {
     display: none;
     margin-bottom: 100px;
     padding-bottom: 50px;
+    z-index: 1;
 }
 header {
     background: #00274c;
     width: 100%;
     top: 0;
     left: 0;
-    z-index: 998;
+    z-index: 2;
 }
 header img {
     cursor: pointer;
@@ -151,7 +152,7 @@ label:hover {
     -ms-user-select: none;
     user-select: none;
     width: 100%;
-    z-index: 999;
+    z-index: 3;
 }
 #return {
     background: #ffcb05;
@@ -187,6 +188,11 @@ label:hover {
     margin: auto;
     max-width: 90%;
     min-width: 500px;
+}
+#viewVisitors hr {
+    margin-top: 20px;
+    opacity: 0.4;
+    width: 70%;
 }
 #fixedHeader {
     position: fixed;
@@ -229,6 +235,9 @@ label:hover {
     font-size: 4vw;
     color: #ffcb05;
 }
+#viewVisitors h2 {
+    margin: 20px auto -10px auto;
+}
 #viewVisitors .row.ui-draggable-dragging {
     background: #ffcb05;
     cursor: none;
@@ -237,7 +246,7 @@ label:hover {
     border: 5px inset transparent;
     margin: auto;
     padding: 30px;
-    width: 70%;
+    width: 55%;
 }
 #viewVisitors .tableContainer.ui-droppable.pickMe {
     background: dodgerblue;
@@ -320,6 +329,18 @@ input[type=button],
     font-size: 1em;
     position: absolute;
     width: 65px;
+}
+#checkoutNote {
+    background: #DDDDDC;
+    border: 2px outset #ffcb05;
+    height: 200px;
+    margin: auto;
+    min-width: 300px;
+    max-width: 500px;
+    padding: 20px;
+    position: relative;
+    width: 50%;
+    z-index: 3;
 }
 
 /*----------------------------------------*/
