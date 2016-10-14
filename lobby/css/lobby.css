@@ -61,12 +61,14 @@ header ul#topNav li span {
     -ms-user-select: none;
 }
 ul#topNav li:not(.noNav) span:hover { background-color: #555; }
-ul#topNav li#navTitle span { color: #ffcb05; }
+ul#topNav li.noNav span { color: #ffcb05; }
+ul#topNav li#navTitle { font-weight: bold; }
+ul#topNav li#currentUser { float: right; }
 ul#topNav li#logOut { float: right; }
 ul#topNav li#menuIcon { display: none; }
 form {
     width: 600px;
-    margin: 80px auto;
+    margin: 100px auto;
 }
 form > div {
     display: inline-block;
@@ -434,14 +436,12 @@ input[type=button], #submitForm {
         width: 250px;
     }
 }
-@media screen and (max-width: 680px) {
+@media screen and (max-width: 750px) {
     ul#topNav li:not(:first-child) { display: none; }
     ul#topNav li#menuIcon {
         float: right;
         display: inline-block;
     }
-}
-@media screen and (max-width: 680px) {
     ul#topNav.responsive { position: relative; }
     ul#topNav.responsive li#menuIcon {
         position: absolute;

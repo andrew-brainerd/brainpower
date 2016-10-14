@@ -8,7 +8,7 @@ var page = $("body");
 var header = $("header");
 var logo = header.find("img");
 var menuIcon = header.find("#menuIcon");
-var inputs = page.find("input");
+var inputs = page.find("input:not([type=hidden])");
 var form = $("#initialForm");
 var viewVisitors = $("#viewVisitors");
 var visitorRows = viewVisitors.find(".row");
@@ -26,6 +26,7 @@ var submit = $("#submitForm");
 var cancel = $("#cancel");
 var reporting = $("#reporting");
 var logOut = $("#logOut");
+var isTeamMember = $("#team").val() == "true";
 var draggedVID;
 
 var nav = {
@@ -39,8 +40,8 @@ checkRedirect();
 inputs.addClass("textIndent");
 page.find("#closingNote").remove();
 nav.checkIn.hide();
+if (!isTeamMember) form.css("margin-top", "160px");
 viewVisitors.hide();
-closeReport.hide();
 hideAdditionalInfo();
 fetchReasons();
 clearForm();
@@ -152,7 +153,10 @@ nav.checkIn.click(function () {
 });
 nav.activity.click(fetchVisitors);
 nav.reporting.click(function () {
-
+    location.href = "https://umculobby.com/reports";
+});
+nav.logOut.click(function () {
+    location.href = "https://umculobby.com/lobby/?branch=" + branch.val();
 });
 menuIcon.click(function () {
     console.log("Clicked Menu Icon");
@@ -163,20 +167,13 @@ menuIcon.click(function () {
 });
 
 function showPopupMessage() {
-    page.fadeOut("slow", function () {
+    form.fadeOut("slow", function () {
         clearForm();
-        showReport.show();
-        page.fadeIn("slow");
+        form.fadeIn("slow");
     });
     /*var popup = $("#thankYou");
-    popup.fadeIn("slow", function () {
-        clearForm();
-    });
-    setTimeout(function () {
-        popup.fadeOut("slow", function () {
-     showReport.fadeIn();
-        });
-     }, 3000);*/
+     popup.fadeIn("slow", function () { clearForm(); });
+     setTimeout(function () { popup.fadeOut("slow"); }, 3000);*/
 }
 function fetchVisitors() {
     var sd = "", noteText = "";

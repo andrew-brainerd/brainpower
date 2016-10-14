@@ -8,6 +8,7 @@
     $goTo = strip_tags($_GET["goto"]);
     $_GET["branch"] = strip_tags($_GET["branch"]);
     $branch = $_GET["branch"];
+$team = strip_tags($_GET["team"]);
 //}
 ?>
 <!DOCTYPE html>
@@ -17,7 +18,7 @@
     include "head.php";
     if ($branch != "Huron") echo "<link rel='stylesheet' href='css/lobby.css'/>";
     ?>
-    <title>UMCU Lobby Check-In</title>
+    <title>UMCU Lobby - <?php echo $branch; ?></title>
 </head>
 <body>
 <header>
@@ -35,7 +36,8 @@
 <div id="viewVisitors"></div>
 <div id="screensaver"></div>
 <input type="text" id="decoy" title="" readonly/>
-<input type="hidden" id="branch" value="<?php echo $branch ?>"/>
+<input type="hidden" id="team" value="<?php echo $team ?>"/>
+<input type="hidden" id="branch" value="<?php echo $branch; ?>"/>
 <input type="hidden" id="goTo" value="<?php echo $goTo; ?>"/>
 <script src="/js/secure.js"></script>
 <?php include "util/jquery.php"; ?>
