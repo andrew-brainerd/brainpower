@@ -7,13 +7,15 @@ var environment = "";
 var page = $("body");
 var header = $("header");
 var logo = header.find("img");
-var menuIcon = header.find(".menuIcon");
+var menuIcon = header.find("#menuIcon");
 var inputs = page.find("input");
 var form = $("#initialForm");
 var viewVisitors = $("#viewVisitors");
 var visitorRows = viewVisitors.find(".row");
 var showReport = $("#report");
 var closeReport = $("#closeReport");
+var checkIn = $("#checkIn");
+var memberActivity = $("#checkOut");
 var branch = $("#branch");
 var vid = $("#vid").val();
 var fname = $("#fname");
@@ -22,11 +24,18 @@ var reason = $("#reason");
 var addInfo = $("#addInfo");
 var submit = $("#submitForm");
 var cancel = $("#cancel");
+var reporting = $("#reporting");
 var draggedVID;
+
+var nav = {
+    "activity": memberActivity,
+    "reporting": reporting
+};
 
 checkRedirect();
 inputs.addClass("textIndent");
 page.find("#closingNote").remove();
+nav.today.hide();
 viewVisitors.hide();
 closeReport.hide();
 hideAdditionalInfo();
@@ -140,9 +149,11 @@ closeReport.click(function () {
     });
 });
 menuIcon.click(function () {
-    if ($(this).hasClass("responsive")) {
-        $(this).removeClass("responsive");
-    } else $(this).addClass("responsive");
+    console.log("Clicked Menu Icon");
+    var nav = $("#topNav");
+    if (nav.hasClass("responsive")) {
+        nav.removeClass("responsive");
+    } else nav.addClass("responsive");
 });
 
 function showPopupMessage() {
