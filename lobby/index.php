@@ -15,17 +15,13 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
 <head>
     <?php
     include "head.php";
-    if ($branch != "Huron") echo "<link rel=\"stylesheet\" href=\"css/lobby.css\"/>";
+    if ($branch != "Huron") echo "<link rel='stylesheet' href='css/lobby.css'/>";
     ?>
     <title>UMCU Lobby Check-In</title>
 </head>
 <body>
 <header>
-    <div id="timer"></div>
-    <img src="img/umcu_logo.png" alt="UMCU Logo"/>
-    <!--<img src="img/UMCU-NewLogo-transparent2.png" />-->
-    <div id="closeReport">Check-In</div>
-    <div id="report">Check-Out</div>
+    <?php include "header.php" ?>
 </header>
 <div id="initialForm">
     <?php

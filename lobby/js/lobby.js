@@ -7,6 +7,7 @@ var environment = "";
 var page = $("body");
 var header = $("header");
 var logo = header.find("img");
+var menuIcon = header.find(".menuIcon");
 var inputs = page.find("input");
 var form = $("#initialForm");
 var viewVisitors = $("#viewVisitors");
@@ -137,6 +138,11 @@ closeReport.click(function () {
             showReport.fadeIn();
         });
     });
+});
+menuIcon.click(function () {
+    if ($(this).hasClass("responsive")) {
+        $(this).removeClass("responsive");
+    } else $(this).addClass("responsive");
 });
 
 function showPopupMessage() {
@@ -377,6 +383,9 @@ function hideAdditionalInfo() {
 }
 function addCheckoutNote() {
     var popup = $("<div id='checkoutNote'></div>");
-    popup.position(header.position());
+    var wall = $("<div id='theWall'></div>");
+    popup.css("top", header.height());
+    wall.css("top", header.height());
     page.prepend(popup);
+    page.prepend(wall);
 }

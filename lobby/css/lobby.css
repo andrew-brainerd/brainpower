@@ -30,10 +30,30 @@ header {
 }
 header img {
     cursor: pointer;
-    display: block;
+    display: inline-block;
     margin: 20px auto;
-    /*margin: 20px 0 20px 20px;*/
+    width: 300px;
 }
+header ul.topNav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+header ul.topNav li { float: left; }
+header ul.topNav li span {
+    display: inline-block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+}
+ul.topNav li span:hover { background-color: #555; }
+ul.topNav li#icon { display: none; }
+
 form {
     width: 600px;
     margin: 80px auto;
@@ -69,9 +89,6 @@ input, select, #submitForm {
     /*text-align: left;*/
     width: 250px;
 }
-/*input[type=text] {
-    text-indent: 75px;
-}*/
 select {
     text-align-last: center;
     -webkit-appearance: none;
@@ -255,8 +272,7 @@ label:hover {
 #viewVisitors .tableContainer.ui-droppable.almostHaveIt {
     background: orangered;
 }
-input[type=button],
-#submitForm {
+input[type=button], #submitForm {
     cursor: pointer;
     display: inline-block;
     -webkit-appearance: none;
@@ -330,23 +346,35 @@ input[type=button],
     position: absolute;
     width: 65px;
 }
+#theWall {
+    background: black;
+    height: 120%;
+    left: 0;
+    opacity: 0.3;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+}
 #checkoutNote {
     background: #DDDDDC;
-    border: 2px outset #ffcb05;
+    border: 3px solid white;
     height: 200px;
+    left: 0;
     margin: auto;
     min-width: 300px;
     max-width: 500px;
     padding: 20px;
-    position: relative;
+    position: fixed;
+    right: 0;
     width: 50%;
-    z-index: 3;
+    z-index: 4;
 }
 
 /*----------------------------------------*/
 /* Media Queries */
 /*----------------------------------------*/
-@media (max-width: 500px) {
+@media screen and (max-width: 500px) {
     body { /*border: 3px solid gold;*/
     }
 
@@ -394,6 +422,29 @@ input[type=button],
 
     #parkingContainer select {
         width: 250px;
+    }
+}
+@media screen and (max-width: 680px) {
+    ul.topnav li:not(:first-child) { display: none; }
+    ul.topnav li.icon {
+        float: right;
+        display: inline-block;
+    }
+}
+@media screen and (max-width: 680px) {
+    ul.topnav.responsive { position: relative; }
+    ul.topnav.responsive li.icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    ul.topnav.responsive li {
+        float: none;
+        display: inline;
+    }
+    ul.topnav.responsive li a {
+        display: block;
+        text-align: left;
     }
 }
 
