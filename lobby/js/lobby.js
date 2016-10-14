@@ -25,17 +25,20 @@ var addInfo = $("#addInfo");
 var submit = $("#submitForm");
 var cancel = $("#cancel");
 var reporting = $("#reporting");
+var logOut = $("#logOut");
 var draggedVID;
 
 var nav = {
+    "checkIn": checkIn,
     "activity": memberActivity,
-    "reporting": reporting
+    "reporting": reporting,
+    "logOut": logOut
 };
 
 checkRedirect();
 inputs.addClass("textIndent");
 page.find("#closingNote").remove();
-nav.today.hide();
+nav.checkIn.hide();
 viewVisitors.hide();
 closeReport.hide();
 hideAdditionalInfo();
@@ -138,15 +141,18 @@ submit.click(function () {
     }
 });
 showReport.click(fetchVisitors);
-closeReport.click(function () {
+nav.checkIn.click(function () {
     page.find("#closingNote").remove();
     viewVisitors.fadeOut(function () {
-        closeReport.fadeOut(function () {
-            header.css({"position": "static", "border-bottom": "none"});
+        nav.checkIn.fadeOut(function () {
             form.fadeIn();
-            showReport.fadeIn();
+            nav.activity.fadeIn();
         });
     });
+});
+nav.activity.click(fetchVisitors);
+nav.reporting.click(function () {
+
 });
 menuIcon.click(function () {
     console.log("Clicked Menu Icon");
@@ -183,8 +189,9 @@ function fetchVisitors() {
         success: function (msg) {
             viewVisitors.html(msg);
             form.fadeOut();
-            showReport.fadeOut(function () {
-                header.css({"position": "fixed", "border-bottom": "3px solid white"});
+            nav.activity.fadeOut(function () {
+                nav.checkIn.fadeIn();
+                //header.css({"position": "fixed", "border-bottom": "3px solid white"});
                 $(".tableContainer").droppable({
                     activate: function (event, ui) {
                         $(this).addClass("pickMe");

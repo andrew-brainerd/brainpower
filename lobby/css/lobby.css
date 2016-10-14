@@ -23,9 +23,10 @@ body {
 }
 header {
     background: #00274c;
-    width: 100%;
+    position: fixed;
     top: 0;
     left: 0;
+    width: 100%;
     z-index: 2;
 }
 header img {
@@ -59,8 +60,9 @@ header ul#topNav li span {
     -moz-user-select: none;
     -ms-user-select: none;
 }
+ul#topNav li:not(.noNav) span:hover { background-color: #555; }
 ul#topNav li#navTitle span { color: #ffcb05; }
-ul#topNav li:not(#navTitle) span:hover { background-color: #555; }
+ul#topNav li#logOut { float: right; }
 ul#topNav li#menuIcon { display: none; }
 form {
     width: 600px;
@@ -203,7 +205,7 @@ label:hover {
     text-align: center;
 }
 #viewVisitors {
-    margin-top: 180px;
+    margin-top: 90px;
 }
 #viewVisitors * {
     transition: background 0.5s ease-in-out;
@@ -454,6 +456,7 @@ input[type=button], #submitForm {
         display: block;
         text-align: left;
     }
+    ul#topNav.responsive li#logOut { float: none; }
 }
 
 /*----------------------------------------*/
