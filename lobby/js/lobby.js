@@ -147,7 +147,7 @@ nav.checkIn.click(function () {
     viewVisitors.fadeOut(function () {
         nav.checkIn.fadeOut(function () {
             form.fadeIn();
-            nav.activity.fadeIn();
+            nav.activity.fadeIn().removeAttr("style");
         });
     });
 });
@@ -163,7 +163,13 @@ menuIcon.click(function () {
     var nav = $("#topNav");
     if (nav.hasClass("responsive")) {
         nav.removeClass("responsive");
-    } else nav.addClass("responsive");
+    }
+    else {
+        nav.addClass("responsive");
+        $(".reponsive").find("li").click(function () {
+            nav.removeClass("responsive");
+        });
+    }
 });
 
 function showPopupMessage() {
@@ -187,8 +193,7 @@ function fetchVisitors() {
             viewVisitors.html(msg);
             form.fadeOut();
             nav.activity.fadeOut(function () {
-                nav.checkIn.fadeIn();
-                //header.css({"position": "fixed", "border-bottom": "3px solid white"});
+                nav.checkIn.fadeIn().removeAttr("style");
                 $(".tableContainer").droppable({
                     activate: function (event, ui) {
                         $(this).addClass("pickMe");
@@ -205,32 +210,20 @@ function fetchVisitors() {
                         switch (dropID) {
                             case "status0":
                                 status = 0;
-                                statusText = "Waiting";
+                                updateStatus(dragID, status);
                                 break;
                             case "status1":
                                 status = 1;
-                                statusText = "With MSR";
+                                updateStatus(dragID, status);
                                 break;
                             case "status2":
                                 status = 2;
-                                statusText = "Done";
-                                addCheckoutNote();
+                                addCheckoutNote(dragID, status);
                                 break;
                             default:
                                 console.log("Mucked it up. Nice Job");
                         }
                         $(this).removeClass("almostHaveIt").addClass("droppedTheMic");
-                        $.ajax({
-                            type: "POST",
-                            url: "util/updateStatus.php",
-                            data: "vid=" + dragID +
-                            "&status=" + status +
-                            "&noteText=" + noteText,
-                            success: function (msg) {
-                                console.log("vid=" + dragID + "&status=" + status);
-                                fetchVisitors();
-                            }
-                        });
                     },
                     greedy: true,
                     out: function () {
@@ -251,7 +244,6 @@ function fetchVisitors() {
                     console.log("I was clicked on");
                 });
                 viewVisitors.fadeIn();
-                closeReport.fadeIn();
             });
             queryID++;
         }
@@ -396,11 +388,49 @@ function hideAdditionalInfo() {
     addInfo.prev("label").hide();
     addInfo.hide();
 }
-function addCheckoutNote() {
+function updateStatus(dragID, status, noteText) {
+    $.ajax({
+        type: "POST",
+        url: "util/updateStatus.php",
+        data: "vid=" + dragID +
+        "&status=" + status +
+        "&noteText=" + noteText,
+        success: function (msg) {
+            console.log("vid=" + dragID + "&status=" + status);
+            fetchVisitors();
+        }
+    });
+}
+function addCheckoutNote(dragID, status) {
+    var checkOutElements = $("<div id='checkoutVisitor'></div>");
     var popup = $("<div id='checkoutNote'></div>");
+    var noteInput = $("<textarea id='checkoutNoteText'></textarea>");
+    var confirm = $("<input type='button' id='confirmCheckout' value='OK'/>");
+    var cancel = $("<input type='button' id='cancelCheckout' value='Cancel'/>");
+    popup.append("<h3>Check-Out Visitor</h3>");
+    popup.append(noteInput);
+    popup.append(confirm);
+    popup.append(cancel);
     var wall = $("<div id='theWall'></div>");
     popup.css("top", header.height());
     wall.css("top", header.height());
-    page.prepend(popup);
-    page.prepend(wall);
+
+    checkOutElements.append(popup);
+    checkOutElements.append(wall);
+    page.prepend(checkOutElements);
+
+    confirm.click(function () {
+        var noteText = $("#checkoutNoteText").val();
+        updateStatus(dragID, status, noteText);
+    });
+    cancel.click(function () {
+        checkOutElements.fadeOut(function () {
+            checkOutElements.remove();
+        });
+    });
+    wall.click(function () {
+        checkOutElements.fadeOut(function () {
+            checkOutElements.remove();
+        });
+    });
 }

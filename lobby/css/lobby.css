@@ -358,6 +358,8 @@ input[type=button], #submitForm {
     position: absolute;
     width: 65px;
 }
+#checkOutVisitor {
+}
 #theWall {
     background: black;
     height: 120%;
