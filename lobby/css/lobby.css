@@ -44,6 +44,7 @@ header ul#topNav {
     overflow: hidden;
 }
 header ul#topNav li {
+    /*border: 2px solid transparent;*/
     float: left; /* Nav Button Alignment */
     cursor: pointer;
 }
@@ -60,12 +61,16 @@ header ul#topNav li span {
     -moz-user-select: none;
     -ms-user-select: none;
 }
-ul#topNav li:not(.noNav) span:hover { background-color: #555; }
+ul#topNav li:not(.noNav) span:hover { background-color: #8e939d; }
 ul#topNav li.noNav span { color: #ffcb05; }
 ul#topNav li#navTitle { font-weight: bold; }
 ul#topNav li#currentUser { float: right; }
 ul#topNav li#logOut { float: right; }
 ul#topNav li#menuIcon { display: none; }
+ul#topNav li.selected {
+    background-color: #444c5c;
+    /*border: 2px solid white;*/
+}
 form {
     width: 600px;
     margin: 100px auto;

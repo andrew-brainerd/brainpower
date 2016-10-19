@@ -38,9 +38,11 @@ var nav = {
 };
 
 checkRedirect();
+
+if ($("#goTo").val() == "view") updateSelected(nav.activity);
+else updateSelected(nav.checkIn);
 inputs.addClass("textIndent");
 page.find("#closingNote").remove();
-nav.checkIn.hide();
 if (!isTeamMember) form.css("margin-top", "160px");
 viewVisitors.hide();
 hideAdditionalInfo();
@@ -144,16 +146,18 @@ submit.click(function () {
 });
 showReport.click(fetchVisitors);
 nav.checkIn.click(function () {
+    updateSelected($(this));
     page.find("#closingNote").remove();
     viewVisitors.fadeOut(function () {
-        nav.checkIn.fadeOut(function () {
-            form.fadeIn();
-            nav.activity.fadeIn().removeAttr("style");
-        });
+        form.fadeIn();
     });
 });
-nav.activity.click(fetchVisitors);
+nav.activity.click(function () {
+    updateSelected($(this));
+    fetchVisitors();
+});
 nav.reporting.click(function () {
+    updateSelected($(this));
     location.href = "https://umculobby.com/reports";
 });
 nav.logOut.click(function () {
@@ -192,17 +196,17 @@ function fetchVisitors() {
         "&branch=" + branch.val(),
         success: function (msg) {
             viewVisitors.html(msg);
-            form.fadeOut();
-            nav.activity.fadeOut(function () {
-                nav.checkIn.fadeIn().removeAttr("style");
-                $(".tableContainer").droppable({
-                    activate: function (event, ui) {
+            form.fadeOut(function () {
+                viewVisitors.fadeIn();
+            });
+            $(".tableContainer").droppable({
+                activate: function (event, ui) {
                         $(this).addClass("pickMe");
                     },
-                    deactivate: function () {
+                deactivate: function () {
                         $(this).removeClass("pickMe");
                     },
-                    drop: function (event, ui) {
+                drop: function (event, ui) {
                         $(this).removeClass("almostHaveIt");
                         var dragID = ui.helper.attr("data-vid");
                         var dropID = $(this).attr("id");
@@ -226,15 +230,15 @@ function fetchVisitors() {
                         }
                         $(this).removeClass("almostHaveIt").addClass("droppedTheMic");
                     },
-                    greedy: true,
-                    out: function () {
+                greedy: true,
+                out: function () {
                         $(this).removeClass("almostHaveIt");
                     },
-                    over: function () {
+                over: function () {
                         $(this).addClass("almostHaveIt")
                     }
-                });
-                $(".row").draggable({
+            });
+            $(".row").draggable({
                     helper: "clone",
                     start: function (event, ui) {
                         $(ui.helper).attr("class", $(this).attr("id"));
@@ -244,8 +248,7 @@ function fetchVisitors() {
                     if ($(this).hasClass(("ui-draggable-dragging"))) return;
                     console.log("I was clicked on");
                 });
-                viewVisitors.fadeIn();
-            });
+
             queryID++;
         }
     });
@@ -318,8 +321,8 @@ function clearForm() {
     lname.val("");
     lname.prev("label").css("right", "0").text("Last Name");
     reason.val("-1");
-    addInfo.hide();
     addInfo.val("");
+    hideAdditionalInfo();
     submit.removeClass("disabled");
 }
 function fetchReasons() {
@@ -439,4 +442,11 @@ function addCheckoutNote(dragID, status) {
             checkOutElements.remove();
         });
     });
+}
+function updateSelected(selectedItem) {
+    $.each(nav, function () {
+        $(this).removeClass("selected");
+    });
+    console.log("Selected: " + selectedItem.attr("id"));
+    selectedItem.addClass("selected");
 }
