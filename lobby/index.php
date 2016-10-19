@@ -1,21 +1,18 @@
-<?php
-//$clientIP = $_SERVER['REMOTE_ADDR'];
+<?php /*//$clientIP = $_SERVER['REMOTE_ADDR'];
 //$goTo = "";
 //$branch = "";
-/*if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
+if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
     //header("Location: ../video");
-} else {*/
-    $goTo = strip_tags($_GET["goto"]);
-    $_GET["branch"] = strip_tags($_GET["branch"]);
-    $branch = $_GET["branch"];
-$team = strip_tags($_GET["team"]);
-//}
-?>
+} else {*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <?php
     include "head.php";
+    $goTo = strip_tags($_GET["goto"]);
+    $_GET["branch"] = strip_tags($_GET["branch"]);
+    $branch = $_GET["branch"];
+    $team = strip_tags($_GET["team"]);
     if ($branch != "Huron") echo "<link rel='stylesheet' href='css/lobby.css'/>";
     ?>
     <title>UMCU Lobby - <?php echo $branch; ?></title>
