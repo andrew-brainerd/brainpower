@@ -248,7 +248,6 @@ function fetchVisitors() {
                     if ($(this).hasClass(("ui-draggable-dragging"))) return;
                     console.log("I was clicked on");
                 });
-
             queryID++;
         }
     });
@@ -400,6 +399,7 @@ function updateStatus(dragID, status, noteText) {
         "&status=" + status +
         "&noteText=" + noteText,
         success: function (msg) {
+            if (msg.indexOf("Failed") > -1) console.log("Error: " + msg);
             console.log("vid=" + dragID + "&status=" + status);
             if (noteText != "" && noteText != undefined) checkOutElements.fadeOut(function () {
                 checkOutElements.remove();

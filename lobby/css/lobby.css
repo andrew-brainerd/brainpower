@@ -215,7 +215,7 @@ label:hover {
     margin-top: 90px;
 }
 #viewVisitors * {
-    transition: background 0.5s ease-in-out;
+    transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
 }
 #viewVisitors .table {
     font-size: 1.5vw;
