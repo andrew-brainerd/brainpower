@@ -28,6 +28,7 @@ var reporting = $("#reporting");
 var logOut = $("#logOut");
 var isTeamMember = $("#team").val() == "true";
 var draggedVID;
+var checkOutElements;
 
 var nav = {
     "checkIn": checkIn,
@@ -397,20 +398,25 @@ function updateStatus(dragID, status, noteText) {
         "&noteText=" + noteText,
         success: function (msg) {
             console.log("vid=" + dragID + "&status=" + status);
+            if (noteText != "" && noteText != undefined) checkOutElements.fadeOut(function () {
+                checkOutElements.remove();
+            });
             fetchVisitors();
         }
     });
 }
 function addCheckoutNote(dragID, status) {
-    var checkOutElements = $("<div id='checkoutVisitor'></div>");
+    checkOutElements = $("<div id='checkoutVisitor'></div>");
     var popup = $("<div id='checkoutNote'></div>");
     var noteInput = $("<textarea id='checkoutNoteText'></textarea>");
-    var confirm = $("<input type='button' id='confirmCheckout' value='OK'/>");
+    var buttonContainer = $("<div id='buttonContainer'></div>");
+    var confirm = $("<input type='button' id='confirmCheckout' value='Check Out'/>");
     var cancel = $("<input type='button' id='cancelCheckout' value='Cancel'/>");
     popup.append("<h3>Check-Out Visitor</h3>");
     popup.append(noteInput);
-    popup.append(confirm);
-    popup.append(cancel);
+    buttonContainer.append(confirm);
+    buttonContainer.append(cancel);
+    popup.append(buttonContainer);
     var wall = $("<div id='theWall'></div>");
     popup.css("top", header.height());
     wall.css("top", header.height());

@@ -8,14 +8,16 @@
 
 $vid = $_POST["vid"];
 $noteText = strip_tags($_POST["noteText"]);
+$teamID = $_POST["teamID"];
 $status = $_POST["status"];
 $timeOut = date("H:i:s a");
 
 include "dbconnect.php";
 
-$done = "";
-if ($status == "2") $done = " time_out='$timeOut',";
-$sql = "UPDATE SimpleVisitors SET$done status='$status', noteText='$noteText' WHERE vid='$vid'";
+$statusInfo = "";
+if ($status == "1") $statusInfo = " team_id='$teamID'";
+else if ($status == "2") $statusInfo = " time_out='$timeOut',";
+$sql = "UPDATE SimpleVisitors SET$statusInfo status='$status', note_text='$noteText' WHERE vid='$vid'";
 
 $success2 = $conn->query($sql);
 if ($success2 === TRUE) {

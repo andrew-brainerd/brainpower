@@ -2,9 +2,10 @@
 <!---->
 <?php
 
-$isTeamMember = $_GET["team"] == "true";
+$isTeamMember = (bool)$_GET["team"] == "true";
 $isManager = $_GET["role"] == "manager";
 $currentBranch = $_GET["branch"];
+$isiPad = (bool)strpos($_SERVER['HTTP_USER_AGENT'], 'iPad');
 
 if ($isTeamMember) {
     echo "<ul id='topNav'>";
