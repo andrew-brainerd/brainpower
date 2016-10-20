@@ -209,21 +209,16 @@ function fetchVisitors() {
                 drop: function (event, ui) {
                         $(this).removeClass("almostHaveIt");
                         var dragID = ui.helper.attr("data-vid");
-                        var dropID = $(this).attr("id");
+                    var dropID = parseInt($(this).attr("id").replace("status", ""));
                         console.log("drag: " + dragID + "    drop: " + dropID);
                         var status, statusText;
                         switch (dropID) {
-                            case "status0":
-                                status = 0;
-                                updateStatus(dragID, status);
+                            case 0:
+                            case 1:
+                                updateStatus(dragID, dropID);
                                 break;
-                            case "status1":
-                                status = 1;
-                                updateStatus(dragID, status);
-                                break;
-                            case "status2":
-                                status = 2;
-                                addCheckoutNote(dragID, status);
+                            case 2:
+                                addCheckoutNote(dragID, dropID);
                                 break;
                             default:
                                 console.log("Mucked it up. Nice Job");
@@ -238,13 +233,8 @@ function fetchVisitors() {
                         $(this).addClass("almostHaveIt")
                     }
             });
-            $(".row").draggable({
-                    helper: "clone",
-                    start: function (event, ui) {
-                        $(ui.helper).attr("class", $(this).attr("id"));
-                        //console.log("Helper ID: " + $(ui.helper).attr("class"));
-                    }
-                }).click(function () {
+            $(".row").draggable({helper: "clone"})
+                .click(function () {
                     if ($(this).hasClass(("ui-draggable-dragging"))) return;
                     console.log("I was clicked on");
                 });

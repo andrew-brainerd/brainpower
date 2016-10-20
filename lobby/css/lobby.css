@@ -203,6 +203,26 @@ label:hover {
     user-select: none;
     width: 250px;
 }
+input[type=button], #submitForm {
+    cursor: pointer;
+    display: inline-block;
+    -webkit-appearance: none;
+    margin: 20px auto 30px auto;
+    width: 200px;
+    background: #ffcb05;
+    color: #00274c;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+input[type=button].detailsButton {
+    background-color: #0f345e;
+    border-color: white;
+    color: white;
+    font-size: 16px;
+    margin: 0;
+}
 
 /*----------------------------------------*/
 /* Visitors Table */
@@ -252,10 +272,10 @@ label:hover {
 #viewVisitors .cell.reason { /* Reason */
     max-width: 250px;
 }
-#viewVisitors .cell.time { /* Times */
+.time { /* Times */
     text-align: center;
 }
-#viewVisitors .row:hover .cell {
+#viewVisitors .row:hover:not(.noHover) .cell {
     background: #ffcb05;
     color: #00274c;
     cursor: pointer;
@@ -270,37 +290,25 @@ label:hover {
     color: #ffcb05;
 }
 #viewVisitors h2 {
-    margin: 20px auto -10px auto;
+    margin: 20px auto 0px auto;
 }
 #viewVisitors .row.ui-draggable-dragging {
     background: #ffcb05;
     cursor: none;
 }
 #viewVisitors .tableContainer.ui-droppable {
-    border: 5px inset transparent;
+    border: 3px inset transparent;
     margin: auto;
     padding: 30px;
     width: 55%;
 }
 #viewVisitors .tableContainer.ui-droppable.pickMe {
     background: dodgerblue;
-    border: 5px inset ghostwhite;
+    background-color: #33658A;
+    border: 3px inset ghostwhite;
 }
 #viewVisitors .tableContainer.ui-droppable.almostHaveIt {
-    background: orangered;
-}
-input[type=button], #submitForm {
-    cursor: pointer;
-    display: inline-block;
-    -webkit-appearance: none;
-    margin: 20px auto 30px auto;
-    width: 200px;
-    background: #ffcb05;
-    color: #00274c;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    background: #2F4858;
 }
 #cancel {
     background: red;

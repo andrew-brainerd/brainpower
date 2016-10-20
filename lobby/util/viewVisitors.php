@@ -21,13 +21,13 @@ $sql = $slt . $frm . $whr . $ord;
 
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
-    for ($i = 0; $i < 3; $i++) {
+    for ($statusTable = 0; $statusTable < 3; $statusTable++) {
         $slt = "SELECT *";
         $frm = " FROM SimpleVisitors";
-        $whr = " WHERE location='$branch' AND visit_date = '$today' AND status=$i ";
+        $whr = " WHERE location='$branch' AND visit_date = '$today' AND status=$statusTable ";
         $ord = "ORDER BY time_out ASC, time_in DESC";
         $sql = $slt . $frm . $whr . $ord;
-        switch ($i) {
+        switch ($statusTable) {
             case 0:
                 $tableTitle = "Members Excitedly Waiting";
                 break;
@@ -43,48 +43,12 @@ if ($result->num_rows > 0) {
         echo "<h2 class='tableTitle'>$tableTitle</h2>";
 
         $result = $conn->query($sql);
-        echo "<div class='tableContainer' id='status$i''>";
+        echo "<div class='tableContainer' id='status$statusTable''>";
         if ($result->num_rows > 0) {
             echo "<div class='table' id='viewTable'>";
-            echo "<div class='row' id='viewHeader'>";
-            echo "<div class='hcell'>Name</div>";
-            echo "<div class='hcell'>Time In</div>";
-            echo "<div class='hcell'>Time Out</div>";
-            echo "<div class='hcell'>Reason</div>";
-            //echo "<div class='hcell'>Status</div>";
-            echo "</div>";
+            buildTableHeader($statusTable);
             while ($row = $result->fetch_assoc()) {
-                $reason = $row["reason"];
-                if (strlen($reason) > 30) {
-                    $reason = substr($reason, 0, 16) . "...";
-                }
-                $timeOut = date("g:i a", strtotime($row["time_out"]));
-                $timeIn = date("g:i a", strtotime($row["time_in"]));
-                if ($timeOut === "12:00 am") {
-                    $timeOut = "-";
-                    $vid = $row["vid"];
-                } else $vid = -1;
-                $vid = $row["vid"]; // remove for live (probably)
-
-                $status = $row['status'];
-                if ($status == "2") $reason = $reason . " --> " . $row["noteText"];
-                if ($status == "0") {
-                    echo "<div class='row' data-vid='$vid'>"; // onclick='helpMember($vid)'
-                    $status = "Waiting";
-                } else if ($status == "1") {
-                    echo "<div class='row' data-vid='$vid'>";  // onclick='finalNote($vid, $(this))'
-                    $status = "With MSR";
-                } else {
-                    echo "<div class='row' data-vid='$vid'>"; // remove for live (probably)
-                    $status = "Done";
-                }
-                echo "<div class='cell'>" . $row["fname"] . " " . $row["lname"] . "</div>";
-                //echo "<div class='cell location'>" . $row["location"] . "</div>";
-                echo "<div class='cell time'>" . $timeIn . "</div>";
-                echo "<div class='cell time'>" . $timeOut . "</div>";
-                echo "<div class='cell reason'>" . $reason . "</div>";
-                //echo "<div class='cell'>$status</div>";
-                echo "</div>";  // row
+                buildTableRow($statusTable, $row);
             }
             echo "</div>";  // table
         }
@@ -96,3 +60,54 @@ if ($result->num_rows > 0) {
 }
 
 $conn->close();
+
+function buildTableHeader($table)
+{
+    echo "<div class='row' id='viewHeader'>";
+    echo "<div class='hcell'>Name</div>";
+    if ($table == 0) {        // Status = Waiting
+        echo "<div class='hcell time'>Time Waiting</div>";
+    } else if ($table == 1) {   // Status = Being Helped
+        echo "<div class='hcell time'>Time With MSR</div>";
+    } else if ($table == 2) {   // Status = Done
+        echo "<div class='hcell' time'>Visit Length</div>";
+    }
+    echo "<div class='hcell'>Reason</div>";
+    echo "</div>";
+}
+
+function buildTableRow($table, $row)
+{
+    $currentTime = time();
+    $reason = $row["reason"];
+    if (strlen($reason) > 30) {
+        $reason = substr($reason, 0, 16) . "...";
+    }
+    $timeIn = strtotime($row["time_in"]);
+    $timeHelp = date("g:i a", strtotime($row["time_help"]));
+    $vid = $row["vid"]; // remove for live (probably)
+    $status = $row['status'];
+    if ($status == "2") $reason = $reason . " --> " . $row["note_text"];
+    $timeElapsed = "00:00";
+    if ($table == 0) {
+        $timeElapsed = gmdate("H:i:s", $currentTime - $timeIn);
+        echo "<div class='row' data-vid='$vid'>";
+        echo "<div class='cell'>" . $row["fname"] . " " . $row["lname"] . "</div>";
+        echo "<div class='cell time'>" . $timeElapsed . "</div>";
+        echo "<div class='cell reason'>" . $reason . "</div>";
+    } else if ($table == 1) {
+        echo "<div class='row' data-vid='$vid'>";
+        echo "<div class='cell'>" . $row["fname"] . " " . $row["lname"] . "</div>";
+        echo "<div class='cell time'>" . $timeElapsed . "</div>";
+        echo "<div class='cell reason'>" . $reason . "</div>";
+    } else if ($table == 2) {
+        $timeOut = strtotime($row["time_out"]);
+        $vid = -1;
+        $timeElapsed = gmdate("H:i:s", $timeOut - $timeIn);
+        echo "<div class='row noHover' data-vid='$vid'>";
+        echo "<div class='cell'>" . $row["fname"] . " " . $row["lname"] . "</div>";
+        echo "<div class='cell time'>" . $timeElapsed . "</div>";
+        echo "<div class='cell'><input type='button' class='detailsButton' value='Visit Details'/></div>";
+    }
+    echo "</div>";  // row
+}
