@@ -28,7 +28,8 @@ var reporting = $("#reporting");
 var logOut = $("#logOut");
 var isTeamMember = $("#team").val() == "true";
 var draggedVID;
-var checkOutElements;
+var updateElements;
+var visitDetailElements;
 
 var nav = {
     "checkIn": checkIn,
@@ -49,13 +50,7 @@ hideAdditionalInfo();
 fetchReasons();
 clearForm();
 checkEnvironment();
-
-$(document).bind('keypress.key13', function (e) {
-    if (e.which == 13) {
-        e.preventDefault();
-        submit.click();
-    }
-});
+bindEnterKey(submit);
 
 page.fadeIn(function () {
     page.scroll();
@@ -210,15 +205,17 @@ function fetchVisitors() {
                         $(this).removeClass("almostHaveIt");
                         var dragID = ui.helper.attr("data-vid");
                     var dropID = parseInt($(this).attr("id").replace("status", ""));
-                        console.log("drag: " + dragID + "    drop: " + dropID);
+                    //console.log("drag: " + dragID + "    drop: " + dropID);
                         var status, statusText;
                         switch (dropID) {
                             case 0:
-                            case 1:
                                 updateStatus(dragID, dropID);
                                 break;
+                            case 1:
+                                updateInfoBox(dragID, dropID);
+                                break;
                             case 2:
-                                addCheckoutNote(dragID, dropID);
+                                updateInfoBox(dragID, dropID);
                                 break;
                             default:
                                 console.log("Mucked it up. Nice Job");
@@ -233,76 +230,17 @@ function fetchVisitors() {
                         $(this).addClass("almostHaveIt")
                     }
             });
-            $(".row").draggable({helper: "clone"})
+            $(".row:not(.noHover, .viewHeader)").draggable({helper: "clone"})
                 .click(function () {
                     if ($(this).hasClass(("ui-draggable-dragging"))) return;
                     console.log("I was clicked on");
                 });
+            $(".detailsButton").click(function () {
+                showDetailsBox($(this).attr("data-vid"));
+            });
             queryID++;
         }
     });
-}
-function helpMember(vid) {
-    if (vid != -1) {
-        if (confirm("Assist This Member?")) {
-            $.ajax({
-                type: "POST",
-                url: "util/updateStatus.php",
-                data: "vid=" + vid + "&status=1",
-                success: function (msg) {
-                    fetchVisitors();
-                }
-            });
-        }
-    }
-}
-function finalNote(vid, row) {
-    if (vid != -1) {
-        console.log("Class: " + row.attr("class"));
-        page.find("#closingNote").remove();
-        viewVisitors.find(".row").removeClass("selected");
-        row.addClass("selected");
-        console.log("Row onClick: " + row.attr("onclick"));
-        row.on("click.selected", function () {
-            row.removeClass("selected");
-            page.find("#closingNote").remove();
-            row.off("click.selected");
-        });
-        var finalNote = $("<div id='closingNote'></div>");
-        finalNote.append("<label for='note'>How did we aMAIZE this member today?</label>");
-        finalNote.append("<textarea id='note'></textarea>");
-        finalNote.css({
-            "width": row.width(),
-            "height": row.height(),
-            "left": row.offset().left,
-            "top": row.offset().top + row.height()
-        });
-        var dasButton = $("<input id='addNote' type='button' value='Done' onclick='checkout(" + vid + ")'/>");
-        dasButton.css({
-            "height": finalNote.height(),
-            "left": finalNote.width(),
-            "top": -20 //finalNote.offset().top
-        });
-        finalNote.append(dasButton);
-        page.append(finalNote);
-    }
-    else alert("Visitor already checked out");
-}
-function checkout(vid) {
-    if (vid != -1) {
-        var noteText = $("#note").val();
-        $.ajax({
-            type: "POST",
-            url: "util/updateStatus.php",
-            data: "vid=" + vid +
-            "&noteText=" + noteText +
-            "&status=2",
-            success: function (msg) {
-                page.find("#closingNote").remove();
-                fetchVisitors();
-            }
-        });
-    }
 }
 function clearForm() {
     fname.val("");
@@ -381,55 +319,66 @@ function hideAdditionalInfo() {
     addInfo.prev("label").hide();
     addInfo.hide();
 }
-function updateStatus(dragID, status, noteText) {
+function updateStatus(dragID, status, updateInfo) {
     $.ajax({
         type: "POST",
         url: "util/updateStatus.php",
         data: "vid=" + dragID +
         "&status=" + status +
-        "&noteText=" + noteText,
+        "&updateInfo=" + updateInfo,
         success: function (msg) {
             if (msg.indexOf("Failed") > -1) console.log("Error: " + msg);
-            console.log("vid=" + dragID + "&status=" + status);
-            if (noteText != "" && noteText != undefined) checkOutElements.fadeOut(function () {
-                checkOutElements.remove();
+            else console.log("SQL: " + msg);
+            //console.log("vid=" + dragID + "&status=" + status);
+            if (updateInfo != "" && updateInfo != undefined)
+                updateElements.fadeOut(function () {
+                    updateElements.remove();
             });
             fetchVisitors();
         }
     });
 }
-function addCheckoutNote(dragID, status) {
-    checkOutElements = $("<div id='checkoutVisitor'></div>");
-    var popup = $("<div id='checkoutNote'></div>");
-    var noteInput = $("<textarea id='checkoutNoteText'></textarea>");
+function updateInfoBox(dragID, status) {
+    updateElements = $("<div class='popup' id='updateVisitor'></div>");
+    var title = (status == 1) ? "Please Enter Your User Number" : "Check-Out Visitor";
+    var submitText = (status == 1) ? "OK" : "Check Out";
+    var popup = $("<div id='updateInfo'></div>");
+    var wall = $("<div id='theWall'></div>");
+    var noteInput = $("<textarea id='updateInfoText'></textarea>");
     var buttonContainer = $("<div id='buttonContainer'></div>");
-    var confirm = $("<input type='button' id='confirmCheckout' value='Check Out'/>");
-    var cancel = $("<input type='button' id='cancelCheckout' value='Cancel'/>");
-    popup.append("<h3>Check-Out Visitor</h3>");
-    popup.append(noteInput);
+    var confirm = $("<input type='button' id='confirmUpdate' value='" + submitText + "'/>");
+    var cancel = $("<input type='button' id='cancelUpdate' value='Cancel'/>");
     buttonContainer.append(confirm);
     buttonContainer.append(cancel);
+    popup.append("<h3>" + title + "</h3>");
+    popup.append(noteInput);
     popup.append(buttonContainer);
-    var wall = $("<div id='theWall'></div>");
+
     popup.css("top", header.height());
     wall.css("top", header.height());
 
-    checkOutElements.append(popup);
-    checkOutElements.append(wall);
-    page.prepend(checkOutElements);
+    updateElements.append(popup);
+    updateElements.append(wall);
+    page.prepend(updateElements);
 
+    bindEnterKey(confirm);
     confirm.click(function () {
-        var noteText = $("#checkoutNoteText").val();
+        var noteText = $.trim($("#updateInfoText").val());
+        if (noteText == "") {
+            return alert((status == 1) ? "Please enter valid user number" : "Please enter a closing note");
+        }
         updateStatus(dragID, status, noteText);
+        bindEnterKey(submit);
     });
     cancel.click(function () {
-        checkOutElements.fadeOut(function () {
-            checkOutElements.remove();
+        updateElements.fadeOut(function () {
+            updateElements.remove();
         });
+        bindEnterKey(submit);
     });
     wall.click(function () {
-        checkOutElements.fadeOut(function () {
-            checkOutElements.remove();
+        updateElements.fadeOut(function () {
+            updateElements.remove();
         });
     });
 }
@@ -437,6 +386,42 @@ function updateSelected(selectedItem) {
     $.each(nav, function () {
         $(this).removeClass("selected");
     });
-    console.log("Selected: " + selectedItem.attr("id"));
+    //console.log("Selected: " + selectedItem.attr("id"));
     selectedItem.addClass("selected");
+}
+function bindEnterKey(button) {
+    $(document).unbind("keypress.key13");
+    $(document).bind("keypress.key13", function (e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            console.log("Hit enter: clicking " + button.attr("id"));
+            button.click();
+        }
+    });
+}
+function showDetailsBox(vid) {
+    console.log("Building Detail Box");
+    $.ajax({
+        type: "POST",
+        url: "../util/getVisitDetails.php",
+        data: "vid=" + vid,
+        success: function () {
+            visitDetailElements = $("<div class='popup' id='updateVisitor'></div>");
+            var popup = $("<div id='visitDetails'></div>");
+            var wall = $("<div id='theWall'></div>");
+
+            popup.css("top", header.height());
+            wall.css("top", header.height());
+
+            visitDetailElements.append(popup);
+            visitDetailElements.append(wall);
+            page.prepend(visitDetailElements);
+
+            wall.click(function () {
+                visitDetailElements.fadeOut(function () {
+                    visitDetailElements.remove();
+                });
+            });
+        }
+    });
 }

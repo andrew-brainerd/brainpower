@@ -230,6 +230,7 @@ input[type=button].detailsButton {
 .tableTitle {
     font-size: 2em;
     text-align: center;
+    user-select: none;
 }
 #viewVisitors {
     margin-top: 90px;
@@ -344,7 +345,7 @@ input[type=button].detailsButton {
 /*----------------------------------------*/
 /* Closing Notes Box */
 /*----------------------------------------*/
-#closingNote {
+/*#closingNote {
     background: purple;
     position: absolute;
     z-index: 99;
@@ -370,7 +371,7 @@ input[type=button].detailsButton {
     font-size: 1em;
     position: absolute;
     width: 65px;
-}
+}*/
 #theWall {
     background: black;
     height: 120%;
@@ -381,7 +382,7 @@ input[type=button].detailsButton {
     width: 100%;
     z-index: 3;
 }
-#checkoutNote {
+#updateInfo {
     background: #DDDDDC;
     border: 3px solid white;
     height: 200px;
@@ -395,22 +396,36 @@ input[type=button].detailsButton {
     width: 50%;
     z-index: 4;
 }
-#checkoutNote h3 {
+#updateInfo, #visitDetails h3 {
     color: #00274c;
     font-size: 20px;
 }
-#checkoutNote textarea {
+#updateInfo textarea {
     display: block;
     margin: 20px auto;
     width: 90%;
 }
-#checkoutNote #buttonContainer {
+#updateInfo #buttonContainer {
     margin: auto;
 }
-#checkoutNote input[type=button] {
+#updateInfo input[type=button] {
     font-size: 16px;
     margin: 0 20px;
     width: 100px;
+}
+#visitDetails {
+    background: #DDDDDC;
+    border: 3px solid white;
+    height: 500px;
+    left: 0;
+    margin: auto;
+    min-width: 300px;
+    max-width: 500px;
+    padding: 20px;
+    position: fixed;
+    right: 0;
+    width: 50%;
+    z-index: 4;
 }
 
 /*----------------------------------------*/

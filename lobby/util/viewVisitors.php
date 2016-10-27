@@ -63,7 +63,7 @@ $conn->close();
 
 function buildTableHeader($table)
 {
-    echo "<div class='row' id='viewHeader'>";
+    echo "<div class='row viewHeader'>";
     echo "<div class='hcell'>Name</div>";
     if ($table == 0) {        // Status = Waiting
         echo "<div class='hcell time'>Time Waiting</div>";
@@ -75,7 +75,6 @@ function buildTableHeader($table)
     echo "<div class='hcell'>Reason</div>";
     echo "</div>";
 }
-
 function buildTableRow($table, $row)
 {
     $currentTime = time();
@@ -102,12 +101,11 @@ function buildTableRow($table, $row)
         echo "<div class='cell reason'>" . $reason . "</div>";
     } else if ($table == 2) {
         $timeOut = strtotime($row["time_out"]);
-        $vid = -1;
         $timeElapsed = gmdate("H:i:s", $timeOut - $timeIn);
-        echo "<div class='row noHover' data-vid='$vid'>";
+        echo "<div class='row noHover' data-vid='-1'>";
         echo "<div class='cell'>" . $row["fname"] . " " . $row["lname"] . "</div>";
         echo "<div class='cell time'>" . $timeElapsed . "</div>";
-        echo "<div class='cell'><input type='button' class='detailsButton' value='Visit Details'/></div>";
+        echo "<div class='cell'><input type='button' class='detailsButton' data-vid='$vid' value='Visit Details'/></div>";
     }
     echo "</div>";  // row
 }
