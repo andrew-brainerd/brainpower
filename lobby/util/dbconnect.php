@@ -6,15 +6,15 @@
  * Time: 9:48 AM
  */
 
-/*$host_name = "db624775871.db.1and1.com";
+$host_name = "db624775871.db.1and1.com";
 $database = "db624775871";
 $user_name = "dbo624775871";
-$password = "Umcu@54!#";*/
+$password = "Umcu@54!#";
 
-$host_name = "localhost";
+/*$host_name = "localhost";
 $database = "umcu_lobby";
 $user_name = "root";
-$password = "d@t@b@asep@ssw0rd";
+$password = "d@t@b@asep@ssw0rd";*/
 
 $conn = new mysqli($host_name, $user_name, $password, $database);
 if ($conn->connect_error) {
