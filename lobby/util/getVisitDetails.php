@@ -23,6 +23,14 @@ $sql = $slt . $frm . $whr . $ord;
 $result = $conn->query($sql);
 if ($result->num_rows == 1) {
     echo "<h3>Found Visit Info :D</h3>";
+    $row = $result->fetch_assoc();
+    out($row["fname"] . " " . $row["lname"]);
 } else {
-    echo "Multiple rows returned";
+    echo "<h3>Multiple rows returned</h3>";
+    echo "<h4>$sql</h4>";
+}
+
+function out($str)
+{
+    echo "<h3>$str</h3>";
 }

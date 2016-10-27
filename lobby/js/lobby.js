@@ -403,12 +403,14 @@ function showDetailsBox(vid) {
     console.log("Building Detail Box");
     $.ajax({
         type: "POST",
-        url: "../util/getVisitDetails.php",
-        data: "vid=" + vid,
-        success: function () {
+        url: "util/getVisitDetails.php",
+        data: "branch=" + branch.val() + "&vid=" + vid,
+        success: function (msg) {
             visitDetailElements = $("<div class='popup' id='updateVisitor'></div>");
             var popup = $("<div id='visitDetails'></div>");
             var wall = $("<div id='theWall'></div>");
+
+            popup.html(msg);
 
             popup.css("top", header.height());
             wall.css("top", header.height());
