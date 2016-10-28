@@ -10,6 +10,12 @@
         <?php
         if ($_GET["branch"] == "William") {
             echo "<h3>Probably something extra here...</h3>";
+        } else { ?>
+            <div class="switch">
+                <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox">
+                <label for="cmn-toggle-1"></label>
+            </div>
+        <?php
         }
         ?>
         <div id="submitForm">Check-In</div>
