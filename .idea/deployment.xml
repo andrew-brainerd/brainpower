@@ -2,6 +2,13 @@
 <project version="4">
   <component name="PublishConfigData" serverName="UMCU Lobby" uploadOnCheckin="8357edae-e7ef-4303-a171-e6845ceff24d" exclude=".svn;.cvs;.idea;.DS_Store;.git;.hg;">
     <serverData>
+      <paths name="CentOS">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="UMCU Lobby">
         <serverdata>
           <mappings>

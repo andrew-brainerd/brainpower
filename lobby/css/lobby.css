@@ -216,6 +216,10 @@ input[type=button], #submitForm {
     -ms-user-select: none;
     user-select: none;
 }
+#submitForm {
+    position: relative;
+    top: 60px;
+}
 input[type=button].detailsButton {
     background-color: #0f345e;
     border-color: white;
@@ -342,36 +346,6 @@ input[type=button].detailsButton {
 .smoothness {
     transition: all 0.2s ease-in-out;
 }
-/*----------------------------------------*/
-/* Closing Notes Box */
-/*----------------------------------------*/
-/*#closingNote {
-    background: purple;
-    position: absolute;
-    z-index: 99;
-}
-#closingNote label {
-    display: inline-block;
-    font-size: 1.2em;
-    margin: auto 10px;
-    opacity: 1;
-    top: -20px;
-}
-#closingNote #note {
-    display: inline-block;
-    margin: 10px auto;
-}
-#closingNote #addNote {
-    background: purple;
-    border: none;
-    border-radius: 0;
-    border-bottom-right-radius: 5px;
-    border-top-right-radius: 5px;
-    color: white;
-    font-size: 1em;
-    position: absolute;
-    width: 65px;
-}*/
 #theWall {
     background: black;
     height: 120%;

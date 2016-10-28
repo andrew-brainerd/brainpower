@@ -3,7 +3,15 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="8357edae-e7ef-4303-a171-e6845ceff24d" name="UMCU Lobby" url="http://u84350508.1and1-data.host">
-        <fileTransfer host="u84350508.1and1-data.host" port="22" accessType="SFTP" password="dfffdfc7dfc9dfdfdfeadf9fdf9edf8bdf89" username="u84350508">
+        <fileTransfer host="u84350508.1and1-data.host" port="22" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="da0d6f46-7456-4875-8553-8b92b2bcb406" name="CentOS" url="http://10.0.0.79">
+        <fileTransfer host="10.0.0.79" port="22" rootFolder="/var/www/lobby.umcu.org/" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>

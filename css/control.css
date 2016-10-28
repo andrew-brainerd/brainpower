@@ -1,24 +1,39 @@
-.cmn-toggle {
+/* Base switch style by Call Me Nick - http://callmenick.com/post/css-toggle-switch-examples */
+
+.switch {
+    display: block;
+    position: relative;
+    top: -20px;
+    width: 100%;
+}
+.switch > div:first-child {
+    font-size: 1.5em;
+    position: relative;
+    top: 10px;
+}
+.toggle {
     position: absolute;
     margin-left: -9999px;
     visibility: hidden;
 }
-.cmn-toggle + label {
+.toggle + label {
     display: block;
     position: relative;
     cursor: pointer;
+    opacity: 1;
     outline: none;
     user-select: none;
 }
-input.cmn-toggle-round + label {
+/* ============= Rounded ============== */
+input.toggle-round + label {
     padding: 2px;
     width: 120px;
     height: 60px;
     background-color: #dddddd;
     border-radius: 60px;
 }
-input.cmn-toggle-round + label:before,
-input.cmn-toggle-round + label:after {
+input.toggle-round + label:before,
+input.toggle-round + label:after {
     display: block;
     position: absolute;
     top: 1px;
@@ -26,22 +41,112 @@ input.cmn-toggle-round + label:after {
     bottom: 1px;
     content: "";
 }
-input.cmn-toggle-round + label:before {
+input.toggle-round + label:before {
     right: 1px;
     background-color: #f1f1f1;
     border-radius: 60px;
     transition: background 0.4s;
 }
-input.cmn-toggle-round + label:after {
+input.toggle-round + label:after {
     width: 58px;
     background-color: #fff;
     border-radius: 100%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     transition: margin 0.4s;
 }
-input.cmn-toggle-round:checked + label:before {
+input.toggle-round:checked + label:before {
     background-color: #8ce196;
 }
-input.cmn-toggle-round:checked + label:after {
+input.toggle-round:checked + label:after {
     margin-left: 60px;
+}
+/* =============== Flat =============== */
+input.toggle-round-flat + label {
+    padding: 2px;
+    width: 120px;
+    height: 60px;
+    background-color: #dddddd;
+    border-radius: 60px;
+    transition: background 0.4s;
+}
+input.toggle-round-flat + label:before,
+input.toggle-round-flat + label:after {
+    display: block;
+    position: absolute;
+    content: "";
+}
+input.toggle-round-flat + label:before {
+    top: 2px;
+    left: 2px;
+    bottom: 2px;
+    right: 2px;
+    background-color: #fff;
+    border-radius: 60px;
+    transition: background 0.4s;
+}
+input.toggle-round-flat + label:after {
+    top: 4px;
+    left: 4px;
+    bottom: 4px;
+    width: 52px;
+    background-color: #dddddd;
+    border-radius: 52px;
+    transition: margin 0.4s, background 0.4s;
+}
+input.toggle-round-flat:checked + label {
+    background-color: #8ce196;
+}
+input.toggle-round-flat:checked + label:after {
+    margin-left: 60px;
+    background-color: #8ce196;
+}
+/* =============== Flip =============== */
+input.toggle-yes-no + label {
+    width: 120px; /* width of control */
+    width: 245px;
+    height: 60px; /* height of control */
+    padding: 2px;
+    top: 65px;
+}
+input.toggle-yes-no + label:before,
+input.toggle-yes-no + label:after {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    color: #fff;
+    font-family: "Roboto Slab", serif;
+    font-size: 20px;
+    text-align: center;
+    line-height: 60px;
+}
+input.toggle-yes-no + label:before {
+    background-color: #dddddd; /* Off state background color */
+    background-color: #00274c;
+    border: 2px solid #ffcb05;
+    content: attr(data-off);
+    font-family: 'Avenir Next Condensed', sans-serif;
+    font-size: 1em;
+    transition: transform 0.5s;
+    backface-visibility: hidden;
+}
+input.toggle-yes-no + label:after {
+    background-color: #8ce196; /* On state background color */
+    background-color: #93cf96;
+    background-color: #449d75;
+    border: 2px solid #ffcb05;
+    content: attr(data-on);
+    font-family: 'Avenir Next Condensed', sans-serif;
+    font-size: 1em;
+    transition: transform 0.5s;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+}
+input.toggle-yes-no:checked + label:before {
+    transform: rotateY(180deg);
+}
+input.toggle-yes-no:checked + label:after {
+    transform: rotateY(0);
 }

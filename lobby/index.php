@@ -13,7 +13,10 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
     $_GET["branch"] = strip_tags($_GET["branch"]);
     $branch = $_GET["branch"];
     $team = strip_tags($_GET["team"]);
-    if ($branch != "Huron") echo "<link rel='stylesheet' href='css/lobby.css'/>";
+    if ($branch != "Huron") {
+        echo "<link rel='stylesheet' href='css/lobby.css'/>";
+        echo "<link rel='stylesheet' href='/css/control.css'/>";
+    }
     ?>
     <title>UMCU Lobby - <?php echo $branch; ?></title>
 </head>
