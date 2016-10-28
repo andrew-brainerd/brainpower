@@ -13,11 +13,17 @@
             width: 200px;
             height: 200px;
         }
+        #dump {
+            display: block;
+            margin: auto;
+            text-align: center;
+        }
     </style>
     <script src="/js/analytics.js"></script>
 </head>
 <body>
 <h2 id="reportTitle"></h2>
+<div class="button" id="dump">Data Dump</div>
 <select id="branchSelect">
     <option value="-1">Select A Branch</option>
     <option value="Huron">Huron</option>
@@ -30,16 +36,41 @@
     <option value="Bristol">Bristol</option>
 </select>
 <div id="viewVisitors"></div>
+<input type="hidden" id="downloadLink"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="/js/secure.js"></script>
 <script>
     $("body").fadeIn();
     var visitors = $("#viewVisitors");
     var branchSelect = $("#branchSelect");
+    var dataDump = $("#dump");
     branchSelect.change(function () {
         console.log("Selected: " + $(this).val());
         if ($(this).val() == -1) visitors.fadeOut();
         else runReport();
+    });
+    dataDump.click(function () {
+        console.log("dumping...");
+        var link = $("#downloadLink");
+        $.ajax({
+            type: "POST",
+            url: "/lobby/util/csvExport.php",
+            dataType: "json",
+            success: function (json) {
+                console.log("did the export");
+                var csv = JSON.parse(json.replace(/"([\w]+)":/g, function ($0, $1) {
+                    return ('"' + $1.toLowerCase() + '":');
+                }));
+                link.attr({
+                    "href": "data:text/csv;charset=UTF-8," + encodeURIComponent(csv),
+                    "download": "UMCU_Lobby_DataDump" + $.now()
+                });
+                link.trigger("click");
+            },
+            error: function (msg) {
+                console.log("Error: " + msg);
+            }
+        });
     });
 
     function runReport() {
