@@ -148,5 +148,5 @@ input.toggle-yes-no:checked + label:before {
     transform: rotateY(180deg);
 }
 input.toggle-yes-no:checked + label:after {
-    transform: rotateY(0);
+    transform: rotateY(0deg);
 }
