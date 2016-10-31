@@ -34,6 +34,13 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
     <h1>Enjoy your time at UMCU!</h1>
 </div>
 <div id="viewVisitors"></div>
+<form id="downloadReport" method="GET" action="/lobby/util/csvExport.php">
+    <label for="reportStartDate">Start Date</label>
+    <input type="date" id="reportStartDate" name="start"/>
+    <label for="reportEndDate">End Date</label>
+    <input type="date" id="reportEndDate" name="end"/>
+    <input type="submit" value="Download"/>
+</form>
 <div id="screensaver"></div>
 <input type="text" id="decoy" title="" readonly/>
 <input type="hidden" id="team" value="<?php echo $team ?>"/>

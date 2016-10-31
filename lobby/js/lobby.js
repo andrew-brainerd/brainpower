@@ -8,7 +8,7 @@ var page = $("body");
 var header = $("header");
 var logo = header.find("img");
 var menuIcon = header.find("#menuIcon");
-var inputs = page.find("input:not([type=hidden])");
+var inputs = page.find("input:not([type=hidden], [type=date])");
 var form = $("#initialForm");
 var viewVisitors = $("#viewVisitors");
 var visitorRows = viewVisitors.find(".row");
@@ -26,6 +26,7 @@ var submit = $("#submitForm");
 var cancel = $("#cancel");
 var reporting = $("#reporting");
 var logOut = $("#logOut");
+var reportForm = $("#downloadReport");
 var isTeamMember = $("#team").val() == "true";
 var draggedVID;
 var updateElements;
@@ -46,6 +47,7 @@ inputs.addClass("textIndent");
 page.find("#closingNote").remove();
 if (!isTeamMember) form.css("margin-top", "160px");
 viewVisitors.hide();
+reportForm.hide();
 hideAdditionalInfo();
 fetchReasons();
 clearForm();
@@ -144,6 +146,7 @@ nav.checkIn.click(function () {
     updateSelected($(this));
     page.find("#closingNote").remove();
     viewVisitors.fadeOut(function () {
+
         form.fadeIn();
     });
 });
@@ -153,7 +156,8 @@ nav.activity.click(function () {
 });
 nav.reporting.click(function () {
     updateSelected($(this));
-    location.href = "https://umculobby.com/reports";
+    //location.href = "https://umculobby.com/reports";
+    letsDoSomeReporting();
 });
 nav.logOut.click(function () {
     location.href = "https://umculobby.com/lobby/?branch=" + branch.val();
@@ -192,7 +196,9 @@ function fetchVisitors() {
         success: function (msg) {
             viewVisitors.html(msg);
             form.fadeOut(function () {
-                viewVisitors.fadeIn();
+                reportForm.fadeOut(function () {
+                    viewVisitors.fadeIn();
+                });
             });
             $(".tableContainer").droppable({
                 activate: function (event, ui) {
@@ -425,5 +431,12 @@ function showDetailsBox(vid) {
                 });
             });
         }
+    });
+}
+function letsDoSomeReporting() {
+    form.fadeOut(function () {
+        viewVisitors.fadeOut(function () {
+            reportForm.fadeIn();
+        });
     });
 }

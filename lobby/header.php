@@ -12,7 +12,7 @@ if ($isTeamMember) {
     echo "<li class='noNav' id='navTitle'><span>UMCU Lobby - $currentBranch</span></li>";
     echo "<li id='checkIn'><span>Member Check-In</span></li>";
     echo "<li id='checkOut'><span>Member Activity</span></li>";
-    if ($isManager) echo "<li id='reporting'><span>Reports</span></li>";
+    echo "<li id='reporting'><span>Download Report</span></li>";
     echo "<li id='logOut'><span>Log Out</span></li>";
     //echo "<li class='noNav' id='currentUser'><span>$currentBranch Branch</span></li>";
     echo "<li id='menuIcon'><span>☰</span></li>";

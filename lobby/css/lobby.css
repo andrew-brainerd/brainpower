@@ -216,10 +216,10 @@ input[type=button], #submitForm, .button {
     -ms-user-select: none;
     user-select: none;
 }
-#submitForm {
+/*#submitForm {
     position: relative;
     top: 60px;
-}
+}*/
 input[type=button].detailsButton {
     background-color: #0f345e;
     border-color: white;
@@ -400,6 +400,16 @@ input[type=button].detailsButton {
     right: 0;
     width: 50%;
     z-index: 4;
+}
+/*----------------------------------------*/
+/* Reporting */
+/*----------------------------------------*/
+form#downloadReport label {
+    top: 30px;
+    width: 225px;
+}
+form#downloadReport input[type=date] {
+    margin: 35px auto;
 }
 
 /*----------------------------------------*/
