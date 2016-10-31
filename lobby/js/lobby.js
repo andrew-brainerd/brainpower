@@ -52,7 +52,7 @@ viewVisitors.hide();
 reportForm.hide();
 hideAdditionalInfo();
 fetchReasons();
-fetchBranchs();
+fetchBranches();
 clearForm();
 checkEnvironment();
 bindEnterKey(submit);
@@ -287,7 +287,7 @@ function fetchReasons() {
         }
     });
 }
-function fetchBrances() {
+function fetchBranches() {
     $.ajax({
         type: "POST",
         url: "util/getBranches.php",
