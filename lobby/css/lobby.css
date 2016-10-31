@@ -203,7 +203,9 @@ label:hover {
     user-select: none;
     width: 250px;
 }
-input[type=button], #submitForm, .button {
+input[type=button],
+input[type=submit],
+#submitForm, .button {
     cursor: pointer;
     display: inline-block;
     -webkit-appearance: none;
@@ -215,6 +217,10 @@ input[type=button], #submitForm, .button {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+form#downloadReport input[type=submit] {
+    display: block;
+    margin: auto;
 }
 /*#submitForm {
     position: relative;

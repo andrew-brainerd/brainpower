@@ -39,7 +39,7 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
     <input type="date" id="reportStartDate" name="start"/>
     <label for="reportEndDate">End Date</label>
     <input type="date" id="reportEndDate" name="end"/>
-    <input type="submit" value="Download"/>
+    <input type="button" id="download" value="Download"/>
 </form>
 <div id="screensaver"></div>
 <input type="text" id="decoy" title="" readonly/>
