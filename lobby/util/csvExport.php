@@ -5,13 +5,14 @@
  * Date: 10/28/2016
  * Time: 5:36 PM
  */
-
-header("Content-Type: text/csv; charset=utf-8");
 //header("Content-Type: text/json; charset=utf-8");
+header("Content-Type: text/csv; charset=utf-8");
 header("Content-Disposition: attachment; filename=UMCU_Lobby_DataDump.csv");
 
 $startDate = $_GET["start"];
 $endDate = $_GET["end"];
+$branch = $_GET["branch"];
+//$branch = "Union";
 
 //$startDate = $_POST["start"];
 //$endDate = $_POST["end"];
@@ -23,7 +24,8 @@ include "dbconnect.php";
 
 $sql = "SELECT fname, lname, reason, time_in, time_help, time_out, visit_date, location, team_id, note_text ";
 $sql .= "FROM SimpleVisitors ";
-$sql .= "WHERE visit_date >= '$startDate' AND visit_date <= '$endDate' ";
+$sql .= "WHERE visit_date>='$startDate' AND visit_date<='$endDate' ";
+if ($branch != "" && $branch != null) $sql .= " AND location='$branch' ";
 $sql .= "ORDER BY visit_date ASC, time_in ASC";
 //echo $sql;
 $result = $conn->query($sql);

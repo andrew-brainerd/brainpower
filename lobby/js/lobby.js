@@ -28,6 +28,7 @@ var reporting = $("#reporting");
 var logOut = $("#logOut");
 var reportForm = $("#downloadReport");
 var download = $("#download");
+var branchList = $("#branchList");
 var isTeamMember = $("#team").val() == "true";
 var draggedVID;
 var updateElements;
@@ -51,9 +52,12 @@ viewVisitors.hide();
 reportForm.hide();
 hideAdditionalInfo();
 fetchReasons();
+fetchBranchs();
 clearForm();
 checkEnvironment();
 bindEnterKey(submit);
+//$('#reportStartDate').val(new Date());
+//$('#reportEndDate').val(new Date());
 
 page.fadeIn(function () {
     page.scroll();
@@ -183,8 +187,13 @@ menuIcon.click(function () {
     }
 });
 download.click(function () {
-    if ($("#reportStartDate").val() == "") return alert("Please Enter a Start Date");
-    if ($("#reportEndDate").val() == "") return alert("Please Enter an End Date");
+    var startDate = $("#reportStartDate").val();
+    var endDate = $("#reportEndDate").val();
+    if (startDate == "") return alert("Please Enter a Start Date");
+    if (endDate == "") return alert("Please Enter an End Date");
+    if (new Date(startDate).getTime() > new Date(endDate).getTime())
+        return alert("Please enter a start date that is before the end date")
+    reportForm.submit();
 });
 
 function showPopupMessage() {
@@ -275,6 +284,15 @@ function fetchReasons() {
         url: "util/getReasons.php",
         success: function (data) {
             reason.html(data);
+        }
+    });
+}
+function fetchBrances() {
+    $.ajax({
+        type: "POST",
+        url: "util/getBranches.php",
+        succes: function (data) {
+            branchList.html(data);
         }
     });
 }

@@ -218,9 +218,10 @@ input[type=submit],
     -ms-user-select: none;
     user-select: none;
 }
-form#downloadReport input[type=submit] {
+form#downloadReport input[type=button] {
     display: block;
     margin: auto;
+    text-indent: 0;
 }
 /*#submitForm {
     position: relative;
