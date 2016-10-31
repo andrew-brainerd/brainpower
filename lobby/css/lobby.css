@@ -109,6 +109,7 @@ input, select, #submitForm, .button {
 select {
     text-align-last: center;
     -webkit-appearance: none;
+    -moz-appearance: none;
 }
 label {
     display: block;

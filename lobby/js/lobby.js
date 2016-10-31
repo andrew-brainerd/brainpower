@@ -338,6 +338,9 @@ function checkRedirect() {
         if (g == "view") {
             fetchVisitors();
         }
+        if (g == "report") {
+            nav.reporting.trigger("click");
+        }
         else {
             console.log("Invalid redirect");
         }
@@ -397,6 +400,7 @@ function updateInfoBox(dragID, status) {
     page.prepend(updateElements);
 
     bindEnterKey(confirm);
+    noteInput.focus();
     confirm.click(function () {
         var noteText = $.trim($("#updateInfoText").val());
         if (noteText == "") {

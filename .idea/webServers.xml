@@ -2,7 +2,7 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="8357edae-e7ef-4303-a171-e6845ceff24d" name="UMCU Lobby" url="http://u84350508.1and1-data.host">
+      <webServer id="8357edae-e7ef-4303-a171-e6845ceff24d" name="UMCU Lobby" url="http://umculobby.com">
         <fileTransfer host="u84350508.1and1-data.host" port="22" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />

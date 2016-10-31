@@ -6,16 +6,14 @@
  * Time: 5:36 PM
  */
 //header("Content-Type: text/json; charset=utf-8");
-header("Content-Type: text/csv; charset=utf-8");
-header("Content-Disposition: attachment; filename=UMCU_Lobby_DataDump.csv");
 
 $startDate = $_GET["start"];
 $endDate = $_GET["end"];
 $branch = $_GET["branch"];
-//$branch = "Union";
 
-//$startDate = $_POST["start"];
-//$endDate = $_POST["end"];
+header("Content-Type: text/csv; charset=utf-8");
+header("Content-Disposition: attachment; filename=UMCU_Lobby_DataDump.csv");
+
 $output = fopen("php://output", "w");
 
 fputcsv($output, array("First Name", "Last Name", "Reason for Visit", "Time In", "Time Helped", "Time Out", "Visit Date", "Location", "Team Member ID", "Checkout Note"));
