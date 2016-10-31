@@ -291,7 +291,7 @@ function fetchBranches() {
     $.ajax({
         type: "POST",
         url: "util/getBranches.php",
-        succes: function (data) {
+        success: function (data) {
             branchList.html(data);
         }
     });

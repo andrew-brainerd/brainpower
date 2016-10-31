@@ -39,6 +39,7 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
     <input type="date" id="reportStartDate" name="start"/>
     <label for="reportEndDate">End Date</label>
     <input type="date" id="reportEndDate" name="end"/>
+    <!--<label for="branchList">Branch</label>-->
     <select id="branchList" name="branch"></select>
     <input type="button" id="download" value="Download"/>
 </form>

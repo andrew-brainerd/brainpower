@@ -84,6 +84,7 @@ function buildTableRow($table, $row)
     }
     $timeIn = strtotime($row["time_in"]);
     $timeHelp = strtotime($row["time_help"]);
+    $timeOut = strtotime($row["time_out"]);
     $vid = $row["vid"]; // remove for live (probably)
     $status = $row['status'];
     if ($status == "2") $reason = $reason . " --> " . $row["note_text"];
@@ -100,17 +101,22 @@ function buildTableRow($table, $row)
     } else if ($table == 1) {
         $timeElapsed = gmdate("H:i:s", $currentTime - $timeHelp);
         $hours = intval(substr($timeElapsed, 0, 2));
-        $minutes = ($hours * 60) + (intval(substr($timeElapsed, 3, 5)));
+        $minutes = (intval(substr($timeElapsed, 3, 5)));
         echo "<div class='row' data-vid='$vid'>";
         echo "<div class='cell'>" . $row["fname"] . " " . $row["lname"] . "</div>";
-        echo "<div class='cell time'>" . $minutes . " min</div>";
+        echo "<div class='cell time'>";
+        if ($hours > 0) echo "$hours hr ";
+        echo "$minutes min</div>";
         echo "<div class='cell reason'>" . $reason . "</div>";
     } else if ($table == 2) {
-        $timeOut = strtotime($row["time_out"]);
         $timeElapsed = gmdate("H:i:s", $timeOut - $timeIn);
+        $hours = intval(substr($timeElapsed, 0, 2));
+        $minutes = (intval(substr($timeElapsed, 3, 5)));
         echo "<div class='row noHover' data-vid='-1'>";
         echo "<div class='cell'>" . $row["fname"] . " " . $row["lname"] . "</div>";
-        echo "<div class='cell time'>" . $timeElapsed . "</div>";
+        echo "<div class='cell time'>";
+        if ($hours > 0) echo "$hours hr ";
+        echo "$minutes min</div>";
         echo "<div class='cell'><input type='button' class='detailsButton' data-vid='$vid' value='Visit Details'/></div>";
     }
     echo "</div>";  // row
