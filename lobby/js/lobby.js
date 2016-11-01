@@ -228,20 +228,22 @@ function fetchVisitors() {
                         $(this).removeClass("pickMe");
                     },
                 drop: function (event, ui) {
-                        $(this).removeClass("almostHaveIt");
-                        var dragID = ui.helper.attr("data-vid");
-                    var dropID = parseInt($(this).attr("id").replace("status", ""));
-                    //console.log("drag: " + dragID + "    drop: " + dropID);
-                        var status, statusText;
-                        switch (dropID) {
+                    $(this).removeClass("almostHaveIt");
+                    var visitorID = ui.helper.attr("data-vid");
+                    var dragStatus = ui.helper.attr("data-status");
+                    var dropStatus = parseInt($(this).attr("id").replace("status", ""));
+                    //console.log("drag: " + visitorID + "    drag: " + dragStatus + "    drop: " + dropStatus);
+                    if (dragStatus == dropStatus) return;
+                    //var status, statusText;
+                    switch (dropStatus) {
                             case 0:
-                                updateStatus(dragID, dropID);
+                                updateStatus(visitorID, dropStatus);
                                 break;
                             case 1:
-                                updateInfoBox(dragID, dropID);
+                                updateInfoBox(visitorID, dropStatus);
                                 break;
                             case 2:
-                                updateInfoBox(dragID, dropID);
+                                updateInfoBox(visitorID, dropStatus);
                                 break;
                             default:
                                 console.log("Mucked it up. Nice Job");
@@ -259,7 +261,9 @@ function fetchVisitors() {
             $(".row:not(.noHover, .viewHeader)").draggable({helper: "clone"})
                 .click(function () {
                     if ($(this).hasClass(("ui-draggable-dragging"))) return;
-                    console.log("I was clicked on");
+                    var visitorID = $(this).attr("data-vid");
+                    var currentStatus = parseInt($(this).attr("data-status"));
+                    updateInfoBox(visitorID, currentStatus + 1);
                 });
             $(".detailsButton").click(function () {
                 showDetailsBox($(this).attr("data-vid"));
@@ -338,7 +342,7 @@ function checkRedirect() {
         if (g == "view") {
             fetchVisitors();
         }
-        if (g == "report") {
+        else if (g == "report") {
             nav.reporting.trigger("click");
         }
         else {
@@ -357,11 +361,11 @@ function hideAdditionalInfo() {
     addInfo.prev("label").hide();
     addInfo.hide();
 }
-function updateStatus(dragID, status, updateInfo) {
+function updateStatus(visitorID, status, updateInfo) {
     $.ajax({
         type: "POST",
         url: "util/updateStatus.php",
-        data: "vid=" + dragID +
+        data: "vid=" + visitorID +
         "&status=" + status +
         "&updateInfo=" + updateInfo,
         success: function (msg) {
@@ -376,7 +380,7 @@ function updateStatus(dragID, status, updateInfo) {
         }
     });
 }
-function updateInfoBox(dragID, status) {
+function updateInfoBox(visitorID, status) {
     updateElements = $("<div class='popup' id='updateVisitor'></div>");
     var title = (status == 1) ? "Please Enter Your User Number" : "Check-Out Visitor";
     var submitText = (status == 1) ? "OK" : "Check Out";
@@ -406,7 +410,7 @@ function updateInfoBox(dragID, status) {
         if (noteText == "") {
             return alert((status == 1) ? "Please enter valid user number" : "Please enter a closing note");
         }
-        updateStatus(dragID, status, noteText);
+        updateStatus(visitorID, status, noteText);
         bindEnterKey(submit);
     });
     cancel.click(function () {

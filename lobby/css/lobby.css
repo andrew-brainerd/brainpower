@@ -234,6 +234,8 @@ input[type=button].detailsButton {
     color: white;
     font-size: 0.8em;
     margin: 0;
+    padding: 5px 3px;
+    width: 150px;
 }
 
 /*----------------------------------------*/
@@ -254,7 +256,7 @@ input[type=button].detailsButton {
     font-size: 1.5vw;
     margin: auto;
     max-width: 90%;
-    min-width: 500px;
+    min-width: 550px;
 }
 #viewVisitors hr {
     margin-top: 20px;
@@ -293,6 +295,7 @@ input[type=button].detailsButton {
     color: #00274c;
     cursor: pointer;
 }
+#viewVisitors .row:hover.noHover .cell { cursor: default; }
 #viewVisitors .row.selected {
     background: #ffcb05;
     font-weight: bold;
