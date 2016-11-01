@@ -15,7 +15,7 @@ if ($branch === "" || $branch === null) $branch = $_POST['branch'];
 if ($today == "") $today = date("Y/m/d");
 
 $slt = "SELECT *";
-$frm = " FROM SimpleVisitors";
+$frm = " FROM " . $GLOBALS["dbTable"];
 $whr = " WHERE location='$branch' AND visit_date = '$today' AND vid=$vid ";
 $ord = "ORDER BY time_out ASC, time_in DESC";
 $sql = $slt . $frm . $whr . $ord;

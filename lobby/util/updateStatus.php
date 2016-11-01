@@ -19,7 +19,7 @@ $statusInfo = "";
 if ($status == "1") $statusInfo = " team_id='$updateInfo', time_help='$currentTime', ";
 else if ($status == "2") $statusInfo = " time_out='$currentTime', note_text='$updateInfo', ";
 else $statusInfo = " team_id='0', time_out=0, note_text='',";
-$sql = "UPDATE SimpleVisitors SET$statusInfo status='$status' WHERE vid='$vid'";
+$sql = "UPDATE " . $GLOBALS["dbTable"] . " SET$statusInfo status='$status' WHERE vid='$vid'";
 
 $success2 = $conn->query($sql);
 echo $sql;
