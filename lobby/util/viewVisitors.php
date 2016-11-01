@@ -14,16 +14,17 @@ if ($branch === "" || $branch === null) $branch = $_POST['branch'];
 if ($today == "") $today = date("Y/m/d");
 
 $slt = "SELECT *";
-$frm = " FROM " . $GLOBALS['dbTable'];
+$frm = " FROM SimpleVisitorsTest";
 $whr = " WHERE location='$branch' AND visit_date = '$today' ";
 $ord = "ORDER BY time_out ASC, time_in DESC";
 $sql = $slt . $frm . $whr . $ord;
+echo $sql;
 
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     for ($statusTable = 0; $statusTable < 3; $statusTable++) {
         $slt = "SELECT *";
-        $frm = " FROM " . $GLOBALS["dbTable"];
+        $frm = " FROM SimpleVisitors";
         $whr = " WHERE location='$branch' AND visit_date = '$today' AND status=$statusTable ";
         $ord = "ORDER BY time_out ASC, time_in DESC";
         $sql = $slt . $frm . $whr . $ord;

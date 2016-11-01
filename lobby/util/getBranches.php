@@ -14,7 +14,8 @@ $result = $conn->query($sql);
 echo "<option value='-1'>- All Branches -</option>";
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $branch = $row["name"];
-        echo "<option value='" . $branch . "'>" . $branch . "</option>";
+        $reason = $row['name'];
+        echo "<option value='" . $reason . "'>" . $reason . "</option>";
     }
+    //echo "<option value='0'>Other</option>";
 }

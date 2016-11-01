@@ -3,8 +3,7 @@
 //$branch = "";
 if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
     //header("Location: ../video");
-} else {*/
-$GLOBALS["dbTable"] = "SimpleVisitorsTest" ?>
+} else {*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
