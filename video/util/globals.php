@@ -26,7 +26,6 @@ function sendUpdateEmail($msg, $subject)
     $msg = wordwrap($msg, 70);
     sendEmail("abrainerd@umcu.org", "video@umculobby.com", $subject, $msg, "html");
 }
-
 function sendEncodedLink($link, $subject)
 {
     $msg = "<html><head><style type='text/css'>";
@@ -39,7 +38,6 @@ function sendEncodedLink($link, $subject)
     //sendEmail("abrainerd@umcu.org, cardahl@umcu.org", "video@umculobby.com", $subject, $msg, "html");
     return $msg;
 }
-
 function setHeaders($emailFrom, $type)
 {
     $headers = "Reply-To: UMCU <" . $emailFrom . ">\r\n";
@@ -52,7 +50,6 @@ function setHeaders($emailFrom, $type)
     $headers .= "X-Mailer: PHP" . phpversion() . "\r\n";
     return $headers;
 }
-
 function sendEmail($to, $from, $subject, $msg, $type = "plain")
 {
     $emailTo = $to;

@@ -1,4 +1,3 @@
-
 #screensaver {
     background: #00274c;
     position: absolute;
@@ -12,21 +11,18 @@
     box-shadow: 0 0 0 6px #000444;
     animation: 1s animateBorder infinite;*/
 }
-
 @keyframes animateBorder {
     to {
         outline-color: #00274c;
         box-shadow: 0 0 0 6px #ffcb05;
     }
 }
-
 #screensaver h1 {
     font-size: 8vw;
     position: relative;
     margin: 0 auto;
     top: 25%;
 }
-
 #screensaver h2 {
     color: #ffcb05;
     font-size: 4vw;
@@ -34,13 +30,11 @@
     top: 40%;
     /*top: 15%;*/
 }
-
 #screensaver img {
     display: none;
     margin: 70px auto;
     width: 300px;
 }
-
 #tap-anywhere, #tap-anywhere2 {
     transition: color 3s;
 }
