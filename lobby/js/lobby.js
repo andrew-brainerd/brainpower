@@ -33,6 +33,8 @@ var isTeamMember = $("#team").val() == "true";
 var draggedVID;
 var updateElements;
 var visitDetailElements;
+var updateTimer;
+var isPageReload;
 
 var nav = {
     "checkIn": checkIn,
@@ -42,16 +44,16 @@ var nav = {
 };
 
 checkRedirect();
-
-if ($("#goTo").val() == "view") updateSelected(nav.activity);
-else updateSelected(nav.checkIn);
+updateSelected(sessionStorage.getItem("selected"));
 inputs.addClass("textIndent");
 page.find("#closingNote").remove();
 if (!isTeamMember) form.css("margin-top", "160px");
+form.hide();
 viewVisitors.hide();
 reportForm.hide();
 hideAdditionalInfo();
 fetchReasons();
+fetchVisitors();
 fetchBranches();
 clearForm();
 checkEnvironment();
@@ -59,17 +61,8 @@ bindEnterKey(submit);
 //$('#reportStartDate').val(new Date());
 //$('#reportEndDate').val(new Date());
 
-page.fadeIn(function () {
-    page.scroll();
-});
 logo.click(function () {
-    var loc = location.href;
-    if (loc.indexOf("goto") >= 0) {
-        window.location.href = "index.php";
-    }
-    else {
-        location.reload();
-    }
+    location.reload();
 });
 inputs.on("focus", function () {
     //console.log("You focused an input!");
@@ -146,29 +139,17 @@ submit.click(function () {
         }
     }
 });
-showReport.click(fetchVisitors);
-nav.checkIn.click(function () {
-    updateSelected($(this));
-    page.find("#closingNote").remove();
-    viewVisitors.fadeOut(function () {
-        reportForm.fadeOut(function () {
-            bindEnterKey(submit);
-            form.fadeIn();
-        });
-    });
+checkIn.click(function () {
+    updateSelected($(this).attr("id"));
+    setView($(this));
 });
-nav.activity.click(function () {
-    updateSelected($(this));
-    fetchVisitors();
+memberActivity.click(function () {
+    updateSelected($(this).attr("id"));
+    setView($(this));
 });
-nav.reporting.click(function () {
-    updateSelected($(this));
-    form.fadeOut(function () {
-        viewVisitors.fadeOut(function () {
-            bindEnterKey(download);
-            reportForm.fadeIn();
-        });
-    });
+reporting.click(function () {
+    updateSelected($(this).attr("id"));
+    setView($(this));
 });
 nav.logOut.click(function () {
     location.href = "https://umculobby.com/lobby/?branch=" + branch.val();
@@ -195,6 +176,9 @@ download.click(function () {
         return alert("Please enter a start date that is before the end date")
     reportForm.submit();
 });
+page.fadeIn(function () {
+    page.scroll();
+});
 
 function showPopupMessage() {
     form.fadeOut("slow", function () {
@@ -215,11 +199,6 @@ function fetchVisitors() {
         "&branch=" + branch.val(),
         success: function (msg) {
             viewVisitors.html(msg);
-            form.fadeOut(function () {
-                reportForm.fadeOut(function () {
-                    viewVisitors.fadeIn();
-                });
-            });
             $(".tableContainer").droppable({
                 activate: function (event, ui) {
                         $(this).addClass("pickMe");
@@ -268,6 +247,11 @@ function fetchVisitors() {
             $(".detailsButton").click(function () {
                 showDetailsBox($(this).attr("data-vid"));
             });
+            //clearTimeout(updateTimer);
+            if (viewVisitors.find(".cell.time").length > 0) {
+                updateTimer = setInterval(fetchVisitors, 10000);
+                // 5 minutes = 300000
+            }
             queryID++;
         }
     });
@@ -335,20 +319,7 @@ function checkEnvironment() {
 function checkRedirect() {
     branch = $("#branch");
     if (branch.val() == "") location.href = "https://umculobby.com?d=instant";
-    //else if (branch.val() == "William") location.href = "https://umculobby.com/parking/?branch=William";
     else if (branch.val() == "Huron") location.href = "https://umculobby.com/parking/?branch=Huron";
-    var g = $("#goTo").val();
-    if (g != "") {
-        if (g == "view") {
-            fetchVisitors();
-        }
-        else if (g == "report") {
-            nav.reporting.trigger("click");
-        }
-        else {
-            console.log("Invalid redirect");
-        }
-    }
 }
 function capitalize(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
@@ -429,8 +400,18 @@ function updateSelected(selectedItem) {
     $.each(nav, function () {
         $(this).removeClass("selected");
     });
-    //console.log("Selected: " + selectedItem.attr("id"));
+    if (selectedItem == null || selectedItem == undefined) {
+        selectedItem = checkIn;
+        if (selectedItem == null) console.log("is null");
+        if (selectedItem == undefined) console.log("is undefined");
+    }
+    else {
+        isPageReload = true;
+        selectedItem = $("#" + selectedItem);
+    }
+    sessionStorage.setItem("selected", selectedItem.attr("id"));
     selectedItem.addClass("selected");
+    setView(selectedItem);
 }
 function bindEnterKey(button) {
     $(document).unbind("keypress.key13");
@@ -469,4 +450,36 @@ function showDetailsBox(vid) {
             });
         }
     });
+}
+function setView(view) {
+    view = view.attr("id");
+    page.find("#closingNote").remove();
+    if (view == "checkIn") {
+        viewVisitors.fadeOut(function () {
+            reportForm.fadeOut(function () {
+                clearTimeout(updateTimer);
+                bindEnterKey(submit);
+                form.fadeIn();
+            });
+        });
+    }
+    else if (view == "checkOut") {
+        form.fadeOut(function () {
+            reportForm.fadeOut(function () {
+                viewVisitors.fadeIn();
+            });
+        });
+    }
+    else if (view == "reporting") {
+        form.fadeOut(function () {
+            viewVisitors.fadeOut(function () {
+                clearTimeout(updateTimer);
+                bindEnterKey(download);
+                reportForm.fadeIn();
+            });
+        });
+    }
+    else {
+        console.log("nothing matched");
+    }
 }

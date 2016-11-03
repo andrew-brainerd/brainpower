@@ -1,15 +1,14 @@
-<?php /*//$clientIP = $_SERVER['REMOTE_ADDR'];
-//$goTo = "";
-//$branch = "";
-if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
-    //header("Location: ../video");
-} else {*/ ?>
+<?php
+/*
+$clientIP = $_SERVER['REMOTE_ADDR'];
+if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") header("Location: ../video");
+*/
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <?php
     include "head.php";
-    $goTo = strip_tags($_GET["goto"]);
     $_GET["branch"] = strip_tags($_GET["branch"]);
     $branch = $_GET["branch"];
     $team = strip_tags($_GET["team"]);
@@ -47,7 +46,6 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
 <input type="text" id="decoy" title="" readonly/>
 <input type="hidden" id="team" value="<?php echo $team ?>"/>
 <input type="hidden" id="branch" value="<?php echo $branch; ?>"/>
-<input type="hidden" id="goTo" value="<?php echo $goTo; ?>"/>
 <script src="/js/secure.js"></script>
 <?php include "util/jquery.php"; ?>
 <script src="js/lobby.js"></script>
