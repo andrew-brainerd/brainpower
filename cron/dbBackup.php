@@ -10,8 +10,7 @@ $host_name = "db618070060.db.1and1.com";
 $database = "db618070060";
 $user_name = "dbo618070060";
 $password = "Umcu@54!#";
-//$webhome   = "/kunden/homepages/8/d617627196/htdocs";
-//mail("9897210902@vtext.com", "", "Starting Parking DB Backup", "From: UMCU Lobby <walter@umculobby.com>");
+
 $para = array(
     'db_host' => $host_name,    //mysql host
     'db_uname' => $user_name,     //user
@@ -100,19 +99,11 @@ function __backup_mysql_database($params)
     }
 
     $backup_file_name = "ParkingBkup-" . date("d-m-Y--h-i-s") . ".sql";
-    //echo $params['db_backup_path'] . $backup_file_name . "\n";
     $fp = fopen($params['db_backup_path'] . $backup_file_name, 'w+');
     if (($result = fwrite($fp, $contents))) {
         echo "Backup file created '--$backup_file_name' ($result)\n";
-        $msg = "Parking Database Backup Complete\n";
-        //$msg .= $backup_file_name;
-        $emailTo = "9897210902@vtext.com";
-        $emailFrom = "walter@umculobby.com";
-        $headers = "From: UMCU Lobby <" . $emailFrom . ">\r\n";
-        //mail($emailTo, "", $msg, $headers);
     } else {
         $msg = "Parking Database Backup Failed\n";
-        //$msg .= $backup_file_name;
         $emailTo = "9897210902@vtext.com";
         $emailFrom = "walter@umculobby.com";
         $headers = "From: UMCU Lobby <" . $emailFrom . ">\r\n";

@@ -53,109 +53,108 @@ var environment = "";
 
 //</editor-fold>
 
-$(document).ready(function () {
-    $additionalInfo.hide();
-    $parkingSelection.hide();
-    $visitorList.hide();
-    $hideReport.hide();
-    $otherSpot.hide();
-    $otherReason.hide();
-    $spotTaken.hide();
-    $map.hide();
+$additionalInfo.hide();
+$parkingSelection.hide();
+$visitorList.hide();
+$hideReport.hide();
+$otherSpot.hide();
+$otherReason.hide();
+$spotTaken.hide();
+$map.hide();
 
-    $fname.val("");
-    $lname.val("");
-    $vehicleMake.val("");
-    $vehicleModel.val("");
-    $parkingSpot.val("-1");
-    $reason.val("-1");
+$fname.val("");
+$lname.val("");
+$vehicleMake.val("");
+$vehicleModel.val("");
+$parkingSpot.val("-1");
+$reason.val("-1");
 
-    checkEnvironment();
-    checkRedirect();
-    buildMap();
+checkEnvironment();
+checkRedirect();
+buildMap();
 
-    // Bindings
-    $(document).bind('keypress.key13', function (e) {
-        if (e.which == 13) {
-            $("#new").click();
-            $(document).unbind("keypress.key13");
-            $(document).bind('keypress.key13', function (e) {
-                if (e.which == 13) {
-                    $("#next").click();
+// Bindings
+$(document).bind('keypress.key13', function (e) {
+    if (e.which == 13) {
+        $("#new").click();
+        $(document).unbind("keypress.key13");
+        $(document).bind('keypress.key13', function (e) {
+            if (e.which == 13) {
+                $("#next").click();
+            }
+        });
+    }
+});
+$fname.keyup(runQuery);
+$lname.keyup(runQuery);
+$logo.click(function () {
+    if (mapVisible) {
+        $map.hide();
+        mapVisible = false;
+    }
+    else {
+        location.reload();
+        /*if ($branch.val() == "") {
+         location.href = "/?d=instant";
+         console.log("No branch");
+         }
+         else {
+         console.log("Branch: [" + $branch.val() + "}");
+         if (location.href.indexOf("goto") >= 0) {
+         location.href = location.hostname + "/parking/?branch=" + $branch.val();
+         }
+         else location.reload();
+         }*/
+    }
+});
+$cancel.click(function () {
+    location.reload();
+});
+$parkingSpot.change(function () {
+    if ($parkingSpot.val() == 0) {
+        $otherSpot.show();
+    }
+    else $otherSpot.hide();
+});
+$reason.change(function () {
+    var r = $reason.val();
+    if (r == 0) {
+        $otherReason.show();
+    }
+    else {
+        $otherReason.hide();
+        if (r == "Assigned Spot Taken") {
+            //var vid = $("#vid").val();
+            //console.log("VID: " + vid);
+            $.ajax({
+                type: "POST",
+                url: "checkTeamMember.php",
+                data: "vid=" + $visitorID.val(),
+                success: function (data) {
+                    $spotTaken.html(data);
+                    $spotTaken.show();
+                    spotTaken = true;
                 }
             });
         }
-    });
-    $page.fadeIn(function () {
-        $page.scroll();
-        $lname.focus();
-    });
-    $fname.keyup(runQuery);
-    $lname.keyup(runQuery);
-    $logo.click(function () {
-        if (mapVisible) {
-            $map.hide();
-            mapVisible = false;
-        }
         else {
-            if ($branch.val() == "") {
-                location.href = "/?d=instant";
-                console.log("No branch");
-            }
-            else {
-                console.log("Branch: [" + $branch.val() + "}");
-                if (location.href.indexOf("goto") >= 0) {
-                    location.href = "/parking/?branch=" + $branch.val();
-                }
-                else location.reload();
-            }
+            $spotTaken.hide();
         }
+    }
+});
+$showReport.click(fetchVisitors);
+$hideReport.click(function () {
+    $visitorList.fadeOut(function () {
+        $hideReport.fadeOut(function () {
+            $header.css({"position": "static", "border-bottom": "none"});
+            $nameInfo.fadeIn();
+            $showReport.fadeIn();
+        })
     });
-    $cancel.click(function () {
-        location.reload();
-    });
-    $parkingSpot.change(function () {
-        if ($parkingSpot.val() == 0) {
-            $otherSpot.show();
-        }
-        else $otherSpot.hide();
-    });
-    $reason.change(function () {
-        var r = $reason.val();
-        if (r == 0) {
-            $otherReason.show();
-        }
-        else {
-            $otherReason.hide();
-            if (r == "Assigned Spot Taken") {
-                //var vid = $("#vid").val();
-                //console.log("VID: " + vid);
-                $.ajax({
-                    type: "POST",
-                    url: "checkTeamMember.php",
-                    data: "vid=" + $visitorID.val(),
-                    success: function (data) {
-                        $spotTaken.html(data);
-                        $spotTaken.show();
-                        spotTaken = true;
-                    }
-                });
-            }
-            else {
-                $spotTaken.hide();
-            }
-        }
-    });
-    $showReport.click(fetchVisitors);
-    $hideReport.click(function () {
-        $visitorList.fadeOut(function () {
-            $hideReport.fadeOut(function () {
-                $header.css({"position": "static", "border-bottom": "none"});
-                $nameInfo.fadeIn();
-                $showReport.fadeIn();
-            })
-        });
-    });
+});
+$page.fadeIn(function () {
+    $page.scroll();
+    $lname.focus();
 });
 
 function runQuery() {
@@ -462,6 +461,7 @@ function validateCheckIn() {
         }
     }
     $checkIn.prop("disabled", true).css("cursor", "default");
+    console.log("validated check-in");
     return true;
 }
 function checkEnvironment() {

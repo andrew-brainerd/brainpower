@@ -32,7 +32,7 @@ function performLogin($username, $password, $conn)
             $_SESSION["authLv"] = $row["auth_level"];
             $_SESSION['activity'] = time();
             if (isset($_SESSION["prevPage"]) && $_SESSION["prevPage"] != "") {
-                $_SESSION["prevPage"] = "http://umculobby.com/video";
+                $_SESSION["prevPage"] = "https://umculobby.com/video";
                 echo "@" . $_SESSION["prevPage"];
                 $_SESSION["prevPage"] = "";
             }

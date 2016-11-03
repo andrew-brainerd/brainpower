@@ -34,7 +34,7 @@ function sendEncodedLink($link, $subject)
     $msg .= "a { text-decoration: none; color: #ffcb05; font-family: cursive; font-size: 24px; } ";
     $msg .= "table td { padding: 7px; } ";
     $msg .= "</style></head><body>";
-    $msg .= "<table><tr><td>" . $link . "</td></tr></table>";
+    $msg .= "<table title=$subject><tr><td>" . $link . "</td></tr></table>";
     $msg .= "</body></html>";
     //sendEmail("abrainerd@umcu.org, cardahl@umcu.org", "video@umculobby.com", $subject, $msg, "html");
     return $msg;

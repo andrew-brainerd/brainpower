@@ -5,61 +5,43 @@
 var playing = false;
 var video;
 var fadeSpeed = "slow";
+var libraryTitle = "UMCU Video Library";
+var playerView = $("#player");
+var libraryView = $("#library");
+var pageTitle = $("#title");
 
-$(document).ready(function () {
-    /*var loc = window.location.toString();*/
-    var libraryTitle = "UMCU Video Library";
-    /*if (loc.indexOf("itonly") > 0)
-     libraryTitle = "IT Video Library";*/
-    var playerView = $("#player");
-    var libraryView = $("#library");
-    var pageTitle = $("#title");
-    $(".video").click(function () {
-        var vidURL = $(this).attr("data-path");
-        var vidTitle = $(this).text();
-        var vid = $(this).attr("data-vid");
-        //console.log(vidURL);
-        libraryView.fadeOut(fadeSpeed, function () {
-            loadVideo(vidURL, vid);
-            playerView.fadeIn(fadeSpeed);
-        });
-        pageTitle.fadeOut(fadeSpeed, function () {
-            pageTitle.text(vidTitle);
-            pageTitle.fadeIn(fadeSpeed);
-        });
+$(".video").click(function () {
+    var vidURL = $(this).attr("data-path");
+    var vidTitle = $(this).text();
+    var vid = $(this).attr("data-vid");
+    libraryView.fadeOut(fadeSpeed, function () {
+        loadVideo(vidURL, vid);
+        playerView.fadeIn(fadeSpeed);
     });
-    $("#back").click(function () {
-        if (playing) {
-            video.get(0).pause();
-            playing = false;
-            loadVideo("");
-        }
-        playerView.fadeOut(fadeSpeed, function () {
-            libraryView.fadeIn(fadeSpeed);
-        });
-        pageTitle.fadeOut(fadeSpeed, function () {
-            pageTitle.text(libraryTitle);
-            pageTitle.fadeIn(fadeSpeed);
-        });
+    pageTitle.fadeOut(fadeSpeed, function () {
+        pageTitle.text(vidTitle);
+        pageTitle.fadeIn(fadeSpeed);
+    });
+});
+$("#back").click(function () {
+    if (playing) {
+        video.get(0).pause();
+        playing = false;
+        loadVideo("");
+    }
+    playerView.fadeOut(fadeSpeed, function () {
+        libraryView.fadeIn(fadeSpeed);
+    });
+    pageTitle.fadeOut(fadeSpeed, function () {
+        pageTitle.text(libraryTitle);
+        pageTitle.fadeIn(fadeSpeed);
     });
 });
 
 function loadVideo(path, vid) {
     var counter = 0;
     video = $("#video");
-    //var source = $("#vid source");
-    //$("#title").text(title);
     video.prop("src", path);
-    /*var backdrop = $("<div id='backdrop'></div>");
-     backdrop.css("background", "black");
-     backdrop.css("width", video.prop("width"));
-     backdrop.css("height", video.prop("height"));
-     backdrop.css("position", "relative");
-     backdrop.css("top", $("#player").position().top);
-     backdrop.css("left", video.position().left);
-     $("body").append(backdrop);*/
-    //console.log("Video width: " + video.prop("width"));
-    //console.log("Video height: " + video.prop("height"));
 
     var loadTime = setInterval(function () {
         counter++;
@@ -67,7 +49,6 @@ function loadVideo(path, vid) {
     }, 1000);
     var counted = false;
     video.on("canplaythrough", function () {
-        //console.log("Ready to play " + path + " after " + counter + " seconds");
         clearInterval(loadTime);
         video.get(0).play();
         var half = video.get(0).duration / 2;

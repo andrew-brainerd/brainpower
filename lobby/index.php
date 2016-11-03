@@ -39,7 +39,7 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") header("Locat
     <label for="reportEndDate">End Date</label>
     <input type="date" id="reportEndDate" name="end" value="<?php echo date('Y-m-d'); ?>"/>
     <!--<label for="branchList">Branch</label>-->
-    <select id="branchList" name="branch"></select>
+    <select id="branchList" name="branch" title="Branch List"></select>
     <input type="button" id="download" value="Download"/>
 </form>
 <div id="screensaver"></div>

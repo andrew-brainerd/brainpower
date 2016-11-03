@@ -15,7 +15,6 @@
     }
 }
 #screensaver h1 {
-    font-size: 72px;
     font-size: 8vw;
     position: relative;
     margin: 0 auto;
@@ -23,14 +22,12 @@
 }
 #screensaver h2 {
     color: #ffcb05;
-    font-size: 40px;
     font-size: 4vw;
     position: relative;
     top: 40%;
     /*top: 15%;*/
 }
 #screensaver img {
-    display: block;
     display: none;
     margin: 70px auto;
     width: 300px;

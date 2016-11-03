@@ -101,8 +101,9 @@
 <? include "jquery.php"; ?>
 <script type="text/javascript">
     $(document).ready(function () {
+        var page = $("body");
         fetchVisitors();
-        $("body").fadeIn();
+        page.fadeIn();
         var visitor = $("#visitor");
         var dropAreas = $(".finnaDrop");
         visitor.draggable({
@@ -159,7 +160,7 @@
                 $(this).addClass("almostHaveIt")
             }
         });
-        $("body").droppable({
+        page.droppable({
             drop: function (event, ui) {
                 $(dropAreas)
                     .removeClass("droppedTheMic")

@@ -3,9 +3,9 @@
     <html lang="en">
     <head>
         <title>Upload Complete</title>
-        <link rel="icon" href="//umculobby.com/favicon.ico">
-        <link rel="stylesheet" href="//umculobby.com/css/reset.css"/>
-        <link rel="stylesheet" href="//umculobby.com/css/font.css"/>
+        <link rel="icon" href="/favicon.ico">
+        <link rel="stylesheet" href="//css/reset.css"/>
+        <link rel="stylesheet" href="/css/font.css"/>
         <link rel="stylesheet" href="../css/video.css"/>
     </head>
     <body>

@@ -3,6 +3,7 @@
  */
 var branch;
 var distances = [];
+var page = $("body");
 
 if (typeof(Number.prototype.toRadians) === "undefined") {
     Number.prototype.toRadians = function () {
@@ -12,7 +13,7 @@ if (typeof(Number.prototype.toRadians) === "undefined") {
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(calcDistance, showError);
-        $("body").fadeIn();
+        page.fadeIn();
     }
     else {
         alert("Geolocation is not supported by this browser");
@@ -90,7 +91,7 @@ function calcDistance(p) {
     var closest = "";
     var min = 6371000 * 2; // circumference of the earth
     for (var j = 0; j < distances.length; j++) {
-        $("#distances").append("<tr><td>" + distances[j][0] + "</td><td>" + distances[j][1] + "</td>")
+        $("#distances").append("<tr><td>" + distances[j][0] + "</td><td>" + distances[j][1] + "</td>");
         if (distances[j][1] < min) {
             min = distances[j][1];
             closest = j;
@@ -104,23 +105,22 @@ function calcDistance(p) {
     else redirect();
 }
 function redirect() {
-    if (branch == "Huron") location.href = "https://umculobby.com/parking?branch=Huron";
-    //else if (branch == "William") location.href = "https://umculobby.com/parking?branch=William";
-    else location.href = "https://umculobby.com/lobby?branch=" + branch;
+    if (branch == "Huron") location.href = location.hostname + "/parking?branch=Huron";
+    else location.href = "/lobby?branch=" + branch;
 }
 function showError(error) {
     switch (error.code) {
         case error.PERMISSION_DENIED:
             console.log("User denied the request for Geolocation.");
-            $("body").append("<h3>Location request denied by user</h3>");
+            page.append("<h3>Location request denied by user</h3>");
             break;
         case error.POSITION_UNAVAILABLE:
             console.log("Location information is unavailable.");
-            $("body").append("<h3>Location information unavailable</h3>");
+            page.append("<h3>Location information unavailable</h3>");
             break;
         case error.TIMEOUT:
             console.log("The request to get user location timed out.");
-            $("body").append("<h3>Location information timed out</h3>");
+            page.append("<h3>Location information timed out</h3>");
             break;
         default:
             console.log("An unknown error occurred.");
@@ -140,4 +140,4 @@ function getURLParameter(sParam) {
             return sParameterName[1] === undefined ? true : sParameterName[1];
         }
     }
-};
+}

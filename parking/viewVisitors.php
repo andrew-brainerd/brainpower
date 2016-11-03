@@ -50,24 +50,26 @@ if ($result->num_rows > 0) {
                 $spot = $row["spot_num"];
         }
         $reason = $row["reason"];
-        if (strlen($reason) > 30) {
-            $reason = substr($reason, 0, 16) . "...";
-        }
-        $timeIn = date("g:i a", strtotime($row["time_in"]));
-        $timeOut = date("g:i a", strtotime($row["time_out"]));
-        if ($timeOut === "12:00 am") {
-            $timeOut = "-";
-            $pid = $row["pid"];
-        } else $pid = -1;
+        if ($reason != "Testing") {
+            if (strlen($reason) > 30) {
+                $reason = substr($reason, 0, 16) . "...";
+            }
+            $timeIn = date("g:i a", strtotime($row["time_in"]));
+            $timeOut = date("g:i a", strtotime($row["time_out"]));
+            if ($timeOut === "12:00 am") {
+                $timeOut = "-";
+                $pid = $row["pid"];
+            } else $pid = -1;
 
-        echo "<div class='row' onclick='checkOut(" . $pid . ")'>";
-        echo "<div class='cell'>" . $row["fname"] . " " . $row["lname"] . "</div>";
-        echo "<div class='cell'>" . $row["make"] . " " . $row["model"] . "</div>";
-        echo "<div class='cell time'>" . $spot . "</div>";
-        echo "<div class='cell time'>" . $timeIn . "</div>";
-        echo "<div class='cell time'>" . $timeOut . "</div>";
-        echo "<div class='cell' reason>" . $reason . "</div>";
-        echo "</div>";
+            echo "<div class='row' onclick='checkOut(" . $pid . ")'>";
+            echo "<div class='cell'>" . $row["fname"] . " " . $row["lname"] . "</div>";
+            echo "<div class='cell'>" . $row["make"] . " " . $row["model"] . "</div>";
+            echo "<div class='cell time'>" . $spot . "</div>";
+            echo "<div class='cell time'>" . $timeIn . "</div>";
+            echo "<div class='cell time'>" . $timeOut . "</div>";
+            echo "<div class='cell' reason>" . $reason . "</div>";
+            echo "</div>"; // end row
+        }
     }
     echo "</div>";
 } else {

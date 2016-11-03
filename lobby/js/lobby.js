@@ -33,33 +33,32 @@ var isTeamMember = $("#team").val() == "true";
 var draggedVID;
 var updateElements;
 var visitDetailElements;
-var updateTimer;
+var updateTimer = setInterval(fetchVisitors, 180000);
 var isPageReload;
-
-var nav = {
-    "checkIn": checkIn,
-    "activity": memberActivity,
-    "reporting": reporting,
-    "logOut": logOut
-};
+var prevID = 0;
+var nav = [checkIn, memberActivity, reporting, logOut];
 
 checkRedirect();
+//sessionStorage.clear();
 updateSelected(sessionStorage.getItem("selected"));
+sessionStorage.setItem("branch", branch.val());
+console.log("branch = " + sessionStorage.getItem("branch"));
 inputs.addClass("textIndent");
 page.find("#closingNote").remove();
-if (!isTeamMember) form.css("margin-top", "160px");
-form.hide();
+if (isTeamMember) {
+    form.hide();
+    fetchVisitors();
+    fetchBranches();
+} else {
+    form.css("margin-top", "160px");
+}
 viewVisitors.hide();
 reportForm.hide();
 hideAdditionalInfo();
 fetchReasons();
-fetchVisitors();
-fetchBranches();
 clearForm();
 checkEnvironment();
 bindEnterKey(submit);
-//$('#reportStartDate').val(new Date());
-//$('#reportEndDate').val(new Date());
 
 logo.click(function () {
     location.reload();
@@ -151,19 +150,19 @@ reporting.click(function () {
     updateSelected($(this).attr("id"));
     setView($(this));
 });
-nav.logOut.click(function () {
-    location.href = "https://umculobby.com/lobby/?branch=" + branch.val();
+logOut.click(function () {
+    location.href = "/lobby/?branch=" + branch.val();
 });
 menuIcon.click(function () {
     console.log("Clicked Menu Icon");
-    var nav = $("#topNav");
-    if (nav.hasClass("responsive")) {
-        nav.removeClass("responsive");
+    var navBar = $("#topNav");
+    if (navBar.hasClass("responsive")) {
+        navBar.removeClass("responsive");
     }
     else {
-        nav.addClass("responsive");
+        navBar.addClass("responsive");
         $(".reponsive").find("li").click(function () {
-            nav.removeClass("responsive");
+            navBar.removeClass("responsive");
         });
     }
 });
@@ -173,7 +172,7 @@ download.click(function () {
     if (startDate == "") return alert("Please Enter a Start Date");
     if (endDate == "") return alert("Please Enter an End Date");
     if (new Date(startDate).getTime() > new Date(endDate).getTime())
-        return alert("Please enter a start date that is before the end date")
+        return alert("Please enter a start date that is before the end date");
     reportForm.submit();
 });
 page.fadeIn(function () {
@@ -247,12 +246,10 @@ function fetchVisitors() {
             $(".detailsButton").click(function () {
                 showDetailsBox($(this).attr("data-vid"));
             });
-            //clearTimeout(updateTimer);
-            if (viewVisitors.find(".cell.time").length > 0) {
-                updateTimer = setInterval(fetchVisitors, 10000);
-                // 5 minutes = 300000
-            }
+            var now = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+            console.log("Query #" + queryID + " at " + now);
             queryID++;
+            if (queryID > 500) location.reload();
         }
     });
 }
@@ -318,8 +315,8 @@ function checkEnvironment() {
 }
 function checkRedirect() {
     branch = $("#branch");
-    if (branch.val() == "") location.href = "https://umculobby.com?d=instant";
-    else if (branch.val() == "Huron") location.href = "https://umculobby.com/parking/?branch=Huron";
+    if (branch.val() == "") location.href = location.hostname + "?d=instant";
+    else if (branch.val() == "Huron") location.href = location.hostname + "/parking/?branch=Huron";
 }
 function capitalize(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
@@ -457,7 +454,7 @@ function setView(view) {
     if (view == "checkIn") {
         viewVisitors.fadeOut(function () {
             reportForm.fadeOut(function () {
-                clearTimeout(updateTimer);
+                //clearTimeout(updateTimer);
                 bindEnterKey(submit);
                 form.fadeIn();
             });
@@ -473,7 +470,7 @@ function setView(view) {
     else if (view == "reporting") {
         form.fadeOut(function () {
             viewVisitors.fadeOut(function () {
-                clearTimeout(updateTimer);
+                //clearTimeout(updateTimer);
                 bindEnterKey(download);
                 reportForm.fadeIn();
             });

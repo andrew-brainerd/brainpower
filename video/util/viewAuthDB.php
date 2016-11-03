@@ -2,9 +2,9 @@
 <html>
 <head>
     <title>View Auth Database</title>
-    <link rel="stylesheet" href="//umculobby.com/css/reset.css"/>
-    <link rel="stylesheet" href="//umculobby.com/css/font.css"/>
-    <link rel="stylesheet" href="../css/default.css"/>
+    <link rel="stylesheet" href="/css/reset.css"/>
+    <link rel="stylesheet" href="/css/font.css"/>
+    <link rel="stylesheet" href="/lobby/css/lobby.css"/>
 </head>
 <body>
 <?php

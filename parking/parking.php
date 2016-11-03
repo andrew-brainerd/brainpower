@@ -114,12 +114,9 @@
         }, 10000);
     });
     function returnToCheckIn() {
+        console.log("returning to check-in");
         $("#thank-you").fadeOut("slow", function () {
-            var loc = window.location.toString();
-            if (loc.indexOf("notmuchhappening") > 0)
-                window.location.replace("http://umcu.notmuchhappening.com/parking");
-            else
-                window.location.replace("https://umculobby.com/parking/?branch=<?php echo $location ?>");
+            location.href = "/parking";
         });
     }
 </script>

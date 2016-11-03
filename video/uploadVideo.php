@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Upload New Video</title>
-    <link rel="icon" href="//umculobby.com/favicon.ico">
-    <link rel="stylesheet" href="//umculobby.com/css/reset.css"/>
-    <link rel="stylesheet" href="//umculobby.com/css/font.css"/>
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/reset.css"/>
+    <link rel="stylesheet" href="/css/font.css"/>
     <link rel="stylesheet" href="css/video.css"/>
     <link rel="stylesheet" href="css/ripple.css"/>
 </head>
@@ -23,27 +23,22 @@
         <form id="uploadForm" action="util/upload.php" method="post" enctype="multipart/form-data">
             <div id="chooseVideo" class="button">Select Video to Upload</div>
             <input type="file" id="videoUpload" name="videoUpload"/>
-            <!--<input type="file" id="videoUpload" name="videoUpload[]" multiple="multiple"/>-->
             <label for="videoTitle">Video Title</label>
             <input type="text" id="videoTitle" name="videoTitle"/>
             <label for="authLevel">Auth Level</label>
-            <!--<input type="number" id="authLevel" name="authLevel" min="10" max="50" step="10"/>-->
             <select id="authLevel" name="authLevel">
                 <option value="10">All Team</option>
                 <option value="50">IT Only</option>
             </select>
             <label for="releaseDate">Relase Date</label>
             <input type="date" id="releaseDate" name="releaseDate"/>
-            <!--<select id="authLevel"></select>-->
             <input type="submit" id="uploadButton" class="button" value="Upload Video" name="submit">
-
             <div id="progress-div">
                 <div id="progress-bar"></div>
             </div>
             <div id="targetLayer"></div>
         </form>
-        <!--<div id="loading"></div><img src="../img/ripple.svg"/>-->
-        <div id="uploading" class='uil-ripple-css' style='transform:scale(0.92);'>
+        <div id="uploading" class='uil-ripple-css'>
             <div></div>
             <div></div>
         </div>

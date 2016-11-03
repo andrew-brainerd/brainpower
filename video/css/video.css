@@ -129,12 +129,14 @@ header .button {
     top: 20px;
     width: 100px;
 }
+/*noinspection CssUnusedSymbol*/
 header #upload {
     right: 140px;
 }
 header #manage {
     right: 140px;
 }
+/*noinspection CssUnusedSymbol*/
 header #logout {
     right: 20px;
 }
@@ -192,6 +194,7 @@ header #current {
     display: inline-block;
     bottom: 50px;
     right: 40px;
+    transform: scale(0.92);
 }
 #uploadForm label {
     display: block;

@@ -13,7 +13,6 @@ include "globals.php";
 
 $vid = strip_tags($_GET["vid"]);
 
-// Update or create Reason record
 $sql = "SELECT * FROM Videos WHERE vid='$vid'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -27,8 +26,6 @@ if ($result->num_rows > 0) {
 }
 $conn->query($sql);
 
-
-$sql = "INSERT INTO Reasons(reason, used_count) VALUES ('$reason', 1)";
 $day = date("Y/m/d");
 $time = date("H:i:s a");
 $sql = "INSERT INTO Views(vid, view_date, view_time) VALUES ('$vid', '$day', '$time')";

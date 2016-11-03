@@ -21,7 +21,7 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
     <link rel="apple-touch-icon" sizes="152x152" href="img/iconified/apple-touch-icon-152x152.png"/>
     <link rel="apple-touch-icon" sizes="180x180" href="img/iconified/apple-touch-icon-180x180.png"/>
     <title>Location Identifier</title>
-    <link rel="icon" href="//umculobby.com/favicon.ico">
+    <link rel="icon" href="/favicon.ico">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Permanent+Marker">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Oswald:700">
@@ -94,14 +94,6 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
 <script src="js/secure.js"></script>
 <script src="js/location.js"></script>
 <!--<script src="video/js/auth.js"></script>-->
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#continue").hide();
-        getLocation();
-        $("#continue").click(function () {
-            redirect();
-        });
-    });
-</script>
+<script type="text/javascript">getLocation();</script>
 </body>
 </html>
