@@ -74,7 +74,6 @@ session_start(); ?>
 <script src="/js/secure.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="js/auth.js"></script>
-<!--<script src="js/speed.js"></script>-->
 <script src="js/player.js"></script>
 </body>
 </html>

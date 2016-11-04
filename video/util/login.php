@@ -9,16 +9,18 @@
 include "dbconnect.php";
 session_start();
 
-$username = strip_tags($_POST["un"]);
-$password = $_POST["pw"];
-$u = trim($_GET["username"]);
-$p = trim($_GET["password"]);
+$username = strip_tags($_POST["username"]);
+$password = strip_tags($_POST["password"]);
 
-if ($username . $password != "") {
-    performLogin($username, $password, $conn);
+if ($username . $password == "") {
+    $username = strip_tags($_GET["username"]);
+    $password = strip_tags($_GET["password"]);
 }
-if ($u . $p != "") {
-    performLogin($u, $p, $conn);
+echo "Username: " . $username . "<br />";
+echo "Password: " . $password . "<br />";
+if (performLogin($username, $password, $conn)) {
+    echo "Login Sucessful<br />";
+    echo "Session [prevPage]: " . $_SESSION["prevPage"] . "<br />";
 }
 
 function performLogin($username, $password, $conn)
@@ -32,14 +34,16 @@ function performLogin($username, $password, $conn)
             $_SESSION["authLv"] = $row["auth_level"];
             $_SESSION['activity'] = time();
             if (isset($_SESSION["prevPage"]) && $_SESSION["prevPage"] != "") {
-                $_SESSION["prevPage"] = "https://umculobby.com/video";
-                echo "@" . $_SESSION["prevPage"];
+                $_SESSION["prevPage"] = "/video";
+                echo "<div id='prevPage'>Set: " . $_SESSION["prevPage"] . "</div>";
                 $_SESSION["prevPage"] = "";
+            } else {
+                echo "<div id='prevPage'>Not Set: " . $_SESSION["prevPage"] . "</div>";
             }
             $conn->close();
             return true;
-        } else echo "!Incorrect Password";
-    } else echo "!Invalid username";
+        } else echo "<div id='loginError'>Incorrect Password</div>";
+    } else echo "<div id='loginError'>Invalid Username</div>";
     $conn->close();
     return false;
 }

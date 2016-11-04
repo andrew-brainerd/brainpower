@@ -2,31 +2,28 @@
  * Created by abrainerd on 4/1/2016.
  */
 
-var cp = location.href.toString();
 $.ajax({
     type: "GET",
     url: "/video/util/auth.php",
-    data: "cp=" + cp,
-    success: function (message) {
-        if (message.indexOf("authorized") >= 0) {
-            if (cp.indexOf("?") > 0) {
-                cp = cp.substring(0, cp.indexOf("?"));
-                location.href = cp;
-            }
-            else $("body").fadeIn();
-        }
-        else {
+    data: "func=getAuth",
+    success: function (response) {
+        var isAuthorized = $(response).find("#authorization").text() == "authorized";
+        if (isAuthorized) {
+            $("body").fadeIn();
+        } else {
             $("body").fadeOut();
-            location.href = "/video/";
+            location.href = "/video/login.html";
         }
     }
 });
 
-$("header #title").click(function () {
+/* Navigation, should probably move outta this file */
+var header = $("header");
+header.find("#title").click(function () {
     $("body").fadeOut();
     location.href = "/video/";
 });
-$("header #logout").click(function () {
+header.find("#logout").click(function () {
     $.ajax({
         type: "POST",
         url: "/video/util/logout.php",
@@ -38,14 +35,14 @@ $("header #logout").click(function () {
         }
     });
 });
-$("header #upload").click(function () {
+header.find("#upload").click(function () {
     $("body").fadeOut();
     location.href = "/video/uploadVideo.php";
 });
-$("header #manage").click(function () {
+header.find("#manage").click(function () {
     console.log("This will eventually make video settings editable");
 });
-$("header #new").click(function () {
+header.find("#new").click(function () {
     $("body").fadeOut();
     location.href = "/video/util/newUser.php";
 });
