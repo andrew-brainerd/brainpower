@@ -21,7 +21,7 @@ fputcsv($output, array("First Name", "Last Name", "Reason for Visit", "Time In",
 include "dbconnect.php";
 
 $sql = "SELECT fname, lname, reason, time_in, time_help, time_out, visit_date, location, team_id, note_text ";
-$sql .= "FROM SimpleVisitorsTest ";
+$sql .= "FROM SimpleVisitors ";
 $sql .= "WHERE visit_date>='$startDate' AND visit_date<='$endDate' ";
 if ($branch != "" && $branch != null && $branch != "-1") $sql .= " AND location='$branch' ";
 $sql .= "ORDER BY visit_date ASC, time_in ASC";

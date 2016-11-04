@@ -11,7 +11,7 @@
         </fileTransfer>
       </webServer>
       <webServer id="da0d6f46-7456-4875-8553-8b92b2bcb406" name="CentOS" url="http://10.0.0.79">
-        <fileTransfer host="10.0.0.79" port="22" rootFolder="/var/www/lobby.umcu.org/" accessType="SFTP">
+        <fileTransfer host="10.0.0.79" port="22" rootFolder="/var/www/html" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>

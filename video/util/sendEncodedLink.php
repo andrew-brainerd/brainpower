@@ -48,7 +48,7 @@ function encodeUserInfo($acct, $un, $pw)
 {
     echo "<h4>$acct</h4>";
     $loginInfo = json_encode(array("un" => "$un", "pw" => "$pw"));
-    $url = "https://umculobby.com/video/util/auth.php?key=" . base64url_encode($loginInfo);
+    $url = "http://lobby.umcu.org/video/util/auth.php?key=" . base64url_encode($loginInfo);
     $msg = "<a href='" . $url . "' target='_blank' class='libraryLink'>UMCU Video Library</a>";
     echo $msg . "<br><br>";
 }

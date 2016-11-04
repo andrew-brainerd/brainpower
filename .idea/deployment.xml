@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="UMCU Lobby" uploadOnCheckin="8357edae-e7ef-4303-a171-e6845ceff24d" exclude=".svn;.cvs;.idea;.DS_Store;.git;.hg;">
+  <component name="PublishConfigData" autoUpload="Always" serverName="CentOS" uploadOnCheckin="8357edae-e7ef-4303-a171-e6845ceff24d" exclude=".svn;.cvs;.idea;.DS_Store;.git;.hg;">
     <serverData>
       <paths name="CentOS">
         <serverdata>

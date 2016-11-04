@@ -15,7 +15,7 @@ if ($branch === "" || $branch === null) $branch = $_POST['branch'];
 if ($today == "") $today = date("Y/m/d");
 
 $slt = "SELECT * ";
-$frm = "FROM SimpleVisitorsTest sv LEFT JOIN TeamMembers tm on sv.team_id = tm.tid ";
+$frm = "FROM SimpleVisitors sv LEFT JOIN TeamMembers tm on sv.team_id = tm.tid ";
 $whr = "WHERE location='$branch' AND visit_date = '$today' AND vid=$vid ";
 $sql = $slt . $frm . $whr;
 
