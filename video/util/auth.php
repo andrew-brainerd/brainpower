@@ -10,7 +10,7 @@ header("access-control-allow-origin: *");
 echo "<div id='authResponse'>";
 include "dbconnect.php";
 
-// Only happens if session is gucci
+if ($_GET["key"] != null) autoLogin($_GET["key"], $conn);
 $function = strip_tags($_GET["func"]);
 if ($function == "getAuth") {
     $lastActivity = $_SESSION["activity"];
@@ -18,45 +18,20 @@ if ($function == "getAuth") {
     if ($sessionExpired) {
         session_unset();
         session_destroy();
-        echo "<div id='authorization'>session dead, failed</div>";
+        echo "session dead, failed";
         exit;
     }
     $currentUser = $_SESSION["username"];
-    if (isset($currentUser)) echo "<div id='authorization' data-user='$currentUser'>authorized</div>";
+    if (isset($currentUser)) echo "authorized";
     else echo "<div id='authorization'>failed</div>";
 } else if ($function == "setAuth") {
-    $loginInfo = $_GET["login"];
-    if ($loginInfo == null) {
-        $username = strip_tags($_GET["username"]);
-        $password = strip_tags($_GET["password"]);
-        if ($username . $password != "") {
-            //echo "Username: " . $username . "<br />";
-            //echo "Password: " . $password . "<br />";
-            if (performLogin($username, $password, $conn)) echo "<div id='authorization' data-user='$username'>authorized</div>";
-            else echo "<div id='authorization'>failed</div>";
-        } else echo "Please provide a username and password<br />";
-    } else echo "Login Info: " . $loginInfo . "<br />";
-    $redirectPage = $_GET["redirectPage"];
-    if ($redirectPage != null) echo "Redirect Page: " . $redirectPage . "<br />";
+    $username = strip_tags($_GET["username"]);
+    $password = strip_tags($_GET["password"]);
+    if (performLogin($username, $password, $conn)) echo "authorized";
+    else echo "failed";
 }
 echo "<div>"; // end of authResponse
-/*if (strpos($url, "?") > 0) {
-    $params = substr($url, strpos($url, "?") + 1, strlen($url));
-    $decoded = base64url_decode($params);
-    $un = substr($decoded, strpos($decoded, "=") + 1, strpos($decoded, "&") - 2);
-    $decoded2 = substr($decoded, strpos($decoded, "&"));
-    $pw = substr($decoded2, strpos($decoded2, "=") + 1);
-    if (strpos($pw, "&") > 0) {
-        $vi = substr($pw, strpos($pw, "=") + 1);
-        $pw = substr($pw, 0, strpos($pw, "&"));
-    } else {
-        $pw = substr($decoded2, strpos($decoded2, "=") + 1);
-        $vi = "";
-    }
-    echo "Username: " . $un . "<br>";
-    echo "Password: " . $pw . "<br>";
-    echo "Video ID: " . $vi . "<br><br>";
-}*/
+
 function performLogin($username, $password, $conn)
 {
     $slt = "SELECT * FROM Users where username='$username'";
@@ -66,18 +41,20 @@ function performLogin($username, $password, $conn)
         if (password_verify($password, $row["password"])) {
             $_SESSION["username"] = $row["username"];
             $_SESSION["authLv"] = $row["auth_level"];
-            $_SESSION['activity'] = time();
-            if (isset($_SESSION["prevPage"]) && $_SESSION["prevPage"] != "") {
-                $_SESSION["prevPage"] = "/video";
-                echo "<div id='prevPage'>Set: " . $_SESSION["prevPage"] . "</div>";
-                $_SESSION["prevPage"] = "";
-            }
+            $_SESSION["activity"] = time();
             $conn->close();
             return true;
         } else echo "<div id='loginError'>Incorrect Password</div>";
     } else echo "<div id='loginError'>Invalid Username</div>";
     $conn->close();
     return false;
+}
+
+function autoLogin($userKey, $conn)
+{
+    echo "Got a Key! - $userKey<br>";
+    $decoded = json_decode(base64url_decode($userKey), true);
+    performLogin($decoded["un"], $decoded["pw"], $conn);
 }
 function base64url_decode($data)
 {

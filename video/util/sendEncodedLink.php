@@ -16,6 +16,7 @@
             text-decoration: none;
             transition: background 0.5s, color 0.3s;
             width: 200px;
+            user-select: none;
         }
 
         .libraryLink:hover {
@@ -40,37 +41,31 @@
 
 include "globals.php";
 
-//echo "<div class='sentHTML'>" . sendEncodedLink(encodeVideoInfo(3), "Video Library Auto Login") . "</div>";
 encodeUserInfo("All Team", "umcu", "aMAIZEing");
 encodeUserInfo("IT", "it", "b33pb00p");
 
-function encodeVideoInfo($vid)
-{
-    $login = encodeUserInfo("All Team", "umcu", "aMAIZEing");
-    $data = $login . "&v=" . $vid;
-    $encodedData = base64url_encode($data);
-    $base = "https://umculobby.com/video/?";
-    $url = $base . $encodedData;
-    return $msg = "<a href='" . $url . "' target='_blank'>UMCU<br>Video Library</a>";
-}
 function encodeUserInfo($acct, $un, $pw)
 {
-    echo "<h4>" . $acct . "</h4>";
-    $plainU = "u=" . $un;
-    $plainP = "&p=" . $pw;
-    $base = "https://umculobby.com/video/?";
-    $plainInfo = $plainU . $plainP;
-    $encodedinfo = base64url_encode($plainInfo);
-    $url = $base . $encodedinfo;
+    echo "<h4>$acct</h4>";
+    $loginInfo = json_encode(array("un" => "$un", "pw" => "$pw"));
+    $url = "https://umculobby.com/video/util/auth.php?key=" . base64url_encode($loginInfo);
     $msg = "<a href='" . $url . "' target='_blank' class='libraryLink'>UMCU Video Library</a>";
     echo $msg . "<br><br>";
-    return $plainInfo;
 }
 function base64url_encode($data)
 {
     return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
 }
 
+/*function encodeVideoInfo($vid)
+{
+    $login = encodeUserInfo("All Team", "umcu", "aMAIZEing");
+    $data = $login . "&v=" . $vid;
+    $encodedData = base64url_encode($data);
+    $base = "https://umculobby.com/video/util/auth.php?key=";
+    $url = $base . $encodedData;
+    return $msg = "<a href='" . $url . "' target='_blank'>UMCU<br>Video Library</a>";
+}*/
 ?>
 </body>
 </html>
@@ -78,6 +73,8 @@ function base64url_encode($data)
 <!--
 Unused, possibly useful PHP
 //$plain = $base . $plainU . $plainP;
-//$style = "background: #00274c;border-radius: 5px;color: #ffcb05;display: block;font-family: 'Caveat Brush', cursive;font-size: 24px;height: 100px;line-height: 100px;text-align: center;text-decoration: none;transition: background 0.5s, color 0.3s;width: 200px;";
+//$style = "background: #00274c;border-radius: 5px;color: #ffcb05;display: block;"
+//$style .= "font-family: 'Caveat Brush', cursive;font-size: 24px;height: 100px;line-height: 100px;"
+//$style .= "text-align: center;text-decoration: none;transition: background 0.5s, color 0.3s;width: 200px;";
 //$msg = "<a href='" . $url . "' target='_blank' id='libraryLink' style='" . $style . "'>UMCU Video Library</a>";
 -->

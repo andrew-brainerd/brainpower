@@ -20,7 +20,6 @@ echo "Username: " . $username . "<br />";
 echo "Password: " . $password . "<br />";
 if (performLogin($username, $password, $conn)) {
     echo "Login Sucessful<br />";
-    echo "Session [prevPage]: " . $_SESSION["prevPage"] . "<br />";
 }
 
 function performLogin($username, $password, $conn)
@@ -33,13 +32,6 @@ function performLogin($username, $password, $conn)
             $_SESSION["username"] = $row["username"];
             $_SESSION["authLv"] = $row["auth_level"];
             $_SESSION['activity'] = time();
-            if (isset($_SESSION["prevPage"]) && $_SESSION["prevPage"] != "") {
-                $_SESSION["prevPage"] = "/video";
-                echo "<div id='prevPage'>Set: " . $_SESSION["prevPage"] . "</div>";
-                $_SESSION["prevPage"] = "";
-            } else {
-                echo "<div id='prevPage'>Not Set: " . $_SESSION["prevPage"] . "</div>";
-            }
             $conn->close();
             return true;
         } else echo "<div id='loginError'>Incorrect Password</div>";

@@ -2,13 +2,9 @@
  * Created by abrainerd on 4/1/2016.
  */
 
-$("#username").focus();
-var url = location.href.toString();
-var message = $("#message");
+var username = $("#username");
 var loginButton = $("#loginButton");
-if (url.indexOf("notmuch") > 0)
-    url = url.substring(0, 32);
-else url = url.substring(0, 21);
+var loginMessage = $("#message");
 
 loginButton.click(function () {
     var username = $("#username").val();
@@ -21,14 +17,12 @@ loginButton.click(function () {
         "&password=" + password,
         success: function (response) {
             var isAuthorized = $(response).find("#authorization").text() == "authorized";
-            if (isAuthorized) {
-                console.log("User is now authorized :D");
-                location.href = "/video";
-            }
+            if (isAuthorized) location.href = "/video";
+            else loginMessage.text($(response).find("#"));
         }
     });
 });
-message.on("change", function () {
+loginMessage.on("change", function () {
     message.fadeOut(function () {
         message.css("color", "red");
         message.fadeIn(function () {
@@ -43,4 +37,4 @@ $("body").bind('keypress', function (e) {
         loginButton.click();
     }
 }).fadeIn();
-
+username.focus();

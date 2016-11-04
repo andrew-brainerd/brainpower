@@ -315,8 +315,8 @@ function checkEnvironment() {
 }
 function checkRedirect() {
     branch = $("#branch");
-    if (branch.val() == "") location.href = location.hostname + "?d=instant";
-    else if (branch.val() == "Huron") location.href = location.hostname + "/parking/?branch=Huron";
+    if (branch.val() == "") location.href = "?d=instant";
+    else if (branch.val() == "Huron") location.href = "/parking/?branch=Huron";
 }
 function capitalize(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
