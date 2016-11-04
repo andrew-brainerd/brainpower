@@ -13,23 +13,12 @@ session_start(); ?>
         <?php
         $today = date("Y/m/d");
         $al = 0;
-        if (isset($_SESSION)) {
-            $al = $_SESSION['authLv'];
-        }
-
-        if ($al > 10) {
-            $sql = "SELECT * FROM Videos where required_auth <= '$al' ORDER BY upload_time DESC";
-        }
-        else {
-            $sql = "SELECT * FROM Videos where required_auth <= '$al' and (release_date <= '$today' OR release_date IS NULL) ORDER BY upload_time DESC";
-        }
+        if (isset($_SESSION))  $al = $_SESSION['authLv'];
+        if ($al > 10) $sql = "SELECT * FROM Videos where required_auth <= '$al' ORDER BY upload_time DESC";
+        else $sql = "SELECT * FROM Videos where required_auth <= '$al' and (release_date <= '$today' OR release_date IS NULL) ORDER BY upload_time DESC";
         $result = $conn->query($sql);
         $numVid = $result->num_rows;
-
-        if ($numVid > 8 && $al > 10) {
-            $split = 4;
-            echo ".video { width: calc(100% / " . $split . " ); font-size: 0.9em; }";
-        }
+        if ($numVid > 8 && $al > 10) echo ".video { width: calc(100%/4); font-size: 0.9em; }";
         ?>
     </style>
 </head>

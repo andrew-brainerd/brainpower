@@ -7,7 +7,7 @@ $.ajax({
     url: "/video/util/auth.php",
     data: "func=getAuth",
     success: function (response) {
-        var isAuthorized = $(response).find("#authorization").text() == "authorized";
+        var isAuthorized = response == "authorized";
         if (isAuthorized) {
             $("body").fadeIn();
         } else {

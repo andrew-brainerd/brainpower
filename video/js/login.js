@@ -16,18 +16,17 @@ loginButton.click(function () {
         "&username=" + username +
         "&password=" + password,
         success: function (response) {
-            var isAuthorized = $(response).find("#authorization").text() == "authorized";
+            var isAuthorized = response == "authorized";
             if (isAuthorized) location.href = "/video";
-            else loginMessage.text($(response).find("#"));
+            else loginMessage.text(response);
         }
     });
 });
 loginMessage.on("change", function () {
-    message.fadeOut(function () {
-        message.css("color", "red");
-        message.fadeIn(function () {
+    $(this).fadeOut(function () {
+        $(this).css("color", "red").fadeIn(function () {
             setTimeout(function () {
-                message.fadeOut();
+                $(this).fadeOut();
             }, 2000);
         });
     });

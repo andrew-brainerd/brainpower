@@ -7,8 +7,8 @@
  */
 session_start();
 header("access-control-allow-origin: *");
-echo "<div id='authResponse'>";
 include "dbconnect.php";
+$errorText = "Failed";
 
 if ($_GET["key"] != null) autoLogin($_GET["key"], $conn);
 $function = strip_tags($_GET["func"]);
@@ -23,17 +23,16 @@ if ($function == "getAuth") {
     }
     $currentUser = $_SESSION["username"];
     if (isset($currentUser)) echo "authorized";
-    else echo "<div id='authorization'>failed</div>";
 } else if ($function == "setAuth") {
     $username = strip_tags($_GET["username"]);
     $password = strip_tags($_GET["password"]);
     if (performLogin($username, $password, $conn)) echo "authorized";
-    else echo "failed";
+    else echo $errorText;
 }
-echo "<div>"; // end of authResponse
 
 function performLogin($username, $password, $conn)
 {
+    global $errorText;
     $slt = "SELECT * FROM Users where username='$username'";
     $result = $conn->query($slt);
     if ($result->num_rows > 0) {
@@ -44,8 +43,8 @@ function performLogin($username, $password, $conn)
             $_SESSION["activity"] = time();
             $conn->close();
             return true;
-        } else echo "<div id='loginError'>Incorrect Password</div>";
-    } else echo "<div id='loginError'>Invalid Username</div>";
+        } else $errorText = "Incorrect Password";
+    } else $errorText = "Invalid Username";
     $conn->close();
     return false;
 }
