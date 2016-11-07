@@ -27,7 +27,11 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Oswald:700">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Caveat+Brush">
     <link rel="stylesheet" type="text/css" href="css/landing.css">
-    <style> body {
+    <style>
+        html {
+            overflow-y: scroll;
+        }
+        body {
             display: none;
         }
 
@@ -86,8 +90,8 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
             <img src="img/video.svg"/>
         </div>
     </div>
--->
-<div id="continue">Continue</div>
+
+<div id="continue">Continue</div>-->
 <table id="distances"></table>
 <p id="credit">Icons made by Freepik from www.flaticon.com</p>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>

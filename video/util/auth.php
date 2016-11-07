@@ -10,7 +10,7 @@ header("access-control-allow-origin: *");
 include "dbconnect.php";
 $errorText = "Failed";
 
-if ($_GET["key"] != null) autoLogin($_GET["key"], $conn);
+if (isset($_GET["key"])) autoLogin($_GET["key"], $conn);
 $function = strip_tags($_GET["func"]);
 if ($function == "getAuth") {
     $lastActivity = $_SESSION["activity"];

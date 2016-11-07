@@ -1,5 +1,18 @@
-<?php include "util/dbconnect.php";
-session_start(); ?>
+<?php
+include "util/dbconnect.php";
+/*$host_name = "db622747619.db.1and1.com";
+$database = "db622747619";
+$user_name = "dbo622747619";
+$password = "Umcu@54!#";
+$conn = new mysqli($host_name, $user_name, $password, $database);
+if ($conn->connect_error) {
+    $success = "Failed to connect to database: " . mysqli_connect_error();
+} else {
+    $success = "Connected to database[" . $_SERVER['SERVER_ADDR'] . "=>$host_name] :D";
+}
+echo "<h1 style='font-family: sans-serif'>" . $success . "</h1>";*/
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +47,7 @@ session_start(); ?>
         if ($numVid > 0) {
             while ($row = $result->fetch_assoc()) {
                 $title = $row["title"];
-                $path = $row["location"];
+                $path = "https://umculobby.com/video/" . $row["location"];
                 $vid = $row["vid"];
                 $addClass = "";
                 if ($al > 10) {
@@ -45,7 +58,7 @@ session_start(); ?>
                 }
                 $videoElement = "<div class='video" . $addClass . "' data-vid='" . $vid . "' data-path='" . $path . "'";
                 $addClass = "";
-                if (!file_exists($path)) $videoElement .= " style='background: #f6546a;'";
+                //if (!file_exists($path)) $videoElement .= " style='background: #f6546a;'";
                 $videoElement .= ">" . $title;
                 $videoElement .= "</div>";
                 echo $videoElement . "\n\t    ";
