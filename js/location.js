@@ -105,6 +105,7 @@ function calcDistance(p) {
     else redirect();
 }
 function redirect() {
+    console.log("hit this redirect");
     if (branch == "Huron") location.href = location.hostname + "/parking?branch=Huron";
     else location.href = "/lobby?branch=" + branch;
 }
