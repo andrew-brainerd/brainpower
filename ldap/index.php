@@ -20,7 +20,7 @@
         .table {
             display: table;
             margin: 50px auto;
-            min-width: 50%;
+            min-width: 60%;
         }
         .row {
             display: table-row;

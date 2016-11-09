@@ -14,10 +14,8 @@
 
     var connectArgs = {
         // the proxy url to the BOSH server
-        httpBindingURL: '/httpbinding',
-        // onConnected is the success callback method
+        httpBindingURL: 'http://cups1',
         successCallback: onConnected,
-        // onClientError is the error callback method
         errorCallback: onClientError
     };
     client.connect(username, password, connectArgs);

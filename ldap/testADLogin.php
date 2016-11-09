@@ -11,12 +11,13 @@ if ($ldapconn) {
     $ldapbind = @ldap_bind($ldapconn, "CN=Andrew Brainerd,CN=Users," . $dn, "b0ggl3sth3m!nd");
     if ($ldapbind) {
         //echo "<h5>User Verified via Active Directory</h5>";
-        $dn = "OU=All Staff,DC=thedomain,DC=umcu,DC=org";
+        $dn = "OU=Information Technology,OU=All Staff,DC=thedomain,DC=umcu,DC=org";
         $enabled = "(!(userAccountControl:1.2.840.113556.1.4.803:=2))";
-        //$filter = "(&(objectClass=user)(lockoutTime>=1)$enabled)";
-        $filter = "(&(objectClass=user)(lockoutTime>=1))";
+        $filter = "(&(objectClass=user)(lockoutTime>=1)$enabled)";
+        //$filter = "(&(objectClass=user)(lockoutTime>=1))";
         echo "<h3>Filter:$filter</h3>";
         //$filter = "(&(objectCategory=Person)(objectClass=User)(lockoutTime>=1))";
+        $filter = "(&(objectClass=user))";
 
         $attributes = array(
             "distinguishedName",
@@ -27,9 +28,10 @@ if ($ldapconn) {
             "samaccountname",
             "mail",
             "lastlogontimestamp",
-            "lockouttime",
-            "badpasswordtime",
-            "badpwdcount"
+            //"lockouttime",
+            //"badpasswordtime",
+            //"badpwdcount",
+            "jpegphoto"
             //"nsaccountlock",
             //"mobile"
         );
@@ -98,22 +100,24 @@ function myPrint($results, $attributes, $username)
     echo "<div class='hcell'>Organizational Unit</div>";
     echo "<div class='hcell'>Name</div>";
     foreach ($attributes as $name) {
-        if ($name != "distinguishedName") echo "<div class='hcell'>$name</div>";
+        if ($name != "distinguishedName" && $name != "jpegphoto") echo "<div class='hcell'>$name</div>";
     }
     echo "</div>";
     foreach ($results as $key => $value) {
         if (is_array($value)) { // && getGroup($value["dn"]) == "Information Technology") {
             $accountName = $value["samaccountname"][0];
             $selected = strcasecmp($accountName, $username) == 0 ? "selected" : "";
-            echo "<div class='row " . $selected . "'>";
+            $image = base64_encode($value["jpegphoto"][0]);
+            //echo "<img src='data:image/jpeg;base64,$image'/>";
+            echo "<div class='row " . $selected . "' data-img-src='data:image/jpeg;base64,$image'>";
             foreach ($attributes as $name) {
-                if ($name != "distinguishedName") {
-                    if ($name == "lockouttime" || $name == "badpasswordtime" || $name == "lastlogontimestamp")
-                        echo "<div class='cell' data-name='$name'>" . formatTime($value[$name][0]) . "</div>";
-                    else echo "<div class='cell' data-name='$name'>" . $value[$name][0] . "</div>";
-                } else {
+                if ($name == "distinguishedName") {
                     echo "<div class='cell'>" . getGroup($value["dn"]) . "</div>";
                     echo "<div class='cell'>" . getName($value["dn"]) . "</div>";
+                } else if ($name != "jpegphoto") {
+                    if ($name == "lockouttime" || $name == "badpasswordtime" || $name == "lastlogontimestamp") {
+                        echo "<div class='cell' data-name='$name'>" . formatTime($value[$name][0]) . "</div>";
+                    } else echo "<div class='cell' data-name='$name'>" . $value[$name][0] . "</div>";
                 }
             }
 
