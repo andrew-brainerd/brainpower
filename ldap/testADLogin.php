@@ -12,7 +12,12 @@ if ($ldapconn) {
     if ($ldapbind) {
         //echo "<h5>User Verified via Active Directory</h5>";
         $dn = "OU=All Staff,DC=thedomain,DC=umcu,DC=org";
-        $filter = "(&(objectClass=user))";
+        $enabled = "(!(userAccountControl:1.2.840.113556.1.4.803:=2))";
+        //$filter = "(&(objectClass=user)(lockoutTime>=1)$enabled)";
+        $filter = "(&(objectClass=user)(lockoutTime>=1))";
+        echo "<h3>Filter:$filter</h3>";
+        //$filter = "(&(objectCategory=Person)(objectClass=User)(lockoutTime>=1))";
+
         $attributes = array(
             "distinguishedName",
             //"organizationalUnit",
@@ -21,29 +26,32 @@ if ($ldapconn) {
             //"givenname",
             "samaccountname",
             "mail",
-            "lastLogonTimestamp"
+            "lastlogontimestamp",
+            "lockouttime",
+            "badpasswordtime",
+            "badpwdcount"
+            //"nsaccountlock",
+            //"mobile"
         );
-        //echo "<br />Filter: $filter";
         $ldapresults = ldap_search($ldapconn, $dn, $filter, $attributes);
-        if (!$ldapresults) echo "<br />Super Search Fail"; //else echo "<br />Performed a search";
+        if (!$ldapresults) die("Search Failed"); //else echo "<br />Performed a search";
         if (1 > ldap_count_entries($ldapconn, $ldapresults)) echo "<br />No users with that information found";
         else {
             $results = ldap_get_entries($ldapconn, $ldapresults);
             ldap_free_result($ldapresults);
             //if ($results["count"] > 1) echo "<br />" . $results["count"] . " records found";
             if (false === $results) echo "no result set found";
-            //myPrint($results, $attributes, $username);
-            //prettyPrint($results);
-            tryLogin($results, $dn, $username, $password);
+            if ($password == null) myPrint($results, $attributes, $username);
+            else tryLogin($results, $dn, $username, $password);
         }
 
-        $dn = "DC=Users,DC=thedomain,DC=umcu,DC=org";
+        /*$dn = "DC=Users,DC=thedomain,DC=umcu,DC=org";
         $attributes = array(
             "distinguishedName",
             "organizationalUnit",
             "objectClass"
         );
-        /*$ldapresults = ldap_search($ldapconn, $dn, $filter, $attributes);
+        $ldapresults = ldap_search($ldapconn, $dn, $filter, $attributes);
         if (!$ldapresults) echo "<br />Super Search Fail"; //else echo "<br />Performed a search";
         if (1 > ldap_count_entries($ldapconn, $ldapresults)) echo "<br />No users with that information found";
         else {
@@ -69,7 +77,7 @@ function tryLogin($results, $dn, $username, $password)
             //echo "</div>";
             if (strcasecmp($accountName, $username) == 0) {
                 $loginName = $value["dn"];
-                echo "<h3>Found User: $loginName</h3>";
+                echo "<h3>Found User: " . getName($loginName) . "</h3>";
                 break;
             }
         }
@@ -89,8 +97,8 @@ function myPrint($results, $attributes, $username)
     echo "<div class='row'>";
     echo "<div class='hcell'>Organizational Unit</div>";
     echo "<div class='hcell'>Name</div>";
-    foreach ($attributes as $a) {
-        if ($a != "distinguishedName") echo "<div class='hcell'>$a</div>";
+    foreach ($attributes as $name) {
+        if ($name != "distinguishedName") echo "<div class='hcell'>$name</div>";
     }
     echo "</div>";
     foreach ($results as $key => $value) {
@@ -98,19 +106,24 @@ function myPrint($results, $attributes, $username)
             $accountName = $value["samaccountname"][0];
             $selected = strcasecmp($accountName, $username) == 0 ? "selected" : "";
             echo "<div class='row " . $selected . "'>";
-            echo "<div class='cell'>" . getGroup($value["dn"]) . "</div>";
-            echo "<div class='cell'>" . getName($value["dn"]) . "</div>";
-            echo "<div class='cell'>" . $value["samaccountname"][0] . "</div>";
-            echo "<div class='cell'>" . $value["mail"][0] . "</div>";
-            $lastLogonTime = formatTime($value["lastlogontimestamp"][0]);
-            echo "<div class='cell'>" . $lastLogonTime . "</div>";
-            echo "</div>";
+            foreach ($attributes as $name) {
+                if ($name != "distinguishedName") {
+                    if ($name == "lockouttime" || $name == "badpasswordtime" || $name == "lastlogontimestamp")
+                        echo "<div class='cell' data-name='$name'>" . formatTime($value[$name][0]) . "</div>";
+                    else echo "<div class='cell' data-name='$name'>" . $value[$name][0] . "</div>";
+                } else {
+                    echo "<div class='cell'>" . getGroup($value["dn"]) . "</div>";
+                    echo "<div class='cell'>" . getName($value["dn"]) . "</div>";
+                }
+            }
+
+            echo "</div>"; // end row
         }
     }
     echo "</div>";
 }
 
-function prettyPrint($results)
+function prettyPrint($results, $a, $b)
 {
     print "<pre>";
     print_r($results);
@@ -151,6 +164,7 @@ function formatTime($time)
 {
     return date("m-d-Y h:i", $time / 10000000 - 11644473600);
 }
+
 function out($msg)
 {
     echo "<p>" . $msg . "</p>";

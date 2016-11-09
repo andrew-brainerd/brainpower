@@ -7,7 +7,7 @@
             background-color: #302B27;
             color: #576CA8;
             font-family: sans-serif;
-            font-size: 3vw;
+            font-size: 2.5vw;
         }
         h1, h3, h5 { text-align: center; }
         h5 { font-size: 12px; }
@@ -64,7 +64,7 @@
     <label for="username">Username</label>
     <input type="text" id="username" value="abrainerd"/><br/>
     <label for="password">Password</label>
-    <input type="password" id="password" value="b0ggl3sth3m!nd7"/><br/>
+    <input type="password" id="password"/><br/> <!-- value="b0ggl3sth3m!nd7" -->
     <input type="button" id="submit" value="Submit" onclick="runTest()"/>
 </form>
 <div id="anonmessage"></div>
