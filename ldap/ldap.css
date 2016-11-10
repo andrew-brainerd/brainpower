@@ -1,0 +1,84 @@
+body {
+    background-color: #302B27;
+    color: #576CA8;
+    font-family: sans-serif;
+    font-size: 2.5vw;
+}
+
+h1, h3, h5 {
+    text-align: center;
+}
+
+h5 {
+    font-size: 12px;
+}
+
+form {
+    border: 3px dashed grey;
+    margin: 70px auto;
+    padding: 30px;
+    width: 500px;
+}
+
+label {
+    font-size: 20px;
+}
+
+input[type=button] {
+    font-size: 20px;
+}
+
+#message {
+    font-size: 16px;
+}
+
+.table {
+    display: table;
+    margin: 50px auto;
+    min-width: 60%;
+}
+
+.row {
+    display: table-row;
+}
+
+.cell {
+    display: table-cell;
+    padding: 10px;
+}
+
+.hcell {
+    display: table-cell;
+    color: #576CA8;
+    font-weight: bold;
+    border-bottom: 2px solid #576CA8;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.cell {
+    transition: background 0.3s, color 0.3s;
+}
+
+.cell label {
+    margin-right: 10px;
+}
+
+.cell input, .cell select {
+    border-radius: 5px;
+    width: 200px;
+}
+
+.row.selected .cell {
+    color: white;
+}
+
+.row:hover {
+    cursor: pointer;
+}
+
+.floatingHeader {
+    position: fixed;
+    top: 0;
+    visibility: hidden;
+}

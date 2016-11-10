@@ -11,13 +11,13 @@ if ($ldapconn) {
     $ldapbind = @ldap_bind($ldapconn, "CN=Andrew Brainerd,CN=Users," . $dn, "b0ggl3sth3m!nd");
     if ($ldapbind) {
         //echo "<h5>User Verified via Active Directory</h5>";
-        $dn = "OU=Information Technology,OU=All Staff,DC=thedomain,DC=umcu,DC=org";
+        $dn = "OU=Administrators,DC=thedomain,DC=umcu,DC=org"; // CN=Users,
         $enabled = "(!(userAccountControl:1.2.840.113556.1.4.803:=2))";
-        $filter = "(&(objectClass=user)(lockoutTime>=1)$enabled)";
+        $filter = "(&(objectClass=user)$enabled)";
         //$filter = "(&(objectClass=user)(lockoutTime>=1))";
+        //$filter = "(&(objectCategory=person)(objectClass=User)(lockoutTime>=1))";
+        $filter = "(&(objectClass=user)$enabled(samaccountname=*admin*)(lockoutTime>=1))"; // (objectCategory=person)
         echo "<h3>Filter:$filter</h3>";
-        //$filter = "(&(objectCategory=Person)(objectClass=User)(lockoutTime>=1))";
-        $filter = "(&(objectClass=user))";
 
         $attributes = array(
             "distinguishedName",
@@ -28,10 +28,10 @@ if ($ldapconn) {
             "samaccountname",
             "mail",
             "lastlogontimestamp",
-            //"lockouttime",
+            "lockouttime",
             //"badpasswordtime",
             //"badpwdcount",
-            "jpegphoto"
+            //"jpegphoto"
             //"nsaccountlock",
             //"mobile"
         );
