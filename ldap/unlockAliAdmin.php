@@ -8,9 +8,9 @@
 
 global $ldapconn;
 $ldapconn = ldap_connect("ldap://umcudc-huron.thedomain.umcu.org");
+$dn = "DC=thedomain,DC=umcu,DC=org";
 
 if ($ldapconn) {
-    $dn = "DC=thedomain,DC=umcu,DC=org";
     $ldapbind = @ldap_bind($ldapconn, "CN=Andrew Brainerd,CN=Users," . $dn, "b0ggl3sth3m!nd");
     if ($ldapbind) {
         $dn = "OU=Administrators,DC=thedomain,DC=umcu,DC=org"; // CN=Users,
@@ -35,6 +35,12 @@ if ($ldapconn) {
         }
     } else echo "<h3>User Login Failed [" . ldap_error($ldapconn) . "]</h3>";
 } else echo "Failed to connect to Active Directory";
+$file = "/var/www/html/logs/unlocks";
+$content = file_get_contents($file);
+$content .= "Unlocked $dn\n";
+file_put_contents($file, $content);
+//mail("9897210902@vtext.com", "", "Unlocked $dn", "From: Perry <lobby.ucmu.org>\r\n");
+
 
 function myPrint($results, $attributes) {
     global $ldapconn;
@@ -70,11 +76,13 @@ function myPrint($results, $attributes) {
     }
     echo "</div>";
 }
+
 function prettyPrint($results, $a) {
     print "<pre>";
     print_r($results);
     print "</pre>";
 }
+
 function getName($dn) {
     $groups = "";
     $items = explode(",", $dn);
@@ -88,6 +96,7 @@ function getName($dn) {
     }
     return $groups;
 }
+
 function getGroup($dn) {
     $groups = "";
     $items = explode(",", $dn);
@@ -100,9 +109,11 @@ function getGroup($dn) {
     }
     return $groups;
 }
+
 function formatTime($time) {
     return date("m-d-Y h:i", $time / 10000000 - 11644473600);
 }
+
 function out($msg) {
     echo "<p>" . $msg . "</p>";
 }
