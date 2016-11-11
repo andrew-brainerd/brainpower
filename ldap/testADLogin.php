@@ -38,7 +38,6 @@ if ($ldapconn) {
             if (false === $results) echo "no result set found";
             if ($password == null) myPrint($results, $attributes, $username); else tryLogin($results, $dn, $username, $password);
         }
-
         /*$dn = "DC=Users,DC=thedomain,DC=umcu,DC=org";
         $attributes = array(
             "distinguishedName",

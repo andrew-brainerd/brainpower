@@ -2,7 +2,7 @@
  * Created by abrainerd on 11/10/2016.
  */
 
-var counter = 1;
+var queryID = 1;
 $(document).tooltip({
     //track: true,
     position: {
@@ -21,30 +21,33 @@ $(document).bind("keypress.key13", function (e) {
     }
 });
 var page = $("body");
+var updateTimer = setInterval(findLocked, 60000); // every 3 minutes = 180000
 page.hide();
 var message = $("#message");
 function findLocked() {
-    console.log("Running findLocked...");
+    console.log("Updating...[" + queryID + "]");
     $.ajax({
         type: "GET",
         url: "getLockedUsers.php",
-        data: "q=" + counter,
+        data: "q=" + queryID,
         success: function (msg) {
-            console.log("done running");
             message.html(msg);
             page.fadeIn();
+            queryID++;
             $(".unlock").click(function () {
                 console.log($(this).attr("data-dn"));
-                counter += counter;
-                var args = "dn=" + $.trim($(this).attr("data-dn")) + "&cntplzwrk=" + counter;
+                var args = "dn=" + $.trim($(this).attr("data-dn")) + "&cntplzwrk=" + queryID;
+                if (queryID > 500) location.reload();
                 $.ajax({
                     type: "POST",
                     url: "unlock.php",
                     data: args,
                     success: function (data, status) {
                         console.log(data);
-                        page.fadeOut();
-                        location.reload();
+                        page.fadeOut(function () {
+                            findLocked();
+                        });
+                        //location.reload();
                     },
                     complete: function () {
                         console.log("URL: lobby.umcu.org/ldap/unlock.php/?" + args);
@@ -83,7 +86,7 @@ function runTest() {
                 }, 1);
             });
             $(".row:not(:first-child)").attr("title", "Some Title");
-            counter++;
+            queryID++;
         },
         error: function (err) {
             console.log("Failed");

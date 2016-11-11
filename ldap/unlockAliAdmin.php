@@ -15,7 +15,7 @@ if ($ldapconn) {
     if ($ldapbind) {
         $dn = "OU=Administrators,DC=thedomain,DC=umcu,DC=org"; // CN=Users,
         $enabled = "(!(userAccountControl:1.2.840.113556.1.4.803:=2))";
-        $filter = "(&(objectClass=user)$enabled(samaccountname=*admin*)(|(lockoutTime>=1)(badpwdcount>=2)))";
+        $filter = "(&(objectClass=user)$enabled(samaccountname=asyed-admin)(lockoutTime>=1))";
         //echo "<h3>Filter:$filter</h3>";
         $attributes = array(
             "distinguishedName",
@@ -61,7 +61,7 @@ function myPrint($results, $attributes) {
             }
             echo "</div>"; // end row
             $entries = array(
-                "lockouttime" => 0
+                "lockoutTime" => 0
             );
             if (ldap_modify($ldapconn, $userDN, $entries)) {
                 echo "<h1>" . getName($userDN) . " is Unlocked :D</h1>";
