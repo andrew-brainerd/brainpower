@@ -20,6 +20,9 @@ $(document).bind("keypress.key13", function (e) {
         $("#submit").click();
     }
 });
+var page = $("body");
+page.hide();
+var message = $("#message");
 function findLocked() {
     console.log("Running findLocked...");
     $.ajax({
@@ -28,7 +31,8 @@ function findLocked() {
         data: "q=" + counter,
         success: function (msg) {
             console.log("done running");
-            $("#message").html(msg);
+            message.html(msg);
+            page.fadeIn();
             $(".unlock").click(function () {
                 console.log($(this).attr("data-dn"));
                 counter += counter;
@@ -39,6 +43,7 @@ function findLocked() {
                     data: args,
                     success: function (data, status) {
                         console.log(data);
+                        page.fadeOut();
                         location.reload();
                     },
                     complete: function () {

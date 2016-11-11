@@ -19,17 +19,11 @@ if ($ldapconn) {
         $filter = "(&(objectClass=user)$enabled(samaccountname=*admin*)(lockoutTime>=1))"; // (objectCategory=person)
         echo "<h3>Filter:$filter</h3>";
 
-        $attributes = array(
-            "distinguishedName",
-            //"organizationalUnit",
+        $attributes = array("distinguishedName", //"organizationalUnit",
             //"objectClass",
             //"uid",
             //"givenname",
-            "samaccountname",
-            "mail",
-            "lastlogontimestamp",
-            "lockouttime",
-            //"badpasswordtime",
+            "samaccountname", "mail", "lastlogontimestamp", "lockouttime", //"badpasswordtime",
             //"badpwdcount",
             //"jpegphoto"
             //"nsaccountlock",
@@ -37,14 +31,12 @@ if ($ldapconn) {
         );
         $ldapresults = ldap_search($ldapconn, $dn, $filter, $attributes);
         if (!$ldapresults) die("Search Failed"); //else echo "<br />Performed a search";
-        if (1 > ldap_count_entries($ldapconn, $ldapresults)) echo "<br />No users with that information found";
-        else {
+        if (1 > ldap_count_entries($ldapconn, $ldapresults)) echo "<br />No users with that information found"; else {
             $results = ldap_get_entries($ldapconn, $ldapresults);
             ldap_free_result($ldapresults);
             //if ($results["count"] > 1) echo "<br />" . $results["count"] . " records found";
             if (false === $results) echo "no result set found";
-            if ($password == null) myPrint($results, $attributes, $username);
-            else tryLogin($results, $dn, $username, $password);
+            if ($password == null) myPrint($results, $attributes, $username); else tryLogin($results, $dn, $username, $password);
         }
 
         /*$dn = "DC=Users,DC=thedomain,DC=umcu,DC=org";
@@ -65,8 +57,7 @@ if ($ldapconn) {
     } else echo "<h3>User Login Failed [" . ldap_error($ldapconn) . "]</h3>";
 } else echo "Failed to connect to Active Directory";
 
-function tryLogin($results, $dn, $username, $password)
-{
+function tryLogin($results, $dn, $username, $password) {
     global $ldapconn;
     $loginName = "";
     //echo "<div class='table'>";
@@ -92,9 +83,7 @@ function tryLogin($results, $dn, $username, $password)
         } else echo "<h3>Bind for [$loginName] Failed :(</h3>";
     }
 }
-
-function myPrint($results, $attributes, $username)
-{
+function myPrint($results, $attributes, $username) {
     echo "<div class='table'>";
     echo "<div class='row'>";
     echo "<div class='hcell'>Organizational Unit</div>";
@@ -126,16 +115,12 @@ function myPrint($results, $attributes, $username)
     }
     echo "</div>";
 }
-
-function prettyPrint($results, $a, $b)
-{
+function prettyPrint($results, $a, $b) {
     print "<pre>";
     print_r($results);
     print "</pre>";
 }
-
-function getName($dn)
-{
+function getName($dn) {
     $groups = "";
     $items = explode(",", $dn);
     foreach ($items as $item) {
@@ -148,9 +133,7 @@ function getName($dn)
     }
     return $groups;
 }
-
-function getGroup($dn)
-{
+function getGroup($dn) {
     $groups = "";
     $items = explode(",", $dn);
     foreach ($items as $item) {
@@ -163,14 +146,10 @@ function getGroup($dn)
     }
     return $groups;
 }
-
-function formatTime($time)
-{
+function formatTime($time) {
     return date("m-d-Y h:i", $time / 10000000 - 11644473600);
 }
-
-function out($msg)
-{
+function out($msg) {
     echo "<p>" . $msg . "</p>";
     //$dn = "CN=$username,OU=Information Technology,OU=All Staff,DC=thedomain,DC=umcu,DC=org";
     //$dn = "CN=$username,CN=Users,DC=thedomain,DC=umcu,DC=org";

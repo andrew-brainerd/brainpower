@@ -8,8 +8,8 @@
 
 global $ldapconn;
 $ldapconn = ldap_connect("ldap://umcudc-huron.thedomain.umcu.org");
-$allLocked = array();
 $baseDN = "DC=thedomain,DC=umcu,DC=org";
+$allLocked = array();
 $userLocations = array("OU=All Staff", "CN=Users", "OU=Administrators");
 $enabled = "(!(userAccountControl:1.2.840.113556.1.4.803:=2))";
 $ignore = "IUSR_NP00123F9EF87A";

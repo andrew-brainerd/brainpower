@@ -78,6 +78,7 @@ input[type=button] {
     top: 0;
     visibility: hidden;
 }
+
 .unlock {
     background-color: #449d75;
     border-radius: 3px;
