@@ -51,7 +51,7 @@ function myPrint($results, $attributes) {
         echo "<div class='hcell'>Organizational Unit</div>";
         echo "<div class='hcell'>Name</div>";
         echo "<div class='hcell'>Username</div>";
-        echo "<div class='hcell'>Lockout Time</div>";
+        echo "<div class='hcell time'>Lockout Time</div>";
         /*foreach ($attributes as $name) { if ($name != "distinguishedName" && $name != "samaccountname") echo "<div class='hcell'>$name</div>"; }*/
         echo "<div class='hcell'></div>";
         echo "</div>";
@@ -64,7 +64,7 @@ function myPrint($results, $attributes) {
                         echo "<div class='cell'>" . getGroup($dn) . "</div>";
                         echo "<div class='cell'>" . getName($dn) . "</div>";
                     } else if (stripos($name, "time")) {
-                        echo "<div class='cell'>" . formatTime($value[$name][0]) . "</div>";
+                        echo "<div class='cell time'>" . formatTime($value[$name][0]) . "</div>";
                     } else echo "<div class='cell'>" . $value[$name][0] . "</div>";
                 }
                 echo "<div class='cell'><div class='unlock' data-dn='$dn'>Unlock</div></div>";
@@ -110,7 +110,8 @@ function getGroup($dn) {
 function formatTime($time) {
     $windows_tick = 10000000;
     $sec_to_unix_epoch = 11644473600;
-    $lockoutTime = strtotime("+19 hours", $time / $windows_tick - $sec_to_unix_epoch);
+    $lockoutTime = strtotime("-5 hours", $time / $windows_tick - $sec_to_unix_epoch);
+    //echo "Lockout: " . date("m-d-Y", $lockoutTime) . "  Now: " . date("m-d-Y");
     if (date("m-d-Y", $lockoutTime) == date("m-d-Y")) {
         $lockoutTime = date("g:i a", $lockoutTime);
     }

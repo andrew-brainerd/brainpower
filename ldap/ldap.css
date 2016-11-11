@@ -60,6 +60,9 @@ label {
 .row.selected .cell {
     color: white;
 }
+.time, .username {
+    text-align: center;
+}
 .floatingHeader {
     position: fixed;
     top: 0;
