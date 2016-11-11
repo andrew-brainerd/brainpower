@@ -10,7 +10,7 @@ global $ldapconn;
 $ldapconn = ldap_connect("ldap://umcudc-huron.thedomain.umcu.org");
 $baseDN = "DC=thedomain,DC=umcu,DC=org";
 $allLocked = array();
-$userLocations = array("OU=All Staff", "CN=Users", "OU=Administrators");
+$userLocations = array("OU=All Staff", "CN=Users", "OU=Administrators", "OU=Symitar", "OU=LSI");
 $enabled = "(!(userAccountControl:1.2.840.113556.1.4.803:=2))";
 $ignore = "IUSR_NP00123F9EF87A";
 $attributes = array(
@@ -52,9 +52,7 @@ function myPrint($results, $attributes) {
         echo "<div class='hcell'>Name</div>";
         echo "<div class='hcell'>Username</div>";
         echo "<div class='hcell'>Lockout Time</div>";
-        /*foreach ($attributes as $name) {
-            if ($name != "distinguishedName" && $name != "samaccountname") echo "<div class='hcell'>$name</div>";
-        }*/
+        /*foreach ($attributes as $name) { if ($name != "distinguishedName" && $name != "samaccountname") echo "<div class='hcell'>$name</div>"; }*/
         echo "<div class='hcell'></div>";
         echo "</div>";
         foreach ($results as $key => $value) {
@@ -110,7 +108,14 @@ function getGroup($dn) {
     return $groups;
 }
 function formatTime($time) {
-    return date("m-d-Y h:i", $time / 10000000 - 11644473600);
+    $windows_tick = 10000000;
+    $sec_to_unix_epoch = 11644473600;
+    $lockoutTime = strtotime("+19 hours", $time / $windows_tick - $sec_to_unix_epoch);
+    if (date("m-d-Y", $lockoutTime) == date("m-d-Y")) {
+        $lockoutTime = date("g:i a", $lockoutTime);
+    }
+    else $lockoutTime = date("m-d-Y g:i a", $lockoutTime);
+    return $lockoutTime;
 }
 function out($msg) {
     echo "<p>" . $msg . "</p>";
