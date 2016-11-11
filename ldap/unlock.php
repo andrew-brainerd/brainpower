@@ -12,7 +12,7 @@ $baseDN = "DC=thedomain,DC=umcu,DC=org";
 $dn = $_POST["dn"];
 if ($ldapconn) {
     echo "Got Dist. Name: [$dn]\n";
-    $ldapbind = @ldap_bind($ldapconn, "CN=Andrew Brainerd,CN=Users," . $baseDN, "b0ggl3sth3m!nd");
+    $ldapbind = @ldap_bind($ldapconn, "CN=SU,OU=Administrators," . $baseDN, "C3t1@lph@V!$");
     if ($ldapbind) {
         $entries = array();
         $entries["lockouttime"] = 0;
