@@ -35,7 +35,7 @@ input[type=button] {
 .table {
     display: table;
     margin: 50px auto;
-    min-width: 60%;
+    min-width: 70%;
 }
 
 .row {
@@ -73,12 +73,16 @@ input[type=button] {
     color: white;
 }
 
-.row:hover {
-    cursor: pointer;
-}
-
 .floatingHeader {
     position: fixed;
     top: 0;
     visibility: hidden;
+}
+.unlock {
+    background-color: #449d75;
+    border-radius: 3px;
+    color: #f2f2f2;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
 }

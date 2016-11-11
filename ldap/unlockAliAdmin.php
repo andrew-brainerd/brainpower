@@ -35,10 +35,6 @@ if ($ldapconn) {
         }
     } else echo "<h3>User Login Failed [" . ldap_error($ldapconn) . "]</h3>";
 } else echo "Failed to connect to Active Directory";
-$file = "/var/www/html/logs/unlocks";
-$content = file_get_contents($file);
-$content .= "Unlocked $dn\n";
-file_put_contents($file, $content);
 //mail("9897210902@vtext.com", "", "Unlocked $dn", "From: Perry <lobby.ucmu.org>\r\n");
 
 
@@ -54,11 +50,11 @@ function myPrint($results, $attributes) {
     echo "</div>";
     foreach ($results as $key => $value) {
         if (is_array($value)) {
-            $dn = $value["dn"];
+            $userDN = $value["dn"];
             foreach ($attributes as $name) {
                 if ($name == "distinguishedName") {
-                    echo "<div class='cell'>" . getGroup($dn) . "</div>";
-                    echo "<div class='cell'>" . getName($dn) . "</div>";
+                    echo "<div class='cell'>" . getGroup($userDN) . "</div>";
+                    echo "<div class='cell'>" . getName($userDN) . "</div>";
                 } else if (stripos($name, "time")) {
                     echo "<div class='cell'>" . formatTime($value[$name][0]) . "</div>";
                 } else echo "<div class='cell'>" . $value[$name][0] . "</div>";
@@ -67,10 +63,14 @@ function myPrint($results, $attributes) {
             $entries = array(
                 "lockouttime" => 0
             );
-            if (ldap_modify($ldapconn, $dn, $entries)) {
-                echo "<h1>" . getName($dn) . " is Unlocked :D</h1>";
+            if (ldap_modify($ldapconn, $userDN, $entries)) {
+                echo "<h1>" . getName($userDN) . " is Unlocked :D</h1>";
+                $file = "/var/www/html/logs/unlocks";
+                $content = file_get_contents($file);
+                $content .= "Unlocked " . getName($userDN) . " [" . date("d-m-Y H:i") . "]\n";
+                file_put_contents($file, $content);
             } else {
-                echo "<h3>Did not unlock " . getName($dn) . "</h3><h3>" . ldap_error($ldapconn) . "</h3>";
+                echo "<h3>Did not unlock " . getName($userDN) . "</h3><h3>" . ldap_error($ldapconn) . "</h3>";
             }
         }
     }

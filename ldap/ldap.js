@@ -24,11 +24,32 @@ function findLocked() {
     console.log("Running findLocked...");
     $.ajax({
         type: "GET",
-        url: "unlock.php",
+        url: "getLockedUsers.php",
+        data: "q=" + counter,
         success: function (msg) {
             console.log("done running");
             $("#message").html(msg);
-            counter++;
+            $(".unlock").click(function () {
+                console.log($(this).attr("data-dn"));
+                counter += counter;
+                var args = "dn=" + $.trim($(this).attr("data-dn")) + "&cntplzwrk=" + counter;
+                $.ajax({
+                    type: "POST",
+                    url: "unlock.php",
+                    data: args,
+                    success: function (data, status) {
+                        console.log(data);
+                        location.reload();
+                    },
+                    complete: function () {
+                        console.log("URL: lobby.umcu.org/ldap/unlock.php/?" + args);
+                    },
+                    error: function (data, status) {
+                        console.log("Data: %o", data);
+                        console.log("Status: " + status);
+                    }
+                });
+            });
         },
         error: function (err) {
             console.log("Failed");
@@ -55,7 +76,7 @@ function runTest() {
                 $("html, body").animate({
                     scrollTop: $("html").offset().top
                 }, 1);
-            }).css("cursor", "pointer");
+            });
             $(".row:not(:first-child)").attr("title", "Some Title");
             counter++;
         },
