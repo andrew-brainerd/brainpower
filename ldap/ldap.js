@@ -29,6 +29,7 @@ function findLocked() {
     $.ajax({
         type: "GET",
         url: "getLockedUsers.php",
+        cache: false,
         data: "q=" + queryID,
         success: function (msg) {
             message.html(msg);

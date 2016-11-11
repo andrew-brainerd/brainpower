@@ -23,7 +23,7 @@ $attributes = array(
 );
 
 if ($ldapconn) {
-    $ldapbind = @ldap_bind($ldapconn, "CN=Andrew Brainerd,CN=Users," . $baseDN, "b0ggl3sth3m!nd");
+    $ldapbind = @ldap_bind($ldapconn, "CN=SU,OU=Administrators," . $baseDN, "C3t1@lph@V!$");
     if ($ldapbind) {
         foreach ($userLocations as $location) {
             $dn = $location . "," . $baseDN;
