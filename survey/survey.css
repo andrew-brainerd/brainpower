@@ -1,0 +1,29 @@
+#container {
+    margin: auto;
+    width: 800px;
+}
+img {
+    border: 2px solid transparent;
+    border-radius: 50px;
+    display: inline-block;
+    transition: background-color 1s;
+    width: 30%;
+}
+#positive {
+    background-color: green;
+}
+#positive:hover {
+    background-color: dodgerblue;
+}
+#neutral {
+    background-color: yellow;
+}
+#neutral:hover {
+    background-color: dodgerblue;
+}
+#negative {
+    background-color: red;
+}
+#negative:hover {
+    background-color: dodgerblue;
+}
