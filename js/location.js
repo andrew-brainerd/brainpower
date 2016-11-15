@@ -13,7 +13,7 @@ if (typeof(Number.prototype.toRadians) === "undefined") {
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(calcDistance, showError);
-        page.fadeIn();
+        //page.fadeIn();
     }
     else {
         alert("Geolocation is not supported by this browser");
@@ -99,10 +99,13 @@ function calcDistance(p) {
     }
     branch = distances[closest][0];
 
-    var redir = getURLParameter("redirect");
+    sessionStorage.setItem("branch", branch.toString());
+    console.log("session: " + sessionStorage.getItem("branch"));
+    //location.href = "/lobby";
+    /*var redir = getURLParameter("redirect");
     if (redir == "b") setTimeout(redirect(), 3000);
     else if (redir == "instant") setTimeout(redirect(), 1000);
-    else redirect();
+    else redirect();*/
 }
 function redirect() {
     console.log("hit this redirect");

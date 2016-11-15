@@ -16,7 +16,7 @@ var showReport = $("#report");
 var closeReport = $("#closeReport");
 var checkIn = $("#checkIn");
 var memberActivity = $("#checkOut");
-var branch = $("#branch");
+var branch = sessionStorage.getItem("branch"); //$("#branch");
 var vid = $("#vid").val();
 var fname = $("#fname");
 var lname = $("#lname");
@@ -43,9 +43,11 @@ var nav = [checkIn, memberActivity, reporting, logOut];
 
 checkRedirect();
 //sessionStorage.clear();
+$("title").text("UMCU Lobby - " + branch);
+$(".noNav > span").text("UMCU Lobby - " + branch.toString());
 updateSelected(sessionStorage.getItem("selected"));
-sessionStorage.setItem("branch", branch.val());
-console.log("branch = " + sessionStorage.getItem("branch"));
+//sessionStorage.setItem("branch", branch.val());
+console.log("branch=[" + sessionStorage.getItem("branch") + "]");
 inputs.addClass("textIndent");
 page.find("#closingNote").remove();
 if (isTeamMember) {
