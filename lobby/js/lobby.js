@@ -332,7 +332,7 @@ function checkEnvironment() {
 }
 function checkRedirect() {
     branch = $("#branch");
-    if (branch.val() == "") location.href = "?d=instant";
+    if (branch.val() == "") location.href = "?redirect=instant";
     else if (branch.val() == "Huron") location.href = "/parking/?branch=Huron";
 }
 function capitalize(s) {

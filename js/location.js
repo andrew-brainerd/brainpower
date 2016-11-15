@@ -99,7 +99,7 @@ function calcDistance(p) {
     }
     branch = distances[closest][0];
 
-    var redir = getURLParameter("d");
+    var redir = getURLParameter("redirect");
     if (redir == "b") setTimeout(redirect(), 3000);
     else if (redir == "instant") setTimeout(redirect(), 1000);
     else redirect();
