@@ -110,8 +110,7 @@ function getGroup($dn) {
 function formatTime($time) {
     $windows_tick = 10000000;
     $sec_to_unix_epoch = 11644473600;
-    $lockoutTime = strtotime("-5 hours", $time / $windows_tick - $sec_to_unix_epoch);
-    //echo "Lockout: " . date("m-d-Y", $lockoutTime) . "  Now: " . date("m-d-Y");
+    $lockoutTime = strtotime("0 hours", $time / $windows_tick - $sec_to_unix_epoch);
     if (date("m-d-Y", $lockoutTime) == date("m-d-Y")) {
         $lockoutTime = date("g:i a", $lockoutTime);
     }

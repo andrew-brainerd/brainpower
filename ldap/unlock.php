@@ -17,6 +17,10 @@ if ($ldapconn) {
         $entries = array();
         $entries["lockouttime"] = 0;
         if (@ldap_modify($ldapconn, $dn, $entries)) {
+            $file = "/var/www/html/logs/unlocks";
+            $content = file_get_contents($file);
+            $content .= "Unlocked " . getName($dn) . " [" . date("m-d-Y H:i") . "]\n";
+            file_put_contents($file, $content);
             echo getName($dn) . " is Unlocked :D\n";
         } else {
             echo "Error [" . ldap_errno($ldapconn) . "] " .  ldap_error($ldapconn) . "\n";

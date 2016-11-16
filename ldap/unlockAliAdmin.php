@@ -16,7 +16,6 @@ if ($ldapconn) {
         $dn = "OU=Administrators,DC=thedomain,DC=umcu,DC=org"; // CN=Users,
         $enabled = "(!(userAccountControl:1.2.840.113556.1.4.803:=2))";
         $filter = "(&(objectClass=user)$enabled(samaccountname=asyed-admin)(lockoutTime>=1))";
-        //echo "<h3>Filter:$filter</h3>";
         $attributes = array(
             "distinguishedName",
             "samaccountname",
@@ -27,67 +26,36 @@ if ($ldapconn) {
         );
         $ldapresults = ldap_search($ldapconn, $dn, $filter, $attributes);
         if (!$ldapresults) die("Search Failed");
-        if (1 > ldap_count_entries($ldapconn, $ldapresults)) echo "<br /><h1>No Locked Users</h1>";
         else {
             $results = ldap_get_entries($ldapconn, $ldapresults);
             ldap_free_result($ldapresults);
             myPrint($results, $attributes);
         }
-    } else echo "<h3>User Login Failed [" . ldap_error($ldapconn) . "]</h3>";
+    } else echo "User Login Failed [" . ldap_error($ldapconn) . "]";
 } else echo "Failed to connect to Active Directory";
-//mail("9897210902@vtext.com", "", "Unlocked $dn", "From: Perry <lobby.ucmu.org>\r\n");
 
 
 function myPrint($results, $attributes) {
     global $ldapconn;
-    echo "<div class='table'>";
-    echo "<div class='row'>";
-    echo "<div class='hcell'>Organizational Unit</div>";
-    echo "<div class='hcell'>Name</div>";
-    foreach ($attributes as $name) {
-        if ($name != "distinguishedName") echo "<div class='hcell'>$name</div>";
-    }
-    echo "</div>";
     foreach ($results as $key => $value) {
         if (is_array($value)) {
             $userDN = $value["dn"];
-            foreach ($attributes as $name) {
-                if ($name == "distinguishedName") {
-                    echo "<div class='cell'>" . getGroup($userDN) . "</div>";
-                    echo "<div class='cell'>" . getName($userDN) . "</div>";
-                } else if (stripos($name, "time")) {
-                    echo "<div class='cell'>" . formatTime($value[$name][0]) . "</div>";
-                } else echo "<div class='cell'>" . $value[$name][0] . "</div>";
-            }
-            echo "</div>"; // end row
             $entries = array(
                 "lockoutTime" => 0
             );
             if (ldap_modify($ldapconn, $userDN, $entries)) {
-                echo "<h1>" . getName($userDN) . " is Unlocked :D</h1>";
                 $file = "/var/www/html/logs/unlocks";
                 $content = file_get_contents($file);
-                $content .= "Unlocked " . getName($userDN) . " [" . date("d-m-Y H:i") . "]\n";
+                $content .= "Unlocked " . getName($userDN) . " [" . date("m-d-Y H:i") . "]\n";
                 file_put_contents($file, $content);
-            } else {
-                echo "<h3>Did not unlock " . getName($userDN) . "</h3><h3>" . ldap_error($ldapconn) . "</h3>";
             }
         }
     }
-    echo "</div>";
 }
-
-function prettyPrint($results, $a) {
-    print "<pre>";
-    print_r($results);
-    print "</pre>";
-}
-
 function getName($dn) {
     $groups = "";
     $items = explode(",", $dn);
     foreach ($items as $item) {
-        //echo "a[0]: " .  . "<br />";
         $type = explode("=", $item)[0];
         $name = explode("=", $item)[1];
         if ($type == "CN" && $name != "Users") {
@@ -112,8 +80,4 @@ function getGroup($dn) {
 
 function formatTime($time) {
     return date("m-d-Y h:i", $time / 10000000 - 11644473600);
-}
-
-function out($msg) {
-    echo "<p>" . $msg . "</p>";
 }
