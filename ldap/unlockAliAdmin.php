@@ -11,7 +11,8 @@ $ldapconn = ldap_connect("ldap://umcudc-huron.thedomain.umcu.org");
 $dn = "DC=thedomain,DC=umcu,DC=org";
 
 if ($ldapconn) {
-    $ldapbind = @ldap_bind($ldapconn, "CN=Andrew Brainerd,CN=Users," . $dn, "b0ggl3sth3m!nd");
+    //$ldapbind = @ldap_bind($ldapconn, "CN=Andrew Brainerd,CN=Users," . $dn, "b0ggl3sth3m!nd");
+    $ldapbind = @ldap_bind($ldapconn, "CN=SU,OU=Administrators," . $dn, "C3t1@lph@V!$");
     if ($ldapbind) {
         $dn = "OU=Administrators,DC=thedomain,DC=umcu,DC=org"; // CN=Users,
         $enabled = "(!(userAccountControl:1.2.840.113556.1.4.803:=2))";

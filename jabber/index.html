@@ -3,27 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        body {
+            background: black;
+        }
+    </style>
 </head>
 <body>
 
 <script type="text/javascript" src="jabberwerx.js"></script>
 <script type="text/javascript">
-    var client = new jabberwerx.Client("CUPS1");
     var username = "abrainerd@umcu.org";
-    var password = "b0ggl3sth3m!nd7";
-
+    var password = "b0ggl3sth3m!Nd8";
     var connectArgs = {
         // the proxy url to the BOSH server
-        httpBindingURL: 'http://cups1',
+        domain: "thedomain.umcu.org",
+        httpBindingURL: "http://cups1:7335/httpbinding",
+        unsecured: true,
+        serviceDiscoveryEnabled: true,
         successCallback: onConnected,
         errorCallback: onClientError
     };
+    jabberwerx._config.unsecureAllowed = connectArgs.unsecureAllowed;
+    jabberwerx._config.serviceDiscoveryEnabled = true;
+
+    var client = new jabberwerx.Client("CUPS1");
     client.connect(username, password, connectArgs);
     function onConnected() {
-        alert("Connected :D");
+        console.log("Connected :D");
     }
-    function onClientError() {
-        alert("ERROR :(");
+    function onClientError(err) {
+        //console.log("ERROR: %o", err);
     }
 </script>
 </body>
