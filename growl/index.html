@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <style>
+            body {
+                background: black;
+            }
+            button {
+                background-color: #eeeeee;
+                border-color: #CCCCCC rgb(153, 153, 153) rgb(153, 153, 153) rgb(204, 204, 204);
+                border-style: double;
+                border-width: 3px;
+                color: #777777;
+                cursor: pointer;
+                display: block;
+                font-size: 2em;
+                font-weight: bold;
+                margin: auto;
+                padding: 25px 50px;
+            }
+            input, textarea {width:320px;}
+        </style>
+    </head>
+    <body>
+        <div id="page">
+            <div id="header">
+                <!--<h1 id="title">Growl for Windows</h1>-->
+            </div>
+            <div id="content">
+                <div class="section">
+                    <!--<p>Make sure Growl for Windows is running and that 'Allow network notifications' and 'Allow notifications
+                    from websites' are checked on the 'Security' tab.</p>
+                    <p><button onclick="register();return false;">register</button></p>-->
+                    <div id="notifyarea">
+                        <!--notification title:<br />
+                        <input type="text" id="notificationtitle" value="test notification" />
+                        <br /><br />
+                        notification text:<br />
+                        <textarea id="notificationtext">you got notified</textarea><br /><br />-->
+                        <p>
+                            <button onclick="notify();return false;">Test Notification</button>
+                            <!--<button onclick="notify2();return false;">notify (w/ callback)</button>-->
+                        </p>
+                    </div>
+                    <div id="growlconnectorcontainer"></div>
+                </div>
+            </div>
+        </div>
+        <script src="growl.js"></script>
+        <script src="notifications.js">register();</script>
+    </body>
+</html>

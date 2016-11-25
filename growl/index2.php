@@ -6,10 +6,11 @@
  * Time: 2:16 PM
  */
 
-require_once "class.growl.php";
+include "class.growl.php";
 
 $growl = new Growl();
-$growl->setAddress("127.0.0.1");
+//$growl->setAddress("127.0.0.1");
+$growl->setAddress("10.16.10.16");
 $growl->addNotification("Test");
 $growl->register();
 
