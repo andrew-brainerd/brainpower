@@ -45,6 +45,7 @@ function register(){
     isRegistered = true;
 }
 function notify(){
+    console.log("notify()");
     if (!isRegistered) register();
     var notification = new Growl.Notification();
     notification.name = "NT1";

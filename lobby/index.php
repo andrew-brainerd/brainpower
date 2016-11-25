@@ -24,9 +24,30 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") header("Locat
     <?php include "header.php" ?>
 </header>
 <div id="initialForm">
-    <?php
-    if ($branch != "Huron") include "lobby.php";
-    ?>
+    <form autocomplete="off" spellcheck="false">
+        <div>
+            <label for="fname" title="First Name" data-alt="First"></label>
+            <input type="text" id="fname"/>
+            <label for="lname" title="Last Name" data-alt="Last"></label>
+            <input type="text" id="lname"/>
+            <select id="reason" name="reason" title="Reason for Visit"></select>
+            <label for="addInfo">Empty</label>
+            <input type="text" id="addInfo"/>
+            <?php
+            if ($_GET["branch"] == "William") {
+                echo "<h3>Probably something extra here...</h3>";
+            } else { ?>
+                <!--<div class="switch" id="appointmentSwitch">
+                    <div>Have an Appointment?</div>
+                    <input id="toggle1" class="toggle toggle-yes-no" type="checkbox">
+                    <label for="toggle1" data-on="Yes" data-off="No"></label>
+                </div>-->
+                <?php
+            }
+            ?>
+            <div id="submitForm">Check-In</div>
+        </div>
+    </form>
 </div>
 <div id="thankYou">
     <h1>Thanks for Checking In</h1>
