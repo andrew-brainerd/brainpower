@@ -16,7 +16,7 @@ var showReport = $("#report");
 var closeReport = $("#closeReport");
 var checkIn = $("#checkIn");
 var memberActivity = $("#checkOut");
-var branch = $("#branch");
+var branch = sessionStorage.getItem("branch"); //$("#branch");
 var vid = $("#vid").val();
 var fname = $("#fname");
 var lname = $("#lname");
@@ -29,6 +29,9 @@ var logOut = $("#logOut");
 var reportForm = $("#downloadReport");
 var download = $("#download");
 var branchList = $("#branchList");
+var nameInfo = $("#nameInfo");
+var visitInfo = $("#visitInfo");
+var next = $("#next");
 var isTeamMember = $("#team").val() == "true";
 var draggedVID;
 var updateElements;
@@ -40,18 +43,23 @@ var nav = [checkIn, memberActivity, reporting, logOut];
 
 checkRedirect();
 //sessionStorage.clear();
+$("title").text("UMCU Lobby - " + branch);
+$(".noNav > span").text("UMCU Lobby - " + branch.toString());
 updateSelected(sessionStorage.getItem("selected"));
-sessionStorage.setItem("branch", branch.val());
-console.log("branch = " + sessionStorage.getItem("branch"));
+//sessionStorage.setItem("branch", branch.val());
+console.log("branch=[" + sessionStorage.getItem("branch") + "]");
 inputs.addClass("textIndent");
 page.find("#closingNote").remove();
 if (isTeamMember) {
-    form.hide();
+    //console.log("Team Member: " + isTeamMember);
+    //form.hide();
+    //setView(memberActivity);
     fetchVisitors();
     fetchBranches();
 } else {
     form.css("margin-top", "160px");
 }
+visitInfo.hide();
 viewVisitors.hide();
 reportForm.hide();
 hideAdditionalInfo();
@@ -60,6 +68,17 @@ clearForm();
 checkEnvironment();
 bindEnterKey(submit);
 
+next.click(function () {
+    var hasAppointment = $("#toggle1").val();
+    if ($.trim(fname.val()) != "" && $.trim(lname.val()) != "") {
+        nameInfo.fadeOut(function () {
+            visitInfo.fadeIn();
+            if (hasAppointment) {
+                showAdditionalInfo("Meeting With", "With");
+            }
+        });
+    }
+});
 logo.click(function () {
     location.reload();
 });
@@ -315,7 +334,7 @@ function checkEnvironment() {
 }
 function checkRedirect() {
     branch = $("#branch");
-    if (branch.val() == "") location.href = "?d=instant";
+    if (branch.val() == "") location.href = "?redirect=instant";
     else if (branch.val() == "Huron") location.href = "/parking/?branch=Huron";
 }
 function capitalize(s) {
@@ -454,9 +473,10 @@ function setView(view) {
     if (view == "checkIn") {
         viewVisitors.fadeOut(function () {
             reportForm.fadeOut(function () {
-                //clearTimeout(updateTimer);
-                bindEnterKey(submit);
-                form.fadeIn();
+                visitInfo.fadeOut(function () {
+                    bindEnterKey(submit);
+                    form.fadeIn();
+                });
             });
         });
     }

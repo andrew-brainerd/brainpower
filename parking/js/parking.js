@@ -94,17 +94,6 @@ $logo.click(function () {
     }
     else {
         location.reload();
-        /*if ($branch.val() == "") {
-         location.href = "/?d=instant";
-         console.log("No branch");
-         }
-         else {
-         console.log("Branch: [" + $branch.val() + "}");
-         if (location.href.indexOf("goto") >= 0) {
-         location.href = location.hostname + "/parking/?branch=" + $branch.val();
-         }
-         else location.reload();
-         }*/
     }
 });
 $cancel.click(function () {

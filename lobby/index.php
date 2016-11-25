@@ -9,15 +9,11 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") header("Locat
 <head>
     <?php
     include "head.php";
-    $_GET["branch"] = strip_tags($_GET["branch"]);
-    $branch = $_GET["branch"];
     $team = strip_tags($_GET["team"]);
-    if ($branch != "Huron") {
-        echo "<link rel='stylesheet' href='css/lobby.css'/>";
-        echo "<link rel='stylesheet' href='/css/control.css'/>";
-    }
     ?>
-    <title>UMCU Lobby - <?php echo $branch; ?></title>
+    <link rel='stylesheet' href='css/lobby.css'/>
+    <link rel='stylesheet' href='/css/control.css'/>
+    <title></title>
 </head>
 <body>
 <header>
@@ -66,7 +62,6 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") header("Locat
 <div id="screensaver"></div>
 <input type="text" id="decoy" title="" readonly/>
 <input type="hidden" id="team" value="<?php echo $team ?>"/>
-<input type="hidden" id="branch" value="<?php echo $branch; ?>"/>
 <script src="/js/secure.js"></script>
 <?php include "util/jquery.php"; ?>
 <script src="js/lobby.js"></script>
