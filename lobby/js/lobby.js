@@ -40,7 +40,6 @@ var updateTimer = setInterval(fetchVisitors, 180000);
 var isPageReload;
 var prevID = 0;
 var nav = [checkIn, memberActivity, reporting, logOut];
-
 checkRedirect();
 //sessionStorage.clear();
 $("title").text("UMCU Lobby - " + branch);
@@ -67,7 +66,6 @@ fetchReasons();
 clearForm();
 checkEnvironment();
 bindEnterKey(submit);
-
 next.click(function () {
     var hasAppointment = $("#toggle1").val();
     if ($.trim(fname.val()) != "" && $.trim(lname.val()) != "") {
@@ -197,7 +195,6 @@ download.click(function () {
 page.fadeIn(function () {
     page.scroll();
 });
-
 function showPopupMessage() {
     form.fadeOut("slow", function () {
         clearForm();
@@ -219,11 +216,11 @@ function fetchVisitors() {
             viewVisitors.html(msg);
             $(".tableContainer").droppable({
                 activate: function (event, ui) {
-                        $(this).addClass("pickMe");
-                    },
+                    $(this).addClass("pickMe");
+                },
                 deactivate: function () {
-                        $(this).removeClass("pickMe");
-                    },
+                    $(this).removeClass("pickMe");
+                },
                 drop: function (event, ui) {
                     $(this).removeClass("almostHaveIt");
                     var visitorID = ui.helper.attr("data-vid");
@@ -233,29 +230,32 @@ function fetchVisitors() {
                     if (dragStatus == dropStatus) return;
                     //var status, statusText;
                     switch (dropStatus) {
-                            case 0:
-                                updateStatus(visitorID, dropStatus);
-                                break;
-                            case 1:
-                                updateInfoBox(visitorID, dropStatus);
-                                break;
-                            case 2:
-                                updateInfoBox(visitorID, dropStatus);
-                                break;
-                            default:
-                                console.log("Mucked it up. Nice Job");
-                        }
-                        $(this).removeClass("almostHaveIt").addClass("droppedTheMic");
-                    },
+                        case 0:
+                            updateStatus(visitorID, dropStatus);
+                            break;
+                        case 1:
+                            updateInfoBox(visitorID, dropStatus);
+                            break;
+                        case 2:
+                            updateInfoBox(visitorID, dropStatus);
+                            break;
+                        default:
+                            console.log("Mucked it up. Nice Job");
+                    }
+                    $(this).removeClass("almostHaveIt").addClass("droppedTheMic");
+                },
                 greedy: true,
                 out: function () {
-                        $(this).removeClass("almostHaveIt");
-                    },
+                    $(this).removeClass("almostHaveIt");
+                },
                 over: function () {
-                        $(this).addClass("almostHaveIt")
-                    }
+                    $(this).addClass("almostHaveIt")
+                }
             });
-            $(".row:not(.noHover, .viewHeader)").draggable({helper: "clone"})
+            $(".row:not(.noHover, .viewHeader)")
+                .draggable({
+                    helper: "clone"
+                })
                 .click(function () {
                     if ($(this).hasClass(("ui-draggable-dragging"))) return;
                     var visitorID = $(this).attr("data-vid");
@@ -362,7 +362,7 @@ function updateStatus(visitorID, status, updateInfo) {
             if (updateInfo != "" && updateInfo != undefined)
                 updateElements.fadeOut(function () {
                     updateElements.remove();
-            });
+                });
             fetchVisitors();
         }
     });
@@ -382,14 +382,11 @@ function updateInfoBox(visitorID, status) {
     popup.append("<h3>" + title + "</h3>");
     popup.append(noteInput);
     popup.append(buttonContainer);
-
     popup.css("top", header.height());
     wall.css("top", header.height());
-
     updateElements.append(popup);
     updateElements.append(wall);
     page.prepend(updateElements);
-
     bindEnterKey(confirm);
     noteInput.focus();
     confirm.click(function () {
@@ -449,16 +446,12 @@ function showDetailsBox(vid) {
             visitDetailElements = $("<div class='popup' id='updateVisitor'></div>");
             var popup = $("<div id='visitDetails'></div>");
             var wall = $("<div id='theWall'></div>");
-
             popup.html(msg);
-
             popup.css("top", header.height());
             wall.css("top", header.height());
-
             visitDetailElements.append(popup);
             visitDetailElements.append(wall);
             page.prepend(visitDetailElements);
-
             wall.click(function () {
                 visitDetailElements.fadeOut(function () {
                     visitDetailElements.remove();

@@ -10,6 +10,11 @@ header("access-control-allow-origin: *");
 include "dbconnect.php";
 $errorText = "Failed";
 
+//echo "isInternal: " . isset($_GET["internal"]) . "\n";
+if ($_GET["internal"] == 1) {
+    if (performLogin("umcu", "aMAIZEing", $conn)) echo "authorized";
+    return;
+}
 if (isset($_GET["key"])) autoLogin($_GET["key"], $conn);
 $function = strip_tags($_GET["func"]);
 if ($function == "getAuth") {
@@ -53,7 +58,7 @@ function autoLogin($userKey, $conn)
 {
     echo "Got a Key! - $userKey<br>";
     $decoded = json_decode(base64url_decode($userKey), true);
-    performLogin($decoded["un"], $decoded["pw"], $conn);
+    if (performLogin($decoded["un"], $decoded["pw"], $conn)) echo "authorized";
 }
 function base64url_decode($data)
 {

@@ -41,7 +41,7 @@ function register(){
 
     Growl.register(application, notificationTypes);
 
-    document.getElementById("notifyarea").style.display = "block";
+    //document.getElementById("notifyarea").style.display = "block";
     isRegistered = true;
 }
 function notify(){
@@ -53,6 +53,8 @@ function notify(){
     notification.text = "A Visitor has just checked in";
     notification.icon = "http://jobs.herosports.com/wp-content/uploads/2016/04/michigan-logo.png";
     notification.priority = "normal";
+    //notification.callback.context = "my context";
+    //notification.callback.type = "string";
 
     Growl.notify(appName, notification);
 }
