@@ -46,7 +46,6 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") header("Locat
             <div id="submitForm">Check-In</div>
         </div>
     </form>
-
 </div>
 <div id="thankYou">
     <h1>Thanks for Checking In</h1>

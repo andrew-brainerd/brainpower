@@ -70,7 +70,7 @@
         if ($_FILES["videoUpload"]["error"] !== UPLOAD_ERR_OK) {
             echo "Upload failed with error code [" . $_FILES['videoUpload']['error'] . "]<br><br><br>";
             phpinfo();
-        } else echo "No noticable error";
+        } else echo "No noticeable error";
     }
     ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>

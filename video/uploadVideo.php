@@ -13,10 +13,7 @@
 <body>
 <header>
     <h1 id='title'>Upload New Video</h1>
-    <?php include "header.php";
-
-    //$max_time = ini_get("max_input_time");
-    //echo "Max Time: " . $max_time; ?>
+    <?php include "header.php"; ?>
 </header>
 <div id="view">
     <div id="uploadContainer">

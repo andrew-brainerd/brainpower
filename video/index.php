@@ -42,7 +42,7 @@ if (isset($_GET["maizenet"]) && !isset($_SESSION["username"])) {
         if ($numVid > 0) {
             while ($row = $result->fetch_assoc()) {
                 $title = $row["title"];
-                $path = "https://umculobby.com/video/" . $row["location"];
+                $path = "https://lobby.umcu.org/video/" . $row["location"];
                 $vid = $row["vid"];
                 $addClass = "";
                 if ($al > 10) {
