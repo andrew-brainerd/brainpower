@@ -21,29 +21,32 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") header("Locat
 </header>
 <div id="initialForm">
     <form autocomplete="off" spellcheck="false">
-        <div>
-            <label for="fname" title="First Name" data-alt="First"></label>
-            <input type="text" id="fname"/>
-            <label for="lname" title="Last Name" data-alt="Last"></label>
-            <input type="text" id="lname"/>
-            <select id="reason" name="reason" title="Reason for Visit"></select>
-            <label for="addInfo">Empty</label>
-            <input type="text" id="addInfo"/>
-            <?php
-            if ($_GET["branch"] == "William") {
-                echo "<h3>Probably something extra here...</h3>";
-            } else { ?>
-                <!--<div class="switch" id="appointmentSwitch">
-                    <div>Have an Appointment?</div>
-                    <input id="toggle1" class="toggle toggle-yes-no" type="checkbox">
-                    <label for="toggle1" data-on="Yes" data-off="No"></label>
-                </div>-->
-                <?php
-            }
-            ?>
+        <div id="nameInfo">
+            <div>
+                <label for="fname" title="First Name" data-alt="First"></label>
+                <input type="text" id="fname"/>
+            </div>
+            <div>
+                <label for="lname" title="Last Name" data-alt="Last"></label>
+                <input type="text" id="lname"/>
+            </div>
+            <div>
+                <select id="reason" name="reason" title="Reason for Visit"></select>
+                <label for="addInfo">Empty</label>
+            </div>
+            <div>
+                <input type="text" id="addInfo"/>
+                <div class="toggle-label">Have an Appointment?</div>
+            </div>
+            <div class="switch" id="appointmentSwitch">
+                <input id="toggle1" class="toggle toggle-round" type="checkbox">
+                <label for="toggle1" data-on="Yes" data-off="No"></label>
+            </div>
+            <!--<div class="button" id="next">Continue</div>-->
             <div id="submitForm">Check-In</div>
         </div>
     </form>
+
 </div>
 <div id="thankYou">
     <h1>Thanks for Checking In</h1>
