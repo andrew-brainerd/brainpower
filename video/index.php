@@ -24,7 +24,6 @@ session_start();
     <link rel="stylesheet" href="css/video.css"/>
     <style>
         <?php
-        if (isset($_GET["maizenet"])) performLogin("umcu","aMAIZEing",$conn);
         $today = date("Y/m/d");
         $al = 0;
         if (isset($_SESSION))  $al = $_SESSION['authLv'];

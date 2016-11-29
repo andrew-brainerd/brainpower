@@ -10,10 +10,11 @@ header("access-control-allow-origin: *");
 include "dbconnect.php";
 $errorText = "Failed";
 
-//echo "isInternal: " . isset($_GET["internal"]) . "\n";
-if ($_GET["internal"] == 1) {
-    if (performLogin("umcu", "aMAIZEing", $conn)) echo "authorized";
-    return;
+if (isset($_GET["maizenet"])) {
+    $_SESSION["username"] = "umcu";
+    $_SESSION["authLv"] = "10";
+    $_SESSION["activity"] = time();
+    header("Location: /video");
 }
 if (isset($_GET["key"])) autoLogin($_GET["key"], $conn);
 $function = strip_tags($_GET["func"]);
