@@ -7,6 +7,7 @@ var environment = "";
 var page = $("body");
 var pageTitle = $("title");
 var header = $("header");
+var navTitle = $("#navTitle");
 var logo = header.find("img");
 var menuIcon = header.find("#menuIcon");
 var inputs = page.find("input:not([type=hidden], [type=date], [type=submit])");
@@ -44,6 +45,7 @@ var nav = [checkIn, memberActivity, reporting, logOut];
 
 checkRedirect();
 pageTitle.text("UMCU Lobby - " + branch);
+navTitle.find("span").text("UMCU Lobby - " + branch);
 updateSelected(sessionStorage.getItem("selected"));
 inputs.addClass("textIndent");
 page.find("#closingNote").remove();

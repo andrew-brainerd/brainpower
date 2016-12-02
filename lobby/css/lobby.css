@@ -488,49 +488,38 @@ form#downloadReport input[type=date] {
 @media screen and (max-width: 500px) {
     body { /*border: 3px solid gold;*/
     }
-
     img {
         width: 250px !important;
     }
-
     #screensaver h1 {
         font-size: 8vw;
     }
-
     #screensaver h2 {
         font-size: 6vw;
         top: 33%;
     }
-
     form > .table .cell {
         display: block;
     }
-
     .hcell {
         display: none;
     }
-
     #results .row {
         border: 2px solid #ffcb05;
         display: block;
     }
-
     #results .cell:nth-child(3) {
         display: block;
     }
-
     #timer {
         font-size: 0.5em;
     }
-
     #report, #closeReport {
         border-top: 2px solid white;
     }
-
     #parkingSelection h1 {
         margin: 0 0 20px 0;
     }
-
     #parkingContainer select {
         width: 250px;
     }

@@ -1,7 +1,6 @@
 <?php
 
-$isTeamMember = (bool)$_GET["team"];
-$isiPad = (bool)strpos($_SERVER['HTTP_USER_AGENT'], 'iPad');
+$isTeamMember = strip_tags(isset($_GET["team"]));
 
 if ($isTeamMember) {
     echo "<ul id='topNav'>";

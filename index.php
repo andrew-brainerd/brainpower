@@ -1,9 +1,3 @@
-<?php
-$clientIP = $_SERVER['REMOTE_ADDR'];
-if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
-    //header("Location: video");
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,13 +20,18 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Permanent+Marker">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Oswald:700">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Caveat+Brush">
+    <link rel="stylesheet" type="text/css" href="css/font.css">
     <link rel="stylesheet" type="text/css" href="css/landing.css">
 </head>
 <body>
 <table id="distances"></table>
+<select id="branches"></select>
+<div id="branchList"></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="js/secure.js"></script>
-<script src="js/location.js"></script>
-<script type="text/javascript">getLocation();</script>
+<script src="js/landing.js"></script>
+<script type='text/javascript'>
+    getLocation(<?php echo (bool)strpos($_SERVER['HTTP_USER_AGENT'], 'iPad'); ?>);
+</script>
 </body>
 </html>

@@ -1,6 +1,9 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+}
 body {
     background: #00274c;
-    color: #00274c;
+    color: white;
     font-family: 'Caveat Brush', cursive;
 }
 #container {
@@ -43,10 +46,58 @@ div.nav img {
 #credit {
     color: transparent;
 }
-#distances {
+select {
+    background: #00274c;
+    border: 2px solid #ffcb05;
+    border-radius: 5px;
     color: white;
+    display: block;
+    font-family: 'Avenir Next Condensed', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 20px auto;
+    padding: 15px;
+    text-align-last: center;
+    width: 250px;
+    z-index: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+select::-ms-expand {
+    display: none;
+}
+#branchList {
+    font-size: 2.7em;
+    margin: auto;
+    text-align: center;
+    width: 900px;
+}
+#branchList > div {
+    display: inline-block;
+    margin-top: 50px;
+    width: 50%;
+}
+#branchList div div {
+    border: 2px solid white;
+    display: inline-block;
+    padding: 20px;
+    transition: all 0.5s;
+    width: 400px;
+}
+#branchList div div:hover {
+    background: #ffcb05;
+    border-color: #0f345e;
+    border-radius: 80%;
+    color: #0f345e;
+    cursor: pointer;
+    width: 300px;
+}
+#distances {
+    display: none;
+}
+    /*color: white;
     font-size: 3em;
 }
 #distances td {
     padding: 15px 80px;
-}
+}*/
