@@ -33,7 +33,7 @@
             if ($file == "")
                 echo wrap("No file name");
             else
-                echo wrap("Sorry, file already exists.");
+                echo wrap("File already exists at $path");
             $upFlag = false;
         }
         if (!$upFlag) {

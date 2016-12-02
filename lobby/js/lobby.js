@@ -5,6 +5,7 @@
 var queryID = 0;          // IE caching fix
 var environment = "";
 var page = $("body");
+var pageTitle = $("title");
 var header = $("header");
 var logo = header.find("img");
 var menuIcon = header.find("#menuIcon");
@@ -16,7 +17,7 @@ var showReport = $("#report");
 var closeReport = $("#closeReport");
 var checkIn = $("#checkIn");
 var memberActivity = $("#checkOut");
-var branch = sessionStorage.getItem("branch"); //$("#branch");
+var branch = sessionStorage.getItem("branch");
 var vid = $("#vid").val();
 var fname = $("#fname");
 var lname = $("#lname");
@@ -40,13 +41,10 @@ var updateTimer = setInterval(fetchVisitors, 180000);
 var isPageReload;
 var prevID = 0;
 var nav = [checkIn, memberActivity, reporting, logOut];
+
 checkRedirect();
-//sessionStorage.clear();
-$("title").text("UMCU Lobby - " + branch);
-$(".noNav > span").text("UMCU Lobby - " + branch.toString());
+pageTitle.text("UMCU Lobby - " + branch);
 updateSelected(sessionStorage.getItem("selected"));
-//sessionStorage.setItem("branch", branch.val());
-console.log("branch=[" + sessionStorage.getItem("branch") + "]");
 inputs.addClass("textIndent");
 page.find("#closingNote").remove();
 if (isTeamMember) {
@@ -66,6 +64,7 @@ fetchReasons();
 clearForm();
 checkEnvironment();
 bindEnterKey(submit);
+
 next.click(function () {
     var hasAppointment = $("#toggle1").val();
     if ($.trim(fname.val()) != "" && $.trim(lname.val()) != "") {
@@ -168,7 +167,7 @@ reporting.click(function () {
     setView($(this));
 });
 logOut.click(function () {
-    location.href = "/lobby/?branch=" + branch.val();
+    location.href = "/lobby/?branch=" + branch;
 });
 menuIcon.click(function () {
     console.log("Clicked Menu Icon");
@@ -195,6 +194,7 @@ download.click(function () {
 page.fadeIn(function () {
     page.scroll();
 });
+
 function showPopupMessage() {
     form.fadeOut("slow", function () {
         clearForm();
@@ -211,7 +211,7 @@ function fetchVisitors() {
         url: "util/viewVisitors.php",
         data: "searchDate=" + sd +
         "&queryID=" + queryID +
-        "&branch=" + branch.val(),
+        "&branch=" + branch,
         success: function (msg) {
             viewVisitors.html(msg);
             $(".tableContainer").droppable({
@@ -333,9 +333,8 @@ function checkEnvironment() {
     }
 }
 function checkRedirect() {
-    branch = $("#branch");
-    if (branch.val() == "") location.href = "?redirect=instant";
-    else if (branch.val() == "Huron") location.href = "/parking/?branch=Huron";
+    if (branch == "") location.href = "?redirect=instant";
+    else if (branch == "Huron") location.href = "/parking/?branch=Huron";
 }
 function capitalize(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
@@ -441,7 +440,7 @@ function showDetailsBox(vid) {
     $.ajax({
         type: "POST",
         url: "util/getVisitDetails.php",
-        data: "branch=" + branch.val() + "&vid=" + vid,
+        data: "branch=" + branch + "&vid=" + vid,
         success: function (msg) {
             visitDetailElements = $("<div class='popup' id='updateVisitor'></div>");
             var popup = $("<div id='visitDetails'></div>");

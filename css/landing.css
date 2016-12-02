@@ -43,3 +43,10 @@ div.nav img {
 #credit {
     color: transparent;
 }
+#distances {
+    color: white;
+    font-size: 3em;
+}
+#distances td {
+    padding: 15px 80px;
+}

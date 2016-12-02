@@ -13,7 +13,7 @@ if (typeof(Number.prototype.toRadians) === "undefined") {
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(calcDistance, showError);
-        //page.fadeIn();
+        page.fadeIn();
     }
     else {
         alert("Geolocation is not supported by this browser");
@@ -91,17 +91,23 @@ function calcDistance(p) {
     var closest = "";
     var min = 6371000 * 2; // circumference of the earth
     for (var j = 0; j < distances.length; j++) {
-        $("#distances").append("<tr><td>" + distances[j][0] + "</td><td>" + distances[j][1] + "</td>");
+        var branchName = "<td class='" + distances[j][0] + "'>" + distances[j][0] + "</td>";
+        var branchDistance = "<td class='" + distances[j][0] + "'>" + Math.round(distances[j][1]) + "</td>";
+        $("#distances").append("<tr>" + branchName + branchDistance + "</tr>");
         if (distances[j][1] < min) {
             min = distances[j][1];
             closest = j;
         }
     }
+    $("." + distances[closest][0]).css({
+        "color": "#ffcb05",
+        "font-size": "1.5em"
+    });
     branch = distances[closest][0];
 
     sessionStorage.setItem("branch", branch.toString());
     console.log("session: " + sessionStorage.getItem("branch"));
-    //location.href = "/lobby";
+    location.href = "/lobby";
     /*var redir = getURLParameter("redirect");
     if (redir == "b") setTimeout(redirect(), 3000);
     else if (redir == "instant") setTimeout(redirect(), 1000);
