@@ -8,6 +8,7 @@ if ($isTeamMember) {
     echo "<li id='checkIn'><span>Member Check-In</span></li>";
     echo "<li id='checkOut'><span>Member Activity</span></li>";
     echo "<li id='reporting'><span>Download Report</span></li>";
+    echo "<li id='logOut'><span>Log Out</span></li>";
     echo "<li id='menuIcon'><span>☰</span></li>";
     echo "</ul>";
 } else {

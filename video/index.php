@@ -42,7 +42,7 @@ if (isset($_GET["maizenet"]) && !isset($_SESSION["username"])) {
         if ($numVid > 0) {
             while ($row = $result->fetch_assoc()) {
                 $title = $row["title"];
-                $path = "https://lobby.umcu.org/video/" . $row["location"];
+                $path = $row["location"]; //"https://lobby.umcu.org/video/" .
                 $vid = $row["vid"];
                 $addClass = "";
                 if ($al > 10) {
@@ -50,10 +50,12 @@ if (isset($_GET["maizenet"]) && !isset($_SESSION["username"])) {
                     if ($rd > $today || $rd == NULL) {
                         $addClass = " preview";
                     }
+                    else if (!file_exists($path)) {
+                        $addClass = " missingVideo";
+                    }
                 }
                 $videoElement = "<div class='video" . $addClass . "' data-vid='" . $vid . "' data-path='" . $path . "'";
                 $addClass = "";
-                //if (!file_exists($path)) $videoElement .= " style='background: #f6546a;'";
                 $videoElement .= ">" . $title;
                 $videoElement .= "</div>";
                 echo $videoElement . "\n\t    ";

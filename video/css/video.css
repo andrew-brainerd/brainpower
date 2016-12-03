@@ -303,3 +303,10 @@ header #current {
     background: #ffcb05;
     color: #00274c;
 }
+.missingVideo {
+    background: #f6546a;
+}
+.missingVideo:hover {
+    background: #f6546a;
+    cursor: default;
+}

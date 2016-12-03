@@ -3,6 +3,7 @@
  */
 
 var username = $("#username");
+var password = $("#password");
 var loginButton = $("#loginButton");
 var loginMessage = $("#message");
 
@@ -36,4 +37,6 @@ $("body").bind('keypress', function (e) {
         loginButton.click();
     }
 }).fadeIn();
+username.val("");
+username.val("");
 username.focus();

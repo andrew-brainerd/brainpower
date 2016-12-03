@@ -10,7 +10,7 @@ var playerView = $("#player");
 var libraryView = $("#library");
 var pageTitle = $("#title");
 
-$(".video").click(function () {
+$(".video:not(.missingVideo)").click(function () {
     var vidURL = $(this).attr("data-path");
     var vidTitle = $(this).text();
     var vid = $(this).attr("data-vid");

@@ -34,7 +34,7 @@ var branchList = $("#branchList");
 var nameInfo = $("#nameInfo");
 var visitInfo = $("#visitInfo");
 var next = $("#next");
-var isTeamMember = $("#team").val() == "true";
+var isTeamMember = $("#team").val();
 var draggedVID;
 var updateElements;
 var visitDetailElements;
@@ -49,10 +49,8 @@ navTitle.find("span").text("UMCU Lobby - " + branch);
 updateSelected(sessionStorage.getItem("selected"));
 inputs.addClass("textIndent");
 page.find("#closingNote").remove();
+console.log("Team Member: " + isTeamMember);
 if (isTeamMember) {
-    //console.log("Team Member: " + isTeamMember);
-    //form.hide();
-    //setView(memberActivity);
     fetchVisitors();
     fetchBranches();
 } else {
@@ -156,20 +154,23 @@ submit.click(function () {
         }
     }
 });
-checkIn.click(function () {
-    updateSelected($(this).attr("id"));
-    setView($(this));
+$.each(nav, function (i, navItem) {
+    navItem.click(function () {
+        updateSelected($(this).attr("id"));
+        setView($(this));
+    });
 });
-memberActivity.click(function () {
+/*memberActivity.click(function () {
     updateSelected($(this).attr("id"));
     setView($(this));
 });
 reporting.click(function () {
     updateSelected($(this).attr("id"));
     setView($(this));
-});
+});*/
 logOut.click(function () {
-    location.href = "/lobby/?branch=" + branch;
+    sessionStorage.clear();
+    location.href = "/lobby/";
 });
 menuIcon.click(function () {
     console.log("Clicked Menu Icon");
@@ -425,6 +426,7 @@ function updateSelected(selectedItem) {
     }
     sessionStorage.setItem("selected", selectedItem.attr("id"));
     selectedItem.addClass("selected");
+    console.log("Setting view to " + selectedItem.attr("id"));
     setView(selectedItem);
 }
 function bindEnterKey(button) {
@@ -465,12 +467,17 @@ function setView(view) {
     view = view.attr("id");
     page.find("#closingNote").remove();
     if (view == "checkIn") {
+        console.log("view is checkIn");
         viewVisitors.fadeOut(function () {
+            console.log("visitors fadeout");
             reportForm.fadeOut(function () {
-                visitInfo.fadeOut(function () {
-                    bindEnterKey(submit);
-                    form.fadeIn();
-                });
+                console.log("report fadeout");
+                console.log("ready to fade in");
+                bindEnterKey(submit);
+                form.fadeIn();
+                /*visitInfo.fadeOut(function () {
+
+                });*/
             });
         });
     }

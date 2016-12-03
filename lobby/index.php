@@ -9,7 +9,7 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") header("Locat
 <head>
     <?php
     include "head.php";
-    $team = strip_tags($_GET["team"]);
+    $isTeamMember = isset($_GET["team"]);
     ?>
     <link rel='stylesheet' href='css/lobby.css'/>
     <link rel='stylesheet' href='/css/control.css'/>
@@ -63,7 +63,7 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") header("Locat
 </form>
 <div id="screensaver"></div>
 <input type="text" id="decoy" title="" readonly/>
-<input type="hidden" id="team" value="<?php echo $team ?>"/>
+<input type="hidden" id="team" value="<?php echo $isTeamMember ?>"/>
 <script src="/js/secure.js"></script>
 <?php include "util/jquery.php"; ?>
 <script src="js/lobby.js"></script>
