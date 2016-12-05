@@ -4,7 +4,7 @@
     <title>View Auth Database</title>
     <link rel="stylesheet" href="/css/reset.css"/>
     <link rel="stylesheet" href="/css/font.css"/>
-    <link rel="stylesheet" href="/lobby/css/lobby.css"/>
+    <link rel="stylesheet" href="/manage/css/lobby.css"/>
 </head>
 <body>
 <?php

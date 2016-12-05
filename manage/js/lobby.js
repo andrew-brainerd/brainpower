@@ -34,7 +34,10 @@ var branchList = $("#branchList");
 var nameInfo = $("#nameInfo");
 var visitInfo = $("#visitInfo");
 var next = $("#next");
+var meetingWith = $("#meetingWith");
 var isTeamMember = $("#team").val();
+var appointmentToggle = $("label[for=toggle1]");
+var hasAppointment = false;
 var draggedVID;
 var updateElements;
 var visitDetailElements;
@@ -56,6 +59,7 @@ if (isTeamMember) {
 } else {
     form.css("margin-top", "160px");
 }
+appointmentToggle.attr("data-checked", false);
 viewVisitors.hide();
 reportForm.hide();
 fetchReasons();
@@ -63,33 +67,23 @@ clearForm();
 checkEnvironment();
 bindEnterKey(submit);
 
-next.click(function () {
-    var hasAppointment = $("#toggle1").val();
-    if ($.trim(fname.val()) != "" && $.trim(lname.val()) != "") {
-        nameInfo.fadeOut(function () {
-            visitInfo.fadeIn();
-            if (hasAppointment) {
-                showAdditionalInfo("Meeting With", "With");
-            }
-        });
-    }
+appointmentToggle.click(function () {
+    hasAppointment = !hasAppointment;
 });
 logo.click(function () {
     location.reload();
 });
 inputs.on("focus", function () {
-    //console.log("You focused an input!");
     var inputLabel = $(this).prev("label");
     if (inputLabel.attr("for") == "addInfo") inputLabel.css("color", "transparent");
     inputLabel.css("right", "80px");
     var altText = inputLabel.data("alt");
-    //if (altText != "" && altText != undefined) altText = altText + ":"; else altText = "|";
     if (inputLabel.text().indexOf(" ") > 0) inputLabel.text(altText + ": ");
 });
 inputs.on("blur", function () {
-    //console.log("You left an input!");
     $(this).val(capitalize($.trim($(this).val())));
     var inputLabel = $(this).prev("label");
+    if (inputLabel.attr("for") == "addInfo") inputLabel.css("color", "white");
     var elementType = inputLabel.prop("nodeName");
     if ($(this).val() == "") {
         inputLabel.css("right", "0").text(inputLabel.attr("title"));
@@ -134,11 +128,6 @@ cancel.click(function () {
 });
 submit.click(function () {
     if (!submit.hasClass("disabled")) {
-        var r = reason.val() == 0 ? addInfo.val() : reason.val();
-        console.log("Branch on Sumbit: " + branch);
-        if (reason.val() == "Appointment") {
-            r = "Appt w/" + addInfo.val();
-        }
         if (validateCheckIn()) {
             $.ajax({
                 type: "POST",
@@ -157,7 +146,6 @@ submit.click(function () {
 $.each(nav, function (i, navItem) {
     navItem.click(function () {
         updateSelected($(this).attr("id"));
-        setView($(this));
     });
 });
 /*memberActivity.click(function () {
@@ -170,7 +158,9 @@ reporting.click(function () {
 });*/
 logOut.click(function () {
     sessionStorage.clear();
-    location.href = "/lobby/";
+    page.fadeOut(function () {
+        location.href = "/";
+    });
 });
 menuIcon.click(function () {
     var navBar = $("#topNav");
@@ -202,13 +192,14 @@ function showPopupMessage() {
         clearForm();
         form.fadeIn("slow");
     });
-    /*var popup = $("#thankYou");
-     popup.fadeIn("slow", function () { clearForm(); });
-     setTimeout(function () { popup.fadeOut("slow"); }, 3000);*/
+    if (!isTeamMember) {
+        var popup = $("#thankYou");
+        popup.fadeIn("slow", function () { clearForm(); });
+        setTimeout(function () { popup.fadeOut("slow"); }, 3000);
+    }
 }
 function fetchVisitors() {
     var sd = "", noteText = "";
-    console.log("Fetching Visitors for " + branch + " branch");
     $.ajax({
         type: "POST",
         url: "util/getVisitors.php",
@@ -269,14 +260,14 @@ function fetchVisitors() {
                 showDetailsBox($(this).attr("data-vid"));
             });
             var now = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
-            console.log("Query #" + queryID + " at " + now);
+            //console.log("Query #" + queryID + " at " + now);
             queryID++;
             if (queryID > 500) location.reload();
         }
     });
 }
 function clearForm() {
-    console.log("Clearing Form");
+    //console.log("Clearing Form");
     fname.val("");
     fname.prev("label").css("right", "0").text("First Name");
     lname.val("");
@@ -323,6 +314,11 @@ function validateCheckIn() {
             return false;
         }
     }
+    if (hasAppointment) {
+        if ($.trim(meetingWith.val()) == "") {
+
+        }
+    }
     submit.addClass("disabled");
     return true;
 }
@@ -337,8 +333,8 @@ function checkEnvironment() {
     }
 }
 function checkRedirect() {
-    if (branch == "") location.href = "?redirect=instant";
-    else if (branch == "Huron") location.href = "/parking/?branch=Huron";
+    //if (branch == "") location.href = "?redirect=instant"; else
+    if (branch == "Huron") location.href = "/parking/?branch=Huron";
 }
 function capitalize(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
@@ -350,7 +346,7 @@ function showAdditionalInfo(labelText, altText) {
     addInfo.show();
 }
 function hideAdditionalInfo() {
-    console.log("Hiding Additional Info");
+    //console.log("Hiding Additional Info");
     addInfo.prev("label").hide();
     addInfo.hide();
 }
@@ -483,6 +479,7 @@ function setView(view) {
     else if (view == "checkOut") {
         form.fadeOut(function () {
             reportForm.fadeOut(function () {
+                fetchVisitors();
                 viewVisitors.fadeIn();
             });
         });

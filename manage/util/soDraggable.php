@@ -11,7 +11,7 @@
 <html>
 <head>
     <title>jQuery Drag/Drop Test</title>
-    <link rel="stylesheet" href="/lobby/css/lobby.css"/>
+    <link rel="stylesheet" href="/manage/css/lobby.css"/>
     <style>
         body {
             background: #00274c;

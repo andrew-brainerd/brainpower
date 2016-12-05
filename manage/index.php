@@ -54,7 +54,7 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") header("Locat
     <h1>Enjoy your time at UMCU!</h1>
 </div>
 <div id="viewVisitors"></div>
-<form id="downloadReport" method="GET" action="/lobby/util/csvExport.php">
+<form id="downloadReport" method="GET" action="/manage/util/csvExport.php">
     <label for="reportStartDate">Start Date</label>
     <input type="date" id="reportStartDate" name="start" value="<?php echo date('Y-m-d'); ?>"/>
     <label for="reportEndDate">End Date</label>

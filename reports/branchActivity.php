@@ -12,7 +12,7 @@ $today = $searchDate == "" ? date("Y/m/d") : $searchDate;
 $formattedToday = date("M d, Y", strtotime($today));
 //echo "<h2>Today is $formattedToday</h2>";
 
-include "../lobby/util/dbconnect.php";
+include "../manage/util/dbconnect.php";
 $lobbyConn = $conn;
 include "../parking/dbconnect.php";
 $parkingConn = $conn;

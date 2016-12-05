@@ -1,9 +1,13 @@
 *, *:before, *:after {
     box-sizing: border-box;
 }
+html {
+    overflow-y: scroll;
+}
 body {
     background: #00274c;
     color: white;
+    display: none;
     font-family: 'Caveat Brush', cursive;
 }
 #container {

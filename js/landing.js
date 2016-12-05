@@ -59,12 +59,14 @@ var distances = [];
 var page = $("body");
 buildBranchList();
 var branchButtons = branchList.find("[data-role=button]");
-branchButtons.hide();
+//branchButtons.hide();
 
 branchButtons.click(function () {
     console.log("Branch Clicked: " + $(this).attr("id"));
     sessionStorage.setItem("branch", $(this).attr("id"));
-    location.href = "/lobby/?team";
+    page.fadeOut(function () {
+        location.href = "/manage/?team";
+    });
 });
 
 if (typeof(Number.prototype.toRadians) === "undefined") {
@@ -90,7 +92,8 @@ function getLocation(mobile) {
         }
     }
     else {
-        branchButtons.fadeIn();
+        //branchButtons.fadeIn();
+        page.fadeIn();
     }
 }
 function calcDistance(p) {

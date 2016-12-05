@@ -14,7 +14,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="img/iconified/apple-touch-icon-144x144.png"/>
     <link rel="apple-touch-icon" sizes="152x152" href="img/iconified/apple-touch-icon-152x152.png"/>
     <link rel="apple-touch-icon" sizes="180x180" href="img/iconified/apple-touch-icon-180x180.png"/>
-    <title>Location Identifier</title>
+    <title>UMCU Lobby</title>
     <link rel="icon" href="/favicon.ico">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Permanent+Marker">

@@ -10,7 +10,7 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include "../lobby/head.php"; ?>
+    <?php include "../manage/head.php"; ?>
     <link rel="stylesheet" href="css/parking.css"/>
     <link rel="stylesheet" href="css/map.css"/>
     <title>UMCU Parking App</title>

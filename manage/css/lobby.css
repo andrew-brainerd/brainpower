@@ -178,7 +178,7 @@ label[for=addInfo] {
 .toggle + label {
     display: block;
     position: relative;
-    left: 100px;
+    left: 125px;
     cursor: pointer;
     opacity: 1;
     outline: none;
