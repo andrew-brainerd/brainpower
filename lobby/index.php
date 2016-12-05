@@ -30,17 +30,19 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") header("Locat
                 <label for="lname" title="Last Name" data-alt="Last"></label>
                 <input type="text" id="lname"/>
             </div>
-            <div>
+            <div class="span2">
                 <select id="reason" name="reason" title="Reason for Visit"></select>
-                <label for="addInfo">Empty</label>
             </div>
             <div>
+                <label for="addInfo">Empty</label>
                 <input type="text" id="addInfo"/>
-                <div class="toggle-label">Have an Appointment?</div>
             </div>
-            <div class="switch" id="appointmentSwitch">
-                <input id="toggle1" class="toggle toggle-round" type="checkbox">
-                <label for="toggle1" data-on="Yes" data-off="No"></label>
+            <div class="span2">
+                <div class="toggle-label">Have an Appointment?</div>
+                <div class="switch" id="appointmentSwitch">
+                    <input id="toggle1" class="toggle toggle-round" type="checkbox">
+                    <label for="toggle1" data-on="Yes" data-off="No"></label>
+                </div>
             </div>
             <!--<div class="button" id="next">Continue</div>-->
             <div id="submitForm">Check-In</div>

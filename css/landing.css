@@ -77,14 +77,14 @@ select::-ms-expand {
     margin-top: 50px;
     width: 50%;
 }
-#branchList div div {
+#branchList > div div {
     border: 2px solid white;
     display: inline-block;
     padding: 20px;
     transition: all 0.5s;
     width: 400px;
 }
-#branchList div div:hover {
+#branchList > div div:hover {
     background: #ffcb05;
     border-color: #0f345e;
     border-radius: 80%;

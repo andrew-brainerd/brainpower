@@ -2,7 +2,10 @@
     display: none;
 }
 
-/**/
+/*
+div {
+    border: 1px solid white;
+}*/
 #timer {
     position: absolute;
     top: 20px;
@@ -137,24 +140,26 @@ label:hover {
 #nameInfo > div {
     display: inline-block;
 }
-#nameInfo > div:nth-child(2n) {
+#nameInfo > div:nth-child(2n):not(#submitForm) {
     float: right;
 }
 .toggle-label {
     float: left;
     font-size: 1.7em;
-    left: 50px;
+    left: 80px;
     position: relative;
-    top: 45px;
+    top: 40px;
 }
 #nameInfo > .button {
     display: block;
     margin-top: 140px;
 }
+#nameInfo #reason {
+    margin-top: 0;
+}
 .switch {
     display: block;
     position: relative;
-    top: -20px;
     width: 100%;
 }
 .switch > div:first-child {
@@ -552,4 +557,7 @@ form#downloadReport input[type=date] {
 /*----------------------------------------*/
 select::-ms-expand {
     display: none;
+}
+.span2 {
+    width: 100%;
 }

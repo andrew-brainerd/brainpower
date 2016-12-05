@@ -49,17 +49,15 @@ navTitle.find("span").text("UMCU Lobby - " + branch);
 updateSelected(sessionStorage.getItem("selected"));
 inputs.addClass("textIndent");
 page.find("#closingNote").remove();
-console.log("Team Member: " + isTeamMember);
+//console.log("Team Member: " + isTeamMember);
 if (isTeamMember) {
     fetchVisitors();
     fetchBranches();
 } else {
     form.css("margin-top", "160px");
 }
-visitInfo.hide();
 viewVisitors.hide();
 reportForm.hide();
-hideAdditionalInfo();
 fetchReasons();
 clearForm();
 checkEnvironment();
@@ -119,6 +117,7 @@ reason.blur(function () {
     }, 0);
 });
 reason.change(function () {
+    console.log("Reason Changed");
     var r = reason.val();
     if (r == 0) {
         showAdditionalInfo("Other Reason", "");
@@ -173,7 +172,6 @@ logOut.click(function () {
     location.href = "/lobby/";
 });
 menuIcon.click(function () {
-    console.log("Clicked Menu Icon");
     var navBar = $("#topNav");
     if (navBar.hasClass("responsive")) {
         navBar.removeClass("responsive");
@@ -276,6 +274,7 @@ function fetchVisitors() {
     });
 }
 function clearForm() {
+    console.log("Clearing Form");
     fname.val("");
     fname.prev("label").css("right", "0").text("First Name");
     lname.val("");
@@ -343,10 +342,13 @@ function capitalize(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
 }
 function showAdditionalInfo(labelText, altText) {
+    console.log("Showing Additional Info");
+    reason.parent("div").removeClass("span2");
     addInfo.prev("label").attr("title", labelText).text(labelText).data("alt", altText).show();
     addInfo.show();
 }
 function hideAdditionalInfo() {
+    console.log("Hiding Additional Info");
     addInfo.prev("label").hide();
     addInfo.hide();
 }
@@ -426,7 +428,6 @@ function updateSelected(selectedItem) {
     }
     sessionStorage.setItem("selected", selectedItem.attr("id"));
     selectedItem.addClass("selected");
-    console.log("Setting view to " + selectedItem.attr("id"));
     setView(selectedItem);
 }
 function bindEnterKey(button) {
@@ -467,12 +468,8 @@ function setView(view) {
     view = view.attr("id");
     page.find("#closingNote").remove();
     if (view == "checkIn") {
-        console.log("view is checkIn");
         viewVisitors.fadeOut(function () {
-            console.log("visitors fadeout");
             reportForm.fadeOut(function () {
-                console.log("report fadeout");
-                console.log("ready to fade in");
                 bindEnterKey(submit);
                 form.fadeIn();
                 /*visitInfo.fadeOut(function () {

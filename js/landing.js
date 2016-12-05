@@ -58,7 +58,8 @@ var locations = {
 var distances = [];
 var page = $("body");
 buildBranchList();
-var branchButtons = branchList.find("[data-role='button']");
+var branchButtons = branchList.find("[data-role=button]");
+branchButtons.hide();
 
 branchButtons.click(function () {
     console.log("Branch Clicked: " + $(this).attr("id"));
@@ -77,10 +78,11 @@ function buildBranchList() {
     });
 }
 function getLocation(mobile) {
+    console.log("Mobile: " + mobile);
     if (mobile != undefined) {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(calcDistance, showError);
-            page.fadeIn();
+            //page.fadeIn();
         }
         else {
             // if (isTeamMember) branchButton.fadeIn();
@@ -92,6 +94,7 @@ function getLocation(mobile) {
     }
 }
 function calcDistance(p) {
+    console.log("Calculating Distance");
     var userLat = p.coords.latitude;
     var userLon = p.coords.longitude;
 
@@ -123,12 +126,12 @@ function calcDistance(p) {
             closest = j;
         }
     }
-    $("." + distances[closest][0]).css({
+    branch = distances[closest][0];
+    $("." + branch).css({
         "color": "#ffcb05",
         "font-size": "1.5em"
     });
-    branch = distances[closest][0];
-    branchButtons.find("[id=" + branch +"]").trigger("click");
+    $("#" + branch).trigger("click");
 }
 function showError(error) {
     switch (error.code) {
