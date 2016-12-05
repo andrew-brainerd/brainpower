@@ -115,11 +115,13 @@ reason.change(function () {
     var r = reason.val();
     if (r == 0) {
         showAdditionalInfo("Other Reason", "");
+        $(this).css("width", "250px");
     }
     else if (r == "Appointment") {
         showAdditionalInfo("Meeting With", "With");
     }
     else {
+        $(this).css("width", "300px");
         hideAdditionalInfo();
     }
 });

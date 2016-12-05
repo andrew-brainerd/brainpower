@@ -159,6 +159,7 @@ label[for=addInfo] {
 }
 #nameInfo #reason {
     margin-top: 0;
+    width: 300px;
 }
 .switch {
     display: block;
