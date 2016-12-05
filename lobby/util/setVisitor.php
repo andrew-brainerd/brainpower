@@ -1,5 +1,5 @@
 <?php
-include 'dbconnect.php';
+include "dbconnect.php";
 
 $fname = strip_tags($_POST["fname"]);
 $lname = strip_tags($_POST["lname"]);

@@ -80,11 +80,11 @@ logo.click(function () {
 inputs.on("focus", function () {
     //console.log("You focused an input!");
     var inputLabel = $(this).prev("label");
+    if (inputLabel.attr("for") == "addInfo") inputLabel.css("color", "transparent");
     inputLabel.css("right", "80px");
     var altText = inputLabel.data("alt");
     //if (altText != "" && altText != undefined) altText = altText + ":"; else altText = "|";
     if (inputLabel.text().indexOf(" ") > 0) inputLabel.text(altText + ": ");
-    //showReport.hide();
 });
 inputs.on("blur", function () {
     //console.log("You left an input!");
@@ -135,6 +135,7 @@ cancel.click(function () {
 submit.click(function () {
     if (!submit.hasClass("disabled")) {
         var r = reason.val() == 0 ? addInfo.val() : reason.val();
+        console.log("Branch on Sumbit: " + branch);
         if (reason.val() == "Appointment") {
             r = "Appt w/" + addInfo.val();
         }
@@ -145,7 +146,7 @@ submit.click(function () {
                 data: "fname=" + fname.val() +
                 "&lname=" + lname.val() +
                 "&reason=" + r +
-                "&branch=" + $("#branch").val(),
+                "&branch=" + branch,
                 success: function () {
                     showPopupMessage();
                 }

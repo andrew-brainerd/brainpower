@@ -9,8 +9,7 @@
 include "dbconnect.php";
 
 $today = $_POST["searchDate"];
-$branch = $_GET["branch"];
-if ($branch === "" || $branch === null) $branch = $_POST["branch"];
+$branch = $_POST["branch"];
 if ($today == "") $today = date("Y/m/d");
 
 $slt = "SELECT * ";
