@@ -133,14 +133,18 @@ cancel.click(function () {
 });
 submit.click(function () {
     if (!submit.hasClass("disabled")) {
+        var r = reason.val() == 0 ? addInfo.val() : reason.val();
+        console.log("Branch on Sumbit: " + branch);
+        if (reason.val() == "Appointment") {
+            r = "Appt w/" + addInfo.val();
+        }
         if (validateCheckIn()) {
+            var data = "fname=" + fname.val() + "&lname=" + lname.val() + "&reason=" + r + "&branch=" + branch;
+            if (hasAppointment) data += "&meetingWith=" + meetingWith.val();
             $.ajax({
                 type: "POST",
                 url: "util/setVisitor.php",
-                data: "fname=" + fname.val() +
-                "&lname=" + lname.val() +
-                "&reason=" + r +
-                "&branch=" + branch,
+                data: data,
                 success: function () {
                     showPopupMessage();
                 }
@@ -153,14 +157,6 @@ $.each(nav, function (i, navItem) {
         updateSelected($(this).attr("id"));
     });
 });
-/*memberActivity.click(function () {
-    updateSelected($(this).attr("id"));
-    setView($(this));
-});
-reporting.click(function () {
-    updateSelected($(this).attr("id"));
-    setView($(this));
-});*/
 logOut.click(function () {
     sessionStorage.clear();
     page.fadeOut(function () {
@@ -279,6 +275,7 @@ function clearForm() {
     lname.prev("label").css("right", "0").text("Last Name");
     reason.val("-1");
     addInfo.val("");
+    if (hasAppointment) appointmentToggle.click();
     meetingWith.prev("label").css("right", "0").text("Meeting With");
     hideAdditionalInfo();
     submit.removeClass("disabled");
