@@ -207,9 +207,10 @@ function showPopupMessage() {
 }
 function fetchVisitors() {
     var sd = "", noteText = "";
+    console.log("Fetching Visitors for " + branch + " branch");
     $.ajax({
         type: "POST",
-        url: "util/viewVisitors.php",
+        url: "util/getVisitors.php",
         data: "searchDate=" + sd +
         "&queryID=" + queryID +
         "&branch=" + branch,
