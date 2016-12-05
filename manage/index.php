@@ -40,9 +40,13 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") header("Locat
             <div class="span2">
                 <div class="toggle-label">Have an Appointment?</div>
                 <div class="switch" id="appointmentSwitch">
-                    <input id="toggle1" class="toggle toggle-round" type="checkbox">
+                    <input type="checkbox" class="toggle toggle-round" id="toggle1">
                     <label for="toggle1" data-on="Yes" data-off="No"></label>
                 </div>
+            </div>
+            <div class="span2" id="meetingInfo">
+                <label for="meetingWith" title="Meeting With" data-alt="With"></label>
+                <input type="text" id="meetingWith">
             </div>
             <!--<div class="button" id="next">Continue</div>-->
             <div id="submitForm">Check-In</div>

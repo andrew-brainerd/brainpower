@@ -69,6 +69,8 @@ bindEnterKey(submit);
 
 appointmentToggle.click(function () {
     hasAppointment = !hasAppointment;
+    meetingWith.prev("label").toggle();
+    meetingWith.toggle();
 });
 logo.click(function () {
     location.reload();
@@ -76,14 +78,15 @@ logo.click(function () {
 inputs.on("focus", function () {
     var inputLabel = $(this).prev("label");
     if (inputLabel.attr("for") == "addInfo") inputLabel.css("color", "transparent");
-    inputLabel.css("right", "80px");
+    //inputLabel.css("right", "80px");
+    inputLabel.css("right", "25%");
     var altText = inputLabel.data("alt");
     if (inputLabel.text().indexOf(" ") > 0) inputLabel.text(altText + ": ");
 });
 inputs.on("blur", function () {
     $(this).val(capitalize($.trim($(this).val())));
     var inputLabel = $(this).prev("label");
-    if (inputLabel.attr("for") == "addInfo") inputLabel.css("color", "white");
+    if (inputLabel.attr("for") == "addInfo" && $(this).val() == "") inputLabel.css("color", "white");
     var elementType = inputLabel.prop("nodeName");
     if ($(this).val() == "") {
         inputLabel.css("right", "0").text(inputLabel.attr("title"));
@@ -92,7 +95,7 @@ inputs.on("blur", function () {
 });
 inputs.on("keyup", function () {
     var inputLabel = $(this).prev("label");
-    if ($(this).val().length >= 12) {
+    if ($(this).val().length >= 12 && $(this).width() <= 200) {
         $(this).removeClass("textIndent");
         inputLabel.css({"color": "transparent", "right": "0"});
     } else {
@@ -276,6 +279,7 @@ function clearForm() {
     lname.prev("label").css("right", "0").text("Last Name");
     reason.val("-1");
     addInfo.val("");
+    meetingWith.prev("label").css("right", "0").text("Meeting With");
     hideAdditionalInfo();
     submit.removeClass("disabled");
 }
@@ -318,7 +322,7 @@ function validateCheckIn() {
     }
     if (hasAppointment) {
         if ($.trim(meetingWith.val()) == "") {
-
+            console.log("Meeting with nobody");
         }
     }
     submit.addClass("disabled");
@@ -351,6 +355,8 @@ function hideAdditionalInfo() {
     //console.log("Hiding Additional Info");
     addInfo.prev("label").hide();
     addInfo.hide();
+    meetingWith.prev("label").hide();
+    meetingWith.hide();
 }
 function updateStatus(visitorID, status, updateInfo) {
     $.ajax({

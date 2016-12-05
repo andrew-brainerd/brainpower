@@ -6,6 +6,7 @@ input.toggle-round + label {
     width: 120px;
     height: 60px;
     background-color: #dddddd;
+    border: 2px solid white;
     border-radius: 60px;
 }
 input.toggle-round + label:before,
@@ -31,7 +32,8 @@ input.toggle-round + label:after {
     transition: margin 0.4s;
 }
 input.toggle-round:checked + label:before {
-    background-color: #8ce196;
+    /*background-color: #8ce196;*/
+    background: #ffcb05;
 }
 input.toggle-round:checked + label:after {
     margin-left: 60px;

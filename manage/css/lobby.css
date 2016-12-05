@@ -149,7 +149,7 @@ label[for=addInfo] {
 .toggle-label {
     float: left;
     font-size: 1.7em;
-    left: 80px;
+    left: 115px;
     position: relative;
     top: 40px;
 }
@@ -184,6 +184,14 @@ label[for=addInfo] {
     opacity: 1;
     outline: none;
     user-select: none;
+}
+#meetingInfo {
+    margin-bottom: 30px;
+    position: relative;
+    top: 85px;
+}
+#meetingInfo > input {
+    width: 400px;
 }
 
 /*----------------------------------------*/
@@ -271,8 +279,10 @@ form#downloadReport input[type=button] {
     text-indent: 0;
 }
 #submitForm {
+    padding: 20px;
     position: relative;
-    top: 60px;
+    top: 55px;
+    width: 350px;
 }
 input[type=button].detailsButton {
     background-color: #0f345e;
