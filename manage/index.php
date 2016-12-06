@@ -1,9 +1,3 @@
-<?php
-/*
-$clientIP = $_SERVER['REMOTE_ADDR'];
-if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") header("Location: ../video");
-*/
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +5,8 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") header("Locat
     include "head.php";
     $isTeamMember = isset($_GET["team"]);
     ?>
-    <link rel='stylesheet' href='css/lobby.css'/>
-    <link rel='stylesheet' href='/css/control.css'/>
+    <link rel="stylesheet" href="css/lobby.css"/>
+    <link rel="stylesheet" href="/css/control.css"/>
     <title></title>
 </head>
 <body>
@@ -34,7 +28,7 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") header("Locat
                 <select id="reason" name="reason" title="Reason for Visit"></select>
             </div>
             <div>
-                <label for="addInfo">Empty</label>
+                <label for="addInfo"></label>
                 <input type="text" id="addInfo"/>
             </div>
             <div class="span2">
@@ -48,7 +42,6 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") header("Locat
                 <label for="meetingWith" title="Meeting With" data-alt="With"></label>
                 <input type="text" id="meetingWith">
             </div>
-            <!--<div class="button" id="next">Continue</div>-->
             <div id="submitForm">Check-In</div>
         </div>
     </form>
@@ -63,15 +56,14 @@ if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94") header("Locat
     <input type="date" id="reportStartDate" name="start" value="<?php echo date('Y-m-d'); ?>"/>
     <label for="reportEndDate">End Date</label>
     <input type="date" id="reportEndDate" name="end" value="<?php echo date('Y-m-d'); ?>"/>
-    <!--<label for="branchList">Branch</label>-->
     <select id="branchList" name="branch" title="Branch List"></select>
     <input type="button" id="download" value="Download"/>
 </form>
 <div id="screensaver"></div>
-<input type="text" id="decoy" title="" readonly/>
+<input type="text" id="decoy" title="" tabindex="-1 readonly"/>
 <input type="hidden" id="team" value="<?php echo $isTeamMember ?>"/>
 <script src="/js/secure.js"></script>
-<?php include "util/jquery.php"; ?>
+<?php include "util/jquery.php"; echo "\n"; ?>
 <script src="js/lobby.js"></script>
 <script src="js/screensaver.js"></script>
 </body>

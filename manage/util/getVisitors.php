@@ -68,6 +68,7 @@ function buildTableHeader($table)
     if ($table == 0) {        // Status = Waiting
         echo "<div class='hcell time'>Time Waiting</div>";
         echo "<div class='hcell'>Reason</div>";
+        echo "<div class='hcell'>Appointment With</div>";
     } else if ($table == 1) {   // Status = Being Helped
         echo "<div class='hcell time'>Time With MSR</div>";
         echo "<div class='hcell'>MSR</div>";
@@ -97,12 +98,14 @@ function buildTableRow($table, $row)
         $timeElapsed = gmdate("H:i:s", $currentTime - $timeIn);
         $hours = intval(substr($timeElapsed, 0, 2));
         $minutes = intval(substr($timeElapsed, 3, 5));
+        $meetingWith = $row["meetingWith"] != "" ? $row["meetingWith"] : "-";
         echo "<div class='row' data-vid='$vid' data-status='$status'>";
         echo "<div class='cell'>" . $row["fname"] . " " . $row["lname"] . "</div>";
         echo "<div class='cell time'>";
         if ($hours > 0) echo "$hours hr ";
         echo "$minutes min</div>";
         echo "<div class='cell reason'>" . $reason . "</div>";
+        echo "<div class='cell appointment'>" . $meetingWith . "</div>";
     } else if ($table == 1) {
         $timeElapsed = gmdate("H:i:s", $currentTime - $timeHelp);
         $hours = intval(substr($timeElapsed, 0, 2));

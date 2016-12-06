@@ -343,6 +343,9 @@ input[type=button].detailsButton {
 #viewVisitors .cell.reason { /* Reason */
     max-width: 250px;
 }
+#viewVisitors .cell.appointment { /* Reason */
+    text-align: center;
+}
 .time { /* Times */
     text-align: center;
 }
@@ -423,7 +426,7 @@ input[type=button].detailsButton {
     width: 100%;
     z-index: 3;
 }
-#updateInfo {
+.popup > div:first-child {
     background: #DDDDDC;
     border: 3px solid white;
     height: 200px;
@@ -437,19 +440,27 @@ input[type=button].detailsButton {
     width: 50%;
     z-index: 4;
 }
-#updateInfo, #visitDetails h3 {
+.popup > div:first-child, #visitDetails h3 {
     color: #00274c;
     font-size: 20px;
 }
-#updateInfo textarea {
+.popup#checkinNotification > div:first-child {
+    background: #ffcb05;
+    height: auto;
+}
+.popup > div:first-child h2 {
+    font-size: 1.5em;
+    margin: auto;
+}
+.popup > div:first-child textarea {
     display: block;
     margin: 20px auto;
     width: 90%;
 }
-#updateInfo #buttonContainer {
+.popup > div:first-child #buttonContainer {
     margin: auto;
 }
-#updateInfo input[type=button] {
+.popup > div:first-child input[type=button] {
     font-size: 16px;
     margin: 0 20px;
     width: 100px;

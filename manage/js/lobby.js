@@ -139,7 +139,11 @@ submit.click(function () {
             r = "Appt w/" + addInfo.val();
         }
         if (validateCheckIn()) {
-            var data = "fname=" + fname.val() + "&lname=" + lname.val() + "&reason=" + r + "&branch=" + branch;
+            var data =
+                "fname=" + fname.val() +
+                "&lname=" + lname.val() +
+                "&reason=" + r +
+                "&branch=" + branch;
             if (hasAppointment) data += "&meetingWith=" + meetingWith.val();
             $.ajax({
                 type: "POST",
@@ -189,14 +193,28 @@ page.fadeIn(function () {
 });
 
 function showPopupMessage() {
+    var popup;
     form.fadeOut("slow", function () {
         clearForm();
         form.fadeIn("slow");
     });
     if (!isTeamMember) {
-        var popup = $("#thankYou");
+        popup = $("#thankYou");
         popup.fadeIn("slow", function () { clearForm(); });
         setTimeout(function () { popup.fadeOut("slow"); }, 3000);
+    }
+    else {
+        console.log("Team Member Checkin");
+        updateElements = $("<div class='popup' id='checkinNotification'></div>");
+        popup = $("<div id='notification'></div>");
+        popup.append("<h2>Checked in " + fname.val() + " " + lname.val() + "</h2>").hide();
+        popup.css("top", header.height());
+        updateElements.append(popup);
+        page.prepend(updateElements);
+        popup.slideDown();
+        setTimeout(function () {
+            popup.slideUp();
+        }, 2000);
     }
 }
 function fetchVisitors() {
@@ -274,10 +292,13 @@ function clearForm() {
     lname.val("");
     lname.prev("label").css("right", "0").text("Last Name");
     reason.val("-1");
+    addInfo.prev("label").text("Empty");
     addInfo.val("");
     if (hasAppointment) appointmentToggle.click();
     meetingWith.prev("label").css("right", "0").text("Meeting With");
+    meetingWith.val("");
     hideAdditionalInfo();
+    hideAppointmentInfo();
     submit.removeClass("disabled");
 }
 function fetchReasons() {
@@ -352,6 +373,8 @@ function hideAdditionalInfo() {
     //console.log("Hiding Additional Info");
     addInfo.prev("label").hide();
     addInfo.hide();
+}
+function hideAppointmentInfo() {
     meetingWith.prev("label").hide();
     meetingWith.hide();
 }

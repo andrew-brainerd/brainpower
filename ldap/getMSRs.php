@@ -5,7 +5,10 @@
     <link rel="stylesheet" href="ldap.css">
     <style type="text/css">
         body {
-            font-size: 1.5vw;
+            font-size: 1.3vw;
+        }
+        p {
+            text-align: center;
         }
     </style>
 </head>
@@ -17,17 +20,24 @@ $baseDN = "DC=thedomain,DC=umcu,DC=org";
 $msrList = array();
 $userLocations = array("OU=All Staff", "CN=Users", "OU=Administrators", "OU=Symitar", "OU=LSI");
 $enabled = "(!(userAccountControl:1.2.840.113556.1.4.803:=2))";
-$attributes = array("distinguishedName", //"organizationalUnit",
-    //"objectClass",
+$attributes = array(
+    "distinguishedName",
     //"uid",
     //"givenname",
-    "samaccountname", "mail", "lastlogontimestamp", "lockouttime", //"badpasswordtime",
+    "department",
+    "samaccountname",
+    "description",
+    //"mail",
+    //"lastlogontimestamp",
+    //"lockouttime",
+    //"badpasswordtime",
     //"badpwdcount",
-    //"jpegphoto"
+    "jpegphoto"
     //"nsaccountlock",
     //"mobile"
 );
-$filter = "(&(objectClass=user)$enabled)";
+$roles = "(|(description=MSR)(description=Branch Manager)(description=Assistant Manager))";
+$filter = "(&(objectClass=user)$roles$enabled)";
 echo "<h3>Filter:$filter</h3>";
 
 if ($ldapconn) {
@@ -39,7 +49,7 @@ if ($ldapconn) {
             if (!$ldapresults) die("Search Failed");
             else {
                 $results = ldap_get_entries($ldapconn, $ldapresults);
-                $msrList = array_merge($msrList, $ldapresults);
+                $msrList = array_merge($msrList, $results);
                 ldap_free_result($ldapresults);
             }
         }
