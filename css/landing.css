@@ -105,3 +105,9 @@ select::-ms-expand {
 #distances td {
     padding: 15px 80px;
 }*/
+@media (max-width: 900px) {
+    #branchList > div div {
+        color: #ffcb05;
+        width: 200px;
+    }
+}

@@ -1,81 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AD - Get MSRs</title>
+    <link rel="stylesheet" href="ldap.css">
+    <style type="text/css">
+        body {
+            font-size: 1.3vw;
+        }
+        p {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
 <?php
-/**
- * Created by PhpStorm.
- * User: abrainerd
- * Date: 12/5/2016
- * Time: 6:36 PM
- */
-
 global $ldapconn;
 $ldapconn = ldap_connect("ldap://umcudc-huron.thedomain.umcu.org");
 $baseDN = "DC=thedomain,DC=umcu,DC=org";
-$allLocked = array();
+$msrList = array();
 $userLocations = array("OU=All Staff", "CN=Users", "OU=Administrators", "OU=Symitar", "OU=LSI");
 $enabled = "(!(userAccountControl:1.2.840.113556.1.4.803:=2))";
-//$ignore = "IUSR_NP00123F9EF87A";
 $attributes = array(
     "distinguishedName",
+    "department",
     "samaccountname",
-    //"lastlogontimestamp",
-    "lockouttime",
-    //"badpasswordtime",
-    //"badpwdcount"
+    "description",
+    "jpegphoto"
 );
+$roles = "(|(description=MSR)(description=Branch Manager)(description=Assistant Manager))";
+$filter = "(&(objectClass=user)$roles$enabled)";
+//echo "<h3>Filter:$filter</h3>";
 
 if ($ldapconn) {
     $ldapbind = @ldap_bind($ldapconn, "CN=SU,OU=Administrators," . $baseDN, "C3t1@lph@V!$");
     if ($ldapbind) {
-        foreach ($userLocations as $location) {
+        foreach($userLocations as $location) {
             $dn = $location . "," . $baseDN;
-            //echo "<h3>Searching in: $dn</h3>";
-            $filter = "(&(objectClass=user)$enabled)";
             $ldapresults = ldap_search($ldapconn, $dn, $filter, $attributes);
             if (!$ldapresults) die("Search Failed");
-            //if (1 > ldap_count_entries($ldapconn, $ldapresults)) echo "<br /><h3>No Locked Users in $location</h3>";
             else {
-                //echo "<h3>Locked users in $location: " . ldap_count_entries($ldapconn, $ldapresults) . "</h3>";
                 $results = ldap_get_entries($ldapconn, $ldapresults);
-                $allLocked = array_merge($allLocked, $results);
+                $msrList = array_merge($msrList, $results);
                 ldap_free_result($ldapresults);
             }
         }
-    } else die("<h3>User Login Failed [" . ldap_error($ldapconn) . "]</h3>");
-} else die("Failed to connect to Active Directory");
+    } else echo "<h3>User Login Failed [" . ldap_error($ldapconn) . "]</h3>";
+} else echo "Failed to connect to Active Directory";
 ldap_unbind($ldapconn);
-myPrint($allLocked, $attributes);
+myPrint($msrList, $attributes);
 
 function myPrint($results, $attributes) {
-    if (sizeof($results) > 1) {
-        echo "<div class='table'>";
-        echo "<div class='row'>";
-        echo "<div class='hcell'>Organizational Unit</div>";
-        echo "<div class='hcell'>Name</div>";
-        echo "<div class='hcell'>Username</div>";
-        echo "<div class='hcell time'>Lockout Time</div>";
-        /*foreach ($attributes as $name) { if ($name != "distinguishedName" && $name != "samaccountname") echo "<div class='hcell'>$name</div>"; }*/
-        echo "<div class='hcell'></div>";
-        echo "</div>";
-        foreach ($results as $key => $value) {
-            if (is_array($value)) {
-                $dn = $value["dn"];
-                echo "<div class='row'>";
-                foreach ($attributes as $name) {
-                    if ($name == "distinguishedName") {
-                        echo "<div class='cell'>" . getGroup($dn) . "</div>";
-                        echo "<div class='cell'>" . getName($dn) . "</div>";
-                    } else if (stripos($name, "time")) {
-                        echo "<div class='cell time'>" . formatTime($value[$name][0]) . "</div>";
-                    } else echo "<div class='cell'>" . $value[$name][0] . "</div>";
+    echo "<div class='table'>";
+    echo "<div class='row'>";
+    //echo "<div class='hcell'>Organizational Unit</div>";
+    //echo "<div class='hcell'>Name</div>";
+    //foreach ($attributes as $name) {
+    //    if ($name != "distinguishedName" && $name != "jpegphoto") echo "<div class='hcell'>$name</div>";
+    //}
+    echo "</div>";
+    foreach ($results as $key => $value) {
+        if (is_array($value)) { // && getGroup($value["dn"]) == "Information Technology") {
+            $accountName = $value["samaccountname"][0];
+            $image = base64_encode($value["jpegphoto"][0]);
+            //echo "<img src='data:image/jpeg;base64,$image'/>";
+            echo "<div class='row' data-img-src='data:image/jpeg;base64,$image'>";
+            foreach ($attributes as $name) {
+                if ($name == "distinguishedName") {
+                    echo "<div class='cell'>" . getGroup($value["dn"]) . "</div>";
+                    echo "<div class='cell'>" . getName($value["dn"]) . "</div>";
+                } else if ($name != "jpegphoto") {
+                    if ($name == "lockouttime" || $name == "badpasswordtime" || $name == "lastlogontimestamp") {
+                        echo "<div class='cell' data-name='$name'>" . formatTime($value[$name][0]) . "</div>";
+                    } else echo "<div class='cell' data-name='$name'>" . $value[$name][0] . "</div>";
                 }
-                echo "<div class='cell'><div class='unlock' data-dn='$dn'>Unlock</div></div>";
-                echo "</div>"; // end row
             }
+            echo "</div>"; // end row
         }
-        echo "</div>";
     }
-    else {
-        echo "<h1>No Locked Users</h1>";
-    }
+    echo "</div>";
 }
 function prettyPrint($results, $a) {
     print "<pre>";
@@ -99,6 +101,7 @@ function getGroup($dn) {
     $groups = "";
     $items = explode(",", $dn);
     foreach ($items as $item) {
+        //echo "a[0]: " .  . "<br />";
         $type = explode("=", $item)[0];
         $name = explode("=", $item)[1];
         if ($type == "OU" && $name != "All Staff") {
@@ -108,15 +111,29 @@ function getGroup($dn) {
     return $groups;
 }
 function formatTime($time) {
-    $windows_tick = 10000000;
-    $sec_to_unix_epoch = 11644473600;
-    $lockoutTime = strtotime("0 hours", $time / $windows_tick - $sec_to_unix_epoch);
-    if (date("m-d-Y", $lockoutTime) == date("m-d-Y")) {
-        $lockoutTime = date("g:i a", $lockoutTime);
-    }
-    else $lockoutTime = date("m-d-Y g:i a", $lockoutTime);
-    return $lockoutTime;
+    return date("m-d-Y h:i", $time / 10000000 - 11644473600);
 }
 function out($msg) {
     echo "<p>" . $msg . "</p>";
+    //$dn = "CN=$username,OU=Information Technology,OU=All Staff,DC=thedomain,DC=umcu,DC=org";
+    //$dn = "CN=$username,CN=Users,DC=thedomain,DC=umcu,DC=org";
+    /*foreach ($results as $key => $value) {
+            if ($key != "count") {
+                echo $key . ": " . $value["mail"][0] . "<br />";
+            }
+        }*/
+    //out("Distinguished Name: " . $results[0]["dn"]);
+    //$filter = '(&(uid=%s))'; //(objectClass=posixAccount))';
+    //ldap_set_option(NULL, LDAP_OPT_DEBUG_LEVEL, 7);
+    //ldap_set_option(NULL, LDAP_OPT_TIMELIMIT, 4);
+    //ldap_set_option(NULL, LDAP_OPT_NETWORK_TIMEOUT, 4);
+    //ldap_set_option($connection, LDAP_OPT_REFERRALS, 0);
+    //$trimmerdUsername = trim(preg_replace('/[^a-zA-Z0-9\-\_@\.]/', '', $username));
+    //$filter = str_replace('%s', "abrainerd", $filter);
+    //$filter = "(|(sn=Andrew Brainerd*)(givenname=*))";
+    //$filter = "(|(mail=*)";
+    //echo "<br />Trimmed: $trimmerdUsername";
 }
+?>
+</body>
+</html>
