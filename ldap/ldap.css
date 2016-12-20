@@ -71,19 +71,68 @@ label {
     visibility: hidden;
 }
 .unlock {
-    background-color: #0078ff;
+    background: #0078ff;
     border-radius: 3px;
     color: #f2f2f2;
     padding: 10px;
     cursor: pointer;
     text-align: center;
     transition: background-color 0.5s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .unlock:hover {
     background-color: #449d75;
 }
 .opt, .opt2 {
     /*transition: all 0.3s;*/
+}
+#loginForm {
+    border-radius: 5px;
+    font-family: 'Avenir Next Condensed', sans-serif;
+    margin: auto;
+    padding: 20px;
+    position: relative;
+    top: 20px;
+    width: 500px;
+}
+#loginForm label {
+    display: block;
+    font-weight: bold;
+    margin: auto;
+    opacity: 0.8;
+    width: 215px;
+}
+#loginForm input {
+    border-radius: 8px;
+    color: #0078ff;
+    display: block;
+    font-family: 'Avenir Next Condensed', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 5px auto 20px auto;
+    padding: 10px;
+    width: 220px;
+}
+#loginForm #loginButton {
+    background: #0078ff;
+    border-radius: 3px;
+    color: #f2f2f2;
+    cursor: pointer;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+    transition: background-color 0.5s;
+    width: 150px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+#loginForm #loginButton:hover {
+    background: #449d75;
 }
 @media (max-width: 800px) {
     body {

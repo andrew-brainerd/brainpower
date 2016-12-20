@@ -14,16 +14,35 @@ $(document).tooltip({
         return "<img src='" + $(this).attr("data-img-src") + "' alt='User Photo'/>";
     }
 });
-$(document).bind("keypress.key13", function (e) {
-    if (e.which == 13) {
-        e.preventDefault();
-        $("#submit").click();
-    }
-});
+
 var page = $("body");
 var updateTimer = setInterval(findLocked, 60000); // every 3 minutes = 180000
 page.hide();
 var message = $("#message");
+function authenticateUser() {
+    var usernameElements = "<label for='username'>Admin Username</label><input type='text' id='username'>";
+    var passwordElements = "<label for='password'>Password</label><input type='password' id='password'>";
+    var submit = "<div id='loginButton'>Login</div>";
+    var loginElements = "<div id='loginForm'>" + usernameElements + passwordElements + submit + "</div>";
+    message.html(loginElements);
+    var loginButton = $("#loginButton");
+    loginButton.click(function () {
+        $.ajax({
+            type: "POST",
+            url: "ldapLogin.php",
+            success: function (response) {
+                console.log("Response: " + response);
+            }
+        });
+    });
+    $(document).bind("keypress.key13", function (e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            loginButton.click();
+        }
+    });
+    page.fadeIn();
+}
 function findLocked() {
     console.log("Updating...[" + queryID + "]");
     $.ajax({
