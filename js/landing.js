@@ -83,7 +83,7 @@ function getLocation(mobile) {
     console.log("Mobile: " + mobile);
     if (mobile != undefined) {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(calcDistance, showError);
+            //navigator.geolocation.getCurrentPosition(calcDistance, showError);
             //page.fadeIn();
         }
         else {
@@ -134,7 +134,7 @@ function calcDistance(p) {
         "color": "#ffcb05",
         "font-size": "1.5em"
     });
-    $("#" + branch).trigger("click");
+    //$("#" + branch).trigger("click");
 }
 function showError(error) {
     switch (error.code) {

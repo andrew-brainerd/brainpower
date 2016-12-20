@@ -10,6 +10,7 @@ h1, h3, h5 {
 }
 h1 {
     font-size: 5vw;
+    transition: all 0.3s;
 }
 h5 {
     font-size: 12px;
@@ -26,6 +27,7 @@ label {
 #message {
     /*font-size: 16px;*/
     font-size: 1.7vw;
+    transition: all 0.3s;
 }
 .table {
     display: table;
@@ -79,4 +81,32 @@ label {
 }
 .unlock:hover {
     background-color: #449d75;
+}
+.opt, .opt2 {
+    /*transition: all 0.3s;*/
+}
+@media (max-width: 800px) {
+    body {
+        width: 100%;
+    }
+    .table {
+        width: 90%;
+    }
+    h1 {
+        font-size: 7vw;
+    }
+    #message {
+        font-size: 2.5vw;
+    }
+    .opt {
+        display: none;
+    }
+}
+@media (max-width: 600px) {
+    .opt2 {
+        display: none;
+    }
+    #message {
+        font-size: 4vw;
+    }
 }

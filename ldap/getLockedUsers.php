@@ -48,9 +48,9 @@ function myPrint($results, $attributes) {
     if (sizeof($results) > 1) {
         echo "<div class='table'>";
         echo "<div class='row'>";
-        echo "<div class='hcell'>Organizational Unit</div>";
+        echo "<div class='hcell opt'>Organizational Unit</div>";
         echo "<div class='hcell'>Name</div>";
-        echo "<div class='hcell'>Username</div>";
+        echo "<div class='hcell opt2'>Username</div>";
         echo "<div class='hcell time'>Lockout Time</div>";
         /*foreach ($attributes as $name) { if ($name != "distinguishedName" && $name != "samaccountname") echo "<div class='hcell'>$name</div>"; }*/
         echo "<div class='hcell'></div>";
@@ -61,8 +61,8 @@ function myPrint($results, $attributes) {
                 echo "<div class='row'>";
                 foreach ($attributes as $name) {
                     if ($name == "distinguishedName") {
-                        echo "<div class='cell'>" . getGroup($dn) . "</div>";
-                        echo "<div class='cell'>" . getName($dn) . "</div>";
+                        echo "<div class='cell opt'>" . getGroup($dn) . "</div>";
+                        echo "<div class='cell opt2'>" . getName($dn) . "</div>";
                     } else if (stripos($name, "time")) {
                         echo "<div class='cell time'>" . formatTime($value[$name][0]) . "</div>";
                     } else echo "<div class='cell'>" . $value[$name][0] . "</div>";

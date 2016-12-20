@@ -106,8 +106,19 @@ select::-ms-expand {
     padding: 15px 80px;
 }*/
 @media (max-width: 900px) {
+    body {
+        width: 100%;
+    }
+    #branchList {
+        width: 100%;
+    }
     #branchList > div div {
         color: #ffcb05;
-        width: 200px;
+        width: 90%;
+    }
+}
+@media (max-width: 520px) {
+    #branchList > div div {
+        font-size: 0.8em;
     }
 }
