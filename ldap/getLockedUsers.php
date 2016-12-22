@@ -18,6 +18,7 @@ $attributes = array(
     "samaccountname",
     //"lastlogontimestamp",
     "lockouttime",
+    "lockoutdevice"
     //"badpasswordtime",
     //"badpwdcount"
 );
@@ -52,6 +53,7 @@ function myPrint($results, $attributes) {
         echo "<div class='hcell'>Name</div>";
         echo "<div class='hcell opt2'>Username</div>";
         echo "<div class='hcell time'>Lockout Time</div>";
+        echo "<div class='hcell'>Lockout Device</div>";
         /*foreach ($attributes as $name) { if ($name != "distinguishedName" && $name != "samaccountname") echo "<div class='hcell'>$name</div>"; }*/
         echo "<div class='hcell'></div>";
         echo "</div>";
