@@ -19,6 +19,8 @@ if ($ldapconn) {
         $entries["lockouttime"] = 0;
         if (@ldap_modify($ldapconn, $dn, $entries)) {
             $file = "/var/www/html/logs/unlocks";
+            $brokenAccount = getName($dn) == "Ali Syed" && getGroup($dn) == "Administrators";
+            if ($brokenAccount) $file = "/var/www/html/logs/aliAdminUnlocks";
             $content = file_get_contents($file);
             $content .= "Unlocked " . getName($dn);
             if ($device != " " || $device = "") $content .= " from $device ";
@@ -39,6 +41,18 @@ function getName($dn) {
         $type = explode("=", $item)[0];
         $name = explode("=", $item)[1];
         if ($type == "CN" && $name != "Users") {
+            $groups .= $name;
+        }
+    }
+    return $groups;
+}
+function getGroup($dn) {
+    $groups = "";
+    $items = explode(",", $dn);
+    foreach ($items as $item) {
+        $type = explode("=", $item)[0];
+        $name = explode("=", $item)[1];
+        if ($type == "OU" && $name != "All Staff") {
             $groups .= $name;
         }
     }

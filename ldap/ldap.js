@@ -58,7 +58,7 @@ function findLocked() {
                 console.log($(this).attr("data-dn"));
                 var distName = $.trim($(this).attr("data-dn"));
                 var device = $.trim($(this).attr("data-device"));
-                var args = "dn=" +  + "&device=" + device + "&cntplzwrk=" + queryID;
+                var args = "dn=" + distName + "&device=" + device + "&cntplzwrk=" + queryID;
                 if (queryID > 500) location.reload();
                 $.ajax({
                     type: "POST",
