@@ -2,8 +2,8 @@
 $clientIP = $_SERVER['REMOTE_ADDR'];
 if ($clientIP != "198.111.188.194" && $clientIP != "198.0.123.94" && $clientIP != "10.16.2.101") {
     //header("Location: ");
-    die("<h1>Not Authorized to Access this Resource from " . $clientIP . "</h1>");
-} else {}
+    die("<body style='background: #00274c;'><h1 style='color: #ffcb05; text-align: center;'>Not Authorized to Access this Resource from " . $clientIP . "</h1></body>");
+}
 ?>
 <!DOCTYPE html>
 <html>

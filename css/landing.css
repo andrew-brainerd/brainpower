@@ -91,10 +91,9 @@ select::-ms-expand {
 #branchList > div div:hover {
     background: #ffcb05;
     border-color: #0f345e;
-    border-radius: 80%;
     color: #0f345e;
     cursor: pointer;
-    width: 300px;
+    width: 380px;
 }
 #distances {
     display: none;
