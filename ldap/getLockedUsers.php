@@ -60,6 +60,7 @@ function myPrint($results, $attributes) {
         foreach ($results as $key => $value) {
             if (is_array($value)) {
                 $dn = $value["dn"];
+                $device = $value["lockoutdevice"][0];
                 echo "<div class='row'>";
                 foreach ($attributes as $name) {
                     if ($name == "distinguishedName") {
@@ -71,7 +72,7 @@ function myPrint($results, $attributes) {
                        // echo "<div class='cell opt'>" . $value[$name][0] . "</div>";
                     } else echo "<div class='cell'>" . $value[$name][0] . "</div>";
                 }
-                echo "<div class='cell'><div class='unlock' data-dn='$dn'>Unlock</div></div>";
+                echo "<div class='cell'><div class='unlock' data-dn='$dn' data-device='$device'>Unlock</div></div>";
                 echo "</div>"; // end row
             }
         }

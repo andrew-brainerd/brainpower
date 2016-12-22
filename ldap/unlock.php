@@ -10,6 +10,7 @@ header('Pragma: no-cache');
 $ldapconn = ldap_connect("ldap://umcudc-huron.thedomain.umcu.org");
 $baseDN = "DC=thedomain,DC=umcu,DC=org";
 $dn = $_POST["dn"];
+$device = $_POST["device"];
 if ($ldapconn) {
     echo "Got Dist. Name: [$dn]\n";
     $ldapbind = @ldap_bind($ldapconn, "CN=SU,OU=Administrators," . $baseDN, "C3t1@lph@V!$");
@@ -19,7 +20,9 @@ if ($ldapconn) {
         if (@ldap_modify($ldapconn, $dn, $entries)) {
             $file = "/var/www/html/logs/unlocks";
             $content = file_get_contents($file);
-            $content .= "Unlocked " . getName($dn) . " [" . date("m-d-Y H:i") . "]\n";
+            $content .= "Unlocked " . getName($dn);
+            if ($device != " " || $device = "") $content .= " from $device ";
+            $content .= " [" . date("m-d-Y H:i") . "]\n";
             file_put_contents($file, $content);
             echo getName($dn) . " is Unlocked :D\n";
         } else {
