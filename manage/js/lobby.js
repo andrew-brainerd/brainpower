@@ -174,7 +174,7 @@ menuIcon.click(function () {
     }
     else {
         navBar.addClass("responsive");
-        $(".reponsive").find("li").click(function () {
+        $(".reponsive").find("li").on("click", function () {
             navBar.removeClass("responsive");
         });
     }
