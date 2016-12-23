@@ -515,7 +515,7 @@ form#downloadReport input[type=date] {
 /*----------------------------------------*/
 /* Media Queries */
 /*----------------------------------------*/
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     body { /*border: 3px solid gold;*/
     }
     img {
@@ -527,6 +527,12 @@ form#downloadReport input[type=date] {
     #screensaver h2 {
         font-size: 6vw;
         top: 33%;
+    }
+    form {
+        width: 100%;
+    }
+    form > div > div {
+        width: 100%;
     }
     form > .table .cell {
         display: block;
@@ -541,17 +547,11 @@ form#downloadReport input[type=date] {
     #results .cell:nth-child(3) {
         display: block;
     }
-    #timer {
-        font-size: 0.5em;
+    #nameInfo > div {
+        display: block;
     }
-    #report, #closeReport {
-        border-top: 2px solid white;
-    }
-    #parkingSelection h1 {
-        margin: 0 0 20px 0;
-    }
-    #parkingContainer select {
-        width: 250px;
+    #nameInfo > div:nth-child(2n):not(#submitForm) {
+        /*float: none;*/
     }
 }
 @media screen and (max-width: 880px) {

@@ -10,6 +10,9 @@ body {
     display: none;
     font-family: 'Caveat Brush', cursive;
 }
+h1 {
+    text-align: center;
+}
 #container {
     margin: auto;
     width: 750px;
@@ -72,13 +75,13 @@ select::-ms-expand {
 }
 #branchList {
     font-size: 2.7em;
-    margin: auto;
+    margin: 50px auto;
     text-align: center;
     width: 900px;
 }
 #branchList > div {
     display: inline-block;
-    margin-top: 50px;
+    margin: 25px auto;
     width: 50%;
 }
 #branchList > div div {
@@ -109,10 +112,17 @@ select::-ms-expand {
         width: 100%;
     }
     #branchList {
+        margin-top: 10px;
         width: 100%;
     }
     #branchList > div div {
-        color: #ffcb05;
+        /*color: #ffcb05;*/
+        width: 90%;
+    }
+    #branchList > div div:hover {
+        background: #ffcb05;
+        border-color: #0f345e;
+        color: #0f345e;
         width: 90%;
     }
 }

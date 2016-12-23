@@ -26,6 +26,7 @@
 <body>
 <table id="distances"></table>
 <select id="branches"></select>
+<!--<h1>Select A Branch</h1>-->
 <div id="branchList"></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="js/secure.js"></script>
