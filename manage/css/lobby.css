@@ -515,7 +515,7 @@ form#downloadReport input[type=date] {
 /*----------------------------------------*/
 /* Media Queries */
 /*----------------------------------------*/
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 555px) {
     body { /*border: 3px solid gold;*/
     }
     img {
@@ -554,7 +554,7 @@ form#downloadReport input[type=date] {
         /*float: none;*/
     }
 }
-@media screen and (max-width: 880px) {
+@media screen and (max-width: 955px) {
     ul#topNav li:not(:first-child) { display: none; }
     ul#topNav li#menuIcon {
         float: right;
