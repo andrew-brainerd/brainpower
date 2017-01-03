@@ -1,5 +1,6 @@
 <meta charset="UTF-8">
-<meta name="viewport" content="initial-scale=1"><!--, width=device-width,user-scalable=no">-->
+<!--<meta name="viewport" content="initial-scale=1">, width=device-width,>-->
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="msapplication-task" content="name=Unlock AD Users;action-uri=https://lobby.umcu.org/ldap;icon-uri=https://lobby.umcu.org/favicon.ico"/>

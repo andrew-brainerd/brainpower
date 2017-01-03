@@ -74,7 +74,7 @@ function buildTableHeader($table)
         echo "<div class='hcell'>MSR</div>";
         echo "<div class='hcell'>Reason</div>";
     } else if ($table == 2) {   // Status = Done
-        echo "<div class='hcell' time'>Visit Length</div>";
+        echo "<div class='hcell time'>Visit Length</div>";
         echo "<div class='hcell'></div>";
     }
     echo "</div>";

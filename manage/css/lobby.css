@@ -20,6 +20,8 @@ html {
 }
 body {
     display: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
     margin-bottom: 100px;
     padding-bottom: 50px;
     z-index: 1;
@@ -300,7 +302,7 @@ input[type=button].detailsButton {
 /* Visitors Table */
 /*----------------------------------------*/
 .tableTitle {
-    font-size: 2em;
+    font-size: 3.5vw;
     text-align: center;
     user-select: none;
 }
@@ -377,6 +379,7 @@ input[type=button].detailsButton {
     border: 3px inset transparent;
     margin: auto;
     padding: 30px;
+    width: 60%;
 }
 #viewVisitors .tableContainer.ui-droppable.pickMe {
     background: #33658A;
@@ -470,6 +473,8 @@ input[type=button].detailsButton {
 }
 #visitDetails {
     background: #00274c;
+    max-width: none;
+    transition: width 0.3s;
 }
 #visitDetails h2 {
     color: #22AED1;
@@ -490,7 +495,7 @@ input[type=button].detailsButton {
 #visitDetails .table .row .cell.label {
     color: #22AED1;
     font-size: 1em;
-    width: 45%;
+    width: 50%;
 }
 #visitDetails .table .row .cell.value {
     color: #EAEAEA;
@@ -510,6 +515,27 @@ form#downloadReport input[type=date] {
 /*----------------------------------------*/
 /* Media Queries */
 /*----------------------------------------*/
+@media screen and (min-width: 1600px) {
+    .tableTitle {
+
+    }
+    #viewVisitors .table {
+        font-size: 1vw;
+    }
+}
+@media screen and (max-width: 1600px) {
+    #visitDetails {
+        width: 60%;
+    }
+}
+@media screen and (max-width: 1200px) {
+    #viewVisitors .table {
+        font-size: 1.5vw;
+    }
+    #visitDetails {
+        width: 90%;
+    }
+}
 @media screen and (max-width: 955px) {
     ul#topNav li:not(:first-child) { display: none; }
     ul#topNav li#menuIcon {
@@ -535,7 +561,22 @@ form#downloadReport input[type=date] {
         width: 90%;
     }
     #viewVisitors .table {
-        font-size: 2vw;
+        font-size: 2.5vw;
+    }
+    #viewVisitors #status2 .time {
+        display: none;
+    }
+    #viewVisitors .tableContainer.ui-droppable {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 800px) {
+    #visitDetails .table .cell {
+        display: block;
+        width: 100%;
+    }
+    #visitDetails .table .row .cell.label {
+        padding-bottom: 10px;
     }
 }
 @media screen and (max-width: 555px) {
@@ -576,8 +617,21 @@ form#downloadReport input[type=date] {
     #nameInfo > div:nth-child(2n):not(#submitForm) {
         /*float: none;*/
     }
+    #viewVisitors .table {
+        font-size: 2vw;
+    }
+    #visitDetails {
+        height: 300px;
+        overflow-y: scroll;
+        -webkit-touch-overflow: scroll;
+        touch-overflow: scroll;
+    }
 }
-
+@media screen and (max-width: 280px){
+    ul#topNav li.noNav span {
+        font-size: 24px;
+    }
+}
 /*----------------------------------------*/
 /* Hacksors - Nobody's Perfect */
 /*----------------------------------------*/

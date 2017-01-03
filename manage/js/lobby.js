@@ -482,6 +482,7 @@ function showDetailsBox(vid) {
 function setView(view) {
     view = view.attr("id");
     page.find("#closingNote").remove();
+    menuIcon.trigger("click");
     if (view == "checkIn") {
         viewVisitors.fadeOut(function () {
             reportForm.fadeOut(function () {
