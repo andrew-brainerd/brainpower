@@ -52,7 +52,6 @@ navTitle.find("span").text("UMCU Lobby - " + branch);
 updateSelected(sessionStorage.getItem("selected"));
 inputs.addClass("textIndent");
 page.find("#closingNote").remove();
-//console.log("Team Member: " + isTeamMember);
 if (isTeamMember) {
     fetchVisitors();
     fetchBranches();
@@ -67,11 +66,6 @@ clearForm();
 checkEnvironment();
 bindEnterKey(submit);
 
-appointmentToggle.click(function () {
-    hasAppointment = !hasAppointment;
-    meetingWith.prev("label").toggle();
-    meetingWith.toggle();
-});
 logo.click(function () {
     location.reload();
 });
@@ -114,11 +108,11 @@ reason.blur(function () {
     }, 0);
 });
 reason.change(function () {
-    console.log("Reason Changed");
     var r = reason.val();
     if (r == 0) {
         showAdditionalInfo("Other Reason", "");
         $(this).css("width", "250px");
+
     }
     else if (r == "Appointment") {
         showAdditionalInfo("Meeting With", "With");
@@ -127,6 +121,7 @@ reason.change(function () {
         $(this).css("width", "300px");
         hideAdditionalInfo();
     }
+    addInfo.focus();
 });
 cancel.click(function () {
     clearForm();
@@ -188,6 +183,11 @@ download.click(function () {
         return alert("Please enter a start date that is before the end date");
     reportForm.submit();
 });
+appointmentToggle.click(function () {
+    hasAppointment = !hasAppointment;
+    meetingWith.prev("label").toggle();
+    meetingWith.toggle();
+});
 page.fadeIn(function () {
     page.scroll();
 });
@@ -239,9 +239,7 @@ function fetchVisitors() {
                     var visitorID = ui.helper.attr("data-vid");
                     var dragStatus = ui.helper.attr("data-status");
                     var dropStatus = parseInt($(this).attr("id").replace("status", ""));
-                    //console.log("drag: " + visitorID + "    drag: " + dragStatus + "    drop: " + dropStatus);
                     if (dragStatus == dropStatus) return;
-                    //var status, statusText;
                     switch (dropStatus) {
                         case 0:
                             updateStatus(visitorID, dropStatus);
@@ -279,14 +277,12 @@ function fetchVisitors() {
                 showDetailsBox($(this).attr("data-vid"));
             });
             var now = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
-            //console.log("Query #" + queryID + " at " + now);
             queryID++;
             if (queryID > 500) location.reload();
         }
     });
 }
 function clearForm() {
-    //console.log("Clearing Form");
     fname.val("");
     fname.prev("label").css("right", "0").text("First Name");
     lname.val("");
@@ -357,20 +353,17 @@ function checkEnvironment() {
     }
 }
 function checkRedirect() {
-    //if (branch == "") location.href = "?redirect=instant"; else
     if (branch == "Huron") location.href = "/parking/?branch=Huron";
 }
 function capitalize(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
 }
 function showAdditionalInfo(labelText, altText) {
-    console.log("Showing Additional Info");
     reason.parent("div").removeClass("span2");
     addInfo.prev("label").attr("title", labelText).text(labelText).data("alt", altText).show();
     addInfo.show();
 }
 function hideAdditionalInfo() {
-    //console.log("Hiding Additional Info");
     addInfo.prev("label").hide();
     addInfo.hide();
 }
@@ -388,7 +381,6 @@ function updateStatus(visitorID, status, updateInfo) {
         success: function (msg) {
             if (msg.indexOf("Failed") > -1) console.log("Error: " + msg);
             else console.log("SQL: " + msg);
-            //console.log("vid=" + dragID + "&status=" + status);
             if (updateInfo != "" && updateInfo != undefined)
                 updateElements.fadeOut(function () {
                     updateElements.remove();
@@ -443,11 +435,8 @@ function updateSelected(selectedItem) {
     $.each(nav, function () {
         $(this).removeClass("selected");
     });
-    if (selectedItem == null || selectedItem == undefined) {
+    if (selectedItem == null || selectedItem == undefined)
         selectedItem = checkIn;
-        if (selectedItem == null) console.log("is null");
-        if (selectedItem == undefined) console.log("is undefined");
-    }
     else {
         isPageReload = true;
         selectedItem = $("#" + selectedItem);
@@ -461,7 +450,6 @@ function bindEnterKey(button) {
     $(document).bind("keypress.key13", function (e) {
         if (e.which == 13) {
             e.preventDefault();
-            console.log("Hit enter: clicking " + button.attr("id"));
             button.click();
         }
     });
@@ -498,9 +486,6 @@ function setView(view) {
             reportForm.fadeOut(function () {
                 bindEnterKey(submit);
                 form.fadeIn();
-                /*visitInfo.fadeOut(function () {
-
-                });*/
             });
         });
     }
@@ -521,7 +506,5 @@ function setView(view) {
             });
         });
     }
-    else {
-        console.log("nothing matched");
-    }
+    else console.log("Not a Valid View");
 }
