@@ -396,6 +396,7 @@ function updateInfoBox(visitorID, status) {
     var popup = $("<div id='updateInfo'></div>");
     var wall = $("<div id='theWall'></div>");
     var noteInput = $("<textarea id='updateInfoText'></textarea>");
+    noteInput.attr("placeholder", (status == 1) ? "Symitar User Number" : "Services provided to member");
     var buttonContainer = $("<div id='buttonContainer'></div>");
     var confirm = $("<input type='button' id='confirmUpdate' value='" + submitText + "'/>");
     var cancel = $("<input type='button' id='cancelUpdate' value='Cancel'/>");
