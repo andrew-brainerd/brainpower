@@ -289,8 +289,10 @@ input[type=button].detailsButton {
     border-color: white;
     color: white;
     font-size: 0.8em;
+    left: 25px;
     margin: 0;
     padding: 5px 3px;
+    position: relative;
     width: 150px;
 }
 
@@ -365,7 +367,7 @@ input[type=button].detailsButton {
     color: #ffcb05;
 }
 #viewVisitors h2 {
-    margin: 20px auto 0px auto;
+    margin: 20px auto 0 auto;
 }
 #viewVisitors .row.ui-draggable-dragging {
     background: #ffcb05;
@@ -375,11 +377,9 @@ input[type=button].detailsButton {
     border: 3px inset transparent;
     margin: auto;
     padding: 30px;
-    width: 55%;
 }
 #viewVisitors .tableContainer.ui-droppable.pickMe {
-    background: dodgerblue;
-    background-color: #33658A;
+    background: #33658A;
     border: 3px inset ghostwhite;
 }
 #viewVisitors .tableContainer.ui-droppable.almostHaveIt {
@@ -416,6 +416,10 @@ input[type=button].detailsButton {
 .smoothness {
     transition: all 0.2s ease-in-out;
 }
+
+/*----------------------------------------*/
+/* Popups */
+/*----------------------------------------*/
 #theWall {
     background: black;
     height: 120%;
@@ -429,7 +433,6 @@ input[type=button].detailsButton {
 .popup > div:first-child {
     background: #DDDDDC;
     border: 3px solid white;
-    height: 200px;
     left: 0;
     margin: auto;
     min-width: 300px;
@@ -466,24 +469,15 @@ input[type=button].detailsButton {
     width: 100px;
 }
 #visitDetails {
-    background: #DDDDDC;
-    border: 3px solid white;
-    height: 500px;
-    left: 0;
-    margin: auto;
-    min-width: 300px;
-    max-width: 500px;
-    padding: 20px;
-    position: fixed;
-    right: 0;
-    width: 50%;
-    z-index: 4;
+    background: #00274c;
 }
 #visitDetails h2 {
-    color: #00274c;
-    font-size: 2em;
+    color: #22AED1;
+    font-size: 1.8em;
     margin: 10px auto;
-    text-decoration: underline;
+}
+#visitDetails hr {
+    opacity: 0.6;
 }
 #visitDetails .table {
     color: #00274c;
@@ -494,11 +488,12 @@ input[type=button].detailsButton {
     padding: 0 7px 30px 7px;
 }
 #visitDetails .table .row .cell.label {
-    color: #0f345e;
+    color: #22AED1;
     font-size: 1em;
     width: 45%;
 }
 #visitDetails .table .row .cell.value {
+    color: #EAEAEA;
 }
 /*----------------------------------------*/
 /* Reporting */
@@ -515,6 +510,34 @@ form#downloadReport input[type=date] {
 /*----------------------------------------*/
 /* Media Queries */
 /*----------------------------------------*/
+@media screen and (max-width: 955px) {
+    ul#topNav li:not(:first-child) { display: none; }
+    ul#topNav li#menuIcon {
+        float: right;
+        display: inline-block;
+    }
+    ul#topNav.responsive { position: relative; }
+    ul#topNav.responsive li#menuIcon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    ul#topNav.responsive li {
+        float: none;
+        display: inline;
+    }
+    ul#topNav.responsive li span {
+        display: block;
+        text-align: left;
+    }
+    ul#topNav.responsive li#logOut { float: none; }
+    #visitDetails {
+        width: 90%;
+    }
+    #viewVisitors .table {
+        font-size: 2vw;
+    }
+}
 @media screen and (max-width: 555px) {
     body { /*border: 3px solid gold;*/
     }
@@ -553,28 +576,6 @@ form#downloadReport input[type=date] {
     #nameInfo > div:nth-child(2n):not(#submitForm) {
         /*float: none;*/
     }
-}
-@media screen and (max-width: 955px) {
-    ul#topNav li:not(:first-child) { display: none; }
-    ul#topNav li#menuIcon {
-        float: right;
-        display: inline-block;
-    }
-    ul#topNav.responsive { position: relative; }
-    ul#topNav.responsive li#menuIcon {
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-    ul#topNav.responsive li {
-        float: none;
-        display: inline;
-    }
-    ul#topNav.responsive li span {
-        display: block;
-        text-align: left;
-    }
-    ul#topNav.responsive li#logOut { float: none; }
 }
 
 /*----------------------------------------*/

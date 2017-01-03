@@ -8,10 +8,10 @@
 
 include "dbconnect.php";
 
-$today = $_POST['searchDate'];
+$today = $_POST["searchDate"];
 $vid = $_POST["vid"];
-$branch = $_GET['branch'];
-if ($branch === "" || $branch === null) $branch = $_POST['branch'];
+$branch = $_GET["branch"];
+if ($branch === "" || $branch === null) $branch = $_POST["branch"];
 if ($today == "") $today = date("Y/m/d");
 
 $slt = "SELECT * ";
@@ -26,7 +26,7 @@ if ($result->num_rows == 1) {
     $timeHelp = strtotime($row["time_help"]);
     $timeOut = strtotime($row["time_out"]);
     echo "<h2>Visit Details for " . $row["fname"] . " " . $row["lname"] . "</h2>";
-    echo "<br /><br />";
+    echo "<hr /><br />";
     echo "<div class='table'>";
     echo buildRow("Came For: ", $row["reason"]);
     echo buildRow("Left With: ", $row["note_text"]);
