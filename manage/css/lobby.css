@@ -195,6 +195,9 @@ label[for=addInfo] {
 #meetingInfo > input {
     width: 400px;
 }
+.focused {
+    right: 25%;
+}
 
 /*----------------------------------------*/
 /* Table Structure */
@@ -626,10 +629,43 @@ form#downloadReport input[type=date] {
         -webkit-touch-overflow: scroll;
         touch-overflow: scroll;
     }
+    input.toggle-round + label {
+        width: 200px;
+    }
+    .toggle-label {
+        float: none;
+        position: static;
+    }
+    .toggle + label {
+        left: 0;
+    }
+    #nameInfo > div#submitForm {
+        display: inline-block;
+    }
+    input.toggle-round:checked + label:after {
+        margin-left: 135px;
+    }
+    .focused:not([for=meetingWith]) {
+        right: 15%;
+    }
+    #meetingInfo > input {
+        width: 300px;
+    }
+    .focused[for=meetingWith] {
+        right: 30%;
+    }
+}
+@media screen and (max-width: 450px) {
+    #submitForm {
+        width: 300px;
+    }
 }
 @media screen and (max-width: 280px){
     ul#topNav li.noNav span {
         font-size: 24px;
+    }
+    .focused {
+        right: 25%;
     }
 }
 /*----------------------------------------*/

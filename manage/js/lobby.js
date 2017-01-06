@@ -44,6 +44,7 @@ var visitDetailElements;
 var updateTimer = setInterval(fetchVisitors, 180000);
 var isPageReload;
 var prevID = 0;
+var navBar;
 var nav = [checkIn, memberActivity, reporting, logOut];
 
 checkRedirect();
@@ -73,7 +74,7 @@ inputs.on("focus", function () {
     var inputLabel = $(this).prev("label");
     if (inputLabel.attr("for") == "addInfo") inputLabel.css("color", "transparent");
     //inputLabel.css("right", "80px");
-    inputLabel.css("right", "25%");
+    inputLabel.addClass("focused");
     var altText = inputLabel.data("alt");
     if (inputLabel.text().indexOf(" ") > 0) inputLabel.text(altText + ": ");
 });
@@ -83,7 +84,7 @@ inputs.on("blur", function () {
     if (inputLabel.attr("for") == "addInfo" && $(this).val() == "") inputLabel.css("color", "white");
     var elementType = inputLabel.prop("nodeName");
     if ($(this).val() == "") {
-        inputLabel.css("right", "0").text(inputLabel.attr("title"));
+        inputLabel.removeClass("focused").text(inputLabel.attr("title"));
     }
     showReport.show();
 });
@@ -163,7 +164,7 @@ logOut.click(function () {
     });
 });
 menuIcon.click(function () {
-    var navBar = $("#topNav");
+    navBar = $("#topNav");
     if (navBar.hasClass("responsive")) {
         navBar.removeClass("responsive");
     }
@@ -284,14 +285,14 @@ function fetchVisitors() {
 }
 function clearForm() {
     fname.val("");
-    fname.prev("label").css("right", "0").text("First Name");
+    fname.prev("label").removeClass("focused").text("First Name");
     lname.val("");
-    lname.prev("label").css("right", "0").text("Last Name");
+    lname.prev("label").removeClass("focused").text("Last Name");
     reason.val("-1");
     addInfo.prev("label").text("Empty");
     addInfo.val("");
     if (hasAppointment) appointmentToggle.click();
-    meetingWith.prev("label").css("right", "0").text("Meeting With");
+    meetingWith.prev("label").removeClass("focused").text("Meeting With");
     meetingWith.val("");
     hideAdditionalInfo();
     hideAppointmentInfo();
@@ -480,6 +481,7 @@ function showDetailsBox(vid) {
     });
 }
 function setView(view) {
+    navBar = $("#topNav");
     view = view.attr("id");
     page.find("#closingNote").remove();
     menuIcon.trigger("click");
@@ -509,4 +511,7 @@ function setView(view) {
         });
     }
     else console.log("Not a Valid View");
+    if (navBar.hasClass("responsive")) {
+        navBar.removeClass("responsive");
+    }
 }
