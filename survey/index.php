@@ -1,12 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: andrew
- * Date: 11/12/16
- * Time: 5:43 PM
- */
-include "util/dbconnect.php";
-?>
+<?php include "../manage/util/dbconnect.php"; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,5 +11,6 @@ include "util/dbconnect.php";
         <img src="img/meh.svg" id="neutral" alt="Meh"/>
         <img src="img/sad.svg" id="negative" alt="Sad"/>
     </div>
+<script src="/js/secure.js"></script>
 </body>
 </html>
