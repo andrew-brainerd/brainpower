@@ -101,12 +101,17 @@ select::-ms-expand {
 #distances {
     display: none;
 }
-    /*color: white;
-    font-size: 3em;
+.recommendedBranch:before {
+    color: white;
+    color: #ffcb05;
+    /*content: "Near You: ";*/
+    font-size: 0.8em;
+    margin-right: 10px;
 }
-#distances td {
-    padding: 15px 80px;
-}*/
+#branchList > div.recommendedBranch {
+    border: 4px solid #ffcb05;
+    color: #ffcb05;
+}
 @media (max-width: 900px) {
     body {
         width: 100%;

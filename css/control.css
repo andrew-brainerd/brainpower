@@ -36,7 +36,7 @@ input.toggle-round:checked + label:before {
     background: #ffcb05;
 }
 input.toggle-round:checked + label:after {
-    margin-left: 60px;
+    margin-left: 56px;
 }
 /* =============== Flat =============== */
 input.toggle-round-flat + label {

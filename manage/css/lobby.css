@@ -503,6 +503,7 @@ input[type=button].detailsButton {
 #visitDetails .table .row .cell.value {
     color: #EAEAEA;
 }
+
 /*----------------------------------------*/
 /* Reporting */
 /*----------------------------------------*/
@@ -668,6 +669,7 @@ form#downloadReport input[type=date] {
         right: 25%;
     }
 }
+
 /*----------------------------------------*/
 /* Hacksors - Nobody's Perfect */
 /*----------------------------------------*/

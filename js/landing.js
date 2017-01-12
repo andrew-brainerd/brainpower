@@ -80,24 +80,24 @@ function buildBranchList() {
     });
 }
 function getLocation(mobile) {
+    //if (mobile) alert("Using iPad");
     console.log("Mobile: " + mobile);
     if (mobile != undefined) {
         if (navigator.geolocation) {
-            //navigator.geolocation.getCurrentPosition(calcDistance, showError);
-            //page.fadeIn();
+            navigator.geolocation.getCurrentPosition(calcDistance, showError);
+            page.fadeIn();
         }
         else {
-            // if (isTeamMember) branchButton.fadeIn();
+            //if (isTeamMember) branchButtons.fadeIn();
             alert("Geolocation is not supported by this browser");
         }
     }
     else {
-        //branchButtons.fadeIn();
+        branchButtons.fadeIn();
         page.fadeIn();
     }
 }
 function calcDistance(p) {
-    console.log("Calculating Distance");
     var userLat = p.coords.latitude;
     var userLon = p.coords.longitude;
 
@@ -130,10 +130,7 @@ function calcDistance(p) {
         }
     }
     branch = distances[closest][0];
-    $("." + branch).css({
-        "color": "#ffcb05",
-        "font-size": "1.5em"
-    });
+    $("#" + branch).addClass("recommendedBranch");
     //$("#" + branch).trigger("click");
 }
 function showError(error) {
