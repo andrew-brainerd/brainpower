@@ -14,6 +14,7 @@ var submit = $("#surveySubmit");
 var heading = $("h1");
 var selectedLevel;
 
+page.hide();
 heading.click(function () {
     location.reload();
 });
@@ -60,3 +61,4 @@ submit.click(function () {
         }
     });
 });
+page.fadeIn("slow");
