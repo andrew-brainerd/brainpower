@@ -2,19 +2,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="UMCU Satisfaction Survey"/>
     <title>Member Satisfaction Survey</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed">
     <link rel="stylesheet" href="/css/reset.css"/>
     <link rel="stylesheet" href="/css/font.css"/>
     <link rel="stylesheet" href="css/survey.css">
 </head>
-<body>
+<body id="<?php echo rand(); ?>">
 <div id="container">
+    <h1>How Was Your Visit Today?</h1>
     <div id="satisfactionImages">
-        <img src="img/sad.svg" id="negative" alt="Sad"/>
-        <img src="img/meh.svg" id="neutral" alt="Meh"/>
-        <img src="img/happy.svg" id="positive" alt="Happy"/>
+        <img src="img/3-Sad-emoji.png" id="negative" alt="Worse Than Stepping on a LEGO"/>
+        <img src="img/2-Indifferent-emoji.png" id="neutral" alt="I'm Hard to Impress"/>
+        <img src="img/1-Smiley-Star.png" id="positive" alt="aMAIZEing!"/>
     </div>
-    <div id="additionalInformation">
+    <div class="transparentText" id="selectedLabel">Label</div>
+    <div id="surveySubmit">Submit</div>
+    <!--<div id="additionalInformation">
         <div id="visitReason">
             <label for="reason">Reason for Visit Today</label>
             <input type="text" id="reason"/>
@@ -23,8 +32,7 @@
             <label for="memberComments">Additional Comments</label>
             <textarea id="memberComments"></textarea>
         </div>
-        <div id="surveySubmit">Submit</div>
-    </div>
+    </div>-->
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="/js/secure.js"></script>
