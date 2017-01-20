@@ -8,6 +8,7 @@ var neutral = $("#neutral");
 var negative = $("#negative");
 var satisfaction = $("#container").find("img");
 var visitReason = $("#reason");
+var additionalInfo = $("#additionalInformation");
 var additionalComments = $("#memberComments");
 var selectedLabel = $("#selectedLabel");
 var submit = $("#surveySubmit");
@@ -15,6 +16,8 @@ var heading = $("h1");
 var selectedLevel;
 
 page.hide();
+additionalInfo.hide();
+
 heading.click(function () {
     location.reload();
 });

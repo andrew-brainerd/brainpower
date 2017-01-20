@@ -1,26 +1,18 @@
 body {
-    background: #DCDCE3;
-    background: #565656;
+    /*background: #565656;*/
+    background: #00274c;
     color: white;
 }
 div {
-    /*border: 5px solid black;*/
     margin: 5px;
     padding: 5px;
 }
 h1 {
-    /*font-family: "Lucida Sans", sans-serif;*/
     font-family: 'Fira Sans Extra Condensed', sans-serif;
-    font-size: 8vw;
+    font-size: 9vw;
     margin: 30px auto;
     text-align: center;
 }
-/*div div {
-    border-color: blue;
-}
-div div div {
-    border-color: green;
-}*/
 img {
     /*border: 4px solid black;*/
     border: 4px solid transparent;
@@ -40,7 +32,7 @@ img:hover {
     opacity: 0.8;
 }
 img.selected {
-    /*border: 4px solid black;*/
+    border: 4px solid #ffcb05;
     opacity: 1;
 }
 #container {
@@ -57,27 +49,39 @@ img.selected {
     transition: all 0.5s ease-in-out;
 }
 #surveySubmit {
-    background: #0078ff;
+    /*background: #0078ff;*/
+    background: #ffcb05;
+    /*border: 6px outset #444c5c;*/
     border-radius: 10px;
-    color: white;
+    /*color: white;*/
+    color: #00274c;
     cursor: pointer;
     display: block;
     font-family: 'Fira Sans Extra Condensed', sans-serif;
-    font-size: 6vw;
-    margin: 50px auto;
-    padding: 20px;
+    font-size: 7vw;
+    margin: 25px auto;
+    padding: 20px 0;
     text-align: center;
-    width: 70%;
+    transition: ocpacity 0.5s ease-in-out;
+    user-select: none;
+    width: 40%;
+}
+#surveySubmit:active,
+#surveySubmit:focus {
+    /*border: 6px inset #444c5c;*/
 }
 #surveySubmit:disabled {
     opacity: 0.4;
 }
 #feedbackMessage > h1 {
+    font-size: 8vw;
     margin-top: 150px;
 }
 #feedbackMessage > h1 > div {
-    color: #00274c;
+    /*color: #00274c;*/
+    color: white;
     display: inline;
+    margin: 0;
 }
 #feedbackMessage > h1 > span {
     color: #ffcb05;

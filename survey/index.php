@@ -17,22 +17,18 @@
 <div id="container">
     <h1>How Was Your Visit Today?</h1>
     <div id="satisfactionImages">
-        <img src="img/3-Sad-emoji.png" id="negative" alt="Worse Than Stepping on a LEGO"/>
-        <img src="img/2-Indifferent-emoji.png" id="neutral" alt="I'm Hard to Impress"/>
         <img src="img/1-Smiley-Star.png" id="positive" alt="aMAIZEing!"/>
+        <img src="img/2-Indifferent-emoji.png" id="neutral" alt="Ok"/>
+        <img src="img/3-Sad-emoji.png" id="negative" alt="Not So Good"/>
     </div>
     <div class="transparentText" id="selectedLabel">Label</div>
     <div id="surveySubmit">Submit</div>
-    <!--<div id="additionalInformation">
-        <div id="visitReason">
-            <label for="reason">Reason for Visit Today</label>
-            <input type="text" id="reason"/>
-        </div>
+    <div id="additionalInformation">
         <div id="comments">
             <label for="memberComments">Additional Comments</label>
             <textarea id="memberComments"></textarea>
         </div>
-    </div>-->
+    </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="/js/secure.js"></script>
