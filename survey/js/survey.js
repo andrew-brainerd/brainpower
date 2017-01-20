@@ -27,7 +27,9 @@ satisfaction.click(function () {
         $(this).removeClass("selected");
     });
     $(this).addClass("selected");
-    selectedLabel.text($(this).attr("alt"));
+    var prefix = "I had a" + (selectedLevel == "negative" ? " " : "n ");
+    var suffix = " experience today" + (selectedLevel == "positive" ? "!" : "");
+    selectedLabel.text(prefix + $(this).attr("alt") + suffix);
     selectedLabel.removeClass("transparentText");
 });
 submit.click(function () {

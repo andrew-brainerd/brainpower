@@ -19,21 +19,46 @@ img {
     border-radius: 10px;
     display: inline-block;
     height: 100%;
-    margin: 10px;
+    margin: 15px 10px;
     opacity: 0.5;
-    transition: all 0.3s ease-in-out;
+    position: relative;
+    top: 0;
+    transition: all 0.5s ease-in-out;
     -webkit-user-select: none;
     user-select: none;
     width: 30%;
 }
-img:hover {
+img:hover:not(.selected) {
     /*background-color: dodgerblue;*/
     cursor: pointer;
-    opacity: 0.8;
+    /*opacity: 0.8;*/
+    opacity: 1;
+    /*transform: scale(1.1);*/
 }
 img.selected {
-    border: 4px solid #ffcb05;
+    /*border: 4px solid #ffcb05;*/
     opacity: 1;
+}
+img#positive {
+    transition: transform 1s, opacity 1s;
+}
+img#neutral {
+    transition: transform 1s, filter 15s, opacity 1s;
+}
+img#negative {
+    transition: transform 1s, opacity 1s;
+}
+img.selected#positive {
+    /*transform: rotate(-360deg) scale(1.3);*/
+    transform: scale(1.1);
+}
+img.selected#neutral {
+    /*filter: hue-rotate(1260deg);*/
+    transform: scale(1.1);
+}
+img.selected#negative {
+    /*transform: rotateY(2160deg) scale(1.3);*/
+    transform: scale(1.1);
 }
 #container {
     margin: auto;
@@ -43,7 +68,7 @@ img.selected {
     justify-content: center;
 }
 #selectedLabel {
-    font-size: 5vw;
+    font-size: 4vw;
     font-family: 'Fira Sans Extra Condensed', sans-serif;
     text-align: center;
     transition: all 0.5s ease-in-out;
@@ -59,7 +84,7 @@ img.selected {
     display: block;
     font-family: 'Fira Sans Extra Condensed', sans-serif;
     font-size: 7vw;
-    margin: 25px auto;
+    margin: 35px auto;
     padding: 20px 0;
     text-align: center;
     transition: ocpacity 0.5s ease-in-out;
@@ -88,4 +113,14 @@ img.selected {
 }
 .transparentText {
     color: transparent;
+}
+
+/* Animations */
+@keyframes selectedAnimation {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+@-webkit-keyframes selectedAnimation {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
 }

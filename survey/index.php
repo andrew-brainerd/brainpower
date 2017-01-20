@@ -17,9 +17,9 @@
 <div id="container">
     <h1>How Was Your Visit Today?</h1>
     <div id="satisfactionImages">
-        <img src="img/1-Smiley-Star.png" id="positive" alt="aMAIZEing!"/>
-        <img src="img/2-Indifferent-emoji.png" id="neutral" alt="Ok"/>
-        <img src="img/3-Sad-emoji.png" id="negative" alt="Not So Good"/>
+        <img src="img/1-Smiley-Star.png" id="positive" alt="aMAIZEing"/>
+        <img src="img/2-Indifferent-emoji.png" id="neutral" alt="ok"/>
+        <img src="img/3-Sad-emoji.png" id="negative" alt="not so good"/>
     </div>
     <div class="transparentText" id="selectedLabel">Label</div>
     <div id="surveySubmit">Submit</div>
